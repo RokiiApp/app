@@ -1,0 +1,18 @@
+.rokiContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.resultsContainer {
+  padding: 10px 10px;
+  height: 92%;
+  max-width: 100%;
+  border-top: var(--main-border);
+  overflow: hidden;
+}

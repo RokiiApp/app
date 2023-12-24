@@ -1,0 +1,22 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 5fr 9fr;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.wrapper>* {
+  box-sizing: border-box;
+}
+
+.wrapper> :only-child {
+  grid-column: 1 / span 2;
+}
+
+.resultsList {
+  min-width: 250px;
+}

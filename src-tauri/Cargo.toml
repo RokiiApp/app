@@ -1,0 +1,28 @@
+[package]
+name = "rokii"
+version = "0.0.0"
+description = "Productivity booster for Windows"
+authors = ["David Jiménez <dubisdev@gmail.com>"]
+license = ""
+repository = "https://github.com/rokiiapp/rokii"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1.4", features = [] }
+
+[dependencies]
+tauri = { version = "1.4", features = [ "system-tray", "api-all", "devtools"] }
+serde = { version = "1.0", features = ["derive"] }
+tauri-plugin-fs-watch = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tauri-plugin-fs-extra = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tauri-plugin-autostart = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+systemicons = { git = "https://github.com/RokiiApp/systemicons", branch = "v1"}
+serde_json = "1.0"
+
+[features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]

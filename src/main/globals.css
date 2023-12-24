@@ -1,0 +1,18 @@
+@import "system-font.css";
+@import url("normalize.css/normalize.css");
+
+body {
+    background-color: transparent;
+    height: 99vh;
+    font-family: var(--main-font);
+    overflow: hidden;
+    user-select: none;
+}
+
+#root {
+    border: 1.5px solid rgba(95, 94, 94, 0.522);
+    border-radius: 10px;
+    height: 100%;
+    color: var(--main-font-color);
+    background-color: var(--main-background-color);
+}

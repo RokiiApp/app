@@ -1,0 +1,62 @@
+.inputWrapper {
+    padding: 0 10px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    max-width: 100%;
+    height: 8%;
+}
+
+.inputArea {
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: larger;
+}
+
+.backButton {
+    background-color: var(--secondary-font-color);
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    border-radius: 50%;
+    border: 0.5px;
+    border: 0;
+    object-position: -1.5px 0px;
+}
+
+.backButton:hover,
+.backButton:focus {
+    outline: none;
+    background-color: var(--accent-color);
+    opacity: 0.8;
+
+}
+
+.autocomplete {
+    position: absolute;
+    height: 100%;
+    padding: inherit;
+    color: var(--secondary-font-color);
+    white-space: pre;
+    background: transparent;
+    border: 0;
+}
+
+.input {
+    z-index: 999;
+    position: absolute;
+    padding: inherit;
+    width: 100%;
+    height: 100%;
+    color: var(--main-font-color);
+    font-family: var(--main-font);
+    border: 0;
+    outline: none;
+    background: transparent;
+    white-space: nowrap;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+    user-select: none;
+}

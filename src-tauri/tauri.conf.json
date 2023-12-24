@@ -1,0 +1,92 @@
+{
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
+  "package": {
+    "productName": "Rokii",
+    "version": "../package.json"
+  },
+  "tauri": {
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    },
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://github.com/RokiiApp/app/releases/latest/download/latest.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEUwNTdCOERDOTRDRjZDRUEKUldUcWJNK1UzTGhYNEpKYWd1Z0R0aUM1dlYyUi83eFoxam1UbWtIR3NaWWZUekF2MkxnZ1l6WFIK"
+    },
+    "allowlist": {
+      "all": true,
+      "http": {
+        "all": true,
+        "scope": [
+          "https://registry.npmjs.org/**/*"
+        ]
+      },
+      "fs": {
+        "all": true,
+        "scope": [
+          "$APPCONFIG",
+          "$APPCONFIG/**/**"
+        ]
+      },
+      "path": {
+        "all": true
+      },
+      "globalShortcut": {
+        "all": true
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": [
+          "**"
+        ]
+      }
+    },
+    "bundle": {
+      "category": "Productivity",
+      "windows": {
+        "nsis": {
+          "installerIcon": "icons/icon.ico"
+        }
+      },
+      "active": true,
+      "targets": [
+        "nsis"
+      ],
+      "publisher": "dubis.dev",
+      "identifier": "app.rokii.dev",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    },
+    "security": {
+      "csp": "script-src 'self' asset: https://asset.localhost; worker-src 'self' blob:"
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": false,
+        "title": "Rokii",
+        "width": 650,
+        "height": 515,
+        "decorations": false,
+        "transparent": true,
+        "center": true,
+        "skipTaskbar": true
+      }
+    ]
+  }
+}
