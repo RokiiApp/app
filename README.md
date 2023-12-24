@@ -1,8 +1,9 @@
 <p align="center">
   <a href="https://github.com/RokiiApp">
     <img
+        width="128px"
         alt="Rokii logo"
-        src="./src-tauri/icons/128x128.png"
+        src="https://raw.githubusercontent.com/RokiiApp/developers/main/assets/icon.svg"
     />
   </a>
 </p>
