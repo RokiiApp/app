@@ -12,7 +12,7 @@
 <p align="center">
   <strong>Productivity booster for Windows 🪟</strong>
   <br/>
-  <i>Built with ❤️‍🔥 by @dubisdev</i>
+  <i>Built with ❤️‍🔥 by <a href="https://github.com/dubisdev">@dubisdev</a></i>
 </p>
 
 <p align="center">
