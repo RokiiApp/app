@@ -50,7 +50,7 @@ export const Preview = ({ onComplete, plugin }: PreviewProps) => {
     <div className={styles.preview} key={name}>
       <h2>{`${format.name(name)} (${version})`}</h2>
 
-      <p>{format.description(description)}</p>
+      <p>{description}</p>
       <KeyboardNav>
         <div className={styles.header}>
           {settings && (

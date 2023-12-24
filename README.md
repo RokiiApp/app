@@ -9,11 +9,15 @@
 
 <h1 align="center">Rokii</h1>
 
-<p align="center">Productivity booster for Windows 🪟</p>
+<p align="center">
+  <strong>Productivity booster for Windows 🪟</strong>
+  <br/>
+  <i>Built with ❤️‍🔥 by @dubisdev</i>
+</p>
 
 <p align="center">
-  <a href="https://github.com/RokiiApp/.github/releases/download/1.0.0-alpha.2/Rokii_1.0.0-alpha.2.exe">
-    🔗 Get the Alpha Version
+  <a href="https://github.com/RokiiApp/app/releases/latest">
+    🔗 Download Rokii
   </a>
     &nbsp; | &nbsp; Give it a Star ⭐ | &nbsp;
     <a href="https://www.buymeacoffee.com/dubisdev">Support the project 🤝</a>
@@ -61,7 +65,7 @@ When Windows defender pops up:
 - Select "More info"
 - Then "Run anyway"
 
-Be sure you download Rokii from the [official release link]()
+Be sure you download Rokii from the [official release link](https://github.com/RokiiApp/app/releases/latest)
 
 ## Development
 
@@ -72,3 +76,5 @@ If you are willing to create a plugin based on Cerebro system, take a look at th
 packages available on the [developers repo](https://github.com/RokiiApp/developers).
 
 > Rokii was inspired by [Raycast](https://www.raycast.com/) and [Cerebro](https://www.cerebroapp.com/)
+
+## License

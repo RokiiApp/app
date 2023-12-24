@@ -2,7 +2,7 @@ name: 'Generate Release'
 on:
   push:
     branches:
-      - no-release
+      - main
 
 jobs:
   test-types:
