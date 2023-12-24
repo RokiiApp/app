@@ -30,7 +30,7 @@
 
 <hr />
 
-## Features
+## ✨ Features
 
 - 🚀 Extensible and compatibile with Cerebro Plugins API
 - 🧪 Experimental support for Script and Command extensions
@@ -56,26 +56,30 @@
     />
 </p>
 
-## Installation
+## ⬇️ Installation
 
 ⚠️ Rokii is not signed for now, so you might deal with Windows defender.
 
 Once downloaded, go to your downloads folder and click on the executable.
+
 When Windows defender pops up:
 
-- Select "More info"
-- Then "Run anyway"
+1. Select "More info"
+2. Then "Run anyway"
 
 Be sure you download Rokii from the [official release link](https://github.com/RokiiApp/app/releases/latest)
 
-## Development
+## 🧰 Development
 
 For now Rokii fully supports the Cerebro plugin system.
-But a completely new system is being developed (inspired in Raycast extensions).
+
+In addition, a completely new system is being developed.
 
 If you are willing to create a plugin based on Cerebro system, take a look at the
 packages available on the [developers repo](https://github.com/RokiiApp/developers).
 
 > Rokii was inspired by [Raycast](https://www.raycast.com/) and [Cerebro](https://www.cerebroapp.com/)
 
-## License
+## ⚖️ License
+
+MIT © 2023 David Jiménez
