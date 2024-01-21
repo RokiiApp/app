@@ -82,4 +82,4 @@ packages available on the [developers repo](https://github.com/RokiiApp/develope
 
 ## ⚖️ License
 
-MIT © 2023 David Jiménez
+MIT © 2024 David Jiménez
