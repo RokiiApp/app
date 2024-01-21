@@ -15,7 +15,7 @@
     "@rokii/utils": "2.0.1",
     "@tauri-apps/api": "1.5.3",
     "escape-string-regexp": "5.0.0",
-    "js-base64": "3.7.5",
+    "js-base64": "3.7.6",
     "js-untar": "2.0.0",
     "just-debounce": "1.1.0",
     "memoizee": "0.4.15",
@@ -33,19 +33,19 @@
     "tauri-settings": "0.3.4",
     "typescript-event-target": "1.1.0",
     "wouter": "2.12.1",
-    "zustand": "4.4.7"
+    "zustand": "4.5.0"
   },
   "devDependencies": {
     "@rokii/types": "4.0.0",
     "@tauri-apps/cli": "1.5.9",
     "@types/memoizee": "0.4.11",
-    "@types/node": "20.10.5",
-    "@types/react": "18.2.45",
+    "@types/node": "20.11.5",
+    "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
-    "@typescript-eslint/eslint-plugin": "6.15.0",
-    "@typescript-eslint/parser": "6.15.0",
+    "@typescript-eslint/eslint-plugin": "6.19.0",
+    "@typescript-eslint/parser": "6.19.0",
     "@vitejs/plugin-react": "4.2.1",
     "typescript": "5.3.3",
-    "vite": "5.0.10"
+    "vite": "5.0.12"
   }
 }
