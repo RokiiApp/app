@@ -28,7 +28,8 @@
       "http": {
         "all": true,
         "scope": [
-          "https://registry.npmjs.org/**/*"
+          "https://registry.npmjs.org/**/*",
+          "https://**/*"
         ]
       },
       "fs": {
