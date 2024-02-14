@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { PluginEvents, pluginsManager } from '@/extensions/PluginsManager';
+import { PluginEvents, pluginsManager } from '@/extensions/manager/PluginsManager';
 import { DEFAULT_SCOPE } from '../utils/pluginDefaultScope';
 import { useRokiStore } from '@/state/rokiStore';
 import { pluginSettings } from '@/services/plugins';

@@ -1,4 +1,4 @@
-import { pluginsManager } from '@/extensions/PluginsManager';
+import { pluginsManager } from '@/extensions/manager/PluginsManager';
 import { getInstalledPluginsAndVersions } from '@/services/plugins/getExternalPlugins';
 
 /**

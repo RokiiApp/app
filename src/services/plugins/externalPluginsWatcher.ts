@@ -3,7 +3,7 @@ import debounce from "just-debounce"
 import { pluginSettings } from '@/services/plugins';
 import { PLUGINS_PATH } from "@/common/constants/paths";
 import { isPluginValid, requirePlugin } from "./requirePlugin";
-import { pluginsManager } from "@/extensions/PluginsManager";
+import { pluginsManager } from "@/extensions/manager/PluginsManager";
 
 const parse = (path: string) => {
   const pathAsUrl = new URL(path);

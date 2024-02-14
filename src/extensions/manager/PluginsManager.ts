@@ -1,26 +1,22 @@
 import { PluginModule } from '@rokii/types';
 import { TypedEventTarget } from 'typescript-event-target';
 
-import { corePlugins } from './core';
+import { corePlugins } from '../core';
 import { initPlugin } from '@/services/plugins/initializePlugins';
 import { getInstalledPluginNames } from '@/services/plugins/getExternalPlugins';
 import { requirePlugin } from '@/services/plugins/requirePlugin';
 import { ensureRokiNeededFiles } from '@/services/plugins';
 import { setupPluginsWatcher } from '@/services/plugins/externalPluginsWatcher';
-
-interface PluginsManagerEvents {
-  [PluginEvents.LOADED]: PluginLoadedEvent;
-  [PluginEvents.REMOVED]: PluginRemovedEvent;
-}
+import { PluginEvents, PluginLoadedEvent, PluginRemovedEvent, PluginsManagerEvents } from './types';
+export * from './types';
 
 class PluginsManager extends TypedEventTarget<PluginsManagerEvents> {
   private plugins: Record<string, PluginModule> = {};
 
-  constructor() {
-    super();
-    ensureRokiNeededFiles()
-      .then(() => this.initializePlugins())
-      .then(() => setupPluginsWatcher());
+  async initManager() {
+    await ensureRokiNeededFiles();
+    await this.initializePlugins();
+    await setupPluginsWatcher();
   }
 
   getCorePlugins() {
@@ -79,21 +75,7 @@ class PluginsManager extends TypedEventTarget<PluginsManagerEvents> {
 
 }
 
-export const pluginsManager = new PluginsManager();
+const pluginsManager = new PluginsManager();
+await pluginsManager.initManager();
 
-export const enum PluginEvents {
-  LOADED = 'plugin-loaded',
-  REMOVED = 'plugin-removed'
-}
-
-class PluginLoadedEvent extends CustomEvent<{ name: string }> {
-  constructor(name: string) {
-    super(PluginEvents.LOADED, { detail: { name } });
-  }
-}
-
-class PluginRemovedEvent extends CustomEvent<{ name: string }> {
-  constructor(name: string) {
-    super(PluginEvents.REMOVED, { detail: { name } });
-  }
-}
+export { pluginsManager };
