@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import { useEffect } from 'react';
 import { Autocomplete } from './Autocomplete';
 import { SearchBar } from './SearchBar';
-import { useHashLocation } from '@/main/hooks/useHashLocation';
+import { useHashLocation } from 'wouter/use-hash-location';
 import { CHANNELS } from '@/common/constants/events';
 import { useInputStore } from '@/state/inputStore';
 import { send } from '@/common/ipc';

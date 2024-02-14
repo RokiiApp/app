@@ -1,5 +1,5 @@
 import { Router, Route } from 'wouter';
-import { useHashLocation } from '@/main/hooks/useHashLocation';
+import { useHashLocation } from 'wouter/use-hash-location';
 
 import ResultsList from '@/main/components/ResultsList';
 import { StatusBar } from '@/main/components/StatusBar';
