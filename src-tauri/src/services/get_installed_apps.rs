@@ -1,5 +1,7 @@
 use tauri::api::process::Command;
 
+// TODO - Migrate to this PWsh script
+// https://github.com/oliverschwendener/ueli/blob/main/src/main/Extensions/ApplicationSearch/Windows/usePowershellScripts.ts
 #[tauri::command(async)]
 pub async fn get_installed_apps() -> Vec<String> {
     let result = Command::new("powershell.exe")
