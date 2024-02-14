@@ -1,4 +1,5 @@
 import type { PluginResult } from '@rokii/types';
+import type { InputStore } from '@/state/inputStore';
 
 import { useEffect, useRef, memo } from 'react';
 import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
@@ -10,7 +11,6 @@ import { useRokiStore } from '@/state/rokiStore';
 import { useGetPluginResults } from '@/main/hooks/useGetPluginResults';
 import { wrapEvent } from '@/main/utils/events';
 import { PluginPreview, PluginResultWithPreview } from '@/main/components/PluginPreview';
-import { useInputStore } from '@/state/inputStore';
 import { appWindow } from '@tauri-apps/api/window';
 
 type SelectItemFn = (
@@ -20,9 +20,8 @@ type SelectItemFn = (
     | React.MouseEvent<HTMLDivElement>
 ) => void;
 
-const ResultsList = () => {
-  const [term, updateTerm] = useInputStore((s) => [s.term, s.updateTerm]);
-  useGetPluginResults(term);
+const ResultsList = ({ input, setInput }: { input: string, setInput: InputStore["updateTerm"] }) => {
+  useGetPluginResults(input);
 
   const [results, selected] = useRokiStore((s) => [s.results, s.selected]);
   const listRef = useRef<VirtuosoHandle>(null);
@@ -33,7 +32,7 @@ const ResultsList = () => {
   const selectItem: SelectItemFn = (item, realEvent) => {
     const event = wrapEvent(realEvent);
     if (!item.onSelect && item.term) {
-      return updateTerm(item.term);
+      return setInput(item.term);
     }
 
     item.onSelect(event);
