@@ -3,17 +3,17 @@ name = "rokii"
 version = "0.0.0"
 description = "Productivity booster for Windows"
 authors = ["David Jiménez <dubisdev@gmail.com>"]
-license = ""
-repository = "https://github.com/rokiiapp/rokii"
+license = "MIT"
+repository = "https://github.com/rokiiapp/app"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.4", features = [] }
+tauri-build = { version = "1.5", features = [] }
 
 [dependencies]
-tauri = { version = "1.4", features = [ "updater", "system-tray", "api-all", "devtools"] }
+tauri = { version = "1.5", features = [ "updater", "system-tray", "api-all", "devtools"] }
 serde = { version = "1.0", features = ["derive"] }
 tauri-plugin-fs-watch = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 tauri-plugin-fs-extra = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
