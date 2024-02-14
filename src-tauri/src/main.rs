@@ -1,15 +1,18 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod get_file_icon;
-mod get_installed_apps;
+mod services;
 mod toggle_window_visibility;
 mod tray;
 
 use tauri_plugin_autostart::MacosLauncher;
 
+use crate::services::{get_file_icon, get_installed_apps, open_app_by_id};
+
 use get_file_icon::get_file_icon;
-use get_installed_apps::{get_installed_apps, open_app_by_id};
+use get_installed_apps::get_installed_apps;
+use open_app_by_id::open_app_by_id;
+
 use tauri::Manager;
 use toggle_window_visibility::toggle_window_visibility;
 use tray::{create_tray_menu, system_tray_event_handler};
