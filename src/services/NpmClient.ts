@@ -1,29 +1,25 @@
 import { NPM_API_BASE } from '@/common/constants/urls';
-import { createDir, readTextFile, removeDir, writeBinaryFile, writeFile } from '@tauri-apps/api/fs';
-import { join } from '@tauri-apps/api/path';
+import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs';
+import { join, sep } from '@tauri-apps/api/path';
 import { http } from '@tauri-apps/api';
 import { ResponseType } from '@tauri-apps/api/http';
 import untar from "js-untar";
 import pako from "pako";
+import { PackageJson } from './PackageJson';
+
 /**
  * Lightweight npm client used to install/uninstall package, without resolving dependencies
  */
-
 export class NpmClient {
   private dirPath: string
+  private packageJson: PackageJson;
 
   constructor(dir: string) {
     this.dirPath = dir
-  }
 
-  private async updatePackageJson(config: Record<string, any>) {
-    const packageJsonPath = await join(this.dirPath, 'package.json');
-    writeFile(packageJsonPath, JSON.stringify(config, null, 2));
-  }
-
-  private async getPackageJson() {
-    const packageJsonPath = await join(this.dirPath, 'package.json');
-    return JSON.parse(await readTextFile(packageJsonPath)) as Record<string, any>
+    // Initialize package.json
+    const packageJsonPath = [dir, 'package.json'].join(sep);
+    this.packageJson = new PackageJson(packageJsonPath)
   }
 
   private async downloadAndExtractPackage(
@@ -81,7 +77,7 @@ export class NpmClient {
       const resJson = await fetch(`${NPM_API_BASE}${name}`).then((res) => res.json());
 
       versionToInstall = version || resJson['dist-tags'].latest;
-      console.log('Version:', versionToInstall);
+      console.log('Version: ', versionToInstall);
 
       await this.downloadAndExtractPackage(
         resJson.versions[versionToInstall].dist.tarball,
@@ -89,15 +85,14 @@ export class NpmClient {
         middleware
       );
 
-      const json = await this.getPackageJson();
-      json.dependencies[name] = versionToInstall;
-      console.log('Add package to dependencies');
-      await this.updatePackageJson(json);
+      await this.packageJson.addDependency(name, versionToInstall);
+      console.log('Added package to dependencies');
+
       console.log('Finished installing', name);
-      console.groupEnd();
     } catch (err) {
       console.log('Error in package installation');
       console.log(err);
+    } finally {
       console.groupEnd();
     }
   }
@@ -124,9 +119,7 @@ export class NpmClient {
       await removeDir(modulePath, { recursive: true });
 
       console.log(`(2/2) Remove ${name} from package.json`);
-      const json = await this.getPackageJson();
-      delete json.dependencies?.[name];
-      await this.updatePackageJson(json);
+      await this.packageJson.removeDependency(name);
 
       console.log('Finished uninstalling', name);
 

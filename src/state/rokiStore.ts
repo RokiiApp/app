@@ -21,10 +21,10 @@ export interface RokiStore {
   setSelected: (index: number) => void;
 }
 
-const INITIAL_STATE = {
+const INITIAL_STATE = Object.freeze({
   results: [],
   selected: 0
-};
+});
 
 export const useRokiStore = create<RokiStore>((set) => ({
   ...INITIAL_STATE,
@@ -35,9 +35,9 @@ export const useRokiStore = create<RokiStore>((set) => ({
     if (!isResultValid(result)) return;
 
     return set((state) => {
-      if (!Array.isArray(result)) result = [result];
+      let resultsArray = Array.isArray(result) ? result : [result];
 
-      const normalizedNewResults = result.map((result) => ({
+      const normalizedNewResults = resultsArray.map((result) => ({
         icon,
         // Capitalize first letter of plugin name.
         title: `${pluginName[0].toUpperCase()}${pluginName.slice(1)}`,
@@ -64,15 +64,16 @@ export const useRokiStore = create<RokiStore>((set) => ({
       return { results: newResults };
     }),
 
-  updateResult: (id, result) =>
+  updateResult: (id, newResult) =>
     set((state) => {
       const indexToUpdate = state.results.findIndex((i) => i.id === id);
-      return {
-        results: state.results.with(indexToUpdate, {
-          ...state.results[indexToUpdate],
-          ...result
-        })
-      };
+      const oldResult = state.results[indexToUpdate];
+
+      const updatedResult = { ...oldResult, ...newResult };
+
+      const results = state.results.with(indexToUpdate, updatedResult);
+
+      return { results }
     }),
 
   moveCursor: (direction) =>
@@ -82,6 +83,7 @@ export const useRokiStore = create<RokiStore>((set) => ({
       if (newSelected < 0 || newSelected >= state.results.length) {
         return state;
       }
+
       return { selected: newSelected };
     }),
 
