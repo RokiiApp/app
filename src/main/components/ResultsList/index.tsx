@@ -1,3 +1,4 @@
+import type { ActionResult } from '@/stores/actions/ActionResult';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
 import styles from './styles.module.css';
@@ -8,7 +9,7 @@ import { appWindow } from '@tauri-apps/api/window';
 import { send } from '@/common/ipc';
 import { CHANNELS } from '@/common/constants/events';
 
-const ResultsList = ({ items }: { items: any[] }) => {
+const ResultsList = ({ items }: { items: ActionResult[] }) => {
     const [selected, setSelected] = useState(0);
 
     const listRef = useRef<VirtuosoHandle>(null);
@@ -48,7 +49,7 @@ const ResultsList = ({ items }: { items: any[] }) => {
             const item = items[selected];
             if (item) {
                 // TODO - Type items to ensure onSelect is a function
-                item.run(e);
+                item.execute();
                 appWindow.hide();
             }
         }
@@ -88,12 +89,7 @@ const ResultsList = ({ items }: { items: any[] }) => {
                 totalCount={items.length}
                 itemContent={(index) => {
                     const result = items[index];
-                    return <Row
-                        extensionName={result.extensionName}
-                        index={index}
-                        isSelected={selected === index}
-                        {...result}
-                        onSelect={(e) => result.run(e)} />
+                    return <Row result={result} isSelected={selected === index} />
                 }}
             />
         </div>

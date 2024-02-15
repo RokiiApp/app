@@ -18,7 +18,7 @@ const VersionExtension: Extension = {
             }
         };
 
-        display(action);
+        display([action]);
     }
 }
 

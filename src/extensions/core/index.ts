@@ -1,10 +1,10 @@
 import type { Extension } from '../types';
 import VersionExtension from './version';
 
-const corePlugins: Record<string, Extension> = {
+const coreExtensions: Record<string, Extension> = {
   VersionExtension
 };
 
-Object.freeze(corePlugins);
+Object.freeze(coreExtensions);
 
-export { corePlugins }
+export { coreExtensions }

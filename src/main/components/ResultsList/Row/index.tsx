@@ -1,30 +1,25 @@
+import defaultIcon from '@/extensions/core/icon.png';
 import { SmartIcon } from '@rokii/ui';
 import styles from './styles.module.css';
+import type { ActionResult } from '@/stores/actions/ActionResult';
 
 type Props = {
   isSelected: boolean;
-  icon?: string;
-  title?: string;
-  onSelect: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  subtitle?: string;
-  index: number;
-  extensionName: string;
+  result: ActionResult;
 };
 
 function Row({
   isSelected,
-  icon,
-  title,
-  onSelect,
-  subtitle,
-  extensionName
+  result
 }: Props) {
+  const { icon = defaultIcon, title, subtitle, extension } = result;
+
   const className = isSelected ? `${styles.row} ${styles.selected}` : styles.row;
 
   return (
     <div
       className={className}
-      onClick={onSelect}
+      onClick={result.execute}
       onKeyDown={() => undefined}
     >
 
@@ -36,7 +31,7 @@ function Row({
       </div>
 
       <div aria-label='extension-name' className={styles.extensionName}>
-        {extensionName}
+        {extension}
       </div>
     </div>
   );

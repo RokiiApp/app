@@ -1,11 +1,12 @@
 import type { PluginResult } from '@rokii/types';
+import type { Action } from '@/extensions/types';
 
 import { create } from 'zustand';
 import { isResultValid } from './utils';
 import icon from "@/extensions/core/icon.png"
 
 export interface RokiStore {
-  results: PluginResult[];
+  results: Action[];
   /**
    * Index of selected result
    */
@@ -14,7 +15,7 @@ export interface RokiStore {
    * Reset state to initial state
    */
   reset: () => void;
-  addResult: (pluginName: string, result: PluginResult | PluginResult[], pluginKeywords?: string[]) => void;
+  addResult: (extensionName: string, result: Action[], pluginKeywords?: string[]) => void;
   hide: (id: string) => void;
   updateResult: (id: string, newResult: PluginResult) => void;
   moveCursor: (direction: number) => void;

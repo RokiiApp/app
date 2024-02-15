@@ -1,9 +1,9 @@
 import { watchImmediate } from "tauri-plugin-fs-watch-api";
 import debounce from "just-debounce"
-import { pluginSettings } from '@/services/plugins';
+import { extensionSettings } from '@/services/plugins';
 import { PLUGINS_PATH } from "@/common/constants/paths";
 import { isPluginValid, requirePlugin } from "./requirePlugin";
-import { pluginsManager } from "@/extensions/manager/PluginsManager";
+import { extensionsManager } from "@/extensions/manager/ExtensionsManager";
 
 const parse = (path: string) => {
   const pathAsUrl = new URL(path);
@@ -41,7 +41,7 @@ export const setupPluginsWatcher = async () => {
 
       const pluginName = getPluginName(pluginPath);
 
-      pluginsManager.deletePlugin(pluginName);
+      extensionsManager.deletePlugin(pluginName);
 
       console.log(`[PluginsWatcher]: Removed "${pluginName}" plugin`);
     }
@@ -64,28 +64,28 @@ export const setupPluginsWatcher = async () => {
   }, { recursive: true });
 };
 
-const loadPlugin = async (pluginName: string): Promise<boolean> => {
-  console.group(`[PluginLoader] Load plugin: ${pluginName}`);
-  const plugin = await requirePlugin(pluginName);
+const loadExtension = async (pluginName: string): Promise<boolean> => {
+  console.group(`[ExtensionLoader] Load extension: ${pluginName}`);
+  const extension = await requirePlugin(pluginName);
 
-  if (!plugin || !isPluginValid(plugin)) {
-    console.error('[PluginLoader] Plugin is not valid, skipped');
+  if (!extension || !isPluginValid(extension)) {
+    console.error('[ExtensionLoader] Extension is not valid, skipped');
     console.groupEnd();
     return;
   }
 
-  if (!pluginSettings.validate(plugin)) {
-    console.error('[PluginLoader] Invalid plugins settings');
+  if (!extensionSettings.validate(extension)) {
+    console.error('[ExtensionLoader] Invalid extension settings');
     console.groupEnd();
     return;
   }
 
-  console.log('[PluginLoader] Plugin loaded.');
+  console.log('[ExtensionLoader] Extension loaded.');
 
-  await pluginsManager.requestPluginLoad(pluginName);
+  await extensionsManager.requestPluginLoad(pluginName);
 
-  console.log(`[PluginLoader]: Added "${pluginName}" plugin`)
+  console.log("[ExtensionLoader]: Added extension: ", pluginName)
   console.groupEnd();
 }
 
-const debouncedLoadPlugin = debounce(loadPlugin, 100)
+const debouncedLoadPlugin = debounce(loadExtension, 100)

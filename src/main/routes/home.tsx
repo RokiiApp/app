@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useRokiStore } from '@/state/rokiStore';
+import { useActionsStore } from '@/stores/actions';
 import { useRunPlugins } from '@/main/hooks/useRunPlugins';
 
 import { ResultsList } from '../components/ResultsList';
@@ -7,7 +7,7 @@ import { ResultsList } from '../components/ResultsList';
 const Home = ({ input }: { input: string }) => {
     useRunPlugins(input);
 
-    const results = useRokiStore((s) => s.results);
+    const results = useActionsStore((s) => s.actions);
 
     return <ResultsList items={results} />;
 };

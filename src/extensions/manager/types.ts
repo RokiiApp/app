@@ -1,21 +1,21 @@
 export interface PluginsManagerEvents {
-    [PluginEvents.LOADED]: PluginLoadedEvent;
-    [PluginEvents.REMOVED]: PluginRemovedEvent;
+    [ExtensionEvents.LOADED]: ExtensionLoadedEvent;
+    [ExtensionEvents.REMOVED]: ExtensionRemovedEvent;
 }
 
-export const enum PluginEvents {
-    LOADED = 'plugin-loaded',
-    REMOVED = 'plugin-removed'
+export const enum ExtensionEvents {
+    LOADED = 'extension-loaded',
+    REMOVED = 'extension-removed'
 }
 
-export class PluginLoadedEvent extends CustomEvent<{ name: string }> {
+export class ExtensionLoadedEvent extends CustomEvent<{ name: string }> {
     constructor(name: string) {
-        super(PluginEvents.LOADED, { detail: { name } });
+        super(ExtensionEvents.LOADED, { detail: { name } });
     }
 }
 
-export class PluginRemovedEvent extends CustomEvent<{ name: string }> {
+export class ExtensionRemovedEvent extends CustomEvent<{ name: string }> {
     constructor(name: string) {
-        super(PluginEvents.REMOVED, { detail: { name } });
+        super(ExtensionEvents.REMOVED, { detail: { name } });
     }
 }

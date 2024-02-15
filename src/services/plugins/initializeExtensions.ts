@@ -1,16 +1,15 @@
-import type { PluginModule } from '@rokii/types';
+import { extensionSettings } from '@/services/plugins';
+import { Extension } from '@/extensions/types';
 
-import { pluginSettings } from '@/services/plugins';
-
-export const initPlugin = async (plugin: PluginModule, name: string) => {
-  const { initialize, initializeAsync, onMessage } = plugin;
+export const initExtension = async (extension: Extension, name: string) => {
+  const { initialize, initializeAsync, onMessage } = extension;
 
   // Foreground plugin initialization
   if (initialize) {
     console.log('Initialize sync plugin', name);
 
     try {
-      initialize(pluginSettings.getUserSettings(plugin, name));
+      initialize(extensionSettings.getUserSettings(extension, name));
     } catch (e) {
       console.error(`Failed to initialize plugin: ${name}`, e);
     }
@@ -25,6 +24,6 @@ export const initPlugin = async (plugin: PluginModule, name: string) => {
 
       if (onMessage) onMessage(data);
 
-    }, pluginSettings.getUserSettings(plugin, name));
+    }, extensionSettings.getUserSettings(extension, name));
   }
 };

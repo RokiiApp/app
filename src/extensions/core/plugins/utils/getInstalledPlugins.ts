@@ -1,11 +1,11 @@
-import { pluginsManager } from '@/extensions/manager/PluginsManager';
+import { extensionsManager } from '@/extensions/manager/ExtensionsManager';
 import { getInstalledPluginsAndVersions } from '@/services/plugins/getExternalPlugins';
 
 /**
  * Get list of all installed plugins with versions
  */
 export const getInstalledPlugins = async () => {
-  const plugins = pluginsManager.getAllPlugins();
+  const plugins = extensionsManager.getAllPlugins();
   const installedPluginNames = await getInstalledPluginsAndVersions();
 
   const result = Object.entries(installedPluginNames).map(([pluginName, installedVersion]) => {

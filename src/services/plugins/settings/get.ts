@@ -1,4 +1,4 @@
-import type { PluginModule } from '@rokii/types';
+import type { Extension } from '@/extensions/types';
 import * as config from '@/common/config';
 
 /**
@@ -15,12 +15,12 @@ const getExistingSettings = (pluginName: string) => config.get('plugins')[plugin
  * but can't have the same package.json name
  * @returns An object with keys and values of the plugin settings
  */
-const getUserSettings = (plugin: PluginModule, packageJsonName: string) => {
+const getUserSettings = (extension: Extension, packageJsonName: string) => {
   const userSettings: Record<string, any> = {};
 
   const existingSettings: Record<string, any> =
     getExistingSettings(packageJsonName);
-  const { settings: pluginSettings } = plugin;
+  const { settings: pluginSettings } = extension;
 
   if (pluginSettings) {
     // Provide default values if nothing is set by user

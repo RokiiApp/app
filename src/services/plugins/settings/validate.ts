@@ -1,4 +1,4 @@
-import type { PluginModule } from '@rokii/types';
+import type { Extension } from '@/extensions/types';
 
 const VALID_TYPES = ['string', 'number', 'bool', 'option'] as const;
 
@@ -12,7 +12,7 @@ const validSetting = ({ type, options }: any) => {
   return true;
 };
 
-export const validate = ({ settings }: PluginModule) => {
+export const validate = ({ settings }: Extension) => {
   if (!settings) return true;
   return Object.values(settings).every(validSetting);
 };

@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
-import { useRokiStore } from '@/state/rokiStore';
+import { useActionsStore } from '@/stores/actions';
 import VersionExtension from '@/extensions/core/version';
-import { PluginEvents } from '@/extensions/manager/types';
-import { pluginsManager } from '@/extensions/manager/PluginsManager';
+import { ExtensionEvents } from '@/extensions/manager/types';
+import { extensionsManager } from '@/extensions/manager/ExtensionsManager';
 
 // TODO: Suscribe to unload plugin event to remove plugin from state
 export const useRunPlugins = (term: string) => {
-  const addResult = useRokiStore(s => s.addResult);
-  const resetResultsState = useRokiStore(s => s.reset);
+  const addActions = useActionsStore(s => s.addActions);
+  const removeAllActions = useActionsStore(s => s.removeAllActions);
 
   useEffect(() => {
-    // Reset results state to initial state (select 0, empty results array)
-    resetResultsState();
+    // Reset results state to initial state
+    removeAllActions();
 
     const allPlugins = { VersionExtension }
 
@@ -23,7 +23,7 @@ export const useRunPlugins = (term: string) => {
         // HERE IS WHERE WE PROVIDE THE API TO THE PLUGIN
         extension.run({
           term,
-          display: async (payload) => { addResult(name, { ...payload, extensionName }) }
+          display: async (actions) => { addActions(actions, extensionName) }
         });
       } catch (error) {
         // Do not fail on plugin errors, just log them to console
@@ -32,20 +32,20 @@ export const useRunPlugins = (term: string) => {
     }
 
     // Reset results state on unmount so we don't have stale results and autocomplete values
-    return () => resetResultsState();
+    return () => removeAllActions();
   }, [term]);
 
   useEffect(() => {
-    pluginsManager.addEventListener(PluginEvents.LOADED, ({ detail }) => {
+    extensionsManager.addEventListener(ExtensionEvents.LOADED, ({ detail }) => {
       const { name } = detail;
 
-      const extension = pluginsManager.getPlugin(name);
+      const extension = extensionsManager.getPlugin(name);
 
       try {
         // HERE IS WHERE WE PROVIDE THE API TO THE PLUGIN
         extension.run({
           term,
-          display: async (payload) => { addResult(name, { ...payload, extensionName }) }
+          display: async (actions) => { addActions(actions, name) }
         });
       } catch (error) {
         // Do not fail on plugin errors, just log them to console
@@ -54,7 +54,7 @@ export const useRunPlugins = (term: string) => {
 
     });
 
-    return () => pluginsManager.removeEventListener(PluginEvents.LOADED, () => { });
+    return () => extensionsManager.removeEventListener(ExtensionEvents.LOADED, () => { });
 
   }, [])
 };

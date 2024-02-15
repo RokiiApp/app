@@ -30,4 +30,4 @@ export const ensureRokiNeededFiles = async () => {
 };
 
 export const client = new NpmClient(PLUGINS_PATH);
-export { default as pluginSettings } from './settings';
+export { default as extensionSettings } from './settings';
