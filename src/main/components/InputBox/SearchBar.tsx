@@ -205,7 +205,7 @@ export const SearchBar = () => {
       value={term}
       className={styles.input}
       onChange={(e) => updateTerm(e.target.value)}
-      onKeyDown={onKeyDown}
+    // onKeyDown={onKeyDown}
     />
   );
 };

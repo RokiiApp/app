@@ -5,7 +5,7 @@
   gap: 8px;
   flex-wrap: nowrap;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   white-space: nowrap;
   width: 100%;
   cursor: pointer;
@@ -46,10 +46,11 @@
   color: var(--selected-result-subtitle-color);
 }
 
-.details {
+.actionInfo {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  gap: 5px;
+  justify-content: start;
 }

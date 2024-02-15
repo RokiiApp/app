@@ -1,17 +1,10 @@
-import type { PluginModule } from '@rokii/types';
+import type { Extension } from '../types';
+import VersionExtension from './version';
 
-import * as version from './version';
-import * as quit from './quit';
-import * as settings from './settings';
-import * as reload from './reload';
-import * as plugins from './plugins';
-import * as apps from './apps';
+const corePlugins: Record<string, Extension> = {
+  VersionExtension
+};
 
-export const corePlugins: Record<string, PluginModule> = Object.freeze({
-  plugins,
-  version,
-  quit,
-  settings,
-  reload,
-  apps
-});
+Object.freeze(corePlugins);
+
+export { corePlugins }

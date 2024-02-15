@@ -1,5 +1,5 @@
 import { CHANNELS, StatusBarState } from '@/common/constants/events';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import { on } from '@/common/ipc';
 
@@ -35,4 +35,6 @@ function StatusBar() {
   return <div className={styles.statusBar}>{icon}{statusBarText}</div>;
 }
 
-export { StatusBar };
+const memoizedStatusBar = memo(StatusBar);
+
+export { memoizedStatusBar as StatusBar };

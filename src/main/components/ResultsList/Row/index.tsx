@@ -8,6 +8,7 @@ type Props = {
   onSelect: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   subtitle?: string;
   index: number;
+  extensionName: string;
 };
 
 function Row({
@@ -16,6 +17,7 @@ function Row({
   title,
   onSelect,
   subtitle,
+  extensionName
 }: Props) {
   const className = isSelected ? `${styles.row} ${styles.selected}` : styles.row;
 
@@ -25,12 +27,16 @@ function Row({
       onClick={onSelect}
       onKeyDown={() => undefined}
     >
-      {icon && <SmartIcon path={icon} className={styles.icon} />}
 
-      <div className={styles.details}>
+      <div className={styles.actionInfo}>
+        {icon && <SmartIcon path={icon} className={styles.icon} />}
         {title && <div className={styles.title}>{title}</div>}
 
         {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
+      </div>
+
+      <div aria-label='extension-name' className={styles.extensionName}>
+        {extensionName}
       </div>
     </div>
   );
