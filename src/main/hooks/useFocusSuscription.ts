@@ -21,5 +21,5 @@ export const useFocusSuscription = <T extends React.RefObject<any>>(focusableEle
         return () => {
             unlistenPromise.then(unlisten => unlisten());
         };
-    }, [focusableElementRef]);
+    }, [focusableElementRef, channel, customFocusHandler]);
 };

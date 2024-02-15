@@ -45,7 +45,4 @@ export const useActionsStore = create<ActionsStore>((set) => ({
   removeAllActions: () => {
     set({ actions: [] });
   }
-
-
-
 }));

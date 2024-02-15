@@ -1,5 +1,5 @@
 import { CHANNELS } from '@/common/constants/events';
-import { isAutoStartEnabled, setAutoStart } from './autoStart';
+import { AutoStartManager } from '@/services/AutoStartManager';
 import { invoke, globalShortcut } from '@tauri-apps/api';
 import { changeTheme } from './utils/changeTheme';
 import { on } from '@/common/ipc';
@@ -30,9 +30,7 @@ const SETTING_HANDLERS = createHandlers({
   },
 
   openAtLogin: ({ newValue }) => {
-    isAutoStartEnabled().then(
-      (enabled) => newValue !== enabled ? setAutoStart(newValue) : undefined
-    );
+    AutoStartManager.setAutoStart(newValue);
   },
 
   hotkey: async ({ newValue, oldValue }) => {

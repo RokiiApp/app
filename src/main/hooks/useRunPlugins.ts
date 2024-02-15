@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useActionsStore } from '@/stores/actions';
-import VersionExtension from '@/extensions/core/version';
 import { ExtensionEvents } from '@/extensions/manager/types';
 import { extensionsManager } from '@/extensions/manager/ExtensionsManager';
 
@@ -13,7 +12,7 @@ export const useRunPlugins = (term: string) => {
     // Reset results state to initial state
     removeAllActions();
 
-    const allPlugins = { VersionExtension }
+    const allPlugins = extensionsManager.getAllPlugins();
 
     for (let [name, extension] of Object.entries(allPlugins)) {
 
@@ -56,5 +55,5 @@ export const useRunPlugins = (term: string) => {
 
     return () => extensionsManager.removeEventListener(ExtensionEvents.LOADED, () => { });
 
-  }, [])
+  }, [extensionsManager, term])
 };

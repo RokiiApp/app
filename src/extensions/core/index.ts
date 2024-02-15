@@ -1,8 +1,10 @@
 import type { Extension } from '../types';
 import VersionExtension from './version';
+import AppsExplorerExtension from './apps';
 
 const coreExtensions: Record<string, Extension> = {
-  VersionExtension
+  AppsExplorerExtension,
+  VersionExtension,
 };
 
 Object.freeze(coreExtensions);

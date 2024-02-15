@@ -1,11 +1,8 @@
-import { PluginModule } from "@rokii/types"
+import { Action, Extension } from "@/extensions/types"
+import type { AppEntry } from "./types"
+import icon from "../icon.png"
 import { search } from "@rokii/utils"
 import { invoke } from "@tauri-apps/api/tauri"
-
-type AppEntry = {
-    name: string
-    id: string
-}
 
 const apps: Record<string, AppEntry> = {}
 
@@ -25,13 +22,14 @@ const getInstalledApps = async () => {
     return installedApps
 }
 
-export const fn: PluginModule["fn"] = async (ctx) => {
+const run: Extension["run"] = async (ctx) => {
     // This is a hidden command that will refresh the apps list
     if (ctx.term === "apps refresh") {
-        return ctx.display({
+        const refreshAction: Action = {
             title: "Refresh apps list",
             id: "refresh",
-            onSelect: async (e) => {
+            type: "script",
+            run: async (e) => {
                 e.preventDefault()
                 ctx.update("refresh", {
                     title: "Refreshing apps list...",
@@ -40,7 +38,10 @@ export const fn: PluginModule["fn"] = async (ctx) => {
                 await initializeAsync()
                 ctx.actions.replaceTerm("")
             },
-        })
+        }
+
+        ctx.display([refreshAction])
+        return
     }
 
     if (Object.entries(apps).length === 0) {
@@ -49,22 +50,30 @@ export const fn: PluginModule["fn"] = async (ctx) => {
 
     const foundApps = search(Object.entries(apps), ctx.term, ([name]) => name);
 
-    foundApps.forEach(([name, app]) => {
-        ctx.display({
-            title: name,
-            subtitle: "Launch 🚀",
-            onSelect: () => { invoke("open_app_by_id", { appId: app.id }) }
-        })
-    })
+    const results: Action[] = foundApps.map(([name, app]) => ({
+        title: name,
+        subtitle: "Launch 🚀",
+        type: "script",
+        run: () => { invoke("open_app_by_id", { appId: app.id }) }
+    }));
 
+    ctx.display(results)
 }
 
 // TODO: search the icons, and display them
 // Think about how this should be updated. Maybe an interval?
 
-export const initializeAsync = async () => {
+const initializeAsync = async () => {
     const installedApps = await getInstalledApps()
     Object.assign(apps, Object.fromEntries(installedApps))
 }
 
-export { default as icon } from "../icon.png"
+const AppsExplorerExtension: Extension = {
+    name: "Apps",
+    run,
+    icon,
+    initializeAsync
+}
+
+export default AppsExplorerExtension
+

@@ -26,7 +26,7 @@ export type Action = {
      */
     id?: string;
     title: string;
-    subtitle: string;
+    subtitle?: string;
     type: ActionType;
     keyword?: string[];
     /**

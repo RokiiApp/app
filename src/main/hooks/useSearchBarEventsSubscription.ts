@@ -1,9 +1,8 @@
 import { on, send } from '@/common/ipc';
-import { useInputStore } from '@/stores/inputStore';
+import { useInputStore } from '@/stores/input';
 import { TauriEvent } from '@tauri-apps/api/event';
 import * as config from '@/common/config';
 import { CHANNELS } from '@/common/constants/events';
-// import { ipcRenderer } from 'electron';
 
 import { useEffect } from 'react';
 
@@ -27,10 +26,6 @@ export const useSearchBarEventsSubscription = (mainInput: React.RefObject<HTMLIn
   const cleanup = () => {
     window.removeEventListener('keydown', onDocumentKeydown);
     window.removeEventListener('beforeunload', cleanup);
-    // electronWindow.removeAllListeners('show');
-    // ipcRenderer.removeAllListeners(CHANNELS.ClearInput);
-    // ipcRenderer.removeAllListeners(CHANNELS.ShowTerm);
-    // ipcRenderer.removeAllListeners(CHANNELS.FocusInput);
   };
 
   useEffect(() => {
