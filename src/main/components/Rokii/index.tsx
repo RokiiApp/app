@@ -5,7 +5,7 @@ import { StatusBar } from '@/main/components/StatusBar';
 import { InputBox } from '@/main/components/InputBox';
 import { Home } from '@/main/routes/home';
 import styles from './styles.module.css';
-import { useInputStore } from '@/state/inputStore';
+import { useInputStore } from '@/stores/inputStore';
 
 /**
  * Main search container

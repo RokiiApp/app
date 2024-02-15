@@ -1,6 +1,6 @@
 import { getAutocompleteValue } from '@/main/utils/getAutocompleteValue';
-import { useInputStore } from '@/state/inputStore';
-import { useRokiStore } from '@/state/rokiStore';
+import { useInputStore } from '@/stores/inputStore';
+import { useRokiStore } from '@/stores/rokiStore';
 
 import styles from './styles.module.css';
 

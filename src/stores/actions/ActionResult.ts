@@ -1,5 +1,4 @@
 import { Action, ActionType } from "@/extensions/types";
-import { randomUUID } from "crypto";
 
 export class ActionResult {
     /**
@@ -25,7 +24,7 @@ export class ActionResult {
             this.script = action.run;
         }
 
-        this.id = action.id || randomUUID();
+        this.id = action.id || crypto.randomUUID();
 
     }
 

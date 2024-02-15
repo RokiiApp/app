@@ -5,7 +5,7 @@ import { Autocomplete } from './Autocomplete';
 import { SearchBar } from './SearchBar';
 import { useHashLocation } from 'wouter/use-hash-location';
 import { CHANNELS } from '@/common/constants/events';
-import { useInputStore } from '@/state/inputStore';
+import { useInputStore } from '@/stores/inputStore';
 import { send } from '@/common/ipc';
 
 const InputBox = () => {
