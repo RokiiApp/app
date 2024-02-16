@@ -1,16 +1,10 @@
-import { getAutocompleteValue } from '@/main/utils/getAutocompleteValue';
-import { useInputStore } from '@/stores/input';
-import { useRokiStore } from '@/stores/rokiStore';
-
 import styles from './styles.module.css';
+import { useAutocomplete } from '@/main/hooks/useAutocomplete';
 
 export const Autocomplete = () => {
-  const term = useInputStore(s => s.term);
-  const [results, selected] = useRokiStore((s) => [s.results, s.selected]);
+  const { value } = useAutocomplete();
 
-  const autocompleteTerm = getAutocompleteValue(results[selected], term);
+  if (!value) return null;
 
-  return autocompleteTerm
-    ? <input tabIndex={-1} disabled className={styles.autocomplete} value={autocompleteTerm} />
-    : null;
+  return <input tabIndex={-1} disabled className={styles.autocomplete} value={value} />
 };
