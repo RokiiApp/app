@@ -2,24 +2,18 @@ import type { Action, ExtensionModule } from "@/extensions/types";
 import { getVersion } from "@tauri-apps/api/app";
 import icon from '../icon.png';
 
+const version = await getVersion();
+
+const versionAction: Action = {
+    title: "Rokii Version",
+    subtitle: version,
+    type: "info"
+};
+
 const VersionExtension: ExtensionModule = {
+    name: "Version",
     icon,
-    name: 'Rokii Version',
-    run: async ({ display }) => {
-        const version = await getVersion();
-
-        const action: Action = {
-            title: "Rokii Version",
-            subtitle: version,
-            type: "script",
-            run: (e: Event) => {
-                e.preventDefault();
-                console.log("Rokii Version: ", version);
-            }
-        };
-
-        display([action]);
-    }
-}
+    run: async ({ display }) => display([versionAction])
+};
 
 export default VersionExtension;

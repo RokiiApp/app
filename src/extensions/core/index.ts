@@ -1,10 +1,14 @@
 import type { ExtensionModule } from '../types';
-import VersionExtension from './version';
 import AppsExplorerExtension from './apps';
+import QuitExtension from './quit';
+import ReloadExtension from './reload';
+import VersionExtension from './version';
 
 const coreExtensions: Record<string, ExtensionModule> = {
   AppsExplorerExtension,
-  VersionExtension,
+  QuitExtension,
+  ReloadExtension,
+  VersionExtension
 };
 
 Object.freeze(coreExtensions);
