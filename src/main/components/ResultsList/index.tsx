@@ -39,7 +39,8 @@ const ResultsList = ({ items }: { items: Result[] }) => {
         if (e.key === "Tab") {
             const selectedAction = items[selected];
             if (selectedAction) {
-                send(CHANNELS.ShowTerm, selectedAction.term);
+                send(CHANNELS.ShowTerm, selectedAction.autocomplete);
+                setSelected(0);
             }
         }
 
@@ -48,6 +49,7 @@ const ResultsList = ({ items }: { items: Result[] }) => {
             const item = items[selected];
             if (item) {
                 item.onSelect(e);
+                setSelected(0);
             }
         }
 

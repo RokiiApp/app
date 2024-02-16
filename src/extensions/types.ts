@@ -21,7 +21,7 @@ export type ExtensionModule = {
 
 export type ScriptAction = {
     type: "script";
-    run: (e: Event | React.SyntheticEvent) => Promise<void>;
+    run: (e: Event | React.SyntheticEvent) => void | Promise<void>;
 }
 
 type AppAction = {
@@ -42,6 +42,11 @@ export type Action = {
     subtitle?: string;
     type: ActionType;
     keyword?: string[];
+    /**
+     * The text that will replace the current input when the user uses the tab key
+     * If not provided, the title will be used
+     */
+    autocomplete?: string;
     /**
      * The icon to be displayed in the action
      * If not provided, the extension icon will be used

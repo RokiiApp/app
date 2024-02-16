@@ -19,6 +19,7 @@ export class Result {
     title: string;
     subtitle: string;
     icon: string;
+    autocomplete?: string;
     script: ScriptAction["run"] | undefined;
     readonly id: string;
 
@@ -27,6 +28,7 @@ export class Result {
         this.subtitle = action.subtitle;
         this.icon = action.icon;
         this.extension = extensionName;
+        this.autocomplete = action.autocomplete || action.title;
         this.id = action.id || crypto.randomUUID();
 
         if (action.type === "script") {
