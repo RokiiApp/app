@@ -1,14 +1,14 @@
 import { enable, isEnabled, disable } from 'tauri-plugin-autostart-api';
 
-export class AutoStartManager {
+export class AutoStart {
   static async isEnabled() {
     return await isEnabled();
   }
 
-  static async setAutoStart(to: boolean) {
+  static async set(to: boolean) {
     to
-      ? await AutoStartManager.enable()
-      : await AutoStartManager.disable();
+      ? await AutoStart.enable()
+      : await AutoStart.disable();
   }
 
   private static async enable() {

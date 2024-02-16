@@ -1,5 +1,5 @@
 import { CHANNELS } from '@/common/constants/events';
-import { AutoStartManager } from '@/services/AutoStartManager';
+import { AutoStart } from '@/services/AutoStart';
 import { invoke, globalShortcut } from '@tauri-apps/api';
 import { changeTheme } from './utils/changeTheme';
 import { on } from '@/common/ipc';
@@ -30,7 +30,7 @@ const SETTING_HANDLERS = createHandlers({
   },
 
   openAtLogin: ({ newValue }) => {
-    AutoStartManager.setAutoStart(newValue);
+    AutoStart.set(newValue);
   },
 
   hotkey: async ({ newValue, oldValue }) => {
