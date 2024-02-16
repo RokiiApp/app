@@ -28,8 +28,9 @@
 
 ## ✨ Features
 
-- 🚀 Extensible and compatibile with Cerebro Plugins API
-- 🧪 Experimental support for Script and Command extensions
+- 🔍 Search installed apps
+- 🌗 Light and Dark modes
+- 🚀 Extensible with the Extensions API
 
 <p align="center">
     <img
@@ -65,14 +66,11 @@ When Windows defender pops up:
 
 Be sure you download Rokii from the [official release link](https://github.com/RokiiApp/app/releases/latest)
 
-## 🧰 Development
+## 🧰 Plugins Development
 
-For now Rokii fully supports the Cerebro plugin system.
-
-In addition, a completely new system is being developed.
-
-If you are willing to create a plugin based on Cerebro system, take a look at the
-packages available on the [developers repo](https://github.com/RokiiApp/developers).
+An extensions system is being developed.
+You can take a look at the [available methods](./src/extensions/types.ts)
+and the [example core extensions](./src/extensions/core/).
 
 > Rokii was inspired by [Raycast](https://www.raycast.com/) and [Cerebro](https://www.cerebroapp.com/)
 
