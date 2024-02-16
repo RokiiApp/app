@@ -1,8 +1,8 @@
-import type { Extension } from '../Extension';
+import type { ExtensionModule } from '../types';
 import VersionExtension from './version';
 import AppsExplorerExtension from './apps';
 
-const coreExtensions: Record<string, Extension> = {
+const coreExtensions: Record<string, ExtensionModule> = {
   AppsExplorerExtension,
   VersionExtension,
 };

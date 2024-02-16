@@ -7,7 +7,7 @@ import { requireExtension } from '@/services/plugins/requireExtension';
 import { ensureRokiNeededFiles } from '@/services/plugins';
 import { setupPluginsWatcher } from '@/services/plugins/externalPluginsWatcher';
 import { ExtensionEvents, ExtensionLoadedEvent, ExtensionRemovedEvent, PluginsManagerEvents } from './types';
-import type { Extension } from '../Extension';
+import { Extension } from '../Extension';
 export * from './types';
 
 class ExtensionsManager extends TypedEventTarget<PluginsManagerEvents> {
@@ -20,13 +20,29 @@ class ExtensionsManager extends TypedEventTarget<PluginsManagerEvents> {
   }
 
   getCoreExtensions() {
-    return coreExtensions;
+    const extensionModules = coreExtensions;
+
+    const extensions: Record<string, Extension> = {};
+
+    for (const [key, module] of Object.entries(extensionModules)) {
+      try {
+        const extension = new Extension(module);
+        extensions[key] = extension;
+      } catch (error) {
+        console.error(`Error loading core extension: ${key}`, error);
+      }
+    }
+
+    return extensions;
   }
 
   async initializePlugins() {
     // Load the core plugins (the ones that come with rokii)
     const corePlugins = this.getCoreExtensions()
-    Object.keys(corePlugins).forEach((name) => this.loadCoreExtension(coreExtensions[name], name));
+
+    for (const [name, extension] of Object.entries(corePlugins)) {
+      this.loadCoreExtension(extension, name);
+    }
 
     // load current downloaded plugins
     getInstalledPluginNames().then(installedPlugins => {
