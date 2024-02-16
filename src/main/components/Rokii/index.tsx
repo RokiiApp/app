@@ -4,6 +4,7 @@ import { useHashLocation } from 'wouter/use-hash-location';
 import { StatusBar } from '@/main/components/StatusBar';
 import { InputBox } from '@/main/components/InputBox';
 import { Home } from '@/main/routes/home';
+import { App } from '@/main/routes/app';
 import styles from './styles.module.css';
 import { useInputStore } from '@/stores/input';
 import { memo } from 'react';
@@ -21,6 +22,9 @@ const Rokii = () => {
         <Router hook={useHashLocation}>
           <Route path='/'>
             <Home input={term} />
+          </Route>
+          <Route path='/app/:extension/:app'>
+            <App input={term} />
           </Route>
         </Router>
       </div>

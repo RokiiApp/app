@@ -2,12 +2,15 @@ import { CHANNELS } from "@/common/constants/events";
 import { send } from "@/common/ipc";
 import { Action, ScriptAction } from "@/extensions/types";
 import { appWindow } from "@tauri-apps/api/window";
+import { navigate } from "wouter/use-hash-location";
 
 export class ResultCreator {
     static create(action: Action, extensionName: string): Result {
         switch (action.type) {
             case "script":
                 return new ScriptActionResult(action, extensionName);
+            case "app":
+                return new AppActionResult(action, extensionName);
             default:
                 return new InfoResult(action, extensionName);
         }
@@ -77,6 +80,25 @@ class ScriptActionResult extends Result {
     async onSelect(e: Event | React.SyntheticEvent) {
         this.script(e);
         await super.onSelect(e);
+    }
+
+}
+
+class AppActionResult extends Result {
+    appName: string;
+
+    constructor(action: Action, extensionName: string) {
+        super(action, extensionName);
+
+        if (action.type !== "app") {
+            throw new Error("Invalid action type");
+        }
+
+        this.appName = action.appName;
+    }
+
+    async onSelect() {
+        navigate(`/app/${this.extension}/${this.appName}`)
     }
 
 }

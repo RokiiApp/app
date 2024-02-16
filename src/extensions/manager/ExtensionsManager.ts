@@ -27,7 +27,7 @@ class ExtensionsManager extends TypedEventTarget<PluginsManagerEvents> {
     for (const [key, module] of Object.entries(extensionModules)) {
       try {
         const extension = new Extension(module);
-        extensions[key] = extension;
+        extensions[extension.name] = extension;
       } catch (error) {
         console.error(`Error loading core extension: ${key}`, error);
       }
@@ -84,7 +84,7 @@ class ExtensionsManager extends TypedEventTarget<PluginsManagerEvents> {
 
     await initExtension(extension, name);
 
-    this.extensions[name] = extension;
+    this.extensions[extension.name] = extension;
 
     this.dispatchTypedEvent(ExtensionEvents.LOADED, new ExtensionLoadedEvent(name));
   }

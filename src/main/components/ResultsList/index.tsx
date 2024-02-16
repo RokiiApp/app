@@ -21,7 +21,6 @@ const ResultsList = ({ items }: { items: Result[] }) => {
     const { listRef } = useResultsAutoscroll(selectedIndex)
 
     const { requestAutocomplete } = useAutocomplete();
-    requestAutocomplete(selectedResult.autocomplete);
 
     const onKeyDown = (e: KeyboardEvent) => {
         // Autocomplete
@@ -53,6 +52,8 @@ const ResultsList = ({ items }: { items: Result[] }) => {
     }, [onKeyDown])
 
     if (items.length === 0) return null;
+
+    requestAutocomplete(selectedResult.autocomplete);
 
     return (
         <div className={styles.wrapper}>

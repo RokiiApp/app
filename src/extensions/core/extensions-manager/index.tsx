@@ -82,13 +82,21 @@ import { getPlugins } from './utils/loadPlugins';
 
 const managerLauncherAction: Action = {
   title: 'Manage plugins',
-  type: "app"
+  type: "app",
+  appName: "Manager"
 }
 const TEMPORAL_ACTION_ID = 'plugins-loading';
+
+
 const temporalSearchAction: Action = {
   title: "Looking for plugins...",
   type: "info",
   id: TEMPORAL_ACTION_ID
+}
+
+const testAppAction: Action = {
+  title: "We are here!",
+  type: "info"
 }
 
 export const fn: ExtensionModule['run'] = async ({ term, display, hide, update }) => {
@@ -119,7 +127,13 @@ import icon from '../icon.png';
 const ExtensionsManagerExtension: ExtensionModule = {
   name: "Extensions Manager",
   icon,
-  run: fn
+  run: fn,
+  apps: {
+    "Manager": async ({ display }) => {
+      display([testAppAction]);
+    }
+
+  }
 }
 
 export default ExtensionsManagerExtension;

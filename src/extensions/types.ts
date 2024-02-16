@@ -18,6 +18,7 @@ export type ExtensionModule = {
     initialize?: (...args: any[]) => void;
     initializeAsync?: (...args: any[]) => Promise<void>;
     onMessage?: (data: unknown) => void;
+    apps?: Record<string, (context: ExtensionContext) => Promise<void>>;
 }
 
 export type ScriptAction = {
@@ -27,6 +28,7 @@ export type ScriptAction = {
 
 type AppAction = {
     type: "app";
+    appName: string;
 }
 
 type InfoAction = {
