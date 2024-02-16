@@ -7,9 +7,7 @@ export const requireExtension = async (pluginName: string): Promise<Extension | 
   const pluginPath = await join(PLUGINS_PATH, pluginName, "dist", "index.js")
 
   try {
-    const { module, error } = await ExternalModuleImporter.importModule(pluginPath);
-
-    if (error) throw error
+    const module = await ExternalModuleImporter.importModule(pluginPath);
 
     const extension = new Extension(module)
 
