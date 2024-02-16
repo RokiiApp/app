@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import { useActionsStore } from '@/stores/actions';
-import { useRunPlugins } from '@/main/hooks/useRunPlugins';
+import { useRunExtensions } from '@/main/hooks/useRunPlugins';
 
 import { ResultsList } from '../components/ResultsList';
 
 const Home = ({ input }: { input: string }) => {
-    useRunPlugins(input);
+    useRunExtensions(input);
 
     const results = useActionsStore((s) => s.actions);
 

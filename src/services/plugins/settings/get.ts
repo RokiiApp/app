@@ -1,4 +1,4 @@
-import type { Extension } from '@/extensions/types';
+import type { Extension } from '@/extensions/Extension';
 import * as config from '@/common/config';
 
 /**

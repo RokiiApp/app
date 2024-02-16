@@ -3,11 +3,11 @@ import { TypedEventTarget } from 'typescript-event-target';
 import { coreExtensions } from '../core';
 import { initExtension } from '@/services/plugins/initializeExtensions';
 import { getInstalledPluginNames } from '@/services/plugins/getExternalPlugins';
-import { requirePlugin } from '@/services/plugins/requirePlugin';
+import { requireExtension } from '@/services/plugins/requireExtension';
 import { ensureRokiNeededFiles } from '@/services/plugins';
 import { setupPluginsWatcher } from '@/services/plugins/externalPluginsWatcher';
 import { ExtensionEvents, ExtensionLoadedEvent, ExtensionRemovedEvent, PluginsManagerEvents } from './types';
-import { Extension } from '../types';
+import type { Extension } from '../Extension';
 export * from './types';
 
 class ExtensionsManager extends TypedEventTarget<PluginsManagerEvents> {
@@ -62,13 +62,13 @@ class ExtensionsManager extends TypedEventTarget<PluginsManagerEvents> {
   }
 
   private async loadExternalPlugin(name: string) {
-    const plugin = await requirePlugin(name);
+    const extension = await requireExtension(name);
 
-    if (!plugin) return;
+    if (!extension) return;
 
-    await initExtension(plugin, name);
+    await initExtension(extension, name);
 
-    this.extensions[name] = plugin;
+    this.extensions[name] = extension;
 
     this.dispatchTypedEvent(ExtensionEvents.LOADED, new ExtensionLoadedEvent(name));
   }

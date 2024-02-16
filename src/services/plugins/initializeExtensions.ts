@@ -1,5 +1,5 @@
 import { extensionSettings } from '@/services/plugins';
-import { Extension } from '@/extensions/types';
+import type { Extension } from '@/extensions/Extension';
 
 export const initExtension = async (extension: Extension, name: string) => {
   const { initialize, initializeAsync, onMessage } = extension;

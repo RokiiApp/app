@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useActionsStore } from '@/stores/actions';
 import { ExtensionEvents } from '@/extensions/manager/types';
 import { extensionsManager } from '@/extensions/manager/ExtensionsManager';
+import { ExtensionContextProvider } from '@/services/plugins/ContextProvider';
 
 // TODO: Suscribe to unload plugin event to remove plugin from state
-export const useRunPlugins = (term: string) => {
-  const addActions = useActionsStore(s => s.addActions);
+export const useRunExtensions = (term: string) => {
   const removeAllActions = useActionsStore(s => s.removeAllActions);
 
   useEffect(() => {
@@ -18,12 +18,12 @@ export const useRunPlugins = (term: string) => {
 
       const { name: extensionName } = extension
 
+      const extensionContextProvider = new ExtensionContextProvider(extensionName);
+      const extensionContext = extensionContextProvider.get(term);
+
       try {
         // HERE IS WHERE WE PROVIDE THE API TO THE PLUGIN
-        extension.run({
-          term,
-          display: async (actions) => { addActions(actions, extensionName) }
-        });
+        extension.run(extensionContext);
       } catch (error) {
         // Do not fail on plugin errors, just log them to console
         console.log('Error running plugin', name, error);
@@ -40,12 +40,12 @@ export const useRunPlugins = (term: string) => {
 
       const extension = extensionsManager.getPlugin(name);
 
+      const extensionContextProvider = new ExtensionContextProvider(extension.name);
+      const extensionContext = extensionContextProvider.get(term);
+
       try {
         // HERE IS WHERE WE PROVIDE THE API TO THE PLUGIN
-        extension.run({
-          term,
-          display: async (actions) => { addActions(actions, name) }
-        });
+        extension.run(extensionContext);
       } catch (error) {
         // Do not fail on plugin errors, just log them to console
         console.log('Error running plugin', name, error);

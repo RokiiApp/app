@@ -1,8 +1,8 @@
-import type { Action, Extension } from "@/extensions/types";
+import type { Action, ExtensionModule } from "@/extensions/types";
 import { getVersion } from "@tauri-apps/api/app";
 import icon from '../icon.png';
 
-const VersionExtension: Extension = {
+const VersionExtension: ExtensionModule = {
     icon,
     name: 'Rokii Version',
     run: async ({ display }) => {

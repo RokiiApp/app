@@ -1,4 +1,4 @@
-import type { Extension } from '@/extensions/types';
+import type { Extension } from '@/extensions/Extension';
 
 const VALID_TYPES = ['string', 'number', 'bool', 'option'] as const;
 

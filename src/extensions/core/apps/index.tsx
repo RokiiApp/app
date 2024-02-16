@@ -1,46 +1,32 @@
-import { Action, Extension } from "@/extensions/types"
+import { Action, ExtensionModule } from "@/extensions/types"
 import type { AppEntry } from "./types"
 import icon from "../icon.png"
 import { search } from "@rokii/utils"
 import { invoke } from "@tauri-apps/api/tauri"
+import { getInstalledApps } from "./getInstalledApps"
 
 const apps: Record<string, AppEntry> = {}
 
-const getInstalledApps = async () => {
-    const rawInstalledApps = await invoke<string[]>("get_installed_apps")
-
-    const installedApps = rawInstalledApps.map((appEntry) => {
-        const [match, rawName, rawId] = appEntry.match(/(.+?)\s\s+(.+)/)
-
-        const name = rawName.trim()
-        const id = rawId.trim()
-
-        // We create an array of entries so we can create the apps object
-        return [name, { name, id }] as [string, AppEntry]
-    })
-
-    return installedApps
-}
-
-const run: Extension["run"] = async (ctx) => {
+const run: ExtensionModule["run"] = async ({ term, update, display, actions }) => {
     // This is a hidden command that will refresh the apps list
-    if (ctx.term === "apps refresh") {
+    if (term === "apps refresh") {
+        const ACTION_ID = "refresh"
         const refreshAction: Action = {
             title: "Refresh apps list",
-            id: "refresh",
+            id: ACTION_ID,
             type: "script",
-            run: async (e) => {
-                e.preventDefault()
-                ctx.update("refresh", {
+            run: async () => {
+                update(ACTION_ID, {
                     title: "Refreshing apps list...",
+                    type: "app",
                     subtitle: "This might take a while",
                 })
                 await initializeAsync()
-                ctx.actions.replaceTerm("")
+                actions.replaceTerm("")
             },
         }
 
-        ctx.display([refreshAction])
+        display([refreshAction])
         return
     }
 
@@ -48,7 +34,7 @@ const run: Extension["run"] = async (ctx) => {
         await initializeAsync()
     }
 
-    const foundApps = search(Object.entries(apps), ctx.term, ([name]) => name);
+    const foundApps = search(Object.entries(apps), term, ([name]) => name);
 
     const results: Action[] = foundApps.map(([name, app]) => ({
         title: name,
@@ -57,7 +43,7 @@ const run: Extension["run"] = async (ctx) => {
         run: () => { invoke("open_app_by_id", { appId: app.id }) }
     }));
 
-    ctx.display(results)
+    display(results)
 }
 
 // TODO: search the icons, and display them
@@ -68,7 +54,7 @@ const initializeAsync = async () => {
     Object.assign(apps, Object.fromEntries(installedApps))
 }
 
-const AppsExplorerExtension: Extension = {
+const AppsExplorerExtension: ExtensionModule = {
     name: "Apps",
     run,
     icon,

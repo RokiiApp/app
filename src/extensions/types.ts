@@ -1,9 +1,18 @@
-export type ActionType = "script" | "app";
+export type ActionType = "script" | "app" | "info";
 
-export type Extension = {
+export type ExtensionContext = {
+    display: (actions: Action[]) => Promise<void>;
+    term: string;
+    update: (id: string, action: Action) => void;
+    actions: {
+        replaceTerm: (term: string) => void;
+    }
+}
+
+export type ExtensionModule = {
     icon: string;
     name: string;
-    run: ({ display, term }: { display: (actions: Action[]) => Promise<void>, term: string }) => Promise<void>;
+    run: (context: ExtensionContext) => Promise<void>;
     settings?: any;
     initialize?: (...args: any[]) => void;
     initializeAsync?: (...args: any[]) => Promise<void>;
@@ -17,6 +26,10 @@ type ScriptAction = {
 
 type AppAction = {
     type: "app";
+}
+
+type InfoAction = {
+    type: "info";
 }
 
 export type Action = {
@@ -35,5 +48,5 @@ export type Action = {
      * If the extension icon is not provided, the default icon will be used
      */
     icon?: string;
-} & (ScriptAction | AppAction);
+} & (ScriptAction | AppAction | InfoAction);
 

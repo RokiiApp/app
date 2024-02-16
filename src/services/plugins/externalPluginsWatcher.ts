@@ -2,7 +2,7 @@ import { watchImmediate } from "tauri-plugin-fs-watch-api";
 import debounce from "just-debounce"
 import { extensionSettings } from '@/services/plugins';
 import { PLUGINS_PATH } from "@/common/constants/paths";
-import { isPluginValid, requirePlugin } from "./requirePlugin";
+import { requireExtension } from "./requireExtension";
 import { extensionsManager } from "@/extensions/manager/ExtensionsManager";
 
 const parse = (path: string) => {
@@ -66,9 +66,9 @@ export const setupPluginsWatcher = async () => {
 
 const loadExtension = async (pluginName: string): Promise<boolean> => {
   console.group(`[ExtensionLoader] Load extension: ${pluginName}`);
-  const extension = await requirePlugin(pluginName);
+  const extension = await requireExtension(pluginName);
 
-  if (!extension || !isPluginValid(extension)) {
+  if (!extension) {
     console.error('[ExtensionLoader] Extension is not valid, skipped');
     console.groupEnd();
     return;
