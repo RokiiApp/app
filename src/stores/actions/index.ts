@@ -1,10 +1,10 @@
 import type { Action } from '@/extensions/types';
 import { create } from 'zustand';
-import { ActionResult } from './ActionResult';
+import { type Result, ResultCreator } from './ActionResult';
 
 
 export interface ActionsStore {
-  actions: ActionResult[];
+  actions: Result[];
 
   addActions: (actions: Action[], extensionName: string) => void;
   updateAction: (id: string, newAction: Action) => void;
@@ -16,7 +16,7 @@ export const useActionsStore = create<ActionsStore>((set) => ({
   actions: [],
 
   addActions: (actions, extensionName) => {
-    const actionResults = actions.map((action) => new ActionResult(action, extensionName));
+    const actionResults = actions.map((action) => ResultCreator.create(action, extensionName));
     set((state) => ({ actions: [...state.actions, ...actionResults] }));
   },
 

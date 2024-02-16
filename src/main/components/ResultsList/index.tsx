@@ -1,15 +1,14 @@
-import type { ActionResult } from '@/stores/actions/ActionResult';
+import type { Result } from '@/stores/actions/ActionResult';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Virtuoso, type VirtuosoHandle } from 'react-virtuoso';
 import styles from './styles.module.css';
 
 import { RESULT_HEIGHT, VISIBLE_RESULTS } from '@/common/constants/ui';
 import Row from './Row';
-import { appWindow } from '@tauri-apps/api/window';
 import { send } from '@/common/ipc';
 import { CHANNELS } from '@/common/constants/events';
 
-const ResultsList = ({ items }: { items: ActionResult[] }) => {
+const ResultsList = ({ items }: { items: Result[] }) => {
     const [selected, setSelected] = useState(0);
 
     const listRef = useRef<VirtuosoHandle>(null);
@@ -48,9 +47,7 @@ const ResultsList = ({ items }: { items: ActionResult[] }) => {
         if (e.key === "Enter") {
             const item = items[selected];
             if (item) {
-                // TODO - Type items to ensure onSelect is a function
-                item.execute();
-                appWindow.hide();
+                item.onSelect(e);
             }
         }
 
@@ -71,7 +68,7 @@ const ResultsList = ({ items }: { items: ActionResult[] }) => {
 
     useEffect(() => {
         if (listRef.current) {
-            listRef.current.scrollToIndex({ index: selected, align: 'end' });
+            listRef.current.scrollToIndex({ index: selected, align: "center", behavior: 'smooth' });
         }
     }, [selected]);
 

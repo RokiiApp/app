@@ -19,9 +19,9 @@ export type ExtensionModule = {
     onMessage?: (data: unknown) => void;
 }
 
-type ScriptAction = {
+export type ScriptAction = {
     type: "script";
-    run: Function;
+    run: (e: Event | React.SyntheticEvent) => Promise<void>;
 }
 
 type AppAction = {

@@ -1,11 +1,11 @@
 import defaultIcon from '@/extensions/core/icon.png';
 import { SmartIcon } from '@rokii/ui';
 import styles from './styles.module.css';
-import type { ActionResult } from '@/stores/actions/ActionResult';
+import type { Result } from '@/stores/actions/ActionResult';
 
 type Props = {
   isSelected: boolean;
-  result: ActionResult;
+  result: Result;
 };
 
 function Row({
@@ -19,8 +19,7 @@ function Row({
   return (
     <div
       className={className}
-      onClick={result.execute}
-      onKeyDown={() => undefined}
+      onClick={result.onSelect}
     >
 
       <div className={styles.actionInfo}>
