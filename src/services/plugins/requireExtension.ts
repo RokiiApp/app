@@ -20,4 +20,3 @@ export const requireExtension = async (pluginName: string): Promise<Extension | 
     return null;
   }
 };
-

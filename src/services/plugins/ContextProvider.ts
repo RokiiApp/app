@@ -23,6 +23,10 @@ export class ExtensionContextProvider {
                 const actionsStore = useActionsStore.getState();
                 actionsStore.addActions(actions, this.extensionName);
             },
+            hide(id) {
+                const actionsStore = useActionsStore.getState();
+                actionsStore.removeAction(id);
+            },
             update: (id, action) => {
                 const actionsStore = useActionsStore.getState();
                 actionsStore.updateAction(id, action);

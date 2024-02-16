@@ -2,6 +2,7 @@ export type ActionType = "script" | "app" | "info";
 
 export type ExtensionContext = {
     display: (actions: Action[]) => Promise<void>;
+    hide: (id: string) => void;
     term: string;
     update: (id: string, action: Action) => void;
     actions: {
