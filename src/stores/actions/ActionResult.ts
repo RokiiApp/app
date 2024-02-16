@@ -19,7 +19,7 @@ export class Result {
     title: string;
     subtitle: string;
     icon: string;
-    autocomplete?: string;
+    autocomplete: string;
     script: ScriptAction["run"] | undefined;
     readonly id: string;
 

@@ -1,8 +1,8 @@
-import styles from './styles.module.css';
 import { useAutocomplete } from '@/main/hooks/useAutocomplete';
+import styles from './styles.module.css';
 
 export const Autocomplete = () => {
-  const { value } = useAutocomplete();
+  const { value } = useAutocomplete()
 
   if (!value) return null;
 
