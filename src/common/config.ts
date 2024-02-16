@@ -4,14 +4,14 @@ import { SettingsManager } from "tauri-settings"
 import type { PathValue } from "tauri-settings/dist/types/dot-notation"
 
 import { CHANNELS } from './constants/events';
-import { themes } from './themes';
+import { THEMES } from './themes';
 import { send } from '@/common/ipc';
 
 const settingsManager = new SettingsManager<SettingsSchema>({
   locale: "en-US",
   lang: "en",
   country: "US",
-  theme: themes[0].value,
+  theme: THEMES[0].value,
   hotkey: "Control+Space",
   developerMode: false,
   cleanOnHide: true,

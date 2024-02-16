@@ -2,7 +2,7 @@ import type { SettingsHandler, SettingsSchema } from '@rokii/types';
 
 import { useState } from 'react';
 import { FormComponents } from '@rokii/ui';
-import { themes } from '@/common/themes';
+import { THEMES } from '@/common/themes';
 
 import Hotkey from './Hotkey';
 import styles from './styles.module.css';
@@ -40,8 +40,8 @@ function Settings({ get, set }: SettingsHandler) {
       </Wrapper>
       <Select
         label='Theme'
-        value={themes.find((t) => t.value === state.theme)}
-        options={themes}
+        value={THEMES.find((t) => t.value === state.theme)}
+        options={THEMES}
         onChange={(newValue) => newValue && changeConfig('theme', newValue.value)}
       />
       <Checkbox

@@ -1,4 +1,4 @@
-export const themes = [
+export const THEMES = [
   {
     value: '/themes/light.css',
     label: 'Light'
