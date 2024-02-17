@@ -1,7 +1,7 @@
-import styles from './styles.module.css';
+import styles from './styles.module.css'
 
 function StatusBar ({ value }: { value: string }) {
-  return <div className={styles.statusBar}>{value}</div>;
+  return <div className={styles.statusBar}>{value}</div>
 }
 
-export default StatusBar;
+export default StatusBar

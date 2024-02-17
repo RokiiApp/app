@@ -1,3 +1,3 @@
-import { blurListener } from './blur';
+import { blurListener } from './blur'
 
-export { blurListener };
+export { blurListener }

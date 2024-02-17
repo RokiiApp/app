@@ -1,37 +1,37 @@
-import type { PluginInfo } from '../types';
+import type { PluginInfo } from '../types'
 
-import { useState } from 'react';
-import { KeyboardNav, KeyboardNavItem } from '@rokii/ui';
-import { ActionButton } from './ActionButton';
-import { Description } from './Description';
-import { Settings } from './Settings';
+import { useState } from 'react'
+import { KeyboardNav, KeyboardNavItem } from '@rokii/ui'
+import { ActionButton } from './ActionButton'
+import { Description } from './Description'
+import { Settings } from './Settings'
 
-import { client } from '@/services/plugins/index';
-import styles from './styles.module.css';
-import * as format from '../utils/format';
+import { client } from '@/services/plugins/index'
+import styles from './styles.module.css'
+import * as format from '../utils/format'
 
-type NpmActions = 'installPackage' | 'uninstallPackage' | 'updatePackage';
+type NpmActions = 'installPackage' | 'uninstallPackage' | 'updatePackage'
 
-type PreviewProps = {
-  onComplete: () => void;
-  plugin: PluginInfo;
-};
+interface PreviewProps {
+  onComplete: () => void
+  plugin: PluginInfo
+}
 
 export const Preview = ({ onComplete, plugin }: PreviewProps) => {
-  const [runningAction, setRunningAction] = useState<NpmActions | null>(null);
-  const [showDescription, setShowDescription] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
+  const [runningAction, setRunningAction] = useState<NpmActions | null>(null)
+  const [showDescription, setShowDescription] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
 
   const getNpmActions =
     (pluginName: string, runningActionName: NpmActions) => async () => {
-      setRunningAction(runningActionName);
+      setRunningAction(runningActionName)
 
-      await client[runningActionName](pluginName);
+      await client[runningActionName](pluginName)
 
-      setRunningAction(null);
+      setRunningAction(null)
 
-      onComplete();
-    };
+      onComplete()
+    }
 
   const {
     name,
@@ -43,9 +43,9 @@ export const Preview = ({ onComplete, plugin }: PreviewProps) => {
     installedVersion,
     isUpdateAvailable,
     settings
-  } = plugin;
+  } = plugin
 
-  const githubRepo = repo && repo.match(/^.+github.com\/([^/]+\/[^/]+).*?/);
+  const githubRepo = repo && repo.match(/^.+github.com\/([^/]+\/[^/]+).*?/)
   return (
     <div className={styles.preview} key={name}>
       <h2>{`${format.name(name)} (${version})`}</h2>
@@ -96,5 +96,5 @@ export const Preview = ({ onComplete, plugin }: PreviewProps) => {
         <Description repoName={githubRepo[1]} />
       )}
     </div>
-  );
-};
+  )
+}

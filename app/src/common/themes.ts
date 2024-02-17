@@ -7,4 +7,4 @@ export const THEMES = [
     value: '/themes/dark.css',
     label: 'Dark'
   }
-] as const;
+] as const

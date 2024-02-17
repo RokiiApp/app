@@ -1,20 +1,20 @@
-import defaultIcon from '@/extensions/core/icon.png';
-import { SmartIcon } from '@rokii/ui';
-import styles from './styles.module.css';
-import type { Result } from '@/stores/actions/ActionResult';
+import defaultIcon from '@/extensions/core/icon.png'
+import { SmartIcon } from '@rokii/ui'
+import styles from './styles.module.css'
+import type { Result } from '@/stores/actions/ActionResult'
 
-type Props = {
-  isSelected: boolean;
-  result: Result;
-};
+interface Props {
+  isSelected: boolean
+  result: Result
+}
 
-function Row({
+function Row ({
   isSelected,
   result
 }: Props) {
-  const { icon = defaultIcon, title, subtitle, extension } = result;
+  const { icon = defaultIcon, title, subtitle, extension } = result
 
-  const className = isSelected ? `${styles.row} ${styles.selected}` : styles.row;
+  const className = isSelected ? `${styles.row} ${styles.selected}` : styles.row
 
   return (
     <div
@@ -33,7 +33,7 @@ function Row({
         {extension}
       </div>
     </div>
-  );
+  )
 }
 
-export default Row;
+export default Row

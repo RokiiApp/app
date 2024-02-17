@@ -1,0 +1,29 @@
+{
+  "name": "@rokii/types",
+  "version": "4.0.0",
+  "type": "module",
+  "description": "Types for Rokii Plugin Developers",
+  "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
+  "types": "dist/index.d.ts",
+  "repository": "RokiiApp/developers",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "lint": "eslint --cache --fix ."
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "*",
+    "@types/react": "*",
+    "react": "*"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "rimraf": "5.0.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

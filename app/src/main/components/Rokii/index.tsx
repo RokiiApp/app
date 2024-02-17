@@ -1,19 +1,19 @@
-import { Router, Route } from 'wouter';
-import { useHashLocation } from 'wouter/use-hash-location';
+import { Router, Route } from 'wouter'
+import { useHashLocation } from 'wouter/use-hash-location'
 
-import { StatusBar } from '@/main/components/StatusBar';
-import { InputBox } from '@/main/components/InputBox';
-import { Home } from '@/main/routes/home';
-import { App } from '@/main/routes/app';
-import styles from './styles.module.css';
-import { useInputStore } from '@/stores/input';
-import { memo } from 'react';
+import { StatusBar } from '@/main/components/StatusBar'
+import { InputBox } from '@/main/components/InputBox'
+import { Home } from '@/main/routes/home'
+import { App } from '@/main/routes/app'
+import styles from './styles.module.css'
+import { useInputStore } from '@/stores/input'
+import { memo } from 'react'
 
 /**
  * Main search container
  */
 const Rokii = () => {
-  const term = useInputStore((state) => state.term);
+  const term = useInputStore((state) => state.term)
   return (
     <div className={styles.rokiContainer}>
       <InputBox />
@@ -31,9 +31,9 @@ const Rokii = () => {
 
       <StatusBar />
     </div>
-  );
-};
+  )
+}
 
-const memoizedRokii = memo(Rokii);
+const memoizedRokii = memo(Rokii)
 
-export { memoizedRokii as Rokii };
+export { memoizedRokii as Rokii }

@@ -1,42 +1,42 @@
-import { NPM_API_BASE } from '@/common/constants/urls';
-import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs';
-import { join, sep } from '@tauri-apps/api/path';
-import { http } from '@tauri-apps/api';
-import { ResponseType } from '@tauri-apps/api/http';
-import untar from "js-untar";
-import pako from "pako";
-import { PackageJson } from './PackageJson';
+import { NPM_API_BASE } from '@/common/constants/urls'
+import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs'
+import { join, sep } from '@tauri-apps/api/path'
+import { http } from '@tauri-apps/api'
+import { ResponseType } from '@tauri-apps/api/http'
+import untar from 'js-untar'
+import pako from 'pako'
+import { PackageJson } from './PackageJson'
 
 /**
  * Lightweight npm client used to install/uninstall package, without resolving dependencies
  */
 export class NpmClient {
-  private dirPath: string
-  private packageJson: PackageJson;
+  private readonly dirPath: string
+  private readonly packageJson: PackageJson
 
-  constructor(dir: string) {
+  constructor (dir: string) {
     this.dirPath = dir
 
     // Initialize package.json
-    const packageJsonPath = [dir, 'package.json'].join(sep);
+    const packageJsonPath = [dir, 'package.json'].join(sep)
     this.packageJson = new PackageJson(packageJsonPath)
   }
 
-  private async downloadAndExtractPackage(
+  private async downloadAndExtractPackage (
     tarURL: string,
     destination: string,
     middleware?: () => Promise<any>
   ) {
-    console.log(`Extract ${tarURL} to ${destination}`);
+    console.log(`Extract ${tarURL} to ${destination}`)
 
     middleware?.()
-    const { data } = await http.fetch(tarURL, { method: "GET", responseType: ResponseType.Binary })
+    const { data } = await http.fetch(tarURL, { method: 'GET', responseType: ResponseType.Binary })
 
-    function typedArrayToBuffer(array: Uint8Array): ArrayBuffer {
+    function typedArrayToBuffer (array: Uint8Array): ArrayBuffer {
       return array.buffer.slice(array.byteOffset, array.byteLength + array.byteOffset)
     }
 
-    const files = (await untar(typedArrayToBuffer(pako.ungzip(new Uint8Array(data as any))))).map(file => ({ ...file, name: file.name.replace(/^package\//, "") }))
+    const files = (await untar(typedArrayToBuffer(pako.ungzip(new Uint8Array(data as any))))).map(file => ({ ...file, name: file.name.replace(/^package\//, '') }))
 
     await createDir(`${destination}\\dist`, { recursive: true })
 
@@ -50,7 +50,7 @@ export class NpmClient {
   /**
    * Install npm package
    */
-  async installPackage(
+  async installPackage (
     /**
      * Name of npm package in the registry
      */
@@ -59,79 +59,77 @@ export class NpmClient {
       /**
        * Version of npm package. Default is latest version
        */
-      version?: string;
+      version?: string
       /**
        * Function that returns promise. Called when package's archive is extracted
        * to temp folder, but before moving to real location
        */
-      middleware?: () => Promise<any>;
+      middleware?: () => Promise<any>
     }
   ) {
-    const nameWithoutScope = name.replace(/^@.+?\//, '');
-    let versionToInstall;
-    const { version, middleware } = options || {};
+    const nameWithoutScope = name.replace(/^@.+?\//, '')
+    let versionToInstall
+    const { version, middleware } = (options != null) || {}
 
-    console.group('[NpmClient] Install package', name);
+    console.group('[NpmClient] Install package', name)
 
     try {
-      const resJson = await fetch(`${NPM_API_BASE}${name}`).then((res) => res.json());
+      const resJson = await fetch(`${NPM_API_BASE}${name}`).then(async (res) => await res.json())
 
-      versionToInstall = version || resJson['dist-tags'].latest;
-      console.log('Version: ', versionToInstall);
+      versionToInstall = version || resJson['dist-tags'].latest
+      console.log('Version: ', versionToInstall)
 
       await this.downloadAndExtractPackage(
         resJson.versions[versionToInstall].dist.tarball,
         await join(this.dirPath, nameWithoutScope),
         middleware
-      );
+      )
 
-      await this.packageJson.addDependency(name, versionToInstall);
-      console.log('Added package to dependencies');
+      await this.packageJson.addDependency(name, versionToInstall)
+      console.log('Added package to dependencies')
 
-      console.log('Finished installing', name);
+      console.log('Finished installing', name)
     } catch (err) {
-      console.log('Error in package installation');
-      console.log(err);
+      console.log('Error in package installation')
+      console.log(err)
     } finally {
-      console.groupEnd();
+      console.groupEnd()
     }
   }
 
-  updatePackage(name: string) {
+  async updatePackage (name: string) {
     // Plugin update is downloading `.tar` and unarchiving it to temp folder
     // Only if this part was succeeded, current version of plugin is uninstalled
     // and temp folder moved to real plugin location
-    const middleware = () => this.uninstallPackage(name);
-    return this.installPackage(name, { middleware });
+    const middleware = async () => await this.uninstallPackage(name)
+    return await this.installPackage(name, { middleware })
   }
 
   /**
      * Uninstall npm package
      */
-  async uninstallPackage(name: string) {
-    console.group('[NpmClient] Uninstall package', name);
+  async uninstallPackage (name: string) {
+    console.group('[NpmClient] Uninstall package', name)
 
     try {
-      const nameWithoutScope = name.replace(/^@.+?\//, '');
-      const modulePath = await join(this.dirPath, nameWithoutScope);
+      const nameWithoutScope = name.replace(/^@.+?\//, '')
+      const modulePath = await join(this.dirPath, nameWithoutScope)
 
-      console.log('(1/2) Remove package directory ', modulePath);
-      await removeDir(modulePath, { recursive: true });
+      console.log('(1/2) Remove package directory ', modulePath)
+      await removeDir(modulePath, { recursive: true })
 
-      console.log(`(2/2) Remove ${name} from package.json`);
-      await this.packageJson.removeDependency(name);
+      console.log(`(2/2) Remove ${name} from package.json`)
+      await this.packageJson.removeDependency(name)
 
-      console.log('Finished uninstalling', name);
+      console.log('Finished uninstalling', name)
 
-      return true;
+      return true
     } catch (err) {
-      console.log('Error in package uninstallation');
-      console.log(err);
-      return false;
+      console.log('Error in package uninstallation')
+      console.log(err)
+      return false
     } finally {
-      console.groupEnd();
+      console.groupEnd()
     }
-
   }
-
 }

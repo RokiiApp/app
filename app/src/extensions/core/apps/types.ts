@@ -1,4 +1,4 @@
-export type AppEntry = {
-    name: string
-    id: string
+export interface AppEntry {
+  name: string
+  id: string
 }

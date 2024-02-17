@@ -1,15 +1,15 @@
-import type { SettingsHandler, SettingsSchema } from '@rokii/types';
+import type { SettingsHandler, SettingsSchema } from '@rokii/types'
 
-import { useState } from 'react';
-import { FormComponents } from '@rokii/ui';
-import { THEMES } from '@/common/themes';
+import { useState } from 'react'
+import { FormComponents } from '@rokii/ui'
+import { THEMES } from '@/common/themes'
 
-import Hotkey from './Hotkey';
-import styles from './styles.module.css';
+import Hotkey from './Hotkey'
+import styles from './styles.module.css'
 
-const { Select, Checkbox, Wrapper } = FormComponents;
+const { Select, Checkbox, Wrapper } = FormComponents
 
-function Settings({ get, set }: SettingsHandler) {
+function Settings ({ get, set }: SettingsHandler) {
   const [state, setState] = useState(() => ({
     hotkey: get('hotkey'),
     country: get('country'),
@@ -20,12 +20,12 @@ function Settings({ get, set }: SettingsHandler) {
     selectOnShow: get('selectOnShow'),
     pluginsSettings: get('plugins'),
     openAtLogin: get('openAtLogin')
-  }));
+  }))
 
   const changeConfig = <T extends keyof SettingsSchema>(key: T, value: SettingsSchema[T]) => {
-    set(key, value);
-    setState((prevState) => ({ ...prevState, [key]: value }));
-  };
+    set(key, value)
+    setState((prevState) => ({ ...prevState, [key]: value }))
+  }
 
   return (
     <div className={styles.settings}>
@@ -42,7 +42,7 @@ function Settings({ get, set }: SettingsHandler) {
         label='Theme'
         value={THEMES.find((t) => t.value === state.theme)}
         options={THEMES}
-        onChange={(newValue) => newValue && changeConfig('theme', newValue.value)}
+        onChange={(newValue) => (newValue != null) && changeConfig('theme', newValue.value)}
       />
       <Checkbox
         label='Open at login'
@@ -70,7 +70,7 @@ function Settings({ get, set }: SettingsHandler) {
         onChange={(value: boolean) => changeConfig('selectOnShow', value)}
       />
     </div>
-  );
+  )
 }
 
-export default Settings;
+export default Settings

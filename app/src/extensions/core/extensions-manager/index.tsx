@@ -1,10 +1,12 @@
-import type { Action, ExtensionModule, /* ExtensionContext*/ } from '@/extensions/types';
+import type { Action, ExtensionModule /* ExtensionContext */ } from '@/extensions/types'
 // import type { PluginInfo } from './types';
 // import { search } from '@rokii/utils';
 
 // import { open } from '@tauri-apps/api/shell';
 
-import { getPlugins } from './utils/loadPlugins';
+import { getPlugins } from './utils/loadPlugins'
+
+import icon from '../icon.png'
 // import * as format from './utils/format';
 // import { Preview } from './Preview';
 
@@ -82,31 +84,30 @@ import { getPlugins } from './utils/loadPlugins';
 
 const managerLauncherAction: Action = {
   title: 'Manage plugins',
-  type: "app",
-  appName: "Manager"
+  type: 'app',
+  appName: 'Manager'
 }
-const TEMPORAL_ACTION_ID = 'plugins-loading';
-
+const TEMPORAL_ACTION_ID = 'plugins-loading'
 
 const temporalSearchAction: Action = {
-  title: "Looking for plugins...",
-  type: "info",
+  title: 'Looking for plugins...',
+  type: 'info',
   id: TEMPORAL_ACTION_ID
 }
 
 const testAppAction: Action = {
-  title: "We are here!",
-  type: "info"
+  title: 'We are here!',
+  type: 'info'
 }
 
 export const fn: ExtensionModule['run'] = async ({ term, display, hide, update }) => {
-  const match = term.match(/^plugins?\s*(.+)?$/i);
-  if (!match) return display([managerLauncherAction]);
+  const match = term.match(/^plugins?\s*(.+)?$/i)
+  if (!match) return display([managerLauncherAction])
 
-  display([temporalSearchAction]);
+  display([temporalSearchAction])
 
-  const plugins = await getPlugins();
-  console.log(plugins);
+  const plugins = await getPlugins()
+  console.log(plugins)
   // const matchingPlugins = plugins.filter(
   //   ({ name }) => search([name], match[1]).length > 0
   // );
@@ -117,25 +118,23 @@ export const fn: ExtensionModule['run'] = async ({ term, display, hide, update }
   //   pluginToResult(plugin, update)
   // );
 
-  hide(TEMPORAL_ACTION_ID);
+  hide(TEMPORAL_ACTION_ID)
 
   // display(orderedPlugins);
-};
-
-import icon from '../icon.png';
+}
 
 const ExtensionsManagerExtension: ExtensionModule = {
-  name: "Extensions Manager",
+  name: 'Extensions Manager',
   icon,
   run: fn,
   apps: {
-    "Manager": async ({ display }) => {
-      display([testAppAction]);
+    Manager: async ({ display }) => {
+      display([testAppAction])
     }
 
   }
 }
 
-export default ExtensionsManagerExtension;
+export default ExtensionsManagerExtension
 
-export { initializeAsync } from './initializeAsync';
+export { initializeAsync } from './initializeAsync'

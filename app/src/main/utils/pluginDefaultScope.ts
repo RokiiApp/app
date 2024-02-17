@@ -1,7 +1,7 @@
-import * as config from '@/common/config';
-import { open } from "@tauri-apps/api/shell";
-import { writeText } from "@tauri-apps/api/clipboard";
-import { getCurrent } from "@tauri-apps/api/window";
+import * as config from '@/common/config'
+import { open } from '@tauri-apps/api/shell'
+import { writeText } from '@tauri-apps/api/clipboard'
+import { getCurrent } from '@tauri-apps/api/window'
 
 /**
  * Default scope object would be first argument for plugins
@@ -10,10 +10,10 @@ import { getCurrent } from "@tauri-apps/api/window";
 export const DEFAULT_SCOPE = {
   config,
   actions: {
-    open: (url: string) => open(url),
+    open: async (url: string) => await open(url),
     // TODO: Does this work?
-    reveal: (path: string) => open(path, "explorer"),
-    copyToClipboard: (text: string) => writeText(text),
-    hideWindow: () => getCurrent().hide()
+    reveal: async (path: string) => await open(path, 'explorer'),
+    copyToClipboard: async (text: string) => await writeText(text),
+    hideWindow: async () => await getCurrent().hide()
   }
-};
+}

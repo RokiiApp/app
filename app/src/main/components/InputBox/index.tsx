@@ -1,14 +1,14 @@
-import styles from './styles.module.css';
+import styles from './styles.module.css'
 
-import { memo } from 'react';
-import { Autocomplete } from './Autocomplete';
-import { SearchBar } from './SearchBar';
-import { useHashLocation } from 'wouter/use-hash-location';
+import { memo } from 'react'
+import { Autocomplete } from './Autocomplete'
+import { SearchBar } from './SearchBar'
+import { useHashLocation } from 'wouter/use-hash-location'
 
 const InputBox = () => {
-  const [location, setLocation] = useHashLocation();
+  const [location, setLocation] = useHashLocation()
 
-  const isRoot = location === '/';
+  const isRoot = location === '/'
 
   return (
     <div data-tauri-drag-region className={styles.inputWrapper}>
@@ -20,9 +20,9 @@ const InputBox = () => {
       </div>
 
     </div>
-  );
+  )
 }
 
-const memoizedInputBox = memo(InputBox);
+const memoizedInputBox = memo(InputBox)
 
-export { memoizedInputBox as InputBox };
+export { memoizedInputBox as InputBox }

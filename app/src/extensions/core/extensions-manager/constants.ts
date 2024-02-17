@@ -4,6 +4,6 @@
  * The name must match (case sensitive) the name in the `package.json`.
  */
 export const PLUGINS_BLACKLIST = [
-] as readonly string[];
+] as readonly string[]
 
-export const CACHE_PLUGINS_MAX_AGE = 5 * 60 * 1000; // 5 minutes
+export const CACHE_PLUGINS_MAX_AGE = 5 * 60 * 1000 // 5 minutes

@@ -1,16 +1,16 @@
-import { create } from 'zustand';
+import { create } from 'zustand'
 
 export interface InputStore {
   /** Search term in main input */
-  term: string;
+  term: string
   /** Store last used term in separate field */
-  prevTerm: string;
+  prevTerm: string
   /** Update the term */
-  updateTerm: (term: string) => void;
+  updateTerm: (term: string) => void
 }
 
 export const useInputStore = create<InputStore>((set) => ({
   term: '',
   prevTerm: '',
   updateTerm: (term) => set((state) => ({ term, prevTerm: state.term }))
-}));
+}))

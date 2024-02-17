@@ -1,19 +1,18 @@
-import { watchImmediate } from "tauri-plugin-fs-watch-api";
-import debounce from "just-debounce"
-import { extensionSettings } from '@/services/plugins';
-import { PLUGINS_PATH } from "@/common/constants/paths";
-import { requireExtension } from "./requireExtension";
-import { extensionsRepository } from "@/extensions/repo/ExtensionsRespository";
+import { watchImmediate } from 'tauri-plugin-fs-watch-api'
+import debounce from 'just-debounce'
+import { extensionSettings } from '@/services/plugins'
+import { PLUGINS_PATH } from '@/common/constants/paths'
+import { requireExtension } from './requireExtension'
+import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 
 const parse = (path: string) => {
-  const pathAsUrl = new URL(path);
+  const pathAsUrl = new URL(path)
 
-  const dir = pathAsUrl.pathname.split("/")
-  const base = dir.pop() || ""
+  const dir = pathAsUrl.pathname.split('/')
+  const base = dir.pop() || ''
 
-  return { dir: dir.join("/"), base }
+  return { dir: dir.join('/'), base }
 }
-
 
 /* As we support scoped plugins, using 'base' as plugin name is no longer valid
   because it is not unique. '@example/plugin' and '@test/plugin' would both be treated as 'plugin'
@@ -21,71 +20,70 @@ const parse = (path: string) => {
   This function returns the name with the scope if it is present in the path
 */
 const getPluginName = (pluginPath: string) => {
-  const { base, dir } = parse(pluginPath);
-  const scope = dir.match(/@.+$/);
-  if (!scope) return base;
-  return `${scope[0]}/${base}`;
-};
+  const { base, dir } = parse(pluginPath)
+  const scope = dir.match(/@.+$/)
+  if (scope == null) return base
+  return `${scope[0]}/${base}`
+}
 
 export const setupPluginsWatcher = async () => {
   watchImmediate(PLUGINS_PATH, (event) => {
-    const { type, paths } = event;
+    const { type, paths } = event
 
-    if (type === "any " || type === "other") return
+    if (type === 'any ' || type === 'other') return
 
-    if ("remove" in type) {
+    if ('remove' in type) {
       const pluginPath = paths[0]
-      const { dir } = parse(pluginPath);
+      const { dir } = parse(pluginPath)
 
-      if (!dir.match(/plugins$/)) return;
+      if (dir.match(/plugins$/) == null) return
 
-      const pluginName = getPluginName(pluginPath);
+      const pluginName = getPluginName(pluginPath)
 
-      extensionsRepository.delete(pluginName);
+      extensionsRepository.delete(pluginName)
 
-      console.log(`[PluginsWatcher]: Removed "${pluginName}" plugin`);
+      console.log(`[PluginsWatcher]: Removed "${pluginName}" plugin`)
     }
 
-    if ("modify" in type) {
+    if ('modify' in type) {
       const pluginPath = paths[0]
-      const { dir, base } = parse(pluginPath);
+      const { dir, base } = parse(pluginPath)
 
-      if (!dir.match(/plugins$/) || base.match(/package.json$/)) return;
+      if ((dir.match(/plugins$/) == null) || (base.match(/package.json$/) != null)) return
 
+      const pluginName = getPluginName(pluginPath)
 
-      const pluginName = getPluginName(pluginPath);
+      console.log(`[PluginsWatcher]: Plugin "${pluginName}" changed. Reloading...`)
 
-      console.log(`[PluginsWatcher]: Plugin "${pluginName}" changed. Reloading...`);
-
-      debouncedLoadPlugin(pluginName);
+      debouncedLoadPlugin(pluginName)
 
       console.log(event)
     }
-  }, { recursive: true });
-};
+  }, { recursive: true })
+}
 
 const loadExtension = async (pluginName: string): Promise<boolean> => {
-  console.group(`[ExtensionLoader] Load extension: ${pluginName}`);
-  const extension = await requireExtension(pluginName);
+  console.group(`[ExtensionLoader] Load extension: ${pluginName}`)
+  const extension = await requireExtension(pluginName)
 
   if (!extension) {
-    console.error('[ExtensionLoader] Extension is not valid, skipped');
-    console.groupEnd();
-    return;
+    console.error('[ExtensionLoader] Extension is not valid, skipped')
+    console.groupEnd()
+    return
   }
 
   if (!extensionSettings.validate(extension)) {
-    console.error('[ExtensionLoader] Invalid extension settings');
-    console.groupEnd();
-    return;
+    console.error('[ExtensionLoader] Invalid extension settings')
+    console.groupEnd()
+    return
   }
 
-  console.log('[ExtensionLoader] Extension loaded.');
+  console.log('[ExtensionLoader] Extension loaded.')
 
-  await extensionsRepository.add(extension);
+  await extensionsRepository.add(extension)
 
-  console.log("[ExtensionLoader]: Added extension: ", pluginName)
-  console.groupEnd();
+  console.log('[ExtensionLoader]: Added extension: ', pluginName)
+  console.groupEnd()
 }
 
 const debouncedLoadPlugin = debounce(loadExtension, 100)

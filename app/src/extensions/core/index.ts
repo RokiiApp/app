@@ -1,9 +1,9 @@
-import type { ExtensionModule } from '../types';
-import AppsExplorerExtension from './apps';
-import QuitExtension from './quit';
-import ReloadExtension from './reload';
-import VersionExtension from './version';
-import ExtensionsManagerExtension from './extensions-manager';
+import type { ExtensionModule } from '../types'
+import AppsExplorerExtension from './apps'
+import QuitExtension from './quit'
+import ReloadExtension from './reload'
+import VersionExtension from './version'
+import ExtensionsManagerExtension from './extensions-manager'
 
 const coreExtensions: Record<string, ExtensionModule> = {
   AppsExplorerExtension,
@@ -11,8 +11,8 @@ const coreExtensions: Record<string, ExtensionModule> = {
   QuitExtension,
   ReloadExtension,
   VersionExtension
-};
+}
 
-Object.freeze(coreExtensions);
+Object.freeze(coreExtensions)
 
 export { coreExtensions }
