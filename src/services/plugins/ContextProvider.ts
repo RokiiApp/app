@@ -16,6 +16,10 @@ export class ExtensionContextProvider {
         return extensionContext;
     }
 
+    /**
+     * The method that provides the API to the plugin
+     * @param term The input value from the user
+     */
     private createExtensionContext(term: string): ExtensionContext {
         const context: ExtensionContext = {
             term,

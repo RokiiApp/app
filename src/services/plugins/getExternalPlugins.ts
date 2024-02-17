@@ -1,7 +1,8 @@
 import { PLUGINS_PACKAGE_JSON_PATH, PLUGINS_PATH } from '@/common/constants/paths';
-import { readTextFile, readDir } from '@tauri-apps/api/fs';
+import { readDir } from '@tauri-apps/api/fs';
+import { PackageJson } from '@/services/PackageJson';
 
-export const getExternalPlugins = async () => {
+export const getExternalPluginNames = async () => {
     try {
         const allPlugins = await getPotentialPluginsInFolder();
         return allPlugins;
@@ -28,9 +29,9 @@ const getPotentialPluginsInFolder = async () => {
  */
 export const getInstalledPluginsAndVersions = async () => {
     try {
-        const pkgJson = await readTextFile(PLUGINS_PACKAGE_JSON_PATH)
+        const pkgJson = new PackageJson(PLUGINS_PACKAGE_JSON_PATH)
 
-        const plugins = JSON.parse(pkgJson).dependencies as Record<string, string>
+        const plugins = await pkgJson.getDependencies()
 
         return plugins;
     } catch (err) {
@@ -40,16 +41,16 @@ export const getInstalledPluginsAndVersions = async () => {
 }
 
 export const getInstalledPluginNames = async () => {
-  try {
-    const pkgJson = await readTextFile(PLUGINS_PACKAGE_JSON_PATH)
+    try {
+        const pkgJson = new PackageJson(PLUGINS_PACKAGE_JSON_PATH)
 
-    const plugins = JSON.parse(pkgJson).dependencies as Record<string, string>
+        const plugins = await pkgJson.getDependencies()
 
-    const pluginNames = Object.keys(plugins).map(pluginName => pluginName.replace(/^@.+?\//, ''))
+        const pluginNames = Object.keys(plugins).map(pluginName => pluginName.replace(/^@.+?\//, ''))
 
-    return pluginNames;
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
+        return pluginNames;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
 };
