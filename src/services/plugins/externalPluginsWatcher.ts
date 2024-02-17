@@ -3,7 +3,7 @@ import debounce from "just-debounce"
 import { extensionSettings } from '@/services/plugins';
 import { PLUGINS_PATH } from "@/common/constants/paths";
 import { requireExtension } from "./requireExtension";
-import { extensionsManager } from "@/extensions/manager/ExtensionsManager";
+import { extensionsRepository } from "@/extensions/repo/ExtensionsRespository";
 
 const parse = (path: string) => {
   const pathAsUrl = new URL(path);
@@ -41,7 +41,7 @@ export const setupPluginsWatcher = async () => {
 
       const pluginName = getPluginName(pluginPath);
 
-      extensionsManager.deletePlugin(pluginName);
+      extensionsRepository.delete(pluginName);
 
       console.log(`[PluginsWatcher]: Removed "${pluginName}" plugin`);
     }
@@ -82,7 +82,7 @@ const loadExtension = async (pluginName: string): Promise<boolean> => {
 
   console.log('[ExtensionLoader] Extension loaded.');
 
-  await extensionsManager.requestPluginLoad(pluginName);
+  await extensionsRepository.add(extension);
 
   console.log("[ExtensionLoader]: Added extension: ", pluginName)
   console.groupEnd();

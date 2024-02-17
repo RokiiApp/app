@@ -1,4 +1,4 @@
-import { extensionsManager } from '@/extensions/manager/ExtensionsManager';
+import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository';
 import { ExtensionContextProvider } from '@/services/plugins/ContextProvider';
 import { useActionsStore } from '@/stores/actions';
 import { useEffect, useMemo } from 'react';
@@ -9,7 +9,7 @@ export const useRunApp = (input: string) => {
     const [results, removeAllResults] = useActionsStore((s) => [s.actions, s.removeAllActions]);
 
     const { extension: extensionName, app } = useParams<{ extension: string, app: string }>();
-    const extension = useMemo(() => extensionsManager.getPlugin(extensionName), [extensionName])
+    const extension = useMemo(() => extensionsRepository.get(extensionName), [extensionName])
 
     if (!extension) {
         navigate('/');

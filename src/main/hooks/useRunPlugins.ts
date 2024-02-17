@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useActionsStore } from '@/stores/actions';
-import { ExtensionEvents } from '@/extensions/manager/types';
-import { extensionsManager } from '@/extensions/manager/ExtensionsManager';
+import { ExtensionsRepoEventTypes } from '@/extensions/repo/Events';
+import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository';
 import { ExtensionContextProvider } from '@/services/plugins/ContextProvider';
 
 // TODO: Suscribe to unload plugin event to remove plugin from state
@@ -12,7 +12,7 @@ export const useRunExtensions = (term: string) => {
     // Reset results state to initial state
     removeAllActions();
 
-    const allPlugins = extensionsManager.getAllPlugins();
+    const allPlugins = extensionsRepository.getAll();
 
     for (let [name, extension] of Object.entries(allPlugins)) {
 
@@ -35,10 +35,10 @@ export const useRunExtensions = (term: string) => {
   }, [term]);
 
   useEffect(() => {
-    extensionsManager.addEventListener(ExtensionEvents.LOADED, ({ detail }) => {
+    extensionsRepository.addEventListener(ExtensionsRepoEventTypes.LOADED, ({ detail }) => {
       const { name } = detail;
 
-      const extension = extensionsManager.getPlugin(name);
+      const extension = extensionsRepository.get(name);
 
       const extensionContextProvider = new ExtensionContextProvider(extension.name);
       const extensionContext = extensionContextProvider.get(term);
@@ -53,7 +53,7 @@ export const useRunExtensions = (term: string) => {
 
     });
 
-    return () => extensionsManager.removeEventListener(ExtensionEvents.LOADED, () => { });
+    return () => extensionsRepository.removeEventListener(ExtensionsRepoEventTypes.LOADED, () => { });
 
-  }, [extensionsManager, term])
+  }, [extensionsRepository, term])
 };
