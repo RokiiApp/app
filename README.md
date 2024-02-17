@@ -55,7 +55,8 @@
 
 ## ⬇️ Installation
 
-⚠️ Rokii is not signed for now, so you might deal with Windows defender.
+> [!WARNING]  
+> Rokii is not signed for now, so you might deal with Windows defender.
 
 Once downloaded, go to your downloads folder and click on the executable.
 

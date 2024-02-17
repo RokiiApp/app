@@ -1,7 +1,8 @@
 # Rokii documentation 🔍
 
-[!IMPORTANT] This page is oriented to developers. If you are a user, you might want
-to check the [official website](https://rokiiapp.com) or the main [README](../README.md).
+> [!IMPORTANT]  
+> This page is oriented to developers. If you are a user, you might want
+> to check the [official website](https://rokiiapp.com) or the main [README](../README.md).
 
 ## 🧰 Plugins Development
 
