@@ -9,15 +9,22 @@ const scripts = {
     console.error('Invalid-Command - Usage: npm run (build|clear|dev|start)')
     process.exit(1)
   }
+} as const
+
+function isValidScriptName (scriptName: string): scriptName is keyof typeof scripts {
+  return scriptName in scripts
 }
 
 const scriptName = process.argv[2]
 
-if (!(scriptName in scripts)) {
+if (!isValidScriptName(scriptName)) {
   console.error('Invalid-Command - Usage: npm run (build|clear|dev|start)')
   process.exit(1)
 }
 
-const script = scripts[scriptName as keyof typeof scripts] || scripts.default
+const script = scripts[scriptName]
 
-script()
+script().catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
