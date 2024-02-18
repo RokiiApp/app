@@ -12,7 +12,11 @@
     "test": "vitest run",
     "build": "tsc"
   },
-  "repository": "RokiiApp/developers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rokiiapp/app.git",
+    "directory": "packages/utils"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/RokiiApp/developers/issues"

@@ -1,4 +1,4 @@
-import type { SettingsSchema } from '@rokii/types'
+import type { SettingsSchema } from '@rokii/api'
 
 import { SettingsManager } from 'tauri-settings'
 import type { PathValue } from 'tauri-settings/dist/types/dot-notation'

@@ -1,4 +1,4 @@
-import type { PluginModule } from '@rokii/types'
+import type { PluginModule } from '@rokii/api'
 
 import Settings from './Settings'
 

@@ -37,7 +37,7 @@
     "zustand": "4.5.1"
   },
   "devDependencies": {
-    "@rokii/types": "workspace:*",
+    "@rokii/api": "workspace:*",
     "@tauri-apps/cli": "*",
     "@types/memoizee": "0.4.11",
     "@types/node": "*",
@@ -52,5 +52,10 @@
   },
   "os": [
     "win32"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rokiiapp/app.git",
+    "directory": "app"
+  }
 }

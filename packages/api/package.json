@@ -1,11 +1,15 @@
 {
-  "name": "@rokii/types",
-  "version": "4.0.0",
+  "name": "@rokii/api",
+  "version": "0.0.1",
   "type": "module",
-  "description": "Types for Rokii Plugin Developers",
+  "description": "Utils and Types for Rokii Plugin Developers",
   "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
   "types": "dist/index.d.ts",
-  "repository": "RokiiApp/developers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rokiiapp/app.git",
+    "directory": "packages/api"
+  },
   "files": [
     "dist"
   ],

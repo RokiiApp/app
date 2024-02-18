@@ -1,4 +1,4 @@
-import { SettingsSchema } from '@rokii/types'
+import { SettingsSchema } from '@rokii/api'
 
 export const CHANNELS = {
   UpdateDownloaded: 'update-downloaded',

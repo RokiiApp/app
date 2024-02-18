@@ -3,7 +3,7 @@ import { AutoStart } from '@/services/AutoStart'
 import { invoke, globalShortcut } from '@tauri-apps/api'
 import { changeTheme } from './utils/changeTheme'
 import { on } from '@/common/ipc'
-import { SettingsSchema } from '@rokii/types'
+import { SettingsSchema } from '@rokii/api'
 import { toggleWindow } from '@/services/toggleWindow'
 
 type HandlerMap<T extends SettingsSchema> = {

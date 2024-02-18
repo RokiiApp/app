@@ -1,4 +1,4 @@
-import type { SettingsHandler, SettingsSchema } from '@rokii/types'
+import type { SettingsHandler, SettingsSchema } from '@rokii/api'
 
 import { useState } from 'react'
 import { FormComponents } from '@rokii/ui'
@@ -9,7 +9,7 @@ import styles from './styles.module.css'
 
 const { Select, Checkbox, Wrapper } = FormComponents
 
-function Settings ({ get, set }: SettingsHandler) {
+function Settings({ get, set }: SettingsHandler) {
   const [state, setState] = useState(() => ({
     hotkey: get('hotkey'),
     country: get('country'),

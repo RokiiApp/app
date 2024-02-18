@@ -1,4 +1,4 @@
-import type { PluginResult } from '@rokii/types'
+import type { PluginResult } from '@rokii/api'
 import { focusableSelector } from '@rokii/ui'
 import { CHANNELS } from '@/common/constants/events'
 
@@ -51,7 +51,7 @@ export const PluginPreview = ({ plugin }: { plugin: PluginResultWithPreview }) =
           >
             {Preview}
           </ErrorBoundary>
-          )}
+        )}
     </div>
   )
 }
