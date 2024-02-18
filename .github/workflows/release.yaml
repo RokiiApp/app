@@ -24,7 +24,7 @@ jobs:
         run: pnpm i
 
       - name: Run typecheck
-        run: pnpm tsc
+        run: pnpm type-check
 
   # build-executable:
   #   runs-on: windows-latest
