@@ -67,11 +67,18 @@ When Windows defender pops up:
 
 Be sure you download Rokii from the [official release link](https://github.com/RokiiApp/app/releases/latest)
 
-## 🧰 Plugins Development
+## 🧰 Development
+
+### 🧬 Core app
+
+If you are willing to contribute to the Rokii app,
+you should read the app developer docs [here](./app/README.md).
+
+### 🧩 Extensions
 
 An extensions system is being developed.
-You can take a look at the [available methods](./src/extensions/types.ts)
-and the [example core extensions](./src/extensions/core/).
+You can take a look at the [available methods](./app/src/extensions/types.ts)
+and the [example core extensions](./app/src/extensions/core/).
 
 > Rokii was inspired by [Raycast](https://www.raycast.com/) and [Cerebro](https://www.cerebroapp.com/)
 
