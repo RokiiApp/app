@@ -1,0 +1,45 @@
+{
+  "name": "@rokii/ui",
+  "version": "2.0.4",
+  "type": "module",
+  "description": "Package with common UI components for Rokii plugins",
+  "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rokiiapp/app.git",
+    "directory": "packages/ui"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "ui",
+    "components"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rokiiapp/developers/issues"
+  },
+  "scripts": {
+    "build": "rokii-build clear && rokii-build build && tsc",
+    "lint": "eslint --cache --fix ."
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.4.0",
+    "just-memoize": "2.2.0",
+    "react": "*",
+    "react-dom": "*",
+    "react-fontawesome": "1.7.1",
+    "react-select": "5.7.2"
+  },
+  "devDependencies": {
+    "@rokii/build": "workspace:*",
+    "@types/react": "*",
+    "@types/react-fontawesome": "1.6.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

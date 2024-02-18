@@ -1,0 +1,26 @@
+{
+  "name": "@rokii/build",
+  "version": "2.0.2",
+  "description": "Build utilities for Rokii plugins and packages",
+  "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
+  "repository": "RokiiApp/developers",
+  "type": "module",
+  "bin": {
+    "rokii-build": "dist/index.js"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "esbuild": "0.19.7",
+    "esbuild-css-modules-plugin": "2.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "typescript": "*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

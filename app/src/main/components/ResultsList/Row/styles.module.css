@@ -1,0 +1,56 @@
+.row {
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  white-space: nowrap;
+  width: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
+  height: 45px;
+  padding: 10px 10px;
+  align-items: center;
+  color: var(--main-font-color);
+  background: var(--result-background);
+}
+
+.icon {
+  max-height: 25px;
+  max-width: 25px;
+  object-fit: contain;
+}
+
+.title {
+  font-size: small;
+  color: var(--result-title-color);
+}
+
+.subtitle {
+  font-size: smaller;
+  font-weight: 300;
+  color: var(--result-subtitle-color);
+}
+
+.selected {
+  background: var(--selected-result-background);
+}
+
+.selected .title {
+  color: var(--selected-result-title-color);
+}
+
+.selected .subtitle {
+  color: var(--selected-result-subtitle-color);
+}
+
+.actionInfo {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  justify-content: start;
+}

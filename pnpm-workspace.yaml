@@ -1,0 +1,5 @@
+packages:
+  # Rokii app
+  - 'app'
+  # Package utilities
+  - 'packages/**'
