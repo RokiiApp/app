@@ -24,7 +24,7 @@
   },
   "scripts": {
     "package:type-check": "tsc --noEmit",
-    "package:build": "rokii-build clear && rokii-build build && tsc"
+    "package:build": "vite build"
   },
   "dependencies": {
     "@tauri-apps/api": "*",
@@ -35,9 +35,9 @@
     "react-select": "5.7.2"
   },
   "devDependencies": {
-    "@rokii/build": "workspace:*",
     "@types/react": "*",
-    "@types/react-fontawesome": "1.6.5"
+    "@types/react-fontawesome": "1.6.5",
+    "vite": "5.1.3"
   },
   "publishConfig": {
     "access": "public"
