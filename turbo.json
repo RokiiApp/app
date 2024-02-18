@@ -1,17 +1,13 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "pipeline": {
-        "package:test": {},
-        "package:type-check": {},
         "package:build": {
-            "dependsOn": [
-                "package:type-check",
-                "package:test"
-            ],
             "outputs": [
                 "dist/**"
             ]
         },
+        "package:test": {},
+        "package:type-check": {},
         "app:type-check": {
             "dependsOn": [
                 "^package:build"
