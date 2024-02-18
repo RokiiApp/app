@@ -1,16 +1,25 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "pipeline": {
-        "lint": {},
-        "type-check": {},
-        "test": {},
-        "build": {
+        "package:test": {},
+        "package:type-check": {},
+        "package:build": {
             "dependsOn": [
-                "test",
-                "^build"
+                "package:type-check",
+                "package:test"
             ],
             "outputs": [
                 "dist/**"
+            ]
+        },
+        "app:type-check": {
+            "dependsOn": [
+                "^package:build"
+            ]
+        },
+        "app:build": {
+            "dependsOn": [
+                "app:type-check"
             ]
         }
     }

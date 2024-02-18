@@ -28,8 +28,8 @@ export class Result {
 
   constructor (action: Action, extensionName: string) {
     this.title = action.title
-    this.subtitle = action.subtitle
-    this.icon = action.icon
+    this.subtitle = action.subtitle || ''
+    this.icon = action.icon || ''
     this.extension = extensionName
     this.autocomplete = action.autocomplete || action.title
     this.id = action.id || crypto.randomUUID()
@@ -41,8 +41,8 @@ export class Result {
 
   update (newAction: Action) {
     this.title = newAction.title
-    this.subtitle = newAction.subtitle
-    this.icon = newAction.icon
+    this.subtitle = newAction.subtitle || ''
+    this.icon = newAction.icon || ''
 
     if (newAction.type === 'script') {
       this.script = newAction.run
@@ -77,7 +77,9 @@ class ScriptActionResult extends Result {
   }
 
   async onSelect (e: Event | React.SyntheticEvent) {
-    this.script(e)
+    if (this.script) {
+      this.script(e)
+    }
     await super.onSelect(e)
   }
 }

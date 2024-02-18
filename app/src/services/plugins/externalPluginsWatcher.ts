@@ -62,7 +62,7 @@ export const setupPluginsWatcher = async () => {
   }, { recursive: true })
 }
 
-const loadExtension = async (pluginName: string): Promise<boolean> => {
+const loadExtension = async (pluginName: string) => {
   console.group(`[ExtensionLoader] Load extension: ${pluginName}`)
   const extension = await requireExtension(pluginName)
 
@@ -84,6 +84,8 @@ const loadExtension = async (pluginName: string): Promise<boolean> => {
 
   console.log('[ExtensionLoader]: Added extension: ', pluginName)
   console.groupEnd()
+
+  return
 }
 
 const debouncedLoadPlugin = debounce(loadExtension, 100)

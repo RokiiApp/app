@@ -25,7 +25,9 @@ export const useRunApp = (input: string) => {
 
   useEffect(() => {
     removeAllResults()
-    appRunner(context)
+    if (appRunner) {
+      appRunner(context)
+    }
   }, [input])
 
   return { results }

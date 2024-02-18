@@ -5,7 +5,7 @@ export const getInstalledApps = async () => {
   const rawInstalledApps = await invoke<string[]>('get_installed_apps')
 
   const installedApps = rawInstalledApps.map((appEntry) => {
-    const [match, rawName, rawId] = appEntry.match(/(.+?)\s\s+(.+)/)
+    const [_, rawName, rawId] = appEntry.match(/(.+?)\s\s+(.+)/) || []
 
     const name = rawName.trim()
     const id = rawId.trim()

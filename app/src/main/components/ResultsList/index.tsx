@@ -37,8 +37,12 @@ const ResultsList = ({ items }: { items: Result[] }) => {
       }
     }
 
+    function isMovementKey(key: string): key is keyof typeof MovementHandlers {
+      return key in MovementHandlers
+    }
+
     // Movement
-    if (e.key in MovementHandlers) {
+    if (isMovementKey(e.key)) {
       MovementHandlers[e.key]()
     }
   }
@@ -56,21 +60,21 @@ const ResultsList = ({ items }: { items: Result[] }) => {
   requestAutocomplete(selectedResult.autocomplete)
 
   return (
-        <div className={styles.wrapper}>
-            <Virtuoso
-                tabIndex={-1}
-                ref={listRef}
-                className={styles.resultsList}
-                overscan={5}
-                height={VISIBLE_RESULTS * RESULT_HEIGHT}
-                fixedItemHeight={RESULT_HEIGHT}
-                totalCount={items.length}
-                itemContent={(index) => {
-                  const result = items[index]
-                  return <Row result={result} isSelected={selectedIndex === index} />
-                }}
-            />
-        </div>
+    <div className={styles.wrapper}>
+      <Virtuoso
+        tabIndex={-1}
+        ref={listRef}
+        className={styles.resultsList}
+        overscan={5}
+        height={VISIBLE_RESULTS * RESULT_HEIGHT}
+        fixedItemHeight={RESULT_HEIGHT}
+        totalCount={items.length}
+        itemContent={(index) => {
+          const result = items[index]
+          return <Row result={result} isSelected={selectedIndex === index} />
+        }}
+      />
+    </div>
   )
 }
 

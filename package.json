@@ -9,8 +9,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "type-check": "turbo type-check",
-    "build": "turbo build"
+    "package:type-check": "turbo package:type-check",
+    "type-check": "turbo app:type-check",
+    "build": "turbo app:build"
   },
   "dependencies": {},
   "devDependencies": {
@@ -21,7 +22,6 @@
     "@changesets/cli": "2.27.1",
     "@types/node": "20.11.19",
     "@types/react": "18.2.56",
-    "ts-standard": "12.0.2",
     "turbo": "1.12.4",
     "typescript": "5.3.3"
   },
@@ -35,21 +35,5 @@
       "@tauri-apps/api": "$@tauri-apps/api",
       "@tauri-apps/cli": "$@tauri-apps/cli"
     }
-  },
-  "eslintConfig": {
-    "rules": {
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/strict-boolean-expressions": "off",
-      "@typescript-eslint/no-floating-promises": "off",
-      "@typescript-eslint/restrict-template-expressions": "off"
-    },
-    "parserOptions": {
-      "project": [
-        "./**/tsconfig.json"
-      ]
-    },
-    "extends": [
-      "standard-with-typescript"
-    ]
   }
 }

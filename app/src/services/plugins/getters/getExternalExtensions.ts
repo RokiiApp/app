@@ -7,6 +7,9 @@ export const getExternalExtensions: ExtensionGetter = async () => {
 
   const extensions = await Promise.allSettled(extensionNames.map(async (name) => {
     const extension = await requireExtension(name)
+    if (extension === null) {
+      return Promise.reject(new Error(`Failed to load extension: ${name}`))
+    }
     return extension
   }))
 

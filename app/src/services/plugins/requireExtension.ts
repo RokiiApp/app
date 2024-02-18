@@ -3,7 +3,7 @@ import { join } from '@tauri-apps/api/path'
 import { ExternalModuleImporter } from '@/services/ExternalModuleImporter'
 import { Extension } from '@/extensions/Extension'
 
-export const requireExtension = async (pluginName: string): Promise<Extension | null> => {
+export const requireExtension = async (pluginName: string) => {
   const pluginPath = await join(PLUGINS_PATH, pluginName, 'dist', 'index.js')
 
   try {

@@ -3,7 +3,8 @@ import { ResultsList } from '../components/ResultsList'
 import { useRunApp } from '../hooks/useRunApp'
 
 const App = ({ input }: { input: string }) => {
-  const { results } = useRunApp(input)
+  // TODO - Fix useRunApp hook to avoid returning null
+  const { results } = useRunApp(input) || { results: [] }
 
   return <ResultsList items={results} />
 }

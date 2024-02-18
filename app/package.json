@@ -7,9 +7,9 @@
   "scripts": {
     "web:dev": "vite",
     "web:build": "vite build",
-    "dev": "tauri dev",
-    "build": "tauri build",
-    "type-check": "tsc"
+    "app:dev": "tauri dev",
+    "app:build": "tauri build",
+    "app:type-check": "tsc"
   },
   "dependencies": {
     "@rokii/ui": "workspace:*",
@@ -41,8 +41,10 @@
     "@tauri-apps/cli": "*",
     "@types/memoizee": "0.4.11",
     "@types/node": "*",
+    "@types/pako": "2.0.3",
     "@types/react": "*",
     "@types/react-dom": "18.2.19",
+    "@types/semver": "7.5.7",
     "@vitejs/plugin-react": "4.2.1",
     "typescript": "*",
     "vite": "5.1.3"

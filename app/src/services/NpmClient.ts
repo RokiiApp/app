@@ -3,6 +3,7 @@ import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs'
 import { join, sep } from '@tauri-apps/api/path'
 import { http } from '@tauri-apps/api'
 import { ResponseType } from '@tauri-apps/api/http'
+// @ts-ignore - no types available
 import untar from 'js-untar'
 import pako from 'pako'
 import { PackageJson } from './PackageJson'
@@ -36,7 +37,7 @@ export class NpmClient {
       return array.buffer.slice(array.byteOffset, array.byteLength + array.byteOffset)
     }
 
-    const files = (await untar(typedArrayToBuffer(pako.ungzip(new Uint8Array(data as any))))).map(file => ({ ...file, name: file.name.replace(/^package\//, '') }))
+    const files = (await untar(typedArrayToBuffer(pako.ungzip(new Uint8Array(data as any))))).map((file: any) => ({ ...file, name: file.name.replace(/^package\//, '') }))
 
     await createDir(`${destination}\\dist`, { recursive: true })
 

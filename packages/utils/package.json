@@ -9,8 +9,9 @@
     "dist"
   ],
   "scripts": {
-    "test": "vitest run",
-    "build": "tsc"
+    "package:test": "vitest run",
+    "package:type-check": "tsc --noEmit",
+    "package:build": "tsc"
   },
   "repository": {
     "type": "git",

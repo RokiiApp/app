@@ -10,7 +10,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "package:type-check": "tsc --noEmit",
+    "package:build": "tsc"
   },
   "dependencies": {
     "esbuild": "0.19.7",

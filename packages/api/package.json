@@ -14,8 +14,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc",
-    "lint": "eslint --cache --fix ."
+    "package:type-check": "tsc --noEmit",
+    "package:build": "rimraf dist && tsc"
   },
   "license": "MIT",
   "dependencies": {

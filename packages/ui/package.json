@@ -23,11 +23,11 @@
     "url": "https://github.com/rokiiapp/developers/issues"
   },
   "scripts": {
-    "build": "rokii-build clear && rokii-build build && tsc",
-    "lint": "eslint --cache --fix ."
+    "package:type-check": "tsc --noEmit",
+    "package:build": "rokii-build clear && rokii-build build && tsc"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.4.0",
+    "@tauri-apps/api": "*",
     "just-memoize": "2.2.0",
     "react": "*",
     "react-dom": "*",
