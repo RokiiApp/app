@@ -13,7 +13,7 @@ export const Text = ({ label, value, onChange, description, type }: InputProps) 
   <Wrapper label={label} description={description}>
     <input
       type={type}
-      value={value || ''}
+      value={value ?? ''}
       className={styles.input}
       onChange={({ target }) => onChange(target.value)}
     />

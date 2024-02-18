@@ -40,7 +40,10 @@ const onKeyDown = (wrapper: React.RefObject<HTMLDivElement>, event: React.Keyboa
 
   if (code === 'ArrowLeft' || isVimKey('h')) {
     // Move control back to main list when ← is clicked or cmd/ctrl+h
-    const mainInput = document.querySelector<HTMLInputElement>('#main-input')!
+    const mainInput = document.querySelector<HTMLInputElement>('#main-input')
+
+    if (!mainInput) return
+
     const position = mainInput.value.length
     mainInput.focus()
     mainInput.setSelectionRange(position, position)

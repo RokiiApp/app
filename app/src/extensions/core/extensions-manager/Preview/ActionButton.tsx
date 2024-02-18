@@ -1,7 +1,7 @@
 import { KeyboardNavItem } from '@rokii/ui'
 
 interface ActionButtonProps {
-  onSelect?: (event: React.SyntheticEvent<Element, Event>) => void
+  onSelect?: (event: React.SyntheticEvent<Element, Event>) => any
   text: string
 }
 

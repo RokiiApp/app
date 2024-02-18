@@ -100,7 +100,7 @@ const testAppAction: Action = {
   type: 'info'
 }
 
-export const fn: ExtensionModule['run'] = async ({ term, display, hide, update }) => {
+export const fn: ExtensionModule['run'] = async ({ term, display, hide }) => {
   const match = term.match(/^plugins?\s*(.+)?$/i)
   if (!match) return display([managerLauncherAction])
 

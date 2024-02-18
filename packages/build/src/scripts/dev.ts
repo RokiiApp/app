@@ -13,7 +13,9 @@ const appName = 'app.rokii.dev'
 /** Plugin name without scope */
 const pluginName = pkgJson.name.split('/').pop()
 
-const symlinkPath = path.join(process.env.APPDATA!, appName, 'plugins', pluginName)
+const appDataPath = process.env.APPDATA ?? ''
+
+const symlinkPath = path.join(appDataPath, appName, 'plugins', pluginName)
 
 function removeSymlink () {
   console.log('🚮 Removing symlink')

@@ -69,14 +69,14 @@ export class NpmClient {
   ) {
     const nameWithoutScope = name.replace(/^@.+?\//, '')
     let versionToInstall
-    const { version, middleware } = (options != null) || {}
+    const { version, middleware } = options ?? {}
 
     console.group('[NpmClient] Install package', name)
 
     try {
       const resJson = await fetch(`${NPM_API_BASE}${name}`).then(async (res) => await res.json())
 
-      versionToInstall = version || resJson['dist-tags'].latest
+      versionToInstall = version ?? resJson['dist-tags'].latest
       console.log('Version: ', versionToInstall)
 
       await this.downloadAndExtractPackage(

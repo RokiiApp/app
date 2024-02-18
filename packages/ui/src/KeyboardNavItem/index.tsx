@@ -15,7 +15,7 @@ interface KeyboardNavItemProps {
 export const KeyboardNavItem: FC<KeyboardNavItemProps> = ({ tagName, ...props }) => {
   const className = props.className ? `${styles.item} ${props.className}` : styles.item
 
-  const onSelect = (props.onSelect != null) || (() => undefined)
+  const onSelect = props.onSelect ?? (() => undefined)
   const onClick = onSelect
 
   const onKeyDown = (event: React.KeyboardEvent) => {

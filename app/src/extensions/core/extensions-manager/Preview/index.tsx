@@ -33,6 +33,10 @@ export const Preview = ({ onComplete, plugin }: PreviewProps) => {
       onComplete()
     }
 
+  const installAction = getNpmActions(plugin.name, 'installPackage')
+  const uninstallAction = getNpmActions(plugin.name, 'uninstallPackage')
+  const updateAction = getNpmActions(plugin.name, 'updatePackage')
+
   const {
     name,
     version,
@@ -45,9 +49,10 @@ export const Preview = ({ onComplete, plugin }: PreviewProps) => {
     settings
   } = plugin
 
-  const githubRepo = repo && repo.match(/^.+github.com\/([^/]+\/[^/]+).*?/)
+  const githubRepo = repo?.match(/^.+github.com\/([^/]+\/[^/]+).*?/)
   return (
     <div className={styles.preview} key={name}>
+      {/* eslint-disable-next-line @typescript-eslint/restrict-template-expressions */}
       <h2>{`${format.name(name)} (${version})`}</h2>
 
       <p>{description}</p>
@@ -63,21 +68,21 @@ export const Preview = ({ onComplete, plugin }: PreviewProps) => {
 
           {!isInstalled && !isDebugging && (
             <ActionButton
-              onSelect={getNpmActions(name, 'installPackage')}
+              onSelect={installAction}
               text={runningAction === 'installPackage' ? 'Installing...' : 'Install'}
             />
           )}
 
           {isInstalled && (
             <ActionButton
-              onSelect={getNpmActions(name, 'uninstallPackage')}
+              onSelect={uninstallAction}
               text={runningAction === 'uninstallPackage' ? 'Uninstalling...' : 'Uninstall'}
             />
           )}
 
           {isUpdateAvailable && (
             <ActionButton
-              onSelect={getNpmActions(name, 'updatePackage')}
+              onSelect={updateAction}
               text={runningAction === 'updatePackage' ? 'Updating...' : `Update (${installedVersion} → ${version})`}
             />
           )}
