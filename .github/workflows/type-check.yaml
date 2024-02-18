@@ -1,0 +1,27 @@
+name: 'Check types'
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+
+      - name: Install app dependencies
+        run: pnpm i
+
+      - name: Run typecheck
+        run: pnpm type-check
