@@ -2,7 +2,7 @@
   "name": "@rokii/ui",
   "version": "2.0.6",
   "type": "module",
-  "description": "Package with common UI components for Rokii plugins",
+  "description": "Package with common UI components for Rokii",
   "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
