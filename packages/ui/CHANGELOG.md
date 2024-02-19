@@ -1,5 +1,12 @@
 # @rokii/ui
 
+## [2.0.6](https://github.com/RokiiApp/app/compare/ui-v2.0.5...ui-v2.0.6) (2024-02-19)
+
+
+### Bug Fixes
+
+* unify licenses and setup ci publish ([007dd21](https://github.com/RokiiApp/app/commit/007dd21d0d927ed2287c11de42eb87e73f96fecc))
+
 ## [2.0.5](https://github.com/RokiiApp/app/compare/ui-v2.0.4...ui-v2.0.5) (2024-02-19)
 
 
