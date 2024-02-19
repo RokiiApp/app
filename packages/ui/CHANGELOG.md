@@ -1,5 +1,12 @@
 # @rokii/ui
 
+## [2.0.5](https://github.com/RokiiApp/app/compare/ui-v2.0.4...ui-v2.0.5) (2024-02-19)
+
+
+### Bug Fixes
+
+* update core packages ([0f06250](https://github.com/RokiiApp/app/commit/0f06250c60db08cb6a73c1e88871a187f2310fdc))
+
 ## 2.0.4
 
 ### Patch Changes
