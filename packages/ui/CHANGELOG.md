@@ -1,5 +1,12 @@
 # @rokii/ui
 
+## [2.0.7](https://github.com/RokiiApp/app/compare/ui-v2.0.6...ui-v2.0.7) (2024-02-19)
+
+
+### Bug Fixes
+
+* package description ([89cd54b](https://github.com/RokiiApp/app/commit/89cd54bf32f21ad4821f1b945b177786b3d94d67))
+
 ## [2.0.6](https://github.com/RokiiApp/app/compare/ui-v2.0.5...ui-v2.0.6) (2024-02-19)
 
 
