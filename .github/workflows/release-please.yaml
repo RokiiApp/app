@@ -102,6 +102,6 @@ jobs:
         run: pnpm package:type-check
       
       - name: Publish packages to npm
-        run: pnpm publish
+        run: pnpm publish -r
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
