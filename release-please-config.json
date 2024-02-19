@@ -4,10 +4,16 @@
             "separate-pull-requests": "true"
         },
         "packages/ui": {
-            "skip-github-release": "true"
+            "prerelease": "true"
         },
-        "packages/api": {},
-        "packages/build": {},
-        "packages/utils": {}
+        "packages/api": {
+            "prerelease": "true"
+        },
+        "packages/build": {
+            "prerelease": "true"
+        },
+        "packages/utils": {
+            "prerelease": "true"
+        }
     }
 }
