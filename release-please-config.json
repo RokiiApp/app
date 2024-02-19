@@ -1,6 +1,8 @@
 {
     "packages": {
-        "app": {},
+        "app": {
+            "separate-pull-requests": "true"
+        },
         "packages/ui": {},
         "packages/api": {},
         "packages/build": {},
