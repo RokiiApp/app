@@ -15,6 +15,7 @@ jobs:
 
     outputs:
       is_rokii_release: ${{ steps.release.outputs.app--release_created }}
+      is_release: ${{ steps.release.outputs.release_created }}
 
     steps:
       - uses: google-github-actions/release-please-action@v4
@@ -75,4 +76,29 @@ jobs:
           tauriScript: pnpm tauri
           releaseId: ${{ steps.latest_release_id.outputs.result }}
 
+  publish-npm-packages:
+    runs-on: ubuntu-latest
+    needs: release-please
+    # Only exec the tauri action if the release comes from the app directory
+    if:  needs.release-please.outputs.is_release == 'true'
 
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+
+      - name: Build packages & type check
+        run: pnpm package:type-check
+      
+      - name: Publish packages to npm
+        run: pnpm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
