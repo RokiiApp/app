@@ -1,5 +1,12 @@
 # @rokii/build
 
+## [2.0.9](https://github.com/RokiiApp/app/compare/build-v2.0.8...build-v2.0.9) (2024-02-19)
+
+
+### Bug Fixes
+
+* remove duplicated license ([4db2b6e](https://github.com/RokiiApp/app/commit/4db2b6edb749fdd46ba50add5667cf8d97ca927c))
+
 ## [2.0.8](https://github.com/RokiiApp/app/compare/build-v2.0.7...build-v2.0.8) (2024-02-19)
 
 

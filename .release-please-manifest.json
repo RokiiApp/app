@@ -2,6 +2,6 @@
     "app": "1.0.7",
     "packages/ui": "2.0.12",
     "packages/api": "0.1.7",
-    "packages/build": "2.0.8",
+    "packages/build": "2.0.9",
     "packages/utils": "2.0.8"
 }
