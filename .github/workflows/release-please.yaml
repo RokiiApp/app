@@ -61,8 +61,8 @@ jobs:
 
             return data.id
 
-      - name: Build deps and app
-        run: pnpm build
+      - name: Build deps and test app
+        run: pnpm type-check
 
       - uses: tauri-apps/tauri-action@v0
         id: tauri_action
