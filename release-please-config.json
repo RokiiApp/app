@@ -1,8 +1,6 @@
 {
     "packages": {
-        "app": {
-            "separate-pull-requests": "true"
-        },
+        "app": {},
         "packages/ui": {
             "prerelease": "true"
         },
