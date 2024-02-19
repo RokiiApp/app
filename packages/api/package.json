@@ -1,6 +1,6 @@
 {
   "name": "@rokii/api",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "type": "module",
   "description": "Utils and Types for Rokii Plugin Developers",
   "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
