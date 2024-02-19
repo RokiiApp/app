@@ -5,7 +5,7 @@ type ScriptRunner = (e: Event | React.SyntheticEvent) => void | Promise<void>
 
 export class ScriptItem extends Item {
     run: ScriptRunner
-    type = ItemTypes.SCRIPT
+    readonly type = ItemTypes.SCRIPT
 
     constructor(action: ScriptItemParams) {
         super(action)

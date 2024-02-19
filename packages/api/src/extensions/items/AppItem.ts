@@ -2,7 +2,7 @@ import { ItemTypes } from "."
 import { Item, type ItemParams } from "./Item"
 
 export class AppItem extends Item {
-    type = ItemTypes.APP
+    readonly type = ItemTypes.APP
     appName: string
 
     constructor(action: AppItemParams) {

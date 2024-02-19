@@ -1,3 +1,5 @@
+import { ItemTypes } from "."
+
 /**
  * An item is a piece of information that can have an action associated with it.
  * 
@@ -10,41 +12,42 @@
  * - Run an App. See {@link AppItem}
  */
 export class Item {
-    readonly id: string
-    title: string
-    subtitle: string
-    keyword: string[] = []
-    autocomplete: string
-    icon?: string
+  readonly id: string
+  title: string
+  subtitle: string
+  readonly type: ItemTypes = ItemTypes.INFO
+  keyword: string[] = []
+  autocomplete: string
+  icon?: string
 
-    constructor(action: ItemParams) {
-        this.id = action.id || crypto.randomUUID()
-        this.title = action.title
-        this.subtitle = action.subtitle || ''
-        this.keyword = action.keyword || []
-        this.autocomplete = action.autocomplete || action.title
-        this.icon = action.icon
-    }
+  constructor(action: ItemParams) {
+    this.id = action.id || crypto.randomUUID()
+    this.title = action.title
+    this.subtitle = action.subtitle || ''
+    this.keyword = action.keyword || []
+    this.autocomplete = action.autocomplete || action.title
+    this.icon = action.icon
+  }
 }
 
 export type ItemParams = {
-    /**
-      * An unique identifier for the result, if not provided, it will be generated
-      * Used to update or remove the action from the store
-      */
-    id?: string
-    title: string
-    subtitle?: string
-    keyword?: string[]
-    /**
-      * The text that will replace the current input when the user uses the tab key
-      * If not provided, the title will be used
-      */
-    autocomplete?: string
-    /**
-      * The icon to be displayed in the result
-      * If not provided, the extension icon will be used
-      * If the extension icon is not provided, the default icon will be used
-      */
-    icon?: string
+  /**
+    * An unique identifier for the result, if not provided, it will be generated
+    * Used to update or remove the action from the store
+    */
+  id?: string
+  title: string
+  subtitle?: string
+  keyword?: string[]
+  /**
+    * The text that will replace the current input when the user uses the tab key
+    * If not provided, the title will be used
+    */
+  autocomplete?: string
+  /**
+    * The icon to be displayed in the result
+    * If not provided, the extension icon will be used
+    * If the extension icon is not provided, the default icon will be used
+    */
+  icon?: string
 }
