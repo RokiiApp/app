@@ -1,5 +1,12 @@
 # @rokii/utils
 
+## [2.0.2](https://github.com/RokiiApp/app/compare/utils-v2.0.1...utils-v2.0.2) (2024-02-19)
+
+
+### Bug Fixes
+
+* update core packages ([0f06250](https://github.com/RokiiApp/app/commit/0f06250c60db08cb6a73c1e88871a187f2310fdc))
+
 ## 2.0.1
 
 ### Patch Changes
