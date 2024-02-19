@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/RokiiApp/app/compare/api-v0.1.4...api-v0.1.5) (2024-02-19)
+
+
+### Bug Fixes
+
+* force release ([24407ac](https://github.com/RokiiApp/app/commit/24407ac90d42d775cd720c2fa539a24da0b54acf))
+
 ## [0.1.4](https://github.com/RokiiApp/app/compare/api-v0.1.3...api-v0.1.4) (2024-02-19)
 
 
