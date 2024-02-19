@@ -55,7 +55,7 @@ jobs:
         id: release_id
         uses: actions/github-script@v7
         env:
-          TAGNAME: needs.release-please.outputs.rokii_release_tagname
+          TAGNAME: ${{ needs.release-please.outputs.rokii_release_tagname }}
         with:
           script: |
             const { data } = await github.rest.repos.getReleaseByTag({ 
