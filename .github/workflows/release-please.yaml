@@ -94,6 +94,9 @@ jobs:
         name: Install pnpm
         with:
           version: 8
+      
+      - name: Install deps
+        run: pnpm i
 
       - name: Build packages & type check
         run: pnpm package:type-check
