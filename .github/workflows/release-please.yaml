@@ -12,9 +12,70 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
+
+    outputs:
+      is_rokii_release: ${{ steps.semantic.outputs.new_release_published }}
+
     steps:
       - uses: google-github-actions/release-please-action@v4
+        id: release
         with:
           # this is a built-in strategy in release-please, see "Action Inputs"
           # for more options
           command: manifest
+  
+  build-app:
+    runs-on: windows-latest
+    needs: release-please
+    # Only exec the tauri action if the release comes from the app directory
+    if:  needs.release-please.outputs.is_rokii_release == 'true'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+ 
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "./app/src-tauri -> target"
+
+      - name: Install app dependencies
+        run: pnpm i
+
+      - name: get latest release id
+        id: latest_release_id
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data } = await github.rest.repos.getLatestRelease({ 
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })
+
+            return data.id
+
+      - name: Build deps and app
+        run: pnpm build
+
+      - uses: tauri-apps/tauri-action@v0
+        id: tauri_action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
+        with:
+          projectPath: app
+          releaseId: ${{ steps.latest_release_id.outputs.result }}
+
+
