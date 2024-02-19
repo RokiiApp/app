@@ -1,5 +1,12 @@
 # @rokii/ui
 
+## [2.0.8](https://github.com/RokiiApp/app/compare/ui-v2.0.7...ui-v2.0.8) (2024-02-19)
+
+
+### Bug Fixes
+
+* force release ([5b6607b](https://github.com/RokiiApp/app/commit/5b6607b697700de5f557c7955bd0c6887969a1eb))
+
 ## [2.0.7](https://github.com/RokiiApp/app/compare/ui-v2.0.6...ui-v2.0.7) (2024-02-19)
 
 
