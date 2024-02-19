@@ -1,6 +1,6 @@
+import type { ExtensionContext } from '@rokii/api'
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
-import { ExtensionContext } from '@/extensions/types'
 import { useActionsStore } from '@/stores/actions'
 
 export class ExtensionContextProvider {

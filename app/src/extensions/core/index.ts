@@ -1,4 +1,4 @@
-import type { ExtensionModule } from '../types'
+import type { ExtensionModule } from '@rokii/api'
 import AppsExplorerExtension from './apps'
 import QuitExtension from './quit'
 import ReloadExtension from './reload'

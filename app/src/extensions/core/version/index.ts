@@ -1,14 +1,10 @@
-import type { Action, ExtensionModule } from '@/extensions/types'
+import { InfoItem, type ExtensionModule } from "@rokii/api"
 import { getVersion } from '@tauri-apps/api/app'
 import icon from '../icon.png'
 
 const version = await getVersion()
 
-const versionAction: Action = {
-  title: 'Rokii Version',
-  subtitle: version,
-  type: 'info'
-}
+const versionAction = new InfoItem({ title: 'Rokii Version', subtitle: version })
 
 const VersionExtension: ExtensionModule = {
   name: 'Version',

@@ -1,4 +1,4 @@
-import type { Action, ExtensionModule /* ExtensionContext */ } from '@/extensions/types'
+import { AppItem, InfoItem, ExtensionModule } from '@rokii/api'
 // import type { PluginInfo } from './types';
 // import { search } from '@rokii/utils';
 
@@ -82,23 +82,15 @@ import icon from '../icon.png'
 //   return result;
 // };
 
-const managerLauncherAction: Action = {
-  title: 'Manage plugins',
-  type: 'app',
-  appName: 'Manager'
-}
+const managerLauncherAction = new AppItem({ title: 'Manage plugins', appName: 'Manager' })
 const TEMPORAL_ACTION_ID = 'plugins-loading'
 
-const temporalSearchAction: Action = {
+const temporalSearchAction = new InfoItem({
   title: 'Looking for plugins...',
-  type: 'info',
   id: TEMPORAL_ACTION_ID
-}
+})
 
-const testAppAction: Action = {
-  title: 'We are here!',
-  type: 'info'
-}
+const testAppAction = new InfoItem({ title: 'We are here!' })
 
 export const fn: ExtensionModule['run'] = async ({ term, display, hide }) => {
   const match = term.match(/^plugins?\s*(.+)?$/i)

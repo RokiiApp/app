@@ -1,4 +1,4 @@
-import { Action, ExtensionModule } from '@/extensions/types'
+import { InfoItem, ScriptItem, ExtensionModule } from '@rokii/api'
 import type { AppEntry } from './types'
 import icon from '../icon.png'
 import { search } from '@rokii/utils'
@@ -7,26 +7,23 @@ import { getInstalledApps } from './getInstalledApps'
 
 const apps: Record<string, AppEntry> = {}
 
+const refreshingItem = new InfoItem({ title: 'Refreshing apps list...', subtitle: 'This might take a while' })
+
 const run: ExtensionModule['run'] = async ({ term, update, display, actions }) => {
   // This is a hidden command that will refresh the apps list
   if (term === 'apps refresh') {
     const ACTION_ID = 'refresh'
-    const refreshAction: Action = {
+    const refreshItem = new ScriptItem({
       title: 'Refresh apps list',
       id: ACTION_ID,
-      type: 'script',
       run: async () => {
-        update(ACTION_ID, {
-          title: 'Refreshing apps list...',
-          type: 'info',
-          subtitle: 'This might take a while'
-        })
+        update(ACTION_ID, refreshingItem)
         await initializeAsync()
         actions.replaceTerm('')
       }
-    }
+    })
 
-    display([refreshAction])
+    display([refreshItem])
     return
   }
 
@@ -36,12 +33,12 @@ const run: ExtensionModule['run'] = async ({ term, update, display, actions }) =
 
   const foundApps = search(Object.entries(apps), term, ([name]) => name)
 
-  const results: Action[] = foundApps.map(([name, app]) => ({
-    title: name,
-    subtitle: 'Launch 🚀',
-    type: 'script',
-    run: () => { invoke('open_app_by_id', { appId: app.id }) }
-  }))
+  const results = foundApps.map(([name, app]) => {
+    const title = name
+    const run = () => { invoke('open_app_by_id', { appId: app.id }) }
+
+    return new ScriptItem({ title, run })
+  })
 
   display(results)
 }

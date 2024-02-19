@@ -1,19 +1,20 @@
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
-import { Action, ScriptAction } from '@/extensions/types'
+import { AppItem, Item, ItemTypes, ScriptItem } from '@rokii/api'
 import { appWindow } from '@tauri-apps/api/window'
 import { navigate } from 'wouter/use-hash-location'
 
 export class ResultCreator {
-  static create (action: Action, extensionName: string): Result {
-    switch (action.type) {
-      case 'script':
-        return new ScriptActionResult(action, extensionName)
-      case 'app':
-        return new AppActionResult(action, extensionName)
-      default:
-        return new InfoResult(action, extensionName)
+  static create(action: Item, extensionName: string): Result {
+    if (action instanceof ScriptItem) {
+      return new ScriptActionResult(action, extensionName)
     }
+
+    if (action instanceof AppItem) {
+      return new AppActionResult(action, extensionName)
+    }
+
+    return new InfoResult(action, extensionName)
   }
 }
 
@@ -23,35 +24,27 @@ export class Result {
   subtitle: string
   icon: string
   autocomplete: string
-  script: ScriptAction['run'] | undefined
   readonly id: string
 
-  constructor (action: Action, extensionName: string) {
+  constructor(action: Item, extensionName: string) {
     this.title = action.title
     this.subtitle = action.subtitle || ''
     this.icon = action.icon || ''
     this.extension = extensionName
     this.autocomplete = action.autocomplete || action.title
     this.id = action.id || crypto.randomUUID()
-
-    if (action.type === 'script') {
-      this.script = action.run
-    }
   }
 
-  update (newAction: Action) {
+  // TODO: Check this because the script method might not be available when updated
+  update(newAction: Item) {
     this.title = newAction.title
     this.subtitle = newAction.subtitle || ''
     this.icon = newAction.icon || ''
 
-    if (newAction.type === 'script') {
-      this.script = newAction.run
-    }
-
     return this
   }
 
-  async onSelect (e: Event | React.SyntheticEvent) {
+  async onSelect(e: Event | React.SyntheticEvent) {
     if (e.defaultPrevented) return
     send(CHANNELS.ClearInput)
     await appWindow.hide()
@@ -62,24 +55,25 @@ export class Result {
  * A factory of results
  */
 class InfoResult extends Result {
-  async onSelect () { };
+  async onSelect() { };
 }
 
 class ScriptActionResult extends Result {
-  constructor (action: Action, extensionName: string) {
+  script: ScriptItem['run']
+
+  constructor(action: ScriptItem, extensionName: string) {
     super(action, extensionName)
 
-    if (action.type !== 'script') {
+    if (action.type !== ItemTypes.SCRIPT) {
       throw new Error('Invalid action type')
     }
 
     this.script = action.run
   }
 
-  async onSelect (e: Event | React.SyntheticEvent) {
-    if (this.script) {
-      this.script(e)
-    }
+  async onSelect(e: Event | React.SyntheticEvent) {
+    this.script(e)
+
     await super.onSelect(e)
   }
 }
@@ -87,17 +81,17 @@ class ScriptActionResult extends Result {
 class AppActionResult extends Result {
   appName: string
 
-  constructor (action: Action, extensionName: string) {
+  constructor(action: AppItem, extensionName: string) {
     super(action, extensionName)
 
-    if (action.type !== 'app') {
+    if (action.type !== ItemTypes.APP) {
       throw new Error('Invalid action type')
     }
 
     this.appName = action.appName
   }
 
-  async onSelect () {
+  async onSelect() {
     navigate(`/app/${this.extension}/${this.appName}`)
   }
 }

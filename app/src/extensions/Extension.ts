@@ -1,4 +1,4 @@
-import { ExtensionContext } from './types'
+import { ExtensionContext } from '@rokii/api'
 
 type RunFn = (context: ExtensionContext) => Promise<void>
 
@@ -12,7 +12,7 @@ export class Extension {
   onMessage?: (data: unknown) => void
   apps?: Record<string, RunFn>
 
-  constructor (module: any) {
+  constructor(module: any) {
     // TODO - check if the module is a valid extension (use ZOD?)
 
     if (!this.isValidExtension(module)) {
@@ -29,11 +29,11 @@ export class Extension {
     this.apps = module.apps
   }
 
-  getApp (name: string): RunFn | undefined {
+  getApp(name: string): RunFn | undefined {
     return this.apps?.[name]
   }
 
-  private isValidExtension (module: any): module is Extension {
+  private isValidExtension(module: any): module is Extension {
     const hasIcon = typeof module.icon === 'string'
     const hasName = typeof module.name === 'string'
     const hasRunFunction = typeof module.run === 'function'

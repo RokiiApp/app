@@ -1,17 +1,17 @@
-import type { Action, ExtensionModule } from '@/extensions/types'
+import { ScriptItem, type ExtensionModule } from '@rokii/api'
 import { relaunch } from '@tauri-apps/api/process'
 import icon from '../icon.png'
 
 const keywords = ['reload', 'restart', 'relaunch']
 const name = 'Reload'
 
-const reloadAction: Action = {
-  type: 'script',
+const reloadAction = new ScriptItem({
   title: 'Reload',
   subtitle: 'Reload RoKii',
   icon,
-  run: async () => await relaunch()
-}
+  run: async () => await relaunch(),
+  keyword: keywords
+})
 
 const ReloadExtension: ExtensionModule = {
   icon,

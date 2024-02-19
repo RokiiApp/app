@@ -1,12 +1,12 @@
-import type { Action } from '@/extensions/types'
+import type { Item } from '@rokii/api'
 import { create } from 'zustand'
 import { type Result, ResultCreator } from './ActionResult'
 
 export interface ActionsStore {
   actions: Result[]
 
-  addActions: (actions: Action[], extensionName: string) => void
-  updateAction: (id: string, newAction: Action) => void
+  addActions: (actions: Item[], extensionName: string) => void
+  updateAction: (id: string, newAction: Item) => void
   removeAction: (id: string) => void
   removeAllActions: () => void
 }
