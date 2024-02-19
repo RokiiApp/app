@@ -1,7 +1,7 @@
 {
-    "app": "1.0.5",
-    "packages/ui": "2.0.10",
-    "packages/api": "0.1.5",
-    "packages/build": "2.0.6",
-    "packages/utils": "2.0.6"
+    "app": "1.0.6",
+    "packages/ui": "2.0.11",
+    "packages/api": "0.1.6",
+    "packages/build": "2.0.7",
+    "packages/utils": "2.0.7"
 }
