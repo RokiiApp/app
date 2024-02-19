@@ -3,7 +3,9 @@
         "app": {
             "separate-pull-requests": "true"
         },
-        "packages/ui": {},
+        "packages/ui": {
+            "skip-github-release": "true"
+        },
         "packages/api": {},
         "packages/build": {},
         "packages/utils": {}

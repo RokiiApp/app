@@ -15,7 +15,7 @@ jobs:
 
     outputs:
       is_rokii_release: ${{ steps.release.outputs.app--release_created }}
-      is_release: ${{ steps.release.outputs.release_created }}
+      is_release: ${{ steps.release.outputs.releases_created }}
 
     steps:
       - uses: google-github-actions/release-please-action@v4
@@ -79,7 +79,7 @@ jobs:
   publish-npm-packages:
     runs-on: ubuntu-latest
     needs: release-please
-    # Only exec the tauri action if the release comes from the app directory
+    # Only exec the publish action if a new release was created
     if:  needs.release-please.outputs.is_release == 'true'
 
     steps:
