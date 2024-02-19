@@ -2,16 +2,16 @@
     "packages": {
         "app": {},
         "packages/ui": {
-            "prerelease": "true"
+            "prerelease": true
         },
         "packages/api": {
-            "prerelease": "true"
+            "prerelease": true
         },
         "packages/build": {
-            "prerelease": "true"
+            "prerelease": true
         },
         "packages/utils": {
-            "prerelease": "true"
+            "prerelease": true
         }
     }
 }
