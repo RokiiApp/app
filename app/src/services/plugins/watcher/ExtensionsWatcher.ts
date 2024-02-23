@@ -1,9 +1,10 @@
 import { RawEvent, watchImmediate } from 'tauri-plugin-fs-watch-api'
+import debounce from 'just-debounce'
 import type { UnlistenFn } from '@tauri-apps/api/event'
 import { PLUGINS_PATH } from '@/common/constants/paths'
 import { TypedEventTarget } from 'typescript-event-target'
 import { ExtensionsWatcherEventTypes, ExtensionAddedEvent, ExtensionRemovedEvent } from './WatcherEvents'
-import { getPluginName, parse } from './fs-utils'
+import { getExtensionNameFromPath } from './fs-utils'
 
 export interface WatcherEvents {
     [ExtensionsWatcherEventTypes.ADDED]: ExtensionAddedEvent
@@ -17,7 +18,8 @@ export interface WatcherEvents {
 class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
     private unlistenFunction: UnlistenFn | null = null
     async watch() {
-        console.log('ExtensionsWatcher started')
+        if (this.unlistenFunction) return
+        console.log('[ExtensionsWatcher] - Started')
 
         this.unlistenFunction = await watchImmediate(PLUGINS_PATH, (event) => {
             this.onRemoveEvent(event)
@@ -27,7 +29,7 @@ class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
     }
 
     stop() {
-        console.log('ExtensionsWatcher stopped')
+        console.log('[ExtensionsWatcher] - Stopped')
         if (this.unlistenFunction) {
             this.unlistenFunction()
         }
@@ -42,18 +44,16 @@ class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
         const isRemoveEvent = 'remove' in type
         if (!isRemoveEvent) return
 
-        const pluginPath = paths[0]
+        const extensionPath = paths[0]
 
-        const { dir } = parse(pluginPath)
+        const extensionName = getExtensionNameFromPath(extensionPath)
 
-        if (dir.match(/plugins$/) == null) return
-
-        const extensionName = getPluginName(pluginPath)
+        /**
+         * We ignore the package.json file, as it is not a plugin
+         */
+        if (extensionName === "package.json") return
 
         this.dispatchTypedEvent(ExtensionsWatcherEventTypes.REMOVED, new ExtensionRemovedEvent(extensionName))
-
-        console.log(`[ExtensionsWatcher]: Extension "${extensionName}" was removed.`)
-
     }
 
     private onModifyEvent(event: RawEvent) {
@@ -65,22 +65,25 @@ class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
         const isModifyEvent = 'modify' in type
         if (!isModifyEvent) return
 
-        const pluginPath = paths[0]
-        const { dir, base } = parse(pluginPath)
+        const extensionPath = paths[0]
 
-        if ((dir.match(/plugins$/) == null) || (base.match(/package.json$/) != null)) return
+        const extensionName = getExtensionNameFromPath(extensionPath)
 
-        const pluginName = getPluginName(pluginPath)
+        /**
+         * We ignore the package.json file, as it is not a plugin
+         */
+        if (extensionName === "package.json") return
 
-        this.dispatchTypedEvent(ExtensionsWatcherEventTypes.ADDED, new ExtensionAddedEvent(pluginName))
-
-        console.log(`[ExtensionsWatcher]: Extension "${pluginName}" changed.`)
-
-        // TODO - Move this to external class
-        // debouncedLoadPlugin(pluginName)
-
-        console.log(event)
+        /**
+         * We use a debounce function to avoid emitting multiple events for the same plugin
+         */
+        this.notifyAddedExtension(extensionName)
     }
+
+    private notifyAddedExtension = debounce((name: string) => {
+        this.dispatchTypedEvent(ExtensionsWatcherEventTypes.ADDED, new ExtensionAddedEvent(name))
+    }, 300)
+
 }
 
 const extensionsWatcher = new ExtensionsWatcher()

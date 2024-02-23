@@ -7,7 +7,8 @@ export interface ActionsStore {
 
   addActions: (actions: Item[], extensionName: string) => void
   updateAction: (id: string, newAction: Item) => void
-  removeAction: (id: string) => void
+  removeAction: (id: string) => void,
+  removeActionsFromExtension: (extensionName: string) => void,
   removeAllActions: () => void
 }
 
@@ -36,6 +37,14 @@ export const useActionsStore = create<ActionsStore>((set) => ({
   removeAction: (id) => {
     set((state) => {
       const newActions = state.actions.filter((action) => action.id !== id)
+
+      return { actions: newActions }
+    })
+  },
+
+  removeActionsFromExtension: (extensionName: string) => {
+    set((state) => {
+      const newActions = state.actions.filter((action) => action.extension !== extensionName)
 
       return { actions: newActions }
     })

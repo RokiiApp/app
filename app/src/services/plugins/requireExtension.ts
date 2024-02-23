@@ -10,23 +10,20 @@ import { Extension } from '@/extensions/Extension'
  * This method is always safe to call, and will never throw an error
  * If the plugin is not found, or if there is an error loading the plugin,
  * it will return null, but will not throw an error
- * @param pluginName 
- * @returns 
  */
 export const requireExtension = async (pluginName: string) => {
   const pluginPath = await join(PLUGINS_PATH, pluginName, 'dist', 'index.js')
 
-  try {
-    const module = await ExternalModuleImporter.importModule(pluginPath)
+  const forceCacheBust = true
 
-    const extension = new Extension(module)
+  try {
+    const module = await ExternalModuleImporter.importModule(pluginPath, forceCacheBust)
+
+    const extension = new Extension(module.default)
 
     return extension
   } catch (error) {
-    // catch all errors from plugin loading
-    console.log('Error requiring', pluginPath)
-    console.log(error)
-
+    console.error(`[requireExtension] - Error loading plugin: ${pluginName}`, error)
     return null
   }
 }

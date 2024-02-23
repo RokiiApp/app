@@ -8,11 +8,14 @@ import { App } from '@/main/routes/app'
 import styles from './styles.module.css'
 import { useInputStore } from '@/stores/input'
 import { memo } from 'react'
+import { useExtensionsRepository } from '@/main/hooks/useExtensionsRepository'
 
 /**
  * Main search container
  */
 const Rokii = () => {
+  useExtensionsRepository()
+
   const term = useInputStore((state) => state.term)
   return (
     <div className={styles.rokiContainer}>

@@ -7,7 +7,11 @@ import { extensionsWatcher } from '@/services/plugins/watcher/ExtensionsWatcher'
 import { ExtensionsRepoEventTypes, ExtensionLoadedEvent, ExtensionRemovedEvent } from './Events'
 import { Extension } from '../Extension'
 import { getCoreExtensions, getExternalExtensions } from '@/services/plugins/getters'
-import { ExtensionsWatcherEventTypes } from '@/services/plugins/watcher/WatcherEvents'
+import {
+  ExtensionAddedEvent,
+  ExtensionRemovedEvent as FsExtensionRemovedEvent,
+  ExtensionsWatcherEventTypes
+} from '@/services/plugins/watcher/WatcherEvents'
 import { requireExtension } from '@/services/plugins/requireExtension'
 
 export interface RepositoryEvents {
@@ -21,34 +25,72 @@ export interface RepositoryEvents {
  * Consumers can subscribe to the events that are dispatched by this class to be notified when an extension is added or removed
  */
 class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
+  private initializedWatcher = false
   private extensions: Record<string, Extension> = {}
+
+  // PUBLIC METHODS
 
   async init() {
     await ensureRokiNeededFiles()
     await this.initializePlugins()
-    await this.initializeExtensionsWatcher()
+    this.initializeExtensionsWatcher()
   }
 
-  async initializeExtensionsWatcher() {
-    extensionsWatcher.addEventListener(ExtensionsWatcherEventTypes.ADDED, async (event) => {
-      const { name } = event.detail
-
-      const extension = await requireExtension(name)
-      if (extension === null) return
-
-      this.add(extension)
-    })
-
-    extensionsWatcher.addEventListener(ExtensionsWatcherEventTypes.REMOVED, (event) => {
-      const { name } = event.detail
-
-      this.delete(name)
-    })
-
-    await extensionsWatcher.watch()
+  destroy() {
+    for (let extensionName in this.extensions) {
+      this.delete(extensionName)
+    }
+    this.stopExtensionsWatcher()
   }
 
-  async initializePlugins() {
+  get(name: string) {
+    return this.extensions[name]
+  }
+
+  getAll() {
+    return this.extensions
+  }
+
+  // PRIVATE METHODS
+
+  private initializeExtensionsWatcher() {
+    if (this.initializedWatcher) return
+    extensionsWatcher.addEventListener(ExtensionsWatcherEventTypes.ADDED, this.onAddedExtensionDetected.bind(this))
+    extensionsWatcher.addEventListener(ExtensionsWatcherEventTypes.REMOVED, this.onRemovedExtensionDetected.bind(this))
+    extensionsWatcher.watch()
+    this.initializedWatcher = true
+  }
+
+  private stopExtensionsWatcher() {
+    extensionsWatcher.removeEventListener(ExtensionsWatcherEventTypes.ADDED, this.onAddedExtensionDetected.bind(this))
+    extensionsWatcher.removeEventListener(ExtensionsWatcherEventTypes.REMOVED, this.onRemovedExtensionDetected.bind(this))
+    extensionsWatcher.stop()
+    this.initializedWatcher = false
+  }
+
+  private async onAddedExtensionDetected(event: ExtensionAddedEvent) {
+    console.log('[ExtensionsRepository] - New extension detected. Extension name: ', event.detail)
+    const { name } = event.detail
+
+    const extension = await requireExtension(name)
+    if (extension === null) {
+      console.log('[ExtensionsRepository] - Extension was invalid. Wont be added: ', event.detail)
+      return
+    }
+
+    console.log('[ExtensionsRepository] - Extension imported sucesfully: ', event.detail)
+
+    this.add(extension)
+  }
+
+  private onRemovedExtensionDetected(event: FsExtensionRemovedEvent) {
+    console.log('[ExtensionsRepository] - Extension removed: ', event.detail)
+    const { name } = event.detail
+
+    this.delete(name)
+  }
+
+  private async initializePlugins() {
     // Load the core plugins (the ones that come with rokii)
     getCoreExtensions().then((coreExtensions) => {
       for (const extension of coreExtensions) {
@@ -67,22 +109,14 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
   /**
    * Method used to add a new extension to the repository
    */
-  async add(ext: Extension) {
+  private async add(ext: Extension) {
     await this.loadExtension(ext)
   }
 
-  get(name: string) {
-    return this.extensions[name]
-  }
-
-  delete(name: string) {
+  private delete(name: string) {
     delete this.extensions[name]
 
     this.dispatchTypedEvent(ExtensionsRepoEventTypes.REMOVED, new ExtensionRemovedEvent(name))
-  }
-
-  getAll() {
-    return this.extensions
   }
 
   private async loadExtension(extension: Extension) {
@@ -95,6 +129,5 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
 }
 
 const extensionsRepository = new ExtensionsRepository()
-await extensionsRepository.init()
 
 export { extensionsRepository }

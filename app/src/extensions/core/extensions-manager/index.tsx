@@ -1,118 +1,76 @@
-import { AppItem, InfoItem, ExtensionModule } from '@rokii/api'
-// import type { PluginInfo } from './types';
-// import { search } from '@rokii/utils';
-
-// import { open } from '@tauri-apps/api/shell';
-
+import { AppItem, InfoItem, ExtensionModule, ScriptItem } from '@rokii/api'
+import { client } from '@/services/plugins'
 import { getPlugins } from './utils/loadPlugins'
-
 import icon from '../icon.png'
-// import * as format from './utils/format';
-// import { Preview } from './Preview';
+import { PluginInfo } from './types';
+import * as format from './utils/format';
 
-// import { CHANNELS } from '@/common/constants/events';
-// import { send } from '@/common/ipc';
+const pluginToResult = (plugin: PluginInfo | string): ScriptItem => {
+  if (typeof plugin === 'string') {
+    return new ScriptItem({
+      title: plugin,
+      id: plugin,
+      run: () => {
+        client.installPackage(plugin)
+      }
+    })
+  };
 
-// const updatePlugin = async (update: ExtensionContext['update'], name: string) => {
-//   const plugins = await getPlugins();
+  const title = `${format.name(plugin.name)}`;
+  const subtitle = format.version(plugin);
 
-//   // TODO: This is a hack to get the updated plugin- need to find a better way
-//   const updatedPlugin = plugins.find((plugin) => plugin.name === name)!;
+  return new ScriptItem({
+    title,
+    subtitle,
+    id: plugin.name,
+    run: () => {
+      client.installPackage(plugin.name)
+    }
+  })
+};
 
-//   const title = `${format.name(updatedPlugin.name)}`;
+const categorizePlugins = (plugins: PluginInfo[]) => {
 
-//   send(CHANNELS.FocusInput)
+  // ref https://github.com/microsoft/TypeScript/issues/47171
+  // @ts-ignore
+  const grouped = Object.groupBy(plugins, (plugin: PluginInfo) => {
+    if (plugin.isDebugging) return '🐛 Debugging';
+    if (plugin.isUpdateAvailable) return '🆕 Updates';
+    if (plugin.isInstalled) return '💫 Installed';
+    if (plugin.name) return '🔎 Available';
+  })
 
-//   update(name, {
-//     title,
-//     subtitle: format.version(updatedPlugin),
-//     getPreview: () => (
-//       <Preview
-//         plugin={updatedPlugin}
-//         key={name}
-//         onComplete={() => updatePlugin(update, name)}
-//       />
-//     )
-//   });
-// };
+  const result: (PluginInfo | string)[] = [];
 
-// const pluginToResult = (plugin: PluginInfo | string, update: ExtensionContext['update']) => {
-//   if (typeof plugin === 'string') return { title: plugin, icon: null };
+  Object.entries(grouped).forEach(([category, plugins]) => {
+    // @ts-ignore
+    result.push(category, ...plugins);
+  })
 
-//   const title = `${format.name(plugin.name)}`;
-//   const subtitle = format.version(plugin);
-//   const repoLink = plugin.repo;
+  return result;
+};
 
-//   const onSelect = repoLink ? () => open(repoLink) : undefined;
+const managerLauncherAction = new AppItem({ title: 'Manage plugins', appName: 'Manager', icon })
+export const fn: ExtensionModule['run'] = async ({ display }) => {
+  display([managerLauncherAction])
+}
 
-//   return {
-//     icon: null,
-//     id: plugin.name,
-//     title,
-//     subtitle,
-//     onSelect,
-//     getPreview: () => (
-//       <Preview
-//         plugin={plugin}
-//         key={plugin.name}
-//         onComplete={() => updatePlugin(update, plugin.name)}
-//       />
-//     )
-//   };
-// };
-
-// const categorizePlugins = (plugins: PluginInfo[]) => {
-
-//   // ref https://github.com/microsoft/TypeScript/issues/47171
-//   // @ts-ignore
-//   const grouped = Object.groupBy(plugins, (plugin: PluginInfo) => {
-//     if (plugin.isDebugging) return '🐛 Debugging';
-//     if (plugin.isUpdateAvailable) return '🆕 Updates';
-//     if (plugin.isInstalled) return '💫 Installed';
-//     if (plugin.name) return '🔎 Available';
-//   })
-
-//   const result: (PluginInfo | string)[] = [];
-
-//   Object.entries(grouped).forEach(([category, plugins]) => {
-//     // @ts-ignore
-//     result.push(category, ...plugins);
-//   })
-
-//   return result;
-// };
-
-const managerLauncherAction = new AppItem({ title: 'Manage plugins', appName: 'Manager' })
 const TEMPORAL_ACTION_ID = 'plugins-loading'
-
 const temporalSearchAction = new InfoItem({
   title: 'Looking for plugins...',
   id: TEMPORAL_ACTION_ID
 })
-
-const testAppAction = new InfoItem({ title: 'We are here!' })
-
-export const fn: ExtensionModule['run'] = async ({ term, display, hide }) => {
-  const match = term.match(/^plugins?\s*(.+)?$/i)
-  if (!match) return display([managerLauncherAction])
-
+const ExtensionsManager: ExtensionModule["run"] = async ({ display, hide }) => {
   display([temporalSearchAction])
-
   const plugins = await getPlugins()
+
   console.log(plugins)
-  // const matchingPlugins = plugins.filter(
-  //   ({ name }) => search([name], match[1]).length > 0
-  // );
-
-  // const categorizeResult = categorizePlugins(matchingPlugins);
-
-  // const orderedPlugins = categorizeResult.map((plugin) =>
-  //   pluginToResult(plugin, update)
-  // );
-
+  const categorizeResult = categorizePlugins(plugins);
+  const orderedPlugins = categorizeResult.map((plugin) =>
+    pluginToResult(plugin)
+  );
   hide(TEMPORAL_ACTION_ID)
-
-  // display(orderedPlugins);
+  display(orderedPlugins)
 }
 
 const ExtensionsManagerExtension: ExtensionModule = {
@@ -120,10 +78,7 @@ const ExtensionsManagerExtension: ExtensionModule = {
   icon,
   run: fn,
   apps: {
-    Manager: async ({ display }) => {
-      display([testAppAction])
-    }
-
+    Manager: ExtensionsManager
   }
 }
 

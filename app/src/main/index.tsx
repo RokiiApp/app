@@ -10,9 +10,6 @@ import { setupWindowListeners } from './setupWindowListeners'
 
 import { setupSettingsListener } from './settingsListener'
 
-// We make react available so the plugins can use it without having to bundle it
-window.React = React
-
 // Set theme from config
 changeTheme(config.get('theme'))
 
