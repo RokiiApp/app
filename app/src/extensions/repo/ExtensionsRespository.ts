@@ -2,10 +2,13 @@ import { TypedEventTarget } from 'typescript-event-target'
 
 import { initExtension } from '@/services/plugins/initializeExtensions'
 import { ensureRokiNeededFiles } from '@/services/plugins'
-import { setupPluginsWatcher } from '@/services/plugins/externalPluginsWatcher'
+import { extensionsWatcher } from '@/services/plugins/watcher/ExtensionsWatcher'
+
 import { ExtensionsRepoEventTypes, ExtensionLoadedEvent, ExtensionRemovedEvent } from './Events'
 import { Extension } from '../Extension'
 import { getCoreExtensions, getExternalExtensions } from '@/services/plugins/getters'
+import { ExtensionsWatcherEventTypes } from '@/services/plugins/watcher/WatcherEvents'
+import { requireExtension } from '@/services/plugins/requireExtension'
 
 export interface RepositoryEvents {
   [ExtensionsRepoEventTypes.LOADED]: ExtensionLoadedEvent
@@ -20,24 +23,43 @@ export interface RepositoryEvents {
 class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
   private extensions: Record<string, Extension> = {}
 
-  async init () {
+  async init() {
     await ensureRokiNeededFiles()
     await this.initializePlugins()
-    await setupPluginsWatcher()
+    await this.initializeExtensionsWatcher()
   }
 
-  async initializePlugins () {
+  async initializeExtensionsWatcher() {
+    extensionsWatcher.addEventListener(ExtensionsWatcherEventTypes.ADDED, async (event) => {
+      const { name } = event.detail
+
+      const extension = await requireExtension(name)
+      if (extension === null) return
+
+      this.add(extension)
+    })
+
+    extensionsWatcher.addEventListener(ExtensionsWatcherEventTypes.REMOVED, (event) => {
+      const { name } = event.detail
+
+      this.delete(name)
+    })
+
+    await extensionsWatcher.watch()
+  }
+
+  async initializePlugins() {
     // Load the core plugins (the ones that come with rokii)
     getCoreExtensions().then((coreExtensions) => {
       for (const extension of coreExtensions) {
-        this.loadExtension(extension)
+        this.add(extension)
       }
     })
 
     // Load the external plugins (the ones that are installed by the user)
     getExternalExtensions().then((externalExtensions) => {
       for (const extension of externalExtensions) {
-        this.loadExtension(extension)
+        this.add(extension)
       }
     })
   }
@@ -45,25 +67,25 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
   /**
    * Method used to add a new extension to the repository
    */
-  async add (ext: Extension) {
+  async add(ext: Extension) {
     await this.loadExtension(ext)
   }
 
-  get (name: string) {
+  get(name: string) {
     return this.extensions[name]
   }
 
-  delete (name: string) {
+  delete(name: string) {
     delete this.extensions[name]
 
     this.dispatchTypedEvent(ExtensionsRepoEventTypes.REMOVED, new ExtensionRemovedEvent(name))
   }
 
-  getAll () {
+  getAll() {
     return this.extensions
   }
 
-  private async loadExtension (extension: Extension) {
+  private async loadExtension(extension: Extension) {
     await initExtension(extension, extension.name)
 
     this.extensions[extension.name] = extension
