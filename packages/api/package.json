@@ -4,6 +4,7 @@
   "type": "module",
   "description": "Utils and Types for Rokii Plugin Developers",
   "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
