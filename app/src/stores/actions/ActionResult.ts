@@ -1,3 +1,4 @@
+import defaultIcon from "@/extensions/core/icon.png"
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
 import { AppItem, Item, ItemTypes, ScriptItem } from '@rokii/api'
@@ -27,9 +28,18 @@ export class Result {
   readonly id: string
 
   constructor(action: Item, extensionName: string) {
+    let calculatedIcon = ""
+
+    // We support null icon to avoid showing the default icon
+    if (action.icon === null) {
+      calculatedIcon = ""
+    } else {
+      calculatedIcon = action.icon ?? defaultIcon
+    }
+
     this.title = action.title
     this.subtitle = action.subtitle || ''
-    this.icon = action.icon || ''
+    this.icon = calculatedIcon
     this.extension = extensionName
     this.autocomplete = action.autocomplete || action.title
     this.id = action.id || crypto.randomUUID()

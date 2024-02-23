@@ -1,11 +1,11 @@
-import type { PluginModule } from '@rokii/api'
+import type { ExtensionModule } from '@rokii/api'
 import { client } from '@/services/plugins'
 import { getPlugins } from './utils/loadPlugins'
 
 /**
  * Check plugins for updates and start plugins autoupdater
  */
-async function updateInstalledPlugins () {
+async function updateInstalledPlugins() {
   console.log('Run plugins autoupdate')
   const plugins = await getPlugins()
 
@@ -25,6 +25,8 @@ async function updateInstalledPlugins () {
   setTimeout(updateInstalledPlugins, 12 * 60 * 60 * 1000)
 }
 
-export const initializeAsync: PluginModule['initializeAsync'] = async () => {
+export const initializeAsync: ExtensionModule['initializeAsync'] = async (send) => {
   updateInstalledPlugins()
+  const plugins = await getPlugins()
+  send(plugins)
 }

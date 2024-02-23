@@ -19,7 +19,6 @@ export const useRunApp = (input: string) => {
   const appRunner = useMemo(() => extension.getApp(app), [app])
 
   const context = useMemo(() => {
-    console.log('Creating context')
     return new ExtensionContextProvider(extensionName).get(input)
   }, [input])
 
@@ -27,6 +26,10 @@ export const useRunApp = (input: string) => {
     removeAllResults()
     if (appRunner) {
       appRunner(context)
+    }
+
+    return () => {
+      removeAllResults()
     }
   }, [input])
 
