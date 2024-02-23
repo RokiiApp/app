@@ -1,13 +1,13 @@
 import type { ExtensionModule } from '@rokii/api'
 import { client } from '@/services/plugins'
 import { getPlugins } from './utils/loadPlugins'
+import { PluginInfo } from './types'
 
 /**
  * Check plugins for updates and start plugins autoupdater
  */
-async function updateInstalledPlugins() {
+async function updateInstalledPlugins(plugins: PluginInfo[]) {
   console.log('Run plugins autoupdate')
-  const plugins = await getPlugins()
 
   const updatePromises = plugins
     .filter((p) => p.isUpdateAvailable)
@@ -26,7 +26,7 @@ async function updateInstalledPlugins() {
 }
 
 export const initializeAsync: ExtensionModule['initializeAsync'] = async (send) => {
-  updateInstalledPlugins()
   const plugins = await getPlugins()
+  updateInstalledPlugins(plugins)
   send(plugins)
 }
