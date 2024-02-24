@@ -12,7 +12,16 @@ import { ItemTypes } from "."
  * - Run an App. See {@link AppItem}
  */
 export class Item {
+  /**
+   * An unique identifier for the result in your extension scope (other extensions can have the same id)
+   * Used to update or remove the action from the store
+   * If not provided, the title will be used.
+   */
   readonly id: string
+  /**
+   * The title of the result
+   * Must be unique if you don't provide an id
+   */
   title: string
   subtitle: string
   readonly type: ItemTypes = ItemTypes.INFO
@@ -21,7 +30,7 @@ export class Item {
   icon?: string
 
   constructor(action: ItemParams) {
-    this.id = action.id || crypto.randomUUID()
+    this.id = action.id || action.title
     this.title = action.title
     this.subtitle = action.subtitle || ''
     this.keyword = action.keyword || []
