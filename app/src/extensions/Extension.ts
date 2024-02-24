@@ -34,6 +34,7 @@ export class Extension {
   }
 
   private isValidExtension(module: any): module is Extension {
+    if (!module) return false
     const hasIcon = typeof module.icon === 'string'
     const hasName = typeof module.name === 'string'
     const hasRunFunction = typeof module.run === 'function'

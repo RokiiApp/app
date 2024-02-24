@@ -36,7 +36,8 @@ export class ExtensionContextProvider {
       },
       update: (id, action) => {
         const actionsStore = useActionsStore.getState()
-        actionsStore.updateAction(id, action)
+        const fullId = `${this.extensionName}-${id}`
+        actionsStore.updateAction(fullId, action)
       },
       actions: {
         reveal: async (path) => {

@@ -1,17 +1,11 @@
 import { client } from "@/services/plugins";
-import { ScriptItem } from "@rokii/api";
+import { InfoItem, Item, ScriptItem } from "@rokii/api";
 import * as format from '../utils/format';
 import { PluginInfo } from "../types";
 
-export const pluginToResult = (plugin: PluginInfo | string): ScriptItem => {
+export const pluginToResult = (plugin: PluginInfo | string): Item => {
     if (typeof plugin === 'string') {
-        return new ScriptItem({
-            title: plugin,
-            id: plugin,
-            run: () => {
-                client.installPackage(plugin)
-            }
-        })
+        return new InfoItem({ title: plugin, id: plugin })
     };
 
     const title = `${format.name(plugin.name)}`;

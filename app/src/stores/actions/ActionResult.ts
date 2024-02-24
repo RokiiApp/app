@@ -25,7 +25,12 @@ export class Result {
   subtitle: string
   icon: string
   autocomplete: string
-  readonly id: string
+  /**
+   * The id of a result is unique for all the results in the app
+   * It's used to update or remove the action from the store
+   * The id schema is `${extensionName}-${actionId}`
+   */
+  readonly id: `${string}-${string}`
 
   constructor(action: Item, extensionName: string) {
     let calculatedIcon = ""
@@ -42,10 +47,9 @@ export class Result {
     this.icon = calculatedIcon
     this.extension = extensionName
     this.autocomplete = action.autocomplete || action.title
-    this.id = action.id || crypto.randomUUID()
+    this.id = `${extensionName}-${action.id}`
   }
 
-  // TODO: Check this because the script method might not be available when updated
   update(newAction: Item) {
     this.title = newAction.title
     this.subtitle = newAction.subtitle || ''
