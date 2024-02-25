@@ -1,10 +1,11 @@
 import { invoke } from '@tauri-apps/api'
-import * as config from '@/common/config'
 import { send } from '@/common/ipc'
 import { CHANNELS } from '@/common/constants/events'
+import { useRokiiSettingsStore } from '@/stores/rokii-settings'
 
 export const toggleWindow = () => {
-  if (config.get('cleanOnHide')) {
+  const { settings } = useRokiiSettingsStore.getState()
+  if (settings.cleanOnHide) {
     send(CHANNELS.ClearInput)
   }
   invoke('toggle_window_visibility')
