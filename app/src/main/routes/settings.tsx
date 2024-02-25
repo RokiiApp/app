@@ -1,6 +1,5 @@
 import { memo, useState } from 'react'
 import SettingsComponent from '../components/Settings'
-import * as config from '@/common/config'
 import { BackButton } from '../components/BackButton'
 
 const SECTIONS = ["General", "Extensions", "About"]
@@ -29,11 +28,7 @@ const Settings = () => {
             </nav>
 
             <section className='overflow-hidden text-wrap col-span-3 border-l border-black'>
-                <SettingsComponent
-                    get={config.get}
-                    // @ts-ignore
-                    set={config.set}
-                />
+                <SettingsComponent />
             </section>
         </div>
     </div>

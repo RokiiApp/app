@@ -1,31 +1,15 @@
-import type { SettingsHandler, SettingsSchema } from '@rokii/api'
-
-import { useState } from 'react'
 import { FormComponents } from '@rokii/ui'
 import { THEMES } from '@/common/themes'
 
 import Hotkey from './Hotkey'
 import styles from './styles.module.css'
+import { useRokiiSettingsStore } from '@/stores/rokii-settings'
 
 const { Select, Checkbox, Wrapper } = FormComponents
 
-function Settings({ get, set }: SettingsHandler) {
-  const [state, setState] = useState(() => ({
-    hotkey: get('hotkey'),
-    country: get('country'),
-    theme: get('theme'),
-    developerMode: get('developerMode'),
-    cleanOnHide: get('cleanOnHide'),
-    hideOnBlur: get('hideOnBlur'),
-    selectOnShow: get('selectOnShow'),
-    pluginsSettings: get('plugins'),
-    openAtLogin: get('openAtLogin')
-  }))
-
-  const changeConfig = <T extends keyof SettingsSchema>(key: T, value: SettingsSchema[T]) => {
-    set(key, value)
-    setState((prevState) => ({ ...prevState, [key]: value }))
-  }
+function Settings() {
+  const state = useRokiiSettingsStore((s) => s.settings)
+  const set = useRokiiSettingsStore((s) => s.set)
 
   return (
     <div className={styles.settings}>
@@ -35,39 +19,39 @@ function Settings({ get, set }: SettingsHandler) {
       >
         <Hotkey
           hotkey={state.hotkey}
-          onChange={(key) => changeConfig('hotkey', key)}
+          onChange={(key) => set('hotkey', key)}
         />
       </Wrapper>
       <Select
         label='Theme'
         value={THEMES.find((t) => t.value === state.theme)}
         options={THEMES}
-        onChange={(newValue) => (newValue != null) && changeConfig('theme', newValue.value)}
+        onChange={(newValue) => (newValue != null) && set('theme', newValue.value)}
       />
       <Checkbox
         label='Open at login'
         value={state.openAtLogin}
-        onChange={(value: boolean) => changeConfig('openAtLogin', value)}
+        onChange={(value: boolean) => set('openAtLogin', value)}
       />
       <Checkbox
         label='Developer Mode'
         value={state.developerMode}
-        onChange={(value: boolean) => changeConfig('developerMode', value)}
+        onChange={(value: boolean) => set('developerMode', value)}
       />
       <Checkbox
         label='Hide window on blur'
         value={state.hideOnBlur}
-        onChange={(value: boolean) => changeConfig('hideOnBlur', value)}
+        onChange={(value: boolean) => set('hideOnBlur', value)}
       />
       <Checkbox
         label='Clean results on hide'
         value={state.cleanOnHide}
-        onChange={(value: boolean) => changeConfig('cleanOnHide', value)}
+        onChange={(value: boolean) => set('cleanOnHide', value)}
       />
       <Checkbox
         label='Select input on show'
         value={state.selectOnShow}
-        onChange={(value: boolean) => changeConfig('selectOnShow', value)}
+        onChange={(value: boolean) => set('selectOnShow', value)}
       />
     </div>
   )

@@ -2,7 +2,7 @@ import { useRokiiSettingsStore } from "@/stores/rokii-settings"
 import { useEffect } from "react"
 import { changeTheme } from "../utils/changeTheme"
 import { AutoStart } from "@/services/AutoStart"
-import { invoke } from "@tauri-apps/api"
+import { globalShortcut, invoke } from "@tauri-apps/api"
 import { registerToggleShortcut } from "@/services/registerToggleShortcut"
 
 export const useRokiiSettings = () => {
@@ -16,7 +16,12 @@ export const useRokiiSettings = () => {
 
     useEffect(() => {
         registerToggleShortcut(prevHotkey, hotkey)
-    }, [hotkey])
+
+        return () => {
+            // Unregister all shortcuts to avoid conflicts
+            globalShortcut.unregisterAll()
+        }
+    }, [hotkey, prevHotkey])
 
     useEffect(() => {
         changeTheme(theme)
