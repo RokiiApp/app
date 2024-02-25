@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.8](https://github.com/RokiiApp/app/compare/rokii-v1.0.7...rokii-v1.0.8) (2024-02-25)
+
+
+### Bug Fixes
+
+* **core-extensions:** avoid double renders on plugins ([1aadd3a](https://github.com/RokiiApp/app/commit/1aadd3a8c3001101998b09322e10ca2dba76f5a5))
+* restore api missing methods ([e6d231f](https://github.com/RokiiApp/app/commit/e6d231f3ce5e4c63cc5eb5c8efe60af9e9abbc7b))
+* update app icon ([5ced58e](https://github.com/RokiiApp/app/commit/5ced58e8ac0b6798cdffa63a2a2d957d26d1c785))
+
 ## [1.0.7](https://github.com/RokiiApp/app/compare/rokii-v1.0.6...rokii-v1.0.7) (2024-02-19)
 
 
