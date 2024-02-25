@@ -2,14 +2,8 @@ import { blurListener } from './windowListeners'
 import { TauriEvent } from '@tauri-apps/api/event'
 import { on } from '@/common/ipc'
 import * as config from '@/common/config'
-import { globalShortcut } from '@tauri-apps/api'
-import { toggleWindow } from '@/services/toggleWindow'
 
 export const setupWindowListeners = () => {
-  globalShortcut.unregisterAll().then(() => {
-    globalShortcut.register(config.get('hotkey'), toggleWindow)
-  })
-
   on(TauriEvent.WINDOW_BLUR, blurListener)
 
   window.addEventListener('keydown', (e) => {

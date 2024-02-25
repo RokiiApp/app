@@ -3,6 +3,7 @@ import { Router, Route } from 'wouter'
 import { useHashLocation } from 'wouter/use-hash-location'
 
 import { useExtensionsRepository } from '@/main/hooks/useExtensionsRepository'
+import { useRokiiSettings } from '@/main/hooks/useRokiiSettings'
 import { Home } from '@/main/routes/home'
 import { ExtensionApp } from '@/main/routes/app'
 import { Settings } from '@/main/routes/settings'
@@ -11,6 +12,7 @@ import { Settings } from '@/main/routes/settings'
  * The Rokii app entry point
  */
 const Rokii = () => {
+    useRokiiSettings()
     useExtensionsRepository()
 
     return (
