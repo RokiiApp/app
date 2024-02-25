@@ -60,11 +60,10 @@ const ResultsList = ({ items }: { items: Result[] }) => {
   requestAutocomplete(selectedResult.autocomplete)
 
   return (
-    <div className={styles.wrapper}>
+    <div data-tauri-drag-region className={styles.resultsContainer}>
       <Virtuoso
         tabIndex={-1}
         ref={listRef}
-        className={styles.resultsList}
         overscan={5}
         height={VISIBLE_RESULTS * RESULT_HEIGHT}
         fixedItemHeight={RESULT_HEIGHT}

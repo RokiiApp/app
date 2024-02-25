@@ -1,6 +1,10 @@
 @import "system-font.css";
 @import url("normalize.css/normalize.css");
 
+* {
+    scrollbar-width: none;
+}
+
 body {
     background-color: transparent;
     height: 99vh;

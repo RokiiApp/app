@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client'
 import * as config from '@/common/config'
 import { changeTheme } from './utils/changeTheme'
 
-import { Rokii } from './components/Rokii'
+import { Rokii } from './Rokii'
 import './globals.css'
 import { setupWindowListeners } from './setupWindowListeners'
 
