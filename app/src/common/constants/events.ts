@@ -9,7 +9,6 @@ export const CHANNELS = {
   RendererToRenderer: 'renderer-to-renderer',
   FocusInput: 'focus-input',
   FocusPreview: 'focus-preview',
-  StatusBarUpdate: 'status-bar-update',
   InitializePluginAsync: 'initialize-plugin-async'
 } as const
 
@@ -31,7 +30,6 @@ export interface ChannelInterfaces {
   }
   [CHANNELS.FocusInput]: undefined
   [CHANNELS.FocusPreview]: undefined
-  [CHANNELS.StatusBarUpdate]: StatusBarState
   [CHANNELS.InitializePluginAsync]: {
     name: string
   }
@@ -45,11 +43,3 @@ export type ChannelInterfacesWithNeccesaryArgs = {
   [K in keyof ChannelInterfaces]: ChannelInterfaces[K] extends undefined ? never : K;
 }[keyof ChannelInterfaces]
 
-export interface StatusBarState {
-  statusBarText: string
-  icon: 'success' | 'error' | 'info' | 'loading' | null
-  /**
-     * The time that the status bar should be visible.
-     */
-  timeout: number | null
-}
