@@ -1,21 +1,25 @@
-import type { PluginModule } from '@rokii/api'
+import { ScriptItem, type ExtensionModule } from '@rokii/api'
+import { navigate } from 'wouter/use-hash-location'
+import icon from '../icon.png'
 
-import Settings from './Settings'
-
-export { default as icon } from '../icon.png'
-export const name = 'RoKii Settings'
-export const keywords = ['RoKii Preferences', 'cfg', 'config', 'params']
+const navigationItem = new ScriptItem({
+  title: 'Open Settings',
+  icon,
+  run: (e) => {
+    // Avoid hidint the rokii window
+    e.preventDefault()
+    navigate('/settings')
+  },
+  keyword: ['RoKii Preferences', 'cfg', 'config', 'params']
+})
 
 /**
- * Plugin to show app settings in results list
+ * Extension to show settings option in results list
  */
-export const fn: PluginModule['fn'] = ({ display, config }) => {
-  const getPreview = () => (
-    <Settings
-      set={(key, value) => config.set(key, value)}
-      get={(key) => config.get(key)}
-    />
-  )
-
-  display({ order: 9, title: name, getPreview })
+const SettingsExtension: ExtensionModule = {
+  icon,
+  name: 'RoKii Settings',
+  run: ({ display }) => display([navigationItem])
 }
+
+export default SettingsExtension

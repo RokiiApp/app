@@ -4,15 +4,16 @@ import { memo } from 'react'
 import { Autocomplete } from './Autocomplete'
 import { SearchBar } from './SearchBar'
 import { useHashLocation } from 'wouter/use-hash-location'
+import { BackButton } from '../BackButton'
 
 const InputBox = () => {
-  const [location, setLocation] = useHashLocation()
+  const [location] = useHashLocation()
 
   const isRoot = location === '/'
 
   return (
     <div data-tauri-drag-region className={styles.inputWrapper}>
-      {!isRoot && <input type='image' src='./back-icon.svg' className={styles.backButton} onClick={() => setLocation('/')} />}
+      {!isRoot && <BackButton backLocation='/' />}
 
       <div className={styles.inputArea}>
         <Autocomplete />
