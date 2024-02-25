@@ -1,22 +1,16 @@
 import { SettingsSchema } from '@rokii/api'
 
 export const CHANNELS = {
-  UpdateDownloaded: 'update-downloaded',
-  UpdateTheme: 'update-theme',
   ClearInput: 'clear-input',
   UpdateSettings: 'update-settings',
   ShowTerm: 'show-term',
-  RendererToRenderer: 'renderer-to-renderer',
   FocusInput: 'focus-input',
-  FocusPreview: 'focus-preview',
-  InitializePluginAsync: 'initialize-plugin-async'
+  FocusPreview: 'focus-preview'
 } as const
 
 export type FocusableChannel = typeof CHANNELS.FocusInput | typeof CHANNELS.FocusPreview
 
 export interface ChannelInterfaces {
-  [CHANNELS.UpdateDownloaded]: undefined
-  [CHANNELS.UpdateTheme]: string
   [CHANNELS.ClearInput]: undefined
   [CHANNELS.UpdateSettings]: {
     settingName: keyof SettingsSchema
@@ -24,15 +18,8 @@ export interface ChannelInterfaces {
     oldValue: any
   }
   [CHANNELS.ShowTerm]: string
-  [CHANNELS.RendererToRenderer]: {
-    message: string
-    payload: any
-  }
   [CHANNELS.FocusInput]: undefined
   [CHANNELS.FocusPreview]: undefined
-  [CHANNELS.InitializePluginAsync]: {
-    name: string
-  }
 }
 
 export type ChannelInterfacesWithoutNeccesaryArgs = {
