@@ -1,6 +1,5 @@
 import { TypedEventTarget } from 'typescript-event-target'
 
-import { initExtension } from '@/services/plugins/initializeExtensions'
 import { ensureRokiNeededFiles } from '@/services/plugins'
 import { extensionsWatcher } from '@/services/plugins/watcher/ExtensionsWatcher'
 
@@ -120,8 +119,6 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
   }
 
   private async loadExtension(extension: Extension) {
-    await initExtension(extension, extension.name)
-
     this.extensions[extension.name] = extension
 
     this.dispatchTypedEvent(ExtensionsRepoEventTypes.LOADED, new ExtensionLoadedEvent(extension.name))

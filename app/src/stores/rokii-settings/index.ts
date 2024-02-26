@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 import { RokiiSettingsSchema } from './RokiiSettingsSchema'
 import { defaultSettings } from './defaultSettings'
 
-export interface RokiiSettings {
+export interface RokiiSettingsStore {
     /**
      * Store all settings
      */
@@ -19,7 +19,7 @@ export interface RokiiSettings {
     set: <T extends keyof RokiiSettingsSchema>(settingName: T, value: RokiiSettingsSchema[T]) => void
 }
 
-export const useRokiiSettingsStore = create<RokiiSettings>()(
+export const useRokiiSettingsStore = create<RokiiSettingsStore>()(
     persist(
         (setStore, getStore) => ({
             settings: defaultSettings,
