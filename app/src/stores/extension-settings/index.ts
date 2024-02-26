@@ -1,29 +1,26 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-type ExtensionName = string
-type SettingId = string
 /**
  * Here we don't care about the type of each extension setting
  * We just want to store the settings by extension name and setting id
  */
-type ExtensionSettings = Record<SettingId, any>
-type AllSettings = Record<ExtensionName, ExtensionSettings>
+export type SavedExtensionSettings = Record<string, any>
 
 export interface ExtensionSettingsStore {
     /**
      * Store all settings
      */
-    settings: AllSettings
+    settings: Record<string, SavedExtensionSettings>
     /**
      * Get all settings for a specific extension
      */
-    getExtensionSettings: (extensionName: string) => ExtensionSettings
+    getExtensionSettings: (extensionName: string) => SavedExtensionSettings
     /**
      * Set a setting by id
      */
-    set: (extensionName: ExtensionName, extensionSettings: ExtensionSettings) => void
-    removeAll: (extensionName: ExtensionName) => void
+    set: (extensionName: string, extensionSettings: SavedExtensionSettings) => void
+    removeAll: (extensionName: string) => void
 }
 
 export const useExtensionsSettings = create<ExtensionSettingsStore>()(

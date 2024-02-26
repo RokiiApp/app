@@ -1,17 +1,24 @@
-import { ExtensionContext } from '@rokii/api'
+import { ExtensionModule } from '@rokii/api'
 
-type RunFn = (context: ExtensionContext) => Promise<void>
-type ExtensionSettings = Record<string, Setting>
-
-export class Extension {
-  icon: string
-  name: string
-  run: RunFn
-  settings?: ExtensionSettings
-  private initialize?: (settings: ExtensionSettings) => void
-  private initializeAsync?: (callback: any, settings: ExtensionSettings) => Promise<void>
-  private onMessage?: (data: unknown) => void
-  apps?: Record<string, RunFn>
+/**
+ * The native Extension class extends the ExtensionModule interface and provides a class-based implementation of the interface.
+ * This is used as a bridge between the extension module and the Rokii application.
+ * 
+ * We use this class to ensure that the extension module is valid and to provide a
+ * consistent interface for the Rokii application to interact with the extension.
+ * 
+ * The class also provides a method to initialize the extension with the user settings.
+ * 
+ */
+export class Extension implements ExtensionModule {
+  icon;
+  name;
+  run;
+  settings;
+  initialize;
+  initializeAsync;
+  onMessage;
+  apps;
 
   constructor(module: any) {
     // TODO - check if the module is a valid extension (use ZOD?)
@@ -30,7 +37,7 @@ export class Extension {
     this.apps = module.apps
   }
 
-  getApp(name: string): RunFn | undefined {
+  getApp(name: string) {
     return this.apps?.[name]
   }
 
@@ -64,7 +71,7 @@ export class Extension {
     return userSettings
   }
 
-  private isValidExtension(module: any): module is Extension {
+  private isValidExtension(module: any): module is ExtensionModule {
     if (!module) return false
     const hasIcon = typeof module.icon === 'string'
     const hasName = typeof module.name === 'string'
@@ -89,26 +96,3 @@ export class Extension {
     return userSettings
   }
 }
-
-type BaseSetting = {
-  id: string
-  label: string
-  description?: string
-}
-
-type BooleanSetting = {
-  type: 'boolean'
-  defaultValue: boolean
-} & BaseSetting
-
-type StringSetting = {
-  type: 'string'
-  defaultValue: string
-} & BaseSetting
-
-type NumberSetting = {
-  type: 'number'
-  defaultValue: number
-} & BaseSetting
-
-export type Setting = BooleanSetting | StringSetting | NumberSetting
