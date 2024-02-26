@@ -1,5 +1,3 @@
-import styles from './styles.module.css'
-
 const isASCII = (str: string) => /^[\p{ASCII}]+$/u.test(str)
 
 const getHotkey = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -36,14 +34,16 @@ interface HotkeyProps {
   onChange: (newHotkey: string) => void
 }
 
-function Hotkey ({ hotkey, onChange }: HotkeyProps) {
+function Hotkey({ hotkey, onChange }: HotkeyProps) {
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const newHotkey = getHotkey(event)
     if (!newHotkey) return
     onChange(newHotkey)
   }
 
-  return <input readOnly className={styles.input} value={hotkey} onKeyDown={onKeyDown} />
+  return <input
+    className="text-base leading-8 px-2 w-full rounded border border-[var(--border-color)]"
+    readOnly value={hotkey} onKeyDown={onKeyDown} />
 }
 
 export default Hotkey

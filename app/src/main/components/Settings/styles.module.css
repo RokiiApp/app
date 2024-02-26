@@ -34,13 +34,3 @@
 .header {
   font-weight: bold;
 }
-
-.input {
-  font-size: 16px;
-  line-height: 34px;
-  padding: 0 10px;
-  box-sizing: border-box;
-  width: 100%;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-}

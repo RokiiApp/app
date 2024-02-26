@@ -11,7 +11,7 @@ const Settings = () => {
 
     const sections = [GeneralSectionName, ...Object.keys(settings)]
 
-    return <div className='py-2 px-4 h-full grid grid-rows-11 gap-2' data-tauri-drag-region>
+    return <div className='px-2 py-1 h-full grid grid-rows-11 gap-2' data-tauri-drag-region>
         <header className='flex items-center gap-2 row-span-1'>
             <BackButton backLocation='/' />
             <h1 className='text-xl font-bold'>Settings</h1>
