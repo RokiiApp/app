@@ -52,5 +52,5 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 5px;
-  justify-content: start;
+  justify-content: flex-start;
 }
