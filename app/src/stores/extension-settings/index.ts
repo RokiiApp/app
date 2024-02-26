@@ -39,6 +39,13 @@ export const useExtensionsSettings = create<ExtensionSettingsStore>()(
 
             set: (extension, extensionSettings) => {
                 setStore(({ settings }) => {
+                    const settingsAreEmpty = Object.keys(extensionSettings).length === 0
+                    if (settingsAreEmpty) {
+                        const newSettings = { ...settings }
+                        delete newSettings[extension]
+                        return { settings: newSettings }
+                    }
+
                     const oldExtensionSettings = settings[extension] || {}
                     const newSettings = { ...oldExtensionSettings, ...extensionSettings }
                     return { settings: { ...settings, [extension]: newSettings } }

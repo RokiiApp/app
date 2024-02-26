@@ -34,7 +34,7 @@ export class Extension {
     return this.apps?.[name]
   }
 
-  init(savedSettings: Record<string, any>) {
+  init(savedSettings: Record<string, any> = {}) {
     const userSettings = this.consolidateSettings(savedSettings)
     // Foreground plugin initialization
     if (this.initialize) {
