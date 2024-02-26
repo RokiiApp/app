@@ -2,6 +2,7 @@ import type { ExtensionContext } from '@rokii/api'
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
 import { useActionsStore } from '@/stores/actions'
+import { useExtensionsSettings } from '@/stores/extension-settings'
 import { writeText } from '@tauri-apps/api/clipboard'
 import { appWindow } from '@tauri-apps/api/window'
 import { open } from '@tauri-apps/api/shell'
@@ -55,7 +56,8 @@ export class ExtensionContextProvider {
         replaceTerm: async (term) => {
           send(CHANNELS.ShowTerm, term)
         }
-      }
+      },
+      settings: useExtensionsSettings.getState().getExtensionSettings(this.extensionName)
     }
 
     return context
