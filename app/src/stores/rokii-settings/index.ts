@@ -21,7 +21,7 @@ export interface RokiiSettings {
 
 export const useRokiiSettingsStore = create<RokiiSettings>()(
     persist(
-        (set, getStore) => ({
+        (setStore, getStore) => ({
             settings: defaultSettings,
             prevHotkey: defaultSettings.hotkey,
             get: (settingName) => {
@@ -29,13 +29,14 @@ export const useRokiiSettingsStore = create<RokiiSettings>()(
                 return settings[settingName]
             },
             set: (settingName, value) => {
-                const settings = getStore().settings
-                let prevHotkey = settings.hotkey
-                settings[settingName] = value
+                const oldSettings = getStore().settings
+                let prevHotkey = oldSettings.hotkey
+
+                const settings = { ...oldSettings, [settingName]: value }
 
                 settingName === 'hotkey'
-                    ? set(() => ({ settings, prevHotkey }))
-                    : set(() => ({ settings }))
+                    ? setStore(({ settings, prevHotkey }))
+                    : setStore(({ settings }))
             }
         }),
 
