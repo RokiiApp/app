@@ -1,5 +1,5 @@
-import type { ExtensionContext } from "./ExtensionContext"
-
+import type { Setting } from ".."
+import type { ExtensionContext } from ".."
 export interface ExtensionModule {
     icon: string
     /**
@@ -17,7 +17,7 @@ export interface ExtensionModule {
      * 
      * This is a WIP, and will be used to provide the extension with settings from the user.
      */
-    settings?: any
+    settings?: Record<string, Setting>
     /**
      * A function that will be called when the extension is initialized.
      * It will be called synchronously, before the extension is executed.
