@@ -71,9 +71,6 @@ importers:
       memoizee:
         specifier: 0.4.15
         version: 0.4.15
-      normalize.css:
-        specifier: 8.0.1
-        version: 8.0.1
       pako:
         specifier: 2.1.0
         version: 2.1.0
@@ -104,9 +101,6 @@ importers:
       tauri-plugin-fs-watch-api:
         specifier: github:tauri-apps/tauri-plugin-fs-watch#v1
         version: github.com/tauri-apps/tauri-plugin-fs-watch/f74123edf269381171c5ef40a9599c3e87bb096a
-      tauri-settings:
-        specifier: 0.3.4
-        version: 0.3.4
       typescript-event-target:
         specifier: 1.1.0
         version: 1.1.0
@@ -4053,10 +4047,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /normalize.css@8.0.1:
-    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
-    dev: false
-
   /object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
@@ -5114,10 +5104,6 @@ packages:
     transitivePeerDependencies:
       - ts-node
     dev: true
-
-  /tauri-settings@0.3.4:
-    resolution: {integrity: sha512-ToFF+TFsCS4yp1Gijmb0dR+vlV4AK69itvNVDf+gTCw1eopjgOAU+AmjVbKxS3WQgCIdEF1QV03MFGdyL/lE/A==}
-    dev: false
 
   /term-size@2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
