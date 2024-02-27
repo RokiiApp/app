@@ -1,8 +1,5 @@
-import { SettingsSchema } from '@rokii/api'
-
 export const CHANNELS = {
   ClearInput: 'clear-input',
-  UpdateSettings: 'update-settings',
   ShowTerm: 'show-term',
   FocusInput: 'focus-input',
   FocusPreview: 'focus-preview'
@@ -12,11 +9,6 @@ export type FocusableChannel = typeof CHANNELS.FocusInput | typeof CHANNELS.Focu
 
 export interface ChannelInterfaces {
   [CHANNELS.ClearInput]: undefined
-  [CHANNELS.UpdateSettings]: {
-    settingName: keyof SettingsSchema
-    newValue: any
-    oldValue: any
-  }
   [CHANNELS.ShowTerm]: string
   [CHANNELS.FocusInput]: undefined
   [CHANNELS.FocusPreview]: undefined

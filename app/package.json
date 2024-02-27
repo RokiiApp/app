@@ -20,7 +20,6 @@
     "js-untar": "2.0.0",
     "just-debounce": "1.1.0",
     "memoizee": "0.4.15",
-    "normalize.css": "8.0.1",
     "pako": "2.1.0",
     "react": "*",
     "react-dom": "*",
@@ -31,7 +30,6 @@
     "tauri-plugin-autostart-api": "github:tauri-apps/tauri-plugin-autostart#v1",
     "tauri-plugin-fs-extra-api": "github:tauri-apps/tauri-plugin-fs-extra#v1",
     "tauri-plugin-fs-watch-api": "github:tauri-apps/tauri-plugin-fs-watch#v1",
-    "tauri-settings": "0.3.4",
     "typescript-event-target": "1.1.0",
     "wouter": "3.0.0",
     "zustand": "4.5.1"

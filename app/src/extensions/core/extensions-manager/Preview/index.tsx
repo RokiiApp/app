@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { KeyboardNav, KeyboardNavItem } from '@rokii/ui'
 import { ActionButton } from './ActionButton'
 import { Description } from './Description'
-import { Settings } from './Settings'
 
 import { client } from '@/services/plugins/index'
 import styles from './styles.module.css'
@@ -63,8 +62,6 @@ export const Preview = ({ onComplete, plugin }: PreviewProps) => {
               <>Settings</>
             </KeyboardNavItem>
           )}
-
-          {showSettings && <Settings name={name} settings={settings} />}
 
           {!isInstalled && !isDebugging && (
             <ActionButton
