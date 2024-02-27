@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.0](https://github.com/RokiiApp/app/compare/api-v0.2.0...api-v0.3.0) (2024-02-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove old plugins api
+
+### Features
+
+* add extensions Settings api ([0c9a7ea](https://github.com/RokiiApp/app/commit/0c9a7ea797c0decd592f4b2371c16678e8d01847))
+
+
+### Miscellaneous Chores
+
+* remove old plugins api ([3e797ca](https://github.com/RokiiApp/app/commit/3e797cab34e8248273eef4abef6fb4a86f044b51))
+
 ## [0.2.0](https://github.com/RokiiApp/app/compare/api-v0.1.7...api-v0.2.0) (2024-02-25)
 
 

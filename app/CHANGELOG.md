@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.9](https://github.com/RokiiApp/app/compare/rokii-v1.0.8...rokii-v1.0.9) (2024-02-27)
+
+
+### Bug Fixes
+
+* improve support for extension settings ([6f478a1](https://github.com/RokiiApp/app/commit/6f478a1005df79ae8708a7ade1c99f24f9929bc3))
+* problems mutating state ([f2ad1f1](https://github.com/RokiiApp/app/commit/f2ad1f1cc48b47cd21e39e7538d2c3ae3bb4865c))
+* unify RokiiLayout styles ([512976b](https://github.com/RokiiApp/app/commit/512976b571d4aed8245d7fee467a89548ecf19c8))
+
 ## [1.0.8](https://github.com/RokiiApp/app/compare/rokii-v1.0.7...rokii-v1.0.8) (2024-02-25)
 
 
