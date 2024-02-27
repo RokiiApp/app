@@ -1,17 +1,11 @@
 {
     "packages": {
         "app": {},
-        "packages/ui": {
-            "prerelease": true
-        },
+        "packages/ui": {},
         "packages/api": {
-            "prerelease": true
+            "bump-minor-pre-major": true
         },
-        "packages/build": {
-            "prerelease": true
-        },
-        "packages/utils": {
-            "prerelease": true
-        }
+        "packages/build": {},
+        "packages/utils": {}
     }
 }
