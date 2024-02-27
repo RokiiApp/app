@@ -80,9 +80,6 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
-      react-error-boundary:
-        specifier: 4.0.12
-        version: 4.0.12(react@18.2.0)
       react-markdown:
         specifier: 9.0.1
         version: 9.0.1(@types/react@18.2.58)(react@18.2.0)
@@ -4442,15 +4439,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-
-  /react-error-boundary@4.0.12(react@18.2.0):
-    resolution: {integrity: sha512-kJdxdEYlb7CPC1A0SeUY38cHpjuu6UkvzKiAmqmOFL21VRfMhOcWxTCBgLVCO0VEMh9JhFNcVaXlV4/BTpiwOA==}
-    peerDependencies:
-      react: 18.2.0
-    dependencies:
-      '@babel/runtime': 7.23.9
-      react: 18.2.0
-    dev: false
 
   /react-fontawesome@1.7.1(react@18.2.0):
     resolution: {integrity: sha512-kottReWW1I9Uupub6A5YX4VK7qfpFnEjAcm5zB4Aepst7iofONT27GJYdTcRsj7q5uQu9PXBL7GsxAFKANNUVg==}

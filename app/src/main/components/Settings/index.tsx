@@ -4,8 +4,9 @@ import { THEMES } from '@/common/themes'
 import Hotkey from './Hotkey'
 import styles from './styles.module.css'
 import { useRokiiSettingsStore } from '@/stores/rokii-settings'
+import { SettingItem } from './SettingItem'
 
-const { Select, Checkbox, Wrapper } = FormComponents
+const { Select, Checkbox } = FormComponents
 
 function Settings() {
   const state = useRokiiSettingsStore((s) => s.settings)
@@ -13,15 +14,21 @@ function Settings() {
 
   return (
     <div className={styles.settings}>
-      <Wrapper
-        label='Hotkey'
-        description='Type your global shortcut for Rokii in this input'
-      >
-        <Hotkey
-          hotkey={state.hotkey}
-          onChange={(key) => set('hotkey', key)}
-        />
-      </Wrapper>
+      <SettingItem
+        setting={{
+          label: 'Hotkey',
+          description: 'Type your global shortcut for Rokii in this input',
+          id: 'hotkey',
+          type: 'string',
+          defaultValue: 'Ctrl+Space'
+        }}
+
+        CustomComponent={() =>
+          <Hotkey hotkey={state.hotkey}
+            onChange={(key) => set('hotkey', key)}
+          />}
+      />
+
       <Select
         label='Theme'
         value={THEMES.find((t) => t.value === state.theme)}
