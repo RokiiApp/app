@@ -12,7 +12,7 @@ const InputBox = () => {
   const isRoot = location === '/'
 
   return (
-    <div data-tauri-drag-region className={styles.inputWrapper}>
+    <div className='flex items-center gap-2 h-full'>
       {!isRoot && <BackButton backLocation='/' />}
 
       <div className={styles.inputArea}>

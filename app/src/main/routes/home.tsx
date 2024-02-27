@@ -5,6 +5,7 @@ import { useRunExtensions } from '@/main/hooks/useRunPlugins'
 import { ResultsList } from '../components/ResultsList'
 import { InputBox } from '../components/InputBox'
 import { useInputStore } from '@/stores/input'
+import { RokiiLayout } from '../components/RokiiLayout'
 
 const Home = () => {
   const term = useInputStore((state) => state.term)
@@ -12,11 +13,10 @@ const Home = () => {
 
   const results = useActionsStore((s) => s.actions)
 
-  return <>
-    <InputBox />
-    <ResultsList items={results} />
-  </>
-
+  return <RokiiLayout
+    TopBar={<InputBox />}
+    ContentContainer={<ResultsList items={results} />}
+  />
 }
 
 const memoizedHome = memo(Home)

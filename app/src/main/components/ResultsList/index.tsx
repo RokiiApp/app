@@ -1,7 +1,6 @@
 import type { Result } from '@/stores/actions/ActionResult'
 import { memo, useEffect } from 'react'
 import { Virtuoso } from 'react-virtuoso'
-import styles from './styles.module.css'
 
 import { RESULT_HEIGHT, VISIBLE_RESULTS } from '@/common/constants/ui'
 import Row from './Row'
@@ -60,20 +59,18 @@ const ResultsList = ({ items }: { items: Result[] }) => {
   requestAutocomplete(selectedResult.autocomplete)
 
   return (
-    <div data-tauri-drag-region className={styles.resultsContainer}>
-      <Virtuoso
-        tabIndex={-1}
-        ref={listRef}
-        overscan={5}
-        height={VISIBLE_RESULTS * RESULT_HEIGHT}
-        fixedItemHeight={RESULT_HEIGHT}
-        totalCount={items.length}
-        itemContent={(index) => {
-          const result = items[index]
-          return <Row result={result} isSelected={selectedIndex === index} />
-        }}
-      />
-    </div>
+    <Virtuoso
+      tabIndex={-1}
+      ref={listRef}
+      overscan={5}
+      height={VISIBLE_RESULTS * RESULT_HEIGHT}
+      fixedItemHeight={RESULT_HEIGHT}
+      totalCount={items.length}
+      itemContent={(index) => {
+        const result = items[index]
+        return <Row result={result} isSelected={selectedIndex === index} />
+      }}
+    />
   )
 }
 

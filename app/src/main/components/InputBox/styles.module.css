@@ -1,12 +1,3 @@
-.inputWrapper {
-    padding: 0 10px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    max-width: 100%;
-    height: 8%;
-}
-
 .inputArea {
     z-index: 2;
     position: relative;
@@ -24,14 +15,6 @@
     border: 0.5px;
     border: 0;
     object-position: -1.5px 0px;
-}
-
-.backButton:hover,
-.backButton:focus {
-    outline: none;
-    background-color: var(--accent-color);
-    opacity: 0.8;
-
 }
 
 .autocomplete {
