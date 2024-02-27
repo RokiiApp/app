@@ -10,10 +10,14 @@
             ]
         },
         "package:test": {},
-        "package:type-check": {},
-        "app:type-check": {
+        "package:type-check": {
             "dependsOn": [
                 "^package:build"
+            ]
+        },
+        "app:type-check": {
+            "dependsOn": [
+                "package:type-check"
             ]
         },
         "app:build": {
