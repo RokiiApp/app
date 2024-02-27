@@ -2,18 +2,18 @@ import { FormComponents } from '@rokii/ui'
 import { THEMES } from '@/common/themes'
 
 import Hotkey from './Hotkey'
-import styles from './styles.module.css'
 import { useRokiiSettingsStore } from '@/stores/rokii-settings'
 import { SettingItem } from './SettingItem'
+import { SettingCheckbox } from './SettingChecbox'
 
-const { Select, Checkbox } = FormComponents
+const { Select } = FormComponents
 
 function Settings() {
   const state = useRokiiSettingsStore((s) => s.settings)
   const set = useRokiiSettingsStore((s) => s.set)
 
   return (
-    <div className={styles.settings}>
+    <div className="overflow-y-auto h-full px-2 flex flex-col gap-3">
       <SettingItem
         setting={{
           label: 'Hotkey',
@@ -35,31 +35,28 @@ function Settings() {
         options={THEMES}
         onChange={(newValue) => (newValue != null) && set('theme', newValue.value)}
       />
-      <Checkbox
+
+      <SettingCheckbox
         label='Open at login'
         value={state.openAtLogin}
         onChange={(value: boolean) => set('openAtLogin', value)}
       />
-      <Checkbox
-        label='Developer Mode'
+      <SettingCheckbox
+        label='Developer mode'
         value={state.developerMode}
-        onChange={(value: boolean) => set('developerMode', value)}
+        onChange={(value) => set('developerMode', value)}
       />
-      <Checkbox
+      <SettingCheckbox
         label='Hide window on blur'
         value={state.hideOnBlur}
-        onChange={(value: boolean) => set('hideOnBlur', value)}
+        onChange={(value) => set('hideOnBlur', value)}
       />
-      <Checkbox
+      <SettingCheckbox
         label='Clean results on hide'
         value={state.cleanOnHide}
         onChange={(value: boolean) => set('cleanOnHide', value)}
       />
-      <Checkbox
-        label='Select input on show'
-        value={state.selectOnShow}
-        onChange={(value: boolean) => set('selectOnShow', value)}
-      />
+
     </div>
   )
 }

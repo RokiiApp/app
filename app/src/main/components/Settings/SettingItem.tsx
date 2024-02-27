@@ -1,4 +1,5 @@
-import { Setting, SettingType } from "@rokii/api"
+import { Setting } from "@rokii/api"
+import { Checkbox } from "@/main/components/ui/checkbox"
 
 type SettingItemProps = {
     setting: Setting
@@ -9,10 +10,10 @@ const InputComponent = ({ value, onChange }: { value: string, onChange: (value: 
     return <input type="text" value={value} onChange={(e) => onChange(e.target.value)} />
 }
 
-const Components: Record<SettingType, (...args: any) => JSX.Element> = {
+const Components = {
     string: InputComponent,
     number: InputComponent,
-    boolean: InputComponent
+    boolean: Checkbox
 }
 
 export const SettingItem = ({ setting, CustomComponent }: SettingItemProps) => {

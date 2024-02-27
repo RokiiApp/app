@@ -45,7 +45,7 @@ type SettingsContainerProps = {
 }
 
 const SettingsContainer = ({ selectedSection, sections, setSection }: SettingsContainerProps) => {
-    return <div className='grid grid-cols-4 gap-2'>
+    return <div className='h-full grid grid-cols-4 gap-2'>
         <nav className="col-span-1">
             <ul className="list-none flex flex-col gap-2">
                 {sections.map((item) => (
@@ -58,7 +58,7 @@ const SettingsContainer = ({ selectedSection, sections, setSection }: SettingsCo
             </ul>
         </nav>
 
-        <section className='overflow-hidden text-wrap col-span-3 border-l border-black'>
+        <section className='overflow-auto h-full text-wrap col-span-3 border-l border-black'>
             {
                 selectedSection === GeneralSectionName
                     ? <SettingsComponent />
