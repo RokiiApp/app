@@ -2,28 +2,53 @@ import { Setting } from "@rokii/api"
 import { Checkbox } from "@/main/components/ui/checkbox"
 
 type SettingItemProps = {
-    setting: Setting
-    CustomComponent?: (...args: any) => JSX.Element
+    setting: Omit<Setting, "defaultValue">
+    value: any
+    onChange: (value: any) => void
 }
 
-const InputComponent = ({ value, onChange }: { value: string, onChange: (value: string) => void }) => {
-    return <input type="text" value={value} onChange={(e) => onChange(e.target.value)} />
+type InputComponentProps<T> = {
+    id: string
+    value: T
+    onChange: (value: T) => void
 }
 
-const Components = {
-    string: InputComponent,
-    number: InputComponent,
-    boolean: Checkbox
+function InputComponent<T>({ id, value, onChange }: InputComponentProps<T>) {
+    if (typeof value === "string") {
+        return <input id={id} type="text" value={value} onChange={(e) => onChange(e.target.value as T)} />
+    }
+
+    if (typeof value === "number") {
+        return <input id={id} type="number" value={value} onChange={(e) => onChange(+e.target.value as T)} />
+    }
+
+    if (typeof value === "boolean") {
+        return <Checkbox id={id} onCheckedChange={(checked) => onChange(checked as T)} checked={value as boolean} />
+    }
+
+    return null
 }
 
-export const SettingItem = ({ setting, CustomComponent }: SettingItemProps) => {
-    const { type } = setting
-    const Component = CustomComponent || Components[type]
+export const SettingItem = ({ value, setting, onChange }: SettingItemProps) => {
+    const { label, id, description } = setting
+
     return (
-        <div className="flex flex-col gap-1">
-            <h2 className="text-xl font-bold">{setting.label}</h2>
-            <Component />
-            <span className="font-light text-sm">{setting.description}</span>
+        <div className="items-top flex space-x-2">
+            <InputComponent id={id} onChange={onChange} value={value} />
+            <div className="grid gap-1.5 leading-none">
+                <label
+                    htmlFor={id}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                    {label}
+                </label>
+                {
+                    description &&
+                    <p className="text-sm text-muted-foreground">
+                        {description}
+                    </p>
+                }
+            </div>
         </div>
     )
 

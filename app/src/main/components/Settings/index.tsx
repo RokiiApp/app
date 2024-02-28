@@ -4,7 +4,6 @@ import { THEMES } from '@/common/themes'
 import Hotkey from './Hotkey'
 import { useRokiiSettingsStore } from '@/stores/rokii-settings'
 import { SettingItem } from './SettingItem'
-import { SettingCheckbox } from './SettingChecbox'
 
 const { Select } = FormComponents
 
@@ -14,19 +13,9 @@ function Settings() {
 
   return (
     <div className="overflow-y-auto h-full px-2 flex flex-col gap-3">
-      <SettingItem
-        setting={{
-          label: 'Hotkey',
-          description: 'Type your global shortcut for Rokii in this input',
-          id: 'hotkey',
-          type: 'string',
-          defaultValue: 'Ctrl+Space'
-        }}
 
-        CustomComponent={() =>
-          <Hotkey hotkey={state.hotkey}
-            onChange={(key) => set('hotkey', key)}
-          />}
+      <Hotkey hotkey={state.hotkey}
+        onChange={(key) => set('hotkey', key)}
       />
 
       <Select
@@ -36,23 +25,43 @@ function Settings() {
         onChange={(newValue) => (newValue != null) && set('theme', newValue.value)}
       />
 
-      <SettingCheckbox
-        label='Open at login'
+      <SettingItem
+        setting={{
+          type: "boolean",
+          id: "openAtLogin",
+          label: "Open at login",
+          description: "Start Rokii when you log in to your computer.",
+        }}
         value={state.openAtLogin}
         onChange={(value: boolean) => set('openAtLogin', value)}
       />
-      <SettingCheckbox
-        label='Developer mode'
+
+      <SettingItem
+        setting={{
+          type: "boolean",
+          id: "developerMode",
+          label: "Developer mode",
+        }}
         value={state.developerMode}
-        onChange={(value) => set('developerMode', value)}
+        onChange={(value: boolean) => set('developerMode', value)}
       />
-      <SettingCheckbox
-        label='Hide window on blur'
+
+      <SettingItem
+        setting={{
+          type: "boolean",
+          id: "hideOnBlur",
+          label: "Hide window on blur",
+        }}
         value={state.hideOnBlur}
-        onChange={(value) => set('hideOnBlur', value)}
+        onChange={(value: boolean) => set('hideOnBlur', value)}
       />
-      <SettingCheckbox
-        label='Clean results on hide'
+
+      <SettingItem
+        setting={{
+          type: "boolean",
+          id: "cleanOnHide",
+          label: "Clean results on hide",
+        }}
         value={state.cleanOnHide}
         onChange={(value: boolean) => set('cleanOnHide', value)}
       />
