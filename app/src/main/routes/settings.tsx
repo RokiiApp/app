@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import ExtensionSettings from '../components/Settings'
+import ExtensionSettings from '../components/Settings/ExtensionSettings'
 import { BackButton } from '../components/BackButton'
 import { RokiiLayout } from '../components/RokiiLayout'
 import { useSettingsStore } from '@/stores/settings'

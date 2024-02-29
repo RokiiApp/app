@@ -1,5 +1,7 @@
-import { Checkbox } from "@/main/components/ui/checkbox"
 import { StoredSetting } from "@/stores/settings"
+import StringInput from "./input-components/StringInput"
+import NumberInput from "./input-components/NumberInput"
+import BooleanInput from "./input-components/BooleanInput"
 
 type SettingItemProps<T = any> = {
     setting: StoredSetting<T>
@@ -14,15 +16,15 @@ type InputComponentProps<T = any> = {
 
 function InputComponent({ id, value, onChange }: InputComponentProps) {
     if (typeof value === "string") {
-        return <input id={id} type="text" value={value} onChange={(e) => onChange(e.target.value)} />
+        return <StringInput id={id} value={value} onChange={onChange} />
     }
 
     if (typeof value === "number") {
-        return <input id={id} type="number" value={value} onChange={(e) => onChange(+e.target.value)} />
+        return <NumberInput id={id} value={value} onChange={onChange} />
     }
 
     if (typeof value === "boolean") {
-        return <Checkbox id={id} onCheckedChange={onChange} checked={value} />
+        return <BooleanInput id={id} value={value} onChange={onChange} />
     }
 
     return null
