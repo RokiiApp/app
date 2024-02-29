@@ -11,11 +11,6 @@ const onMessage: ExtensionModule['onMessage'] = async (message) => {
   plugins = message as PluginInfo[]
 }
 
-const managerLauncherAction = new AppItem({ title: 'Manage plugins', appName: 'Manager', icon })
-export const fn: ExtensionModule['run'] = async ({ display }) => {
-  display([managerLauncherAction])
-}
-
 const ExtensionsManagerApp: ExtensionModule["run"] = async ({ display }) => {
   const categorizeResult = categorizePlugins(plugins);
 
@@ -24,14 +19,17 @@ const ExtensionsManagerApp: ExtensionModule["run"] = async ({ display }) => {
   display(orderedPlugins)
 }
 
+const extensionAppName = "Manager"
+const managerLauncherAction = new AppItem({ title: 'Manage extensions', appName: extensionAppName, icon })
+
 const ExtensionsManagerExtension: ExtensionModule = {
-  name: 'Extensions Manager',
+  name: 'Extensions',
   icon,
   initializeAsync,
-  run: fn,
+  run: ({ display }) => display([managerLauncherAction]),
   onMessage,
   apps: {
-    Manager: ExtensionsManagerApp
+    [extensionAppName]: ExtensionsManagerApp
   }
 }
 
