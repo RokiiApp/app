@@ -3,13 +3,15 @@ import { useActionsStore } from '@/stores/actions'
 import { ExtensionLoadedEvent, ExtensionsRepoEventTypes, ExtensionRemovedEvent } from '@/extensions/repo/Events'
 import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 import { ExtensionContextProvider } from '@/services/plugins/ContextProvider'
-import { useExtensionsSettings } from '@/stores/extension-settings'
+import { useSettingsStore } from '@/stores/settings'
 
 // TODO: Suscribe to unload plugin event to remove plugin from state
 export const useRunExtensions = (term: string) => {
   const removeAllActions = useActionsStore(s => s.removeAllActions)
   const removeActionsFromExtension = useActionsStore(s => s.removeActionsFromExtension)
-  const [addSettings, removeSettings, getExtensionSettings] = useExtensionsSettings(s => [s.set, s.removeAll, s.getExtensionSettings])
+  const updateExtensionSettings = useSettingsStore(s => s.addSettings)
+  const getExtensionSettings = useSettingsStore(s => s.getAllFromExtension)
+  const removeSettings = useSettingsStore(s => s.deleteAllFromExtension)
 
   const onExtensionAdded = ({ detail }: ExtensionLoadedEvent) => {
     const { name } = detail
@@ -23,7 +25,7 @@ export const useRunExtensions = (term: string) => {
 
     try {
       const extensionSettings = extension.init(savedSettings)
-      addSettings(extension.name, extensionSettings)
+      updateExtensionSettings(extension.name, extensionSettings)
     } catch (error) {
       // Do not fail on plugin errors, just log them to console
       console.log('Error initializing plugin', name, error)

@@ -3,7 +3,7 @@ import { Router, Route } from 'wouter'
 import { useHashLocation } from 'wouter/use-hash-location'
 
 import { useExtensionsRepository } from '@/main/hooks/useExtensionsRepository'
-import { useRokiiSettings } from '@/main/hooks/useRokiiSettings'
+import { useGlobalSettings } from '@/main/hooks/useGlobalSettings'
 import { Home } from '@/main/routes/home'
 import { ExtensionApp } from '@/main/routes/app'
 import { Settings } from '@/main/routes/settings'
@@ -12,11 +12,11 @@ import { Settings } from '@/main/routes/settings'
  * The Rokii app entry point
  */
 const Rokii = () => {
-    useRokiiSettings()
+    useGlobalSettings()
     useExtensionsRepository()
 
     return (
-        <div style={{ height: "100%", width: "100%", display: "flex", flexDirection: "column" }}>
+        <div className='h-full w-full flex flex-col'>
             <Router hook={useHashLocation}>
                 <Route path='/' component={Home} />
                 <Route path='/settings' component={Settings} />

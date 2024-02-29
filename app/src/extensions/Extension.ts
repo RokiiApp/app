@@ -1,3 +1,4 @@
+import { StoredExtensionSettings } from '@/stores/settings';
 import { ExtensionModule } from '@rokii/api'
 
 /**
@@ -41,7 +42,7 @@ export class Extension implements ExtensionModule {
     return this.apps?.[name]
   }
 
-  init(savedSettings: Record<string, any> = {}) {
+  init(savedSettings: StoredExtensionSettings = {}): StoredExtensionSettings {
     const userSettings = this.consolidateSettings(savedSettings)
     // Foreground plugin initialization
     if (this.initialize) {
@@ -81,16 +82,19 @@ export class Extension implements ExtensionModule {
 
   /**
    * This function merges the saved settings with the default settings.
+   * Must return an entire object with all the settings, including the ones that are not saved.
+   * This is to ensure that the settings are always consistent and up to date.
    */
-  private consolidateSettings(savedSettings: Record<string, any>) {
-    if (!this.settings) return {}
+  private consolidateSettings(savedSettings: StoredExtensionSettings): StoredExtensionSettings {
+    const userSettings: StoredExtensionSettings = {}
 
-    const userSettings: Record<string, any> = {}
+    if (!this.settings) return userSettings;
 
     // TODO - Use zod to validate the settings
     for (const settingInfo of Object.values(this.settings)) {
-      const { id, defaultValue } = settingInfo
-      userSettings[id] = savedSettings[id] || defaultValue
+      const { id, defaultValue, description, label } = settingInfo
+
+      userSettings[id] = savedSettings[id] || { id, value: defaultValue, description, label }
     }
 
     return userSettings

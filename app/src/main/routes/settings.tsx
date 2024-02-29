@@ -1,13 +1,14 @@
 import { memo, useState } from 'react'
-import SettingsComponent from '../components/Settings'
+import ExtensionSettings from '../components/Settings'
 import { BackButton } from '../components/BackButton'
-import { useExtensionsSettings } from '@/stores/extension-settings'
 import { RokiiLayout } from '../components/RokiiLayout'
+import { useSettingsStore } from '@/stores/settings'
+import GeneralSettings from '../components/Settings/GeneralSettings'
 
 const GeneralSectionName = "General"
 
 const Settings = () => {
-    const settings = useExtensionsSettings(state => state.settings)
+    const settings = useSettingsStore(state => state.settings)
     const [section, setSection] = useState<string>(GeneralSectionName)
 
     const sections = [GeneralSectionName, ...Object.keys(settings)]
@@ -44,7 +45,7 @@ type SettingsContainerProps = {
     setSection: any
 }
 
-const SettingsContainer = ({ selectedSection, sections, setSection }: SettingsContainerProps) => {
+const SettingsContainer = ({ sections, setSection, selectedSection }: SettingsContainerProps) => {
     return <div className='h-full grid grid-cols-4 gap-2'>
         <nav className="col-span-1">
             <ul className="list-none flex flex-col gap-2">
@@ -61,8 +62,8 @@ const SettingsContainer = ({ selectedSection, sections, setSection }: SettingsCo
         <section className='overflow-auto h-full text-wrap col-span-3 border-l border-black'>
             {
                 selectedSection === GeneralSectionName
-                    ? <SettingsComponent />
-                    : <h1>{selectedSection}</h1>
+                    ? <GeneralSettings />
+                    : <ExtensionSettings extensionName={selectedSection} />
             }
         </section>
     </div>

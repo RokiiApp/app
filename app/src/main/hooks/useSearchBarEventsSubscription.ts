@@ -8,7 +8,7 @@ import { useRokiiSettingsStore } from '@/stores/rokii-settings'
 
 export const useSearchBarEventsSubscription = (mainInput: React.RefObject<HTMLInputElement>) => {
   const updateTerm = useInputStore(s => s.updateTerm)
-  const selectOnShow = useRokiiSettingsStore(s => s.settings.selectOnShow)
+  const selectOnShow = useRokiiSettingsStore(s => s.selectOnShow)
 
   const onDocumentKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -19,7 +19,7 @@ export const useSearchBarEventsSubscription = (mainInput: React.RefObject<HTMLIn
   const handleShowEvent = () => {
     send(CHANNELS.FocusInput)
 
-    if (selectOnShow) {
+    if (selectOnShow.value) {
       mainInput.current?.select()
     }
   }

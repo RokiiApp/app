@@ -4,8 +4,8 @@ import { CHANNELS } from '@/common/constants/events'
 import { useRokiiSettingsStore } from '@/stores/rokii-settings'
 
 export const toggleWindow = () => {
-  const { settings } = useRokiiSettingsStore.getState()
-  if (settings.cleanOnHide) {
+  const cleanOnHide = useRokiiSettingsStore.getState().cleanOnHide
+  if (cleanOnHide.value) {
     send(CHANNELS.ClearInput)
   }
   invoke('toggle_window_visibility')

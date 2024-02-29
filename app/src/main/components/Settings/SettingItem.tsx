@@ -1,36 +1,35 @@
-import { Setting } from "@rokii/api"
 import { Checkbox } from "@/main/components/ui/checkbox"
+import { StoredSetting } from "@/stores/settings"
 
-type SettingItemProps = {
-    setting: Omit<Setting, "defaultValue">
-    value: any
-    onChange: (value: any) => void
+type SettingItemProps<T = any> = {
+    setting: StoredSetting<T>
+    onChange: (value: T) => void
 }
 
-type InputComponentProps<T> = {
+type InputComponentProps<T = any> = {
     id: string
     value: T
     onChange: (value: T) => void
 }
 
-function InputComponent<T>({ id, value, onChange }: InputComponentProps<T>) {
+function InputComponent({ id, value, onChange }: InputComponentProps) {
     if (typeof value === "string") {
-        return <input id={id} type="text" value={value} onChange={(e) => onChange(e.target.value as T)} />
+        return <input id={id} type="text" value={value} onChange={(e) => onChange(e.target.value)} />
     }
 
     if (typeof value === "number") {
-        return <input id={id} type="number" value={value} onChange={(e) => onChange(+e.target.value as T)} />
+        return <input id={id} type="number" value={value} onChange={(e) => onChange(+e.target.value)} />
     }
 
     if (typeof value === "boolean") {
-        return <Checkbox id={id} onCheckedChange={(checked) => onChange(checked as T)} checked={value as boolean} />
+        return <Checkbox id={id} onCheckedChange={onChange} checked={value} />
     }
 
     return null
 }
 
-export const SettingItem = ({ value, setting, onChange }: SettingItemProps) => {
-    const { label, id, description } = setting
+export const SettingItem = ({ setting, onChange }: SettingItemProps) => {
+    const { label, id, description, value } = setting
 
     return (
         <div className="items-top flex space-x-2">

@@ -6,7 +6,7 @@ const navigationItem = new ScriptItem({
   title: 'Open Settings',
   icon,
   run: (e) => {
-    // Avoid hidint the rokii window
+    // Avoid hiding the rokii window
     e.preventDefault()
     navigate('/settings')
   },
@@ -18,7 +18,7 @@ const navigationItem = new ScriptItem({
  */
 const SettingsExtension: ExtensionModule = {
   icon,
-  name: 'RoKii Settings',
+  name: 'Rokii Settings',
   run: ({ display }) => display([navigationItem])
 }
 

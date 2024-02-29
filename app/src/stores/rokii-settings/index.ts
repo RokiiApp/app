@@ -3,40 +3,28 @@ import { persist } from 'zustand/middleware'
 import { RokiiSettingsSchema } from './RokiiSettingsSchema'
 import { defaultSettings } from './defaultSettings'
 
-export interface RokiiSettingsStore {
-    /**
-     * Store all settings
-     */
-    settings: RokiiSettingsSchema
+export interface RokiiSettingsStore extends RokiiSettingsSchema {
+    getAllSettings: () => RokiiSettingsSchema
 
-    /**
-     * We store the prevouis hotkey to unregister it when the hotkey changes
-     */
-    prevHotkey: string
+    getSetting: <T extends keyof RokiiSettingsSchema>(settingName: T) => RokiiSettingsSchema[T]
 
-    get: <T extends keyof RokiiSettingsSchema>(settingName: T) => RokiiSettingsSchema[T]
-
-    set: <T extends keyof RokiiSettingsSchema>(settingName: T, value: RokiiSettingsSchema[T]) => void
+    setSetting: <T extends keyof RokiiSettingsSchema>(settingName: T, value: RokiiSettingsSchema[T]) => void
 }
 
 export const useRokiiSettingsStore = create<RokiiSettingsStore>()(
     persist(
         (setStore, getStore) => ({
-            settings: defaultSettings,
-            prevHotkey: defaultSettings.hotkey,
-            get: (settingName) => {
-                const settings = getStore().settings
-                return settings[settingName]
+            ...defaultSettings,
+            getAllSettings: () => {
+                const { getSetting, getAllSettings, setSetting, ...settings } = getStore()
+                return settings
             },
-            set: (settingName, value) => {
-                const oldSettings = getStore().settings
-                let prevHotkey = oldSettings.hotkey
-
-                const settings = { ...oldSettings, [settingName]: value }
-
-                settingName === 'hotkey'
-                    ? setStore(({ settings, prevHotkey }))
-                    : setStore(({ settings }))
+            getSetting: (settingName) => {
+                const setting = getStore()[settingName]
+                return setting
+            },
+            setSetting: (settingName, value) => {
+                setStore(({ [settingName]: value }))
             }
         }),
 

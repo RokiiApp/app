@@ -1,15 +1,15 @@
 import { on } from "@/common/ipc"
-import { useRokiiSettingsStore } from "@/stores/rokii-settings"
 import { TauriEvent } from "@tauri-apps/api/event"
 import { useEffect } from "react"
 import { blurListener } from '../windowListeners'
+import { useRokiiSettingsStore } from "@/stores/rokii-settings"
 
 export const useWindowListeners = () => {
-    const developerMode = useRokiiSettingsStore((state) => state.settings.developerMode)
+    const developerMode = useRokiiSettingsStore(s => s.developerMode)
 
     useEffect(() => {
         const unlistenPromise = on(TauriEvent.WINDOW_BLUR, blurListener)
-        const onKeyDown = onKeyDownListener(developerMode)
+        const onKeyDown = onKeyDownListener(developerMode.value)
         window.addEventListener('keydown', onKeyDown)
 
         return () => {

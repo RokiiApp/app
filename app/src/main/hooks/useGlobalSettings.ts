@@ -1,30 +1,28 @@
-import { useRokiiSettingsStore } from "@/stores/rokii-settings"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { changeTheme } from "../utils/changeTheme"
 import { AutoStart } from "@/services/AutoStart"
 import { globalShortcut, invoke } from "@tauri-apps/api"
 import { registerToggleShortcut } from "@/services/registerToggleShortcut"
+import { useRokiiSettingsStore } from "@/stores/rokii-settings"
 
-export const useRokiiSettings = () => {
-    const {
-        developerMode,
-        hotkey,
-        openAtLogin,
-        theme
-    } = useRokiiSettingsStore(s => s.settings)
-    const prevHotkey = useRokiiSettingsStore(s => s.prevHotkey)
+export const useGlobalSettings = () => {
+    const [prevHotkey, setPrevHotkey] = useState("")
+    const settings = useRokiiSettingsStore(s => s.getAllSettings())
+
+    const { developerMode, hotkey, openAtLogin, theme } = settings
 
     useEffect(() => {
-        registerToggleShortcut(prevHotkey, hotkey)
+        registerToggleShortcut(prevHotkey, hotkey.value)
+        setPrevHotkey(hotkey.value)
 
         return () => {
             // Unregister all shortcuts to avoid conflicts
             globalShortcut.unregisterAll()
         }
-    }, [hotkey, prevHotkey])
+    }, [hotkey])
 
     useEffect(() => {
-        changeTheme(theme)
+        changeTheme(theme.value)
     }, [theme])
 
     useEffect(() => {
@@ -32,7 +30,6 @@ export const useRokiiSettings = () => {
     }, [developerMode])
 
     useEffect(() => {
-        AutoStart.set(openAtLogin)
+        AutoStart.set(openAtLogin.value)
     }, [openAtLogin])
-
 }
