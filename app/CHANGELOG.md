@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/RokiiApp/app/compare/rokii-v1.0.9...rokii-v1.1.0) (2024-02-29)
+
+
+### Features
+
+* add support for extensions settings ([6b696d0](https://github.com/RokiiApp/app/commit/6b696d0c33fbabff6e34894828bf5e5e9e910ba4))
+
 ## [1.0.9](https://github.com/RokiiApp/app/compare/rokii-v1.0.8...rokii-v1.0.9) (2024-02-27)
 
 
