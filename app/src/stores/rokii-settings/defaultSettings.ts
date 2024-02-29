@@ -2,11 +2,10 @@ import { THEMES } from '@/common/themes'
 import { RokiiSettingsSchema } from './RokiiSettingsSchema'
 
 const defaultSettings: RokiiSettingsSchema = {
-    developerMode: {
-        id: "rokii.developerMode",
-        label: "Developer mode",
-        description: "Enable developer mode",
-        value: false
+    hotkey: {
+        id: "rokii.hotkey",
+        label: "Hotkey",
+        value: "Control+Space"
     },
     theme: {
         id: "rokii.theme",
@@ -14,10 +13,11 @@ const defaultSettings: RokiiSettingsSchema = {
         value: THEMES[0].value,
         options: THEMES
     },
-    hotkey: {
-        id: "rokii.hotkey",
-        label: "Hotkey",
-        value: "Control+Space"
+    developerMode: {
+        id: "rokii.developerMode",
+        label: "Developer mode",
+        description: "Enable developer mode",
+        value: false
     },
     cleanOnHide: {
         id: "rokii.cleanOnHide",
