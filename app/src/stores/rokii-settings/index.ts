@@ -11,7 +11,7 @@ export interface RokiiSettingsStore extends RokiiSettingsSchema {
     setSetting: <T extends keyof RokiiSettingsSchema>(settingName: T, value: RokiiSettingsSchema[T]) => void
 }
 
-export const useRokiiSettingsStore = create<RokiiSettingsStore>()(
+export const useRokiiSettings = create<RokiiSettingsStore>()(
     persist(
         (setStore, getStore) => ({
             ...defaultSettings,

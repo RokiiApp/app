@@ -4,11 +4,11 @@ import { TauriEvent } from '@tauri-apps/api/event'
 import { CHANNELS } from '@/common/constants/events'
 
 import { useEffect } from 'react'
-import { useRokiiSettingsStore } from '@/stores/rokii-settings'
+import { useRokiiSettings } from '@/stores/rokii-settings'
 
 export const useSearchBarEventsSubscription = (mainInput: React.RefObject<HTMLInputElement>) => {
   const updateTerm = useInputStore(s => s.updateTerm)
-  const selectOnShow = useRokiiSettingsStore(s => s.selectOnShow)
+  const selectOnShow = useRokiiSettings(s => s.selectOnShow)
 
   const onDocumentKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {

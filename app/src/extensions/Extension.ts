@@ -1,4 +1,4 @@
-import { StoredExtensionSettings } from '@/stores/settings';
+import { StoredExtensionSettings } from '@/stores/extension-settings';
 import { ExtensionModule } from '@rokii/api'
 
 /**

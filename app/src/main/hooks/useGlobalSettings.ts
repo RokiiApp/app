@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { changeTheme } from "../utils/changeTheme"
 import { AutoStart } from "@/services/AutoStart"
 import { globalShortcut, invoke } from "@tauri-apps/api"
 import { registerToggleShortcut } from "@/services/registerToggleShortcut"
-import { useRokiiSettingsStore } from "@/stores/rokii-settings"
+import { useRokiiSettings } from "@/stores/rokii-settings"
 
 export const useGlobalSettings = () => {
     const [prevHotkey, setPrevHotkey] = useState("")
-    const settings = useRokiiSettingsStore(s => s.getAllSettings())
+    const settings = useRokiiSettings(s => s.getAllSettings())
 
     const { developerMode, hotkey, openAtLogin, theme } = settings
 

@@ -3,15 +3,15 @@ import { useActionsStore } from '@/stores/actions'
 import { ExtensionLoadedEvent, ExtensionsRepoEventTypes, ExtensionRemovedEvent } from '@/extensions/repo/Events'
 import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 import { ExtensionContextProvider } from '@/services/plugins/ContextProvider'
-import { useSettingsStore } from '@/stores/settings'
+import { useExtensionSettings } from '@/stores/extension-settings'
 
 // TODO: Suscribe to unload plugin event to remove plugin from state
 export const useRunExtensions = (term: string) => {
   const removeAllActions = useActionsStore(s => s.removeAllActions)
   const removeActionsFromExtension = useActionsStore(s => s.removeActionsFromExtension)
-  const updateExtensionSettings = useSettingsStore(s => s.addSettings)
-  const getExtensionSettings = useSettingsStore(s => s.getAllFromExtension)
-  const removeSettings = useSettingsStore(s => s.deleteAllFromExtension)
+  const updateExtensionSettings = useExtensionSettings(s => s.addSettings)
+  const getExtensionSettings = useExtensionSettings(s => s.getAllFromExtension)
+  const removeSettings = useExtensionSettings(s => s.deleteAllFromExtension)
 
   const onExtensionAdded = ({ detail }: ExtensionLoadedEvent) => {
     const { name } = detail

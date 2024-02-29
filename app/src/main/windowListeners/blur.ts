@@ -1,11 +1,11 @@
 import { appWindow } from '@tauri-apps/api/window'
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
-import { useRokiiSettingsStore } from '@/stores/rokii-settings'
+import { useRokiiSettings } from '@/stores/rokii-settings'
 
 export const blurListener = () => {
-  const hideOnBlur = useRokiiSettingsStore.getState().hideOnBlur
-  const cleanOnHide = useRokiiSettingsStore.getState().cleanOnHide
+  const hideOnBlur = useRokiiSettings.getState().hideOnBlur
+  const cleanOnHide = useRokiiSettings.getState().cleanOnHide
   if (hideOnBlur.value) {
     appWindow.hide()
 

@@ -2,7 +2,7 @@ import { FormComponents } from '@rokii/ui'
 import { THEMES } from '@/common/themes'
 import Hotkey from './input-components/Hotkey'
 import { SettingItem } from './SettingItem'
-import { useRokiiSettingsStore } from '@/stores/rokii-settings'
+import { useRokiiSettings } from '@/stores/rokii-settings'
 
 const { Select } = FormComponents
 
@@ -11,7 +11,7 @@ function isRokiiSetting<T extends string>(settingName: string, settings: Record<
 }
 
 function GeneralSettings() {
-    const [setSetting, generalSettings] = useRokiiSettingsStore(s => [s.setSetting, s.getAllSettings()])
+    const [setSetting, generalSettings] = useRokiiSettings(s => [s.setSetting, s.getAllSettings()])
 
     return (
         <div className="overflow-y-auto h-full px-2 flex flex-col gap-3">
