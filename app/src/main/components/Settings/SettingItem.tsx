@@ -9,14 +9,14 @@ type SettingItemProps<T = any> = {
 }
 
 export const SettingItem = ({ setting, onChange, CustomComponent }: SettingItemProps) => {
-    const { label, id, description, value } = setting
+    const { label, id, description, value, options } = setting
 
     return (
         <div className="items-top flex space-x-2">
             {
                 CustomComponent
                     ? <CustomComponent id={id} value={value} onChange={onChange} />
-                    : <InputComponentFabric id={id} value={value} onChange={onChange} />
+                    : <InputComponentFabric id={id} value={value} onChange={onChange} options={options} />
             }
             <div className="grid gap-1.5 leading-none">
                 <label

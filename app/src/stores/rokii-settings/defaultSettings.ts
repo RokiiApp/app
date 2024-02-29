@@ -11,7 +11,8 @@ const defaultSettings: RokiiSettingsSchema = {
     theme: {
         id: "rokii.theme",
         label: "Theme",
-        value: THEMES[0].value
+        value: THEMES[0].value,
+        options: THEMES
     },
     hotkey: {
         id: "rokii.hotkey",

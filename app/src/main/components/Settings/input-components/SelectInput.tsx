@@ -13,7 +13,7 @@ type SelectInputProps = InputComponentProps<string> & {
 
 type SelectInputComponent = React.FC<SelectInputProps>
 
-export const SelectInputComponent: SelectInputComponent = ({ value, options, onChange }) => {
+export const SelectInput: SelectInputComponent = ({ value, options, onChange }) => {
     return <Select onValueChange={onChange} defaultValue={value}>
         <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Theme" />

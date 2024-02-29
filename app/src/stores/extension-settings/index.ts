@@ -12,6 +12,7 @@ export type StoredSetting<T = any> = {
     label: string
     description?: string
     value: T
+    options?: { value: string, label: string }[]
 }
 
 export interface SettingsStore {
