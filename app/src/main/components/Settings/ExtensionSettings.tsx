@@ -1,8 +1,10 @@
+import { useMemo } from 'react'
 import { SettingItem } from './SettingItem'
 import { useSettingsStore } from '@/stores/settings'
 
 function ExtensionSettings({ extensionName }: { extensionName: string }) {
-  const extensionSetting = useSettingsStore((s) => s.getAllFromExtension(extensionName))
+  const getSettings = useSettingsStore((s) => s.getAllFromExtension)
+  const extensionSetting = useMemo(() => getSettings(extensionName), [extensionName])
   const add = useSettingsStore((s) => s.addSetting)
 
   return (
@@ -18,7 +20,6 @@ function ExtensionSettings({ extensionName }: { extensionName: string }) {
           )
         })
       }
-
     </div>
   )
 }

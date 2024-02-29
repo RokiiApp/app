@@ -1,6 +1,6 @@
 import { FormComponents } from '@rokii/ui'
 import { THEMES } from '@/common/themes'
-import Hotkey from './Hotkey'
+import Hotkey from './input-components/Hotkey'
 import { SettingItem } from './SettingItem'
 import { useRokiiSettingsStore } from '@/stores/rokii-settings'
 
@@ -15,14 +15,6 @@ function GeneralSettings() {
 
     return (
         <div className="overflow-y-auto h-full px-2 flex flex-col gap-3">
-            <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                {generalSettings.hotkey.label}
-            </label>
-            <Hotkey
-                hotkey={generalSettings.hotkey.value}
-                onChange={(value) => setSetting('hotkey', { ...generalSettings.hotkey, value })}
-            />
-
             <Select
                 label='Theme'
                 value={THEMES.find((t) => t.value === generalSettings.theme.value)}
@@ -33,8 +25,18 @@ function GeneralSettings() {
             {
                 Object.entries(generalSettings).map(([id, setting]) => {
                     if (!isRokiiSetting(id, generalSettings)) return null
-                    if (setting.id === 'rokii.hotkey') return null
+
+                    if (setting.id === 'rokii.hotkey') {
+                        return <SettingItem
+                            key={id}
+                            setting={setting}
+                            onChange={(value) => setSetting(id, { ...setting, value })}
+                            CustomComponent={Hotkey}
+                        />
+                    }
+
                     if (setting.id === 'rokii.theme') return null
+
                     return (
                         <SettingItem
                             key={id}
