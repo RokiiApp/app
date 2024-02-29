@@ -1,24 +1,24 @@
 export type SettingType = "string" | "number" | "boolean"
 
-export type Setting = {
+export type Setting<T = any> = {
     id: string
     label: string
     description?: string
     type: SettingType
-    defaultValue: any
+    defaultValue: T
 }
 
 // StringSettings
-type StringSetting = Setting & { type: "string", defaultValue: string }
+type StringSetting = Setting<string> & { type: "string" }
 type StringSettingArgs = Omit<StringSetting, "type">
 export const StringSetting = (setting: StringSettingArgs): StringSetting => ({ ...setting, type: "string" })
 
 // NumberSettings
-type NumberSetting = Setting & { type: "number", defaultValue: number }
+type NumberSetting = Setting<number> & { type: "number" }
 type NumberSettingArgs = Omit<NumberSetting, "type">
 export const NumberSetting = (setting: NumberSettingArgs): NumberSetting => ({ ...setting, type: "number" })
 
 // BooleanSettings
-type BooleanSetting = Setting & { type: "boolean", defaultValue: boolean }
+type BooleanSetting = Setting<boolean> & { type: "boolean" }
 type BooleanSettingArgs = Omit<BooleanSetting, "type">
 export const BooleanSetting = (setting: BooleanSettingArgs): BooleanSetting => ({ ...setting, type: "boolean" })
