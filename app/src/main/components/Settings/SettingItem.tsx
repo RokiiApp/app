@@ -1,4 +1,4 @@
-import type { StoredSetting } from "@/stores/settings"
+import type { StoredSetting } from "@/stores/extension-settings"
 import type { InputComponent } from "./input-components/InputComponent"
 import { InputComponentFabric } from "./input-components/InputComponentFabric"
 

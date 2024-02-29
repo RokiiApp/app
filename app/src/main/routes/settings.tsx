@@ -2,13 +2,13 @@ import { memo, useState } from 'react'
 import ExtensionSettings from '../components/Settings/ExtensionSettings'
 import { BackButton } from '../components/BackButton'
 import { RokiiLayout } from '../components/RokiiLayout'
-import { useSettingsStore } from '@/stores/settings'
+import { useExtensionSettings } from '@/stores/extension-settings'
 import GeneralSettings from '../components/Settings/GeneralSettings'
 
 const GeneralSectionName = "General"
 
 const Settings = () => {
-    const settings = useSettingsStore(state => state.settings)
+    const settings = useExtensionSettings(state => state.settings)
     const [section, setSection] = useState<string>(GeneralSectionName)
 
     const sections = [GeneralSectionName, ...Object.keys(settings)]

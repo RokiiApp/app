@@ -26,7 +26,7 @@ export interface SettingsStore {
     deleteAllFromExtension: (extensionName: ExtensionName) => void
 }
 
-export const useSettingsStore = create<SettingsStore>()(
+export const useExtensionSettings = create<SettingsStore>()(
     persist(
         (set, get) => ({
             settings: {},
