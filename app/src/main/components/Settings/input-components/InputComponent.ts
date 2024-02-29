@@ -1,4 +1,4 @@
-type InputComponentProps<T = any> = {
+export type InputComponentProps<T = any> = {
     id: string
     value: T
     onChange: (value: T) => void

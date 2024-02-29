@@ -12,7 +12,8 @@
     "app:type-check": "tsc"
   },
   "dependencies": {
-    "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-checkbox": "1.0.4",
+    "@radix-ui/react-select": "2.0.0",
     "@rokii/ui": "workspace:*",
     "@rokii/utils": "workspace:*",
     "@tauri-apps/api": "*",
