@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/RokiiApp/app/compare/api-v0.3.0...api-v0.3.1) (2024-02-29)
+
+
+### Bug Fixes
+
+* add correct types to ExtensionModule ([a19f271](https://github.com/RokiiApp/app/commit/a19f2718bed9c657959b6f5099f098ebcb87be43))
+* allow setting inference ([ab9881c](https://github.com/RokiiApp/app/commit/ab9881cd6611a5eb2411e91f96c453854ab18895))
+
 ## [0.3.0](https://github.com/RokiiApp/app/compare/api-v0.2.0...api-v0.3.0) (2024-02-27)
 
 
