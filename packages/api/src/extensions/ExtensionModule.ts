@@ -26,7 +26,7 @@ export interface ExtensionModule {
      * 
      */
     initialize?: (settings: Record<string, any>) => void
-    initializeAsync?: (callback: any, settings: Record<string, any>) => Promise<void>
+    initializeAsync?: (callback: (data: unknown) => void, settings: Record<string, any>) => Promise<void>
     /**
      * This method will be called when the initializeAsync method calls the callback.
      * This is useful to retrieve data for the extension, and to perform long running tasks.
