@@ -1,7 +1,6 @@
 import { InfoItem, ScriptItem, ExtensionModule } from '@rokii/api'
 import type { AppEntry } from './types'
 import icon from '../icon.png'
-import { search } from '@rokii/utils'
 import { invoke } from '@tauri-apps/api/tauri'
 import { getInstalledApps } from './getInstalledApps'
 
@@ -31,9 +30,7 @@ const run: ExtensionModule['run'] = async ({ term, update, display, actions }) =
     await initializeAsync()
   }
 
-  const foundApps = search(Object.entries(apps), term, ([name]) => name)
-
-  const results = foundApps.map(([name, app]) => {
+  const results = Object.entries(apps).map(([name, app]) => {
     const title = name
     const run = () => { invoke('open_app_by_id', { appId: app.id }) }
 
