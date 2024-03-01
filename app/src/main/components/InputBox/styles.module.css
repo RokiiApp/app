@@ -17,16 +17,6 @@
     object-position: -1.5px 0px;
 }
 
-.autocomplete {
-    position: absolute;
-    height: 100%;
-    padding: inherit;
-    color: var(--secondary-font-color);
-    white-space: pre;
-    background: transparent;
-    border: 0;
-}
-
 .input {
     z-index: 999;
     position: absolute;
