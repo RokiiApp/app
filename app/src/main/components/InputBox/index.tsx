@@ -15,7 +15,7 @@ const InputBox = () => {
     <div className='flex items-center gap-2 h-full'>
       {!isRoot && <BackButton backLocation='/' />}
 
-      <div className={styles.inputArea}>
+      <div className="z-[2] relative w-full h-full text-xl">
         <Autocomplete />
         <SearchBar />
       </div>
