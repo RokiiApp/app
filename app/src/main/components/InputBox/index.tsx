@@ -1,5 +1,3 @@
-import styles from './styles.module.css'
-
 import { memo } from 'react'
 import { Autocomplete } from './Autocomplete'
 import { SearchBar } from './SearchBar'
