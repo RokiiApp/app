@@ -1,7 +1,8 @@
+import { StoredSetting } from "@/stores/extension-settings"
+
 export type InputComponentProps<T = any> = {
-    id: string
-    value: T
+    setting: StoredSetting<T>
     onChange: (value: T) => void
 }
 
-export type InputComponent<T> = React.FC<InputComponentProps<T>>
+export type InputComponent<T = any> = React.FC<InputComponentProps<T>>

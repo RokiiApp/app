@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { SettingItem } from './SettingItem'
 import { useExtensionSettings } from '@/stores/extension-settings'
+import { InputComponentFabric } from './input-components/InputComponentFabric'
 
 function ExtensionSettings({ extensionName }: { extensionName: string }) {
   const getSettings = useExtensionSettings((s) => s.getAllFromExtension)
@@ -12,7 +12,7 @@ function ExtensionSettings({ extensionName }: { extensionName: string }) {
       {
         Object.entries(extensionSetting).map(([id, setting]) => {
           return (
-            <SettingItem
+            <InputComponentFabric
               key={id}
               setting={setting}
               onChange={(value) => add(extensionName, { ...setting, value })}

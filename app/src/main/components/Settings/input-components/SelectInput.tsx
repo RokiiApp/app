@@ -1,3 +1,4 @@
+import type { InputComponent } from "./InputComponent"
 import {
     Select,
     SelectContent,
@@ -5,29 +6,29 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/main/components/ui/select"
-import { InputComponentProps } from "./InputComponent"
+import { TitleLayout } from "./TitleLayout"
 
-type SelectInputProps = InputComponentProps<string> & {
-    options: { value: string, label: string }[]
-}
+export const SelectInput: InputComponent<string> = ({ setting, onChange }) => {
+    const { value, options, id, label, description } = setting
 
-type SelectInputComponent = React.FC<SelectInputProps>
+    return (
+        <TitleLayout id={id} title={label} description={description}>
+            <Select onValueChange={onChange} defaultValue={value}>
+                <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Theme" />
+                </SelectTrigger>
+                <SelectContent>
+                    {
+                        options?.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                            </SelectItem>
+                        ))
+                    }
+                </SelectContent>
+            </Select>
+        </TitleLayout>
+    )
 
-export const SelectInput: SelectInputComponent = ({ value, options, onChange }) => {
-    return <Select onValueChange={onChange} defaultValue={value}>
-        <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Theme" />
-        </SelectTrigger>
-        <SelectContent>
-            {
-                options.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                    </SelectItem>
-                ))
-            }
-
-        </SelectContent>
-    </Select>
 }
 

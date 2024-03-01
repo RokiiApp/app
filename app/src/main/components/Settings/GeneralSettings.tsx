@@ -1,5 +1,6 @@
+import { StoredSetting } from '@/stores/extension-settings'
 import Hotkey from './input-components/Hotkey'
-import { SettingItem } from './SettingItem'
+import { InputComponentFabric } from './input-components/InputComponentFabric'
 import { useRokiiSettings } from '@/stores/rokii-settings'
 
 function isRokiiSetting<T extends string>(settingName: string, settings: Record<T, any>): settingName is keyof Record<T, any> {
@@ -16,23 +17,18 @@ function GeneralSettings() {
                     if (!isRokiiSetting(id, generalSettings)) return null
 
                     if (setting.id === 'rokii.hotkey') {
-                        return <SettingItem
+                        return <Hotkey
                             key={id}
-                            setting={setting}
+                            setting={setting as StoredSetting<string>}
                             onChange={(value) => setSetting(id, { ...setting, value })}
-                            CustomComponent={Hotkey}
                         />
                     }
 
-                    console.log(setting)
+                    return <InputComponentFabric
+                        key={id} setting={setting}
+                        onChange={(value) => setSetting(id, { ...setting, value })}
+                    />
 
-                    return (
-                        <SettingItem
-                            key={id}
-                            setting={setting}
-                            onChange={(value) => setSetting(id, { ...setting, value })}
-                        />
-                    )
                 })
             }
 

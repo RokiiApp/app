@@ -2,29 +2,37 @@ import StringInput from "./StringInput"
 import NumberInput from "./NumberInput"
 import BooleanInput from "./BooleanInput"
 import { SelectInput } from "./SelectInput"
+import { StoredSetting } from "@/stores/extension-settings"
+import { InputComponent } from "./InputComponent"
 
 type InputFabricProps<T = any> = {
-    id: string
-    value: T
+    setting: StoredSetting<T>
     onChange: (value: T) => void
-    options?: { value: string, label: string }[]
 }
 
-export function InputComponentFabric({ id, value, onChange, options }: InputFabricProps) {
+const ComponentTypes = {
+    string: StringInput,
+    number: NumberInput,
+    boolean: BooleanInput
+} as const;
+
+const isValidComponentType = (type: string): type is keyof typeof ComponentTypes => {
+    return type in ComponentTypes
+}
+
+export function InputComponentFabric({ setting, onChange }: InputFabricProps) {
+    const { value, options } = setting
+
     if (options) {
-        return <SelectInput id={id} value={value} onChange={onChange} options={options} />
+        return <SelectInput setting={setting} onChange={onChange} />
     }
 
-    if (typeof value === "string") {
-        return <StringInput id={id} value={value} onChange={onChange} />
-    }
+    const componentType = typeof value
 
-    if (typeof value === "number") {
-        return <NumberInput id={id} value={value} onChange={onChange} />
-    }
+    if (isValidComponentType(componentType)) {
+        const GenericInput = ComponentTypes[componentType] as InputComponent<any>
 
-    if (typeof value === "boolean") {
-        return <BooleanInput id={id} value={value} onChange={onChange} />
+        return <GenericInput setting={setting} onChange={onChange} />
     }
 
     return null
