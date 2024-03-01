@@ -31,6 +31,7 @@ export class Result {
    * The id schema is `${extensionName}-${actionId}`
    */
   readonly id: `${string}-${string}`
+  keywords: string[] | undefined
 
   constructor(action: Item, extensionName: string) {
     let calculatedIcon = ""
@@ -48,6 +49,7 @@ export class Result {
     this.extension = extensionName
     this.autocomplete = action.autocomplete || action.title
     this.id = `${extensionName}-${action.id}`
+    this.keywords = action.keyword
   }
 
   update(newAction: Item) {

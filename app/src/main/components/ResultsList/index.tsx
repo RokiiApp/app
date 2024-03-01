@@ -9,13 +9,17 @@ import { CHANNELS } from '@/common/constants/events'
 import { useAutocomplete } from '@/main/hooks/useAutocomplete'
 import { useSelectedResult } from '@/main/hooks/useSelectedResult'
 import { useResultsAutoscroll } from '@/main/hooks/useResultsAutoscroll'
+import { useTermFilter } from '@/main/hooks/useTermFilter'
 
 const ResultsList = ({ items }: { items: Result[] }) => {
+  // Filter items that don't match the term
+  const results = useTermFilter(items)
+
   const {
     selectedResult,
     selectedIndex,
     MovementHandlers
-  } = useSelectedResult(items)
+  } = useSelectedResult(results)
 
   const { listRef } = useResultsAutoscroll(selectedIndex)
 
@@ -54,7 +58,7 @@ const ResultsList = ({ items }: { items: Result[] }) => {
     }
   }, [onKeyDown])
 
-  if (items.length === 0) return null
+  if (results.length === 0) return null
 
   requestAutocomplete(selectedResult.autocomplete)
 
@@ -65,9 +69,9 @@ const ResultsList = ({ items }: { items: Result[] }) => {
       overscan={5}
       height={VISIBLE_RESULTS * RESULT_HEIGHT}
       fixedItemHeight={RESULT_HEIGHT}
-      totalCount={items.length}
+      totalCount={results.length}
       itemContent={(index) => {
-        const result = items[index]
+        const result = results[index]
         return <Row result={result} isSelected={selectedIndex === index} />
       }}
     />
