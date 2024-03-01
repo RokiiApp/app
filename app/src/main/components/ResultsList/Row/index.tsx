@@ -8,7 +8,7 @@ interface Props {
   result: Result
 }
 
-function Row ({
+function Row({
   isSelected,
   result
 }: Props) {
@@ -19,7 +19,7 @@ function Row ({
   return (
     <div
       className={className}
-      onClick={result.onSelect}
+      onClick={(e) => result.onSelect(e)}
     >
 
       <div className={styles.actionInfo}>
