@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { useActionsStore } from '@/stores/actions'
+import { useGlobalResultsStore } from '@/stores/GlobalResultsStore'
 import { useRunExtensions } from '@/main/hooks/useRunPlugins'
 
 import { ResultsList } from '../components/ResultsList'
@@ -11,7 +11,7 @@ const Home = () => {
   const term = useInputStore((state) => state.term)
   useRunExtensions(term)
 
-  const results = useActionsStore((s) => s.actions)
+  const results = useGlobalResultsStore((s) => s.actions)
 
   return <RokiiLayout
     TopBar={<InputBox />}

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useActionsStore } from '@/stores/actions'
+import { useGlobalResultsStore } from '@/stores/GlobalResultsStore'
 import { ExtensionLoadedEvent, ExtensionsRepoEventTypes, ExtensionRemovedEvent } from '@/extensions/repo/Events'
 import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 import { ExtensionContextProvider } from '@/services/plugins/ContextProvider'
@@ -7,8 +7,8 @@ import { useExtensionSettings } from '@/stores/extension-settings'
 
 // TODO: Suscribe to unload plugin event to remove plugin from state
 export const useRunExtensions = (term: string) => {
-  const removeAllActions = useActionsStore(s => s.removeAllActions)
-  const removeActionsFromExtension = useActionsStore(s => s.removeActionsFromExtension)
+  const removeAllActions = useGlobalResultsStore(s => s.removeAllActions)
+  const removeActionsFromExtension = useGlobalResultsStore(s => s.removeActionsFromExtension)
   const updateExtensionSettings = useExtensionSettings(s => s.addSettings)
   const getExtensionSettings = useExtensionSettings(s => s.getAllFromExtension)
   const removeSettings = useExtensionSettings(s => s.deleteAllFromExtension)
@@ -18,7 +18,7 @@ export const useRunExtensions = (term: string) => {
 
     const extension = extensionsRepository.get(name)
 
-    const extensionContextProvider = new ExtensionContextProvider(extension.name, useActionsStore)
+    const extensionContextProvider = new ExtensionContextProvider(extension.name, useGlobalResultsStore)
     const extensionContext = extensionContextProvider.get(term)
 
     const savedSettings = getExtensionSettings(extension.name)
@@ -56,7 +56,7 @@ export const useRunExtensions = (term: string) => {
     for (const [name, extension] of Object.entries(allPlugins)) {
       const { name: extensionName } = extension
 
-      const extensionContextProvider = new ExtensionContextProvider(extensionName, useActionsStore)
+      const extensionContextProvider = new ExtensionContextProvider(extensionName, useGlobalResultsStore)
       const extensionContext = extensionContextProvider.get(term)
 
       try {
