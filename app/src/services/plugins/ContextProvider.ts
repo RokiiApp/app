@@ -57,9 +57,23 @@ export class ExtensionContextProvider {
           send(CHANNELS.ShowTerm, term)
         }
       },
-      settings: useExtensionSettings.getState().getAllFromExtension(this.extensionName)
+      settings: this.getExtensionSettings()
     }
 
     return context
+  }
+
+  /**
+   * Maps the settings from the store to the settings object that is provided to the plugin
+   */
+  private getExtensionSettings() {
+    const savedSettings = useExtensionSettings.getState().getAllFromExtension(this.extensionName)
+    const settingsResult: Record<string, any> = {}
+
+    for (const setting of Object.values(savedSettings)) {
+      settingsResult[setting.id] = setting.value
+    }
+
+    return settingsResult
   }
 }
