@@ -1,4 +1,4 @@
-import { useAutocompleteStore } from '@/stores/autocomplete'
+import { useAutocompleteStore } from '@/stores/AutocompleteStore'
 import { getAutocompleteValue } from '../utils/getAutocompleteValue'
 import { useInputStore } from '@/stores/input'
 
