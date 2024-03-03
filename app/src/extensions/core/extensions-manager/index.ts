@@ -7,10 +7,6 @@ import { pluginToResult } from './utils/pluginToResult';
 
 let plugins: PluginInfo[] = []
 
-const onMessage: ExtensionModule['onMessage'] = async (message) => {
-  plugins = message as PluginInfo[]
-}
-
 const ExtensionsManagerApp: ExtensionModule["run"] = async ({ display }) => {
   const categorizeResult = categorizePlugins(plugins);
 
@@ -27,7 +23,7 @@ const ExtensionsManagerExtension: ExtensionModule = {
   icon,
   initializeAsync,
   run: ({ display }) => display([managerLauncherAction]),
-  onMessage,
+  onMessage: (message) => plugins = message as PluginInfo[],
   apps: {
     [extensionAppName]: ExtensionsManagerApp
   }
