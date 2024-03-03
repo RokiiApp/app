@@ -1,12 +1,12 @@
 import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 import { ExtensionContextProvider } from '@/services/plugins/ContextProvider'
-import { useActionsStore } from '@/stores/actions'
+import { useAppResultsStore } from '@/stores/AppResultsStore'
 import { useEffect, useMemo } from 'react'
 import { useParams } from 'wouter'
 import { navigate } from 'wouter/use-hash-location'
 
 export const useRunApp = (input: string) => {
-  const [results, removeAllResults] = useActionsStore((s) => [s.actions, s.removeAllActions])
+  const [results, removeAllResults] = useAppResultsStore((s) => [s.actions, s.removeAllActions])
 
   const { extension: extensionName, app } = useParams<{ extension: string, app: string }>()
   const extension = useMemo(() => extensionsRepository.get(extensionName), [extensionName])
@@ -19,7 +19,7 @@ export const useRunApp = (input: string) => {
   const appRunner = useMemo(() => extension.getApp(app), [app])
 
   const context = useMemo(() => {
-    return new ExtensionContextProvider(extensionName).get(input)
+    return new ExtensionContextProvider(extensionName, useAppResultsStore).get(input)
   }, [input])
 
   useEffect(() => {

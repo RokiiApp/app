@@ -1,7 +1,7 @@
 import type { ExtensionContext } from '@rokii/api'
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
-import { useActionsStore } from '@/stores/actions'
+import { ZustandResultsStore } from '@/entities/ActionsStore'
 import { useExtensionSettings } from '@/stores/extension-settings'
 import { writeText } from '@tauri-apps/api/clipboard'
 import { appWindow } from '@tauri-apps/api/window'
@@ -9,9 +9,11 @@ import { open } from '@tauri-apps/api/shell'
 
 export class ExtensionContextProvider {
   extensionName: string
+  resultsStore: ZustandResultsStore
 
-  constructor(extensionName: string) {
+  constructor(extensionName: string, resultsStore: ZustandResultsStore) {
     this.extensionName = extensionName
+    this.resultsStore = resultsStore
   }
 
   public get(term: string): ExtensionContext {
@@ -28,15 +30,15 @@ export class ExtensionContextProvider {
     const context: ExtensionContext = {
       term,
       display: async (actions) => {
-        const actionsStore = useActionsStore.getState()
+        const actionsStore = this.resultsStore.getState()
         actionsStore.addActions(actions, this.extensionName)
       },
-      hide(id) {
-        const actionsStore = useActionsStore.getState()
+      hide: (id) => {
+        const actionsStore = this.resultsStore.getState()
         actionsStore.removeAction(id)
       },
       update: (id, action) => {
-        const actionsStore = useActionsStore.getState()
+        const actionsStore = this.resultsStore.getState()
         const fullId = `${this.extensionName}-${id}`
         actionsStore.updateAction(fullId, action)
       },

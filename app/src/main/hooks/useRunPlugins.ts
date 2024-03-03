@@ -18,7 +18,7 @@ export const useRunExtensions = (term: string) => {
 
     const extension = extensionsRepository.get(name)
 
-    const extensionContextProvider = new ExtensionContextProvider(extension.name)
+    const extensionContextProvider = new ExtensionContextProvider(extension.name, useActionsStore)
     const extensionContext = extensionContextProvider.get(term)
 
     const savedSettings = getExtensionSettings(extension.name)
@@ -56,7 +56,7 @@ export const useRunExtensions = (term: string) => {
     for (const [name, extension] of Object.entries(allPlugins)) {
       const { name: extensionName } = extension
 
-      const extensionContextProvider = new ExtensionContextProvider(extensionName)
+      const extensionContextProvider = new ExtensionContextProvider(extensionName, useActionsStore)
       const extensionContext = extensionContextProvider.get(term)
 
       try {

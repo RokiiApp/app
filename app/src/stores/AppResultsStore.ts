@@ -1,8 +1,12 @@
 import { create } from 'zustand'
-import { ResultCreator } from '@/entities/ResultCreator'
 import { ResultsStore } from '@/entities/ActionsStore'
+import { ResultCreator } from '@/entities/ResultCreator'
 
-export const useActionsStore = create<ResultsStore>((set, get) => ({
+/**
+ * A store aislated from the main result store to handle the actions
+ * from the app extensions
+ */
+export const useAppResultsStore = create<ResultsStore>((set, get) => ({
   actionsMap: new Map(),
   actions: [],
 
