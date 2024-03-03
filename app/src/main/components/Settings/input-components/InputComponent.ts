@@ -1,4 +1,4 @@
-import { StoredSetting } from "@/stores/extension-settings"
+import { StoredSetting } from "@/stores/ExtensionSettingsStore"
 
 export type InputComponentProps<T = any> = {
     setting: StoredSetting<T>

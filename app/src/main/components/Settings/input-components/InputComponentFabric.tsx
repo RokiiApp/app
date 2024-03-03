@@ -2,7 +2,7 @@ import StringInput from "./StringInput"
 import NumberInput from "./NumberInput"
 import BooleanInput from "./BooleanInput"
 import { SelectInput } from "./SelectInput"
-import { StoredSetting } from "@/stores/extension-settings"
+import { StoredSetting } from "@/stores/ExtensionSettingsStore"
 import { InputComponent } from "./InputComponent"
 
 type InputFabricProps<T = any> = {

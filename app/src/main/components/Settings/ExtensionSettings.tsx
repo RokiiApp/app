@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useExtensionSettings } from '@/stores/extension-settings'
+import { useExtensionSettings } from '@/stores/ExtensionSettingsStore'
 import { InputComponentFabric } from './input-components/InputComponentFabric'
 
 function ExtensionSettings({ extensionName }: { extensionName: string }) {

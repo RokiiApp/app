@@ -1,4 +1,4 @@
-import { StoredSetting } from "../extension-settings"
+import { StoredSetting } from "../ExtensionSettingsStore"
 
 export type RokiiSettingsSchema = {
     /**

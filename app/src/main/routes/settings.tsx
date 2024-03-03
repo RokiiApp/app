@@ -2,7 +2,7 @@ import { memo, useState } from 'react'
 import ExtensionSettings from '../components/Settings/ExtensionSettings'
 import { BackButton } from '../components/BackButton'
 import { RokiiLayout } from '../components/RokiiLayout'
-import { useExtensionSettings } from '@/stores/extension-settings'
+import { useExtensionSettings } from '@/stores/ExtensionSettingsStore'
 import GeneralSettings from '../components/Settings/GeneralSettings'
 
 const GeneralSectionName = "General"

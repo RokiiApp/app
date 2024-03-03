@@ -3,7 +3,7 @@ import { useGlobalResultsStore } from '@/stores/GlobalResultsStore'
 import { ExtensionLoadedEvent, ExtensionsRepoEventTypes, ExtensionRemovedEvent } from '@/extensions/repo/Events'
 import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 import { ExtensionContextProvider } from '@/services/plugins/ContextProvider'
-import { useExtensionSettings } from '@/stores/extension-settings'
+import { useExtensionSettings } from '@/stores/ExtensionSettingsStore'
 
 // TODO: Suscribe to unload plugin event to remove plugin from state
 export const useRunExtensions = (term: string) => {

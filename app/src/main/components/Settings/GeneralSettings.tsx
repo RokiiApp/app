@@ -1,4 +1,4 @@
-import { StoredSetting } from '@/stores/extension-settings'
+import { StoredSetting } from '@/stores/ExtensionSettingsStore'
 import Hotkey from './input-components/Hotkey'
 import { InputComponentFabric } from './input-components/InputComponentFabric'
 import { useRokiiSettings } from '@/stores/rokii-settings'
