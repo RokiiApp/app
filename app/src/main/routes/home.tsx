@@ -4,7 +4,7 @@ import { useRunExtensions } from '@/main/hooks/useRunPlugins'
 
 import { ResultsList } from '../components/ResultsList'
 import { InputBox } from '../components/InputBox'
-import { useInputStore } from '@/stores/input'
+import { useInputStore } from '@/stores/InputStore'
 import { RokiiLayout } from '../components/RokiiLayout'
 
 const Home = () => {

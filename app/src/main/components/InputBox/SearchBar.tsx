@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef } from 'react'
 
 import { useSearchBarEventsSubscription } from '@/main/hooks/useSearchBarEventsSubscription'
-import { useInputStore } from '@/stores/input'
+import { useInputStore } from '@/stores/InputStore'
 import { CHANNELS } from '@/common/constants/events'
 import { useFocusSuscription } from '@/main/hooks/useFocusSuscription'
 import { useHashLocation } from 'wouter/use-hash-location'

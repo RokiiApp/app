@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { ResultsList } from '../components/ResultsList'
 import { useRunApp } from '../hooks/useRunApp'
-import { useInputStore } from '@/stores/input'
+import { useInputStore } from '@/stores/InputStore'
 import { InputBox } from '@/main/components/InputBox'
 import { RokiiLayout } from '../components/RokiiLayout'
 

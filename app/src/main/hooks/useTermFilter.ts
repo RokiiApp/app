@@ -1,5 +1,5 @@
 import { Result } from "@/stores/actions/ActionResult";
-import { useInputStore } from "@/stores/input";
+import { useInputStore } from "@/stores/InputStore";
 import { useEffect, useState } from "react";
 
 export const useTermFilter = (items: Result[]) => {

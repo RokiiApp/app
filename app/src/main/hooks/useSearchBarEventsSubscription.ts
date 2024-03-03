@@ -1,5 +1,5 @@
 import { on, send } from '@/common/ipc'
-import { useInputStore } from '@/stores/input'
+import { useInputStore } from '@/stores/InputStore'
 import { TauriEvent } from '@tauri-apps/api/event'
 import { CHANNELS } from '@/common/constants/events'
 
