@@ -3,13 +3,13 @@ import { memo, useEffect } from 'react'
 import { Virtuoso } from 'react-virtuoso'
 
 import { RESULT_HEIGHT, VISIBLE_RESULTS } from '@/common/constants/ui'
-import Row from './Row'
 import { send } from '@/common/ipc'
 import { CHANNELS } from '@/common/constants/events'
 import { useAutocomplete } from '@/main/hooks/useAutocomplete'
 import { useSelectedResult } from '@/main/hooks/useSelectedResult'
 import { useResultsAutoscroll } from '@/main/hooks/useResultsAutoscroll'
 import { useTermFilter } from '@/main/hooks/useTermFilter'
+import ResultItem from '../ResultItem'
 
 const ResultsList = ({ items }: { items: Result[] }) => {
   // Filter items that don't match the term
@@ -72,7 +72,7 @@ const ResultsList = ({ items }: { items: Result[] }) => {
       totalCount={results.length}
       itemContent={(index) => {
         const result = results[index]
-        return <Row result={result} isSelected={selectedIndex === index} />
+        return <ResultItem result={result} isSelected={selectedIndex === index} />
       }}
     />
   )
