@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/RokiiApp/app/compare/api-v0.3.1...api-v0.4.0) (2024-03-03)
+
+
+### Features
+
+* add API for select setting ([4156de6](https://github.com/RokiiApp/app/commit/4156de61b56ebaed465b23201e1d54223b0fcaa5))
+
 ## [0.3.1](https://github.com/RokiiApp/app/compare/api-v0.3.0...api-v0.3.1) (2024-02-29)
 
 
