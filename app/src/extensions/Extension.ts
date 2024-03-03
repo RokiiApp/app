@@ -1,3 +1,4 @@
+import { ensureIcon } from '@/entities/Icon';
 import { StoredExtensionSettings } from '@/stores/ExtensionSettingsStore';
 import { ExtensionModule } from '@rokii/api'
 
@@ -28,7 +29,7 @@ export class Extension implements ExtensionModule {
       throw new Error('Invalid extension module')
     }
 
-    this.icon = module.icon
+    this.icon = ensureIcon(module.icon)
     this.name = module.name
     this.run = module.run
     this.settings = module.settings

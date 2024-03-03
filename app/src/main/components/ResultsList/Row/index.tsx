@@ -1,18 +1,14 @@
-import defaultIcon from '@/extensions/core/icon.png'
 import { SmartIcon } from '@rokii/ui'
+import type { Result } from '@/entities/result/Result'
 import styles from './styles.module.css'
-import type { Result } from '@/stores/actions/ActionResult'
 
 interface Props {
   isSelected: boolean
   result: Result
 }
 
-function Row({
-  isSelected,
-  result
-}: Props) {
-  const { icon = defaultIcon, title, subtitle, extension } = result
+function Row({ isSelected, result }: Props) {
+  const { icon, title, subtitle, extension } = result
 
   const className = isSelected ? `${styles.row} ${styles.selected}` : styles.row
 

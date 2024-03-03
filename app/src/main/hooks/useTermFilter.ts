@@ -1,4 +1,4 @@
-import { Result } from "@/stores/actions/ActionResult";
+import { Result } from "@/entities/result/Result";
 import { useInputStore } from "@/stores/InputStore";
 import { useEffect, useState } from "react";
 

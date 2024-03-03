@@ -1,4 +1,4 @@
-import { Result } from '@/stores/actions/ActionResult'
+import type { Result } from '@/entities/result/Result'
 import { useEffect, useState } from 'react'
 
 export const useSelectedResult = (items: Result[]) => {

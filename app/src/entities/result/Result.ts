@@ -1,8 +1,8 @@
-import defaultIcon from "@/extensions/core/icon.png"
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
 import { Item } from '@rokii/api'
 import { appWindow } from '@tauri-apps/api/window'
+import { Icon, ensureIcon } from "@/entities/Icon"
 
 /**
  * A result corresponds to a row in the results list component.
@@ -14,7 +14,10 @@ export class Result {
     extension: string
     title: string
     subtitle: string
-    icon: string
+    /**
+     * A base64 encoded image that represents an icon.
+     */
+    icon: Icon
     autocomplete: string
     /**
      * The id of a result is unique for all the results in the app
@@ -24,19 +27,10 @@ export class Result {
     readonly id: `${string}-${string}`
     keywords: string[] | undefined
   
-    constructor(action: Item, extensionName: string) {
-      let calculatedIcon = ""
-  
-      // We support null icon to avoid showing the default icon
-      if (action.icon === null) {
-        calculatedIcon = ""
-      } else {
-        calculatedIcon = action.icon ?? defaultIcon
-      }
-  
+    constructor(action: Item, extensionName: string) {  
       this.title = action.title
       this.subtitle = action.subtitle || ''
-      this.icon = calculatedIcon
+      this.icon = ensureIcon(action.icon)
       this.extension = extensionName
       this.autocomplete = action.autocomplete || action.title
       this.id = `${extensionName}-${action.id}`

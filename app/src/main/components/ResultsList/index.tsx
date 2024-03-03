@@ -1,4 +1,4 @@
-import type { Result } from '@/stores/actions/ActionResult'
+import type { Result } from '@/entities/result/Result'
 import { memo, useEffect } from 'react'
 import { Virtuoso } from 'react-virtuoso'
 
