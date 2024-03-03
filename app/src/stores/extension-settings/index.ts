@@ -21,7 +21,7 @@ export interface SettingsStore {
      */
     settings: Settings
 
-    addSetting: <T>(extensionName: string, setting: StoredSetting<T>) => void
+    addSetting: (extensionName: string, setting: StoredSetting) => void
     addSettings: (extensionName: string, settings: StoredExtensionSettings) => void
     getAllFromExtension: (extensionName: ExtensionName) => StoredExtensionSettings
     deleteAllFromExtension: (extensionName: ExtensionName) => void
