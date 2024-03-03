@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0](https://github.com/RokiiApp/app/compare/rokii-v1.1.0...rokii-v1.2.0) (2024-03-03)
+
+
+### Features
+
+* add support for select settings ([988a945](https://github.com/RokiiApp/app/commit/988a945e00b0c7cbfe4deacd4e9545a460d7ef2f))
+
+
+### Bug Fixes
+
+* Make search engine respect the input term ([e493988](https://github.com/RokiiApp/app/commit/e4939884e6984b74a53e770eebbf46595e540970)), closes [#26](https://github.com/RokiiApp/app/issues/26)
+* problem installing packages ([d07b487](https://github.com/RokiiApp/app/commit/d07b487b6a829b90625ce0b00ef9e86a4052e7e7))
+* Selecting a result with the mouse now does not break Rokii ([7071e47](https://github.com/RokiiApp/app/commit/7071e47142f9bba4c5e9915f4fa30401f7505a9a))
+* Settings API now returns correct schema ([6c42d0e](https://github.com/RokiiApp/app/commit/6c42d0efef4e418019d706dbcf70238991c43171))
+* **ui:** Improve setting components ([9db3aaf](https://github.com/RokiiApp/app/commit/9db3aaf3c2390a59189358a19bf419ce10a191c2)), closes [#22](https://github.com/RokiiApp/app/issues/22)
+* update to Tauri v1.6 ([4307688](https://github.com/RokiiApp/app/commit/43076880ea8d4d6c5a2caefcdccb47c4136f12da))
+
 ## [1.1.0](https://github.com/RokiiApp/app/compare/rokii-v1.0.9...rokii-v1.1.0) (2024-02-29)
 
 
