@@ -92,9 +92,13 @@ export class Extension implements ExtensionModule {
 
     // TODO - Use zod to validate the settings
     for (const settingInfo of Object.values(this.settings)) {
-      const { id, defaultValue, description, label } = settingInfo
+      const { id, defaultValue, description, label, options  } = settingInfo
 
-      userSettings[id] = savedSettings[id] || { id, value: defaultValue, description, label }
+      const savedValue = savedSettings[id]?.value
+
+      const value = savedValue !== undefined ? savedValue : defaultValue
+
+      userSettings[id] = { id, value, description, label, options }
     }
 
     return userSettings
