@@ -5,13 +5,21 @@ import { AppItem, Item, ItemTypes, ScriptItem } from '@rokii/api'
 import { appWindow } from '@tauri-apps/api/window'
 import { navigate } from 'wouter/use-hash-location'
 
+function isScriptItem(action: Item): action is ScriptItem {
+  return action.type === ItemTypes.SCRIPT
+}
+
+function isAppItem(action: Item): action is AppItem {
+  return action.type === ItemTypes.APP
+}
+
 export class ResultCreator {
   static create(action: Item, extensionName: string): Result {
-    if (action instanceof ScriptItem) {
+    if (isScriptItem(action)) {
       return new ScriptActionResult(action, extensionName)
     }
 
-    if (action instanceof AppItem) {
+    if (isAppItem(action)) {
       return new AppActionResult(action, extensionName)
     }
 
