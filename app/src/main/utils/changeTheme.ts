@@ -1,8 +1,15 @@
+type ThemeMode = 'light' | 'dark'
 /**
  * Change current theme
  *
- * @param src Absolute path to new theme css file
  */
-export const changeTheme = (src: string) => {
-  (document.getElementById('rokii-theme') as HTMLLinkElement).href = src
+export const changeTheme = (theme: ThemeMode) => {
+  if (theme === "light") {
+    document.body.classList.remove("dark")
+    return
+  }
+  if (theme === "dark") {
+    document.body.classList.add("dark")
+    return
+  }
 }

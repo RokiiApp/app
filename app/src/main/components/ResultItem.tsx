@@ -12,34 +12,26 @@ function ResultItem({ isSelected, result }: ResultProps) {
     return (
         <div
             className={
-                `w-full rounded-md relative flex gap-2 flex-nowrap justify-between whitespace-nowrap cursor-pointer p-2
-                h-12 text-[var(--main-font-color)] bacground-[var(--result-background)] items-center
-                ${isSelected ? "bg-[var(--selected-result-background)] " : ""}`
+                `flex flex-nowrap gap-2 justify-between items-center whitespace-nowrap
+                w-full h-12 rounded-md cursor-pointer p-2
+                ${isSelected ? "bg-result-background-selected" : "bg-result-background"}`
             }
             onClick={(e) => result.onSelect(e)}
         >
 
-            <div className={
-                `w-full flex flex-wrap items-center gap-2 content-start
-                ${isSelected ? "text-[var(--selected-result-color] " : ""}`}
+            <div className={`w-full flex flex-wrap items-center gap-2 content-start`}
             >
                 {icon && <SmartIcon path={icon} className="h-7 w-7 object-contain" />}
                 {title &&
-                    <div className={
-                        `text-sm text-[var(--result-title-color)]
-                        ${isSelected ? "text-[var(--selected-result-title-color)]" : ""}`
-                    }>
+                    <span className={`${isSelected ? "text-result-title-selected" : "text-result-title"} text-sm`}>
                         {title}
-                    </div>
+                    </span>
                 }
 
                 {subtitle
-                    && <div className={
-                        `text-xs font-light text-[var(--result-subtitle-color)]
-                        ${isSelected ? "text-[var(--selected-result-subtitle-color)]" : ""}`
-                    }>
+                    && <span className={`${isSelected ? "text-result-subtitle-selected" : "text-result-subtitle"} text-xs font-light`}>
                         {subtitle}
-                    </div>}
+                    </span>}
             </div>
 
             <div aria-label='extension-name'>

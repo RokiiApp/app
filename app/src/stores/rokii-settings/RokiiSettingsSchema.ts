@@ -1,10 +1,12 @@
 import { StoredSetting } from "../ExtensionSettingsStore"
 
+export type ThemeMode = 'light' | 'dark'
+
 export type RokiiSettingsSchema = {
     /**
      * The id of the theme to use
      */
-    theme: StoredSetting<string>,
+    theme: StoredSetting<ThemeMode>,
     /**
      * The hotkey to toggle the Rokii window
      */

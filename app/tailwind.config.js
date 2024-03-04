@@ -18,12 +18,38 @@ module.exports = {
     },
     extend: {
       colors: {
+        background: "var(--background)",
+
+        result: {
+          title: {
+            DEFAULT: "var(--result-title)",
+            selected: "var(--result-title-selected)",
+          },
+          subtitle: {
+            DEFAULT: "var(--result-subtitle)",
+            selected: "var(--result-subtitle-selected)",
+          },
+          background: {
+            DEFAULT: "var(--result-background)",
+            selected: "var(--result-background-selected)",
+            hover: "var(--result-background-hover)",
+          },
+        },
+
+        input: {
+          DEFAULT: "var(--input)",
+          autocomplete: "var(--input-autocomplete)",
+        },
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
+          text: {
+            DEFAULT: "var(--primary-text)",
+            selected: "var(--primary-text-selected)",
+          },
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },

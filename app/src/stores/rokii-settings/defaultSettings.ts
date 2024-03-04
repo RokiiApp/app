@@ -1,4 +1,3 @@
-import { THEMES } from '@/common/themes'
 import { RokiiSettingsSchema } from './RokiiSettingsSchema'
 
 const defaultSettings: RokiiSettingsSchema = {
@@ -10,8 +9,17 @@ const defaultSettings: RokiiSettingsSchema = {
     theme: {
         id: "rokii.theme",
         label: "Theme",
-        value: THEMES[0].value,
-        options: THEMES
+        value: 'light',
+        options: [
+            {
+                label: "Light",
+                value: "light"
+            },
+            {
+                label: "Dark",
+                value: "dark"
+            }
+        ]
     },
     developerMode: {
         id: "rokii.developerMode",

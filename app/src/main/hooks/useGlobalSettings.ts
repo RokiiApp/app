@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { changeTheme } from "../utils/changeTheme"
 import { AutoStart } from "@/services/AutoStart"
 import { globalShortcut, invoke } from "@tauri-apps/api"
