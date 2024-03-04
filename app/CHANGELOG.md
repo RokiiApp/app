@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/RokiiApp/app/compare/rokii-v1.2.0...rokii-v1.3.0) (2024-03-04)
+
+
+### Features
+
+* add hover efect on results ([402aecf](https://github.com/RokiiApp/app/commit/402aecfca0bfa49617c2fb5756879eeafaf5f923)), closes [#27](https://github.com/RokiiApp/app/issues/27)
+* Enable light and dark themes ([0f8e15c](https://github.com/RokiiApp/app/commit/0f8e15c94c7329a9e7df6f9ba40e18eb0d019103))
+
+
+### Bug Fixes
+
+* update deps ([e23a597](https://github.com/RokiiApp/app/commit/e23a597bc94df2c9dc6e0bb58e38231a96e051ae))
+
 ## [1.2.0](https://github.com/RokiiApp/app/compare/rokii-v1.1.0...rokii-v1.2.0) (2024-03-03)
 
 
