@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/RokiiApp/app/compare/rokii-v1.3.1...rokii-v1.4.0) (2024-03-04)
+
+
+### Features
+
+* Full support for light and dark themes ([bb4c0eb](https://github.com/RokiiApp/app/commit/bb4c0ebdddaa49ebb5c9a5f6fee91bc43c6d0751)), closes [#21](https://github.com/RokiiApp/app/issues/21)
+
+
+### Bug Fixes
+
+* Hotkey not working ([25d4055](https://github.com/RokiiApp/app/commit/25d4055b20ce6be5bd4ff1ab4562b2a57ec3716d)), closes [#30](https://github.com/RokiiApp/app/issues/30)
+* **ui:** Separate result items ([15c29fc](https://github.com/RokiiApp/app/commit/15c29fca1052e2ad5d57339fb51322278317a9cb))
+
 ## [1.3.1](https://github.com/RokiiApp/app/compare/rokii-v1.3.0...rokii-v1.3.1) (2024-03-04)
 
 
