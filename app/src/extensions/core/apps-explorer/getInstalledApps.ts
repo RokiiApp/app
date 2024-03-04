@@ -2,17 +2,21 @@ import type { AppEntry } from './types'
 import { invoke } from '@tauri-apps/api/tauri'
 
 export const getInstalledApps = async () => {
-  const rawInstalledApps = await invoke<string[]>('get_installed_apps')
+  const rawInstalledApps = await invoke<string>('get_installed_apps')
 
-  const installedApps = rawInstalledApps.map((appEntry) => {
-    const [_, rawName, rawId] = appEntry.match(/(.+?)\s\s+(.+)/) || []
+  const lines = rawInstalledApps.split('\n').map(line => line.trim()).filter(line => line.length > 0)
 
-    const name = rawName.trim()
-    const id = rawId.trim()
+  // lines 0, 2, 4... contains app name
+  // lines 1, 3, 5... contains app id
 
-    // We create an array of entries so we can create the apps object
-    return [name, { name, id }] as [string, AppEntry]
-  })
+  const apps: Record<string, AppEntry> = {}
 
-  return installedApps
+  for (let i = 0; i < lines.length; i += 2) {
+    const name = lines[i]
+    const id = lines[i + 1]
+
+    apps[name] = { name, id }
+  }
+
+  return apps;
 }

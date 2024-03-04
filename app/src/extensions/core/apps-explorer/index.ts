@@ -45,7 +45,7 @@ const run: ExtensionModule['run'] = async ({ term, update, display, actions }) =
 
 const initializeAsync = async () => {
   const installedApps = await getInstalledApps()
-  Object.assign(apps, Object.fromEntries(installedApps))
+  Object.assign(apps, installedApps)
 }
 
 const AppsExplorerExtension: ExtensionModule = {
