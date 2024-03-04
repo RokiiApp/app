@@ -13,7 +13,7 @@ function ResultItem({ isSelected, result }: ResultProps) {
         <div
             className={
                 `flex flex-nowrap gap-2 justify-between items-center whitespace-nowrap
-                w-full h-12 rounded-md cursor-pointer p-2 hover:bg-result-background-hover
+                w-full h-12 rounded-lg cursor-pointer p-2 hover:bg-result-background-hover mb-1
                 ${isSelected ? "bg-result-background-selected" : "bg-result-background"}`
             }
             onClick={(e) => result.onSelect(e)}
