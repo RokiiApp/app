@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/RokiiApp/app/compare/rokii-v1.3.0...rokii-v1.3.1) (2024-03-04)
+
+
+### Bug Fixes
+
+* force release ([9bac4b2](https://github.com/RokiiApp/app/commit/9bac4b2e4184a9ff5b809ed1de8a3f300868e9bc))
+
 ## [1.3.0](https://github.com/RokiiApp/app/compare/rokii-v1.2.0...rokii-v1.3.0) (2024-03-04)
 
 
