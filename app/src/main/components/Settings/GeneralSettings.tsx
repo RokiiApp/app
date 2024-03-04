@@ -1,3 +1,5 @@
+import { StoredSetting } from '@/stores/ExtensionSettingsStore'
+import Hotkey from './input-components/Hotkey'
 import { InputComponentFabric } from './input-components/InputComponentFabric'
 import { useRokiiSettings } from '@/stores/rokii-settings'
 
@@ -13,6 +15,14 @@ function GeneralSettings() {
             {
                 Object.entries(generalSettings).map(([id, setting]) => {
                     if (!isRokiiSetting(id, generalSettings)) return null
+
+                    if (setting.id === 'rokii.hotkey') {
+                        return <Hotkey
+                            key={id}
+                            setting={setting as StoredSetting<string>}
+                            onChange={(value) => setSetting(id, { ...setting, value })}
+                        />
+                    }
 
                     return <InputComponentFabric
                         key={id} setting={setting}
