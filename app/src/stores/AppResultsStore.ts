@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { ResultsStore } from '@/entities/ActionsStore'
+import { ResultsStore } from '@/entities/ResultsStore'
 import { ResultCreator } from '@/entities/ResultCreator'
 
 /**

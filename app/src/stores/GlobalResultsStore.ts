@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { ResultCreator } from '@/entities/ResultCreator'
-import { ResultsStore } from '@/entities/ActionsStore'
+import { ResultsStore } from '@/entities/ResultsStore'
 
 export const useGlobalResultsStore = create<ResultsStore>((set, get) => ({
   actionsMap: new Map(),

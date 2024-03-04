@@ -1,7 +1,7 @@
 import type { ExtensionContext } from '@rokii/api'
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
-import { ZustandResultsStore } from '@/entities/ActionsStore'
+import { ZustandResultsStore } from '@/entities/ResultsStore'
 import { useExtensionSettings } from '@/stores/ExtensionSettingsStore'
 import { writeText } from '@tauri-apps/api/clipboard'
 import { appWindow } from '@tauri-apps/api/window'
