@@ -19,11 +19,11 @@ export const useRokiiSettings = create<RokiiSettingsStore>()(
                 const { getSetting, getAllSettings, setSetting, ...settings } = getStore()
                 return settings
             },
-            getSetting: (settingName) => {
+            getSetting: <T extends keyof RokiiSettingsSchema>(settingName: T) => {
                 const setting = getStore()[settingName]
                 return setting
             },
-            setSetting: (settingName, value) => {
+            setSetting: <T extends keyof RokiiSettingsSchema>(settingName: T, value: RokiiSettingsSchema[T]) => {
                 setStore(({ [settingName]: value }))
             }
         }),
