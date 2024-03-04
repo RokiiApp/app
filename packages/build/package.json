@@ -14,8 +14,7 @@
     "package:build": "tsc"
   },
   "dependencies": {
-    "esbuild": "0.19.7",
-    "esbuild-css-modules-plugin": "2.7.1"
+    "vite": "5.1.5"
   },
   "devDependencies": {
     "@types/node": "*",

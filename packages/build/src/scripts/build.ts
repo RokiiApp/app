@@ -1,34 +1,23 @@
-import esbuild from 'esbuild'
-import CssModulesPlugin from 'esbuild-css-modules-plugin'
-import url from 'node:url'
-import fs from 'node:fs'
-
-const configFile = url.pathToFileURL('rokii.build.js')
-let config = {}
-
-if (fs.existsSync(configFile)) {
-  config = await import(configFile.toString()).then(m => m.config)
-  console.log('✅ Loaded configuration file from: ', configFile.toString())
-}
+import { build } from "vite"
 
 console.log('⌛ Creating bundle...')
-esbuild
-  .build({
-    logLevel: 'info',
-    entryPoints: ['./src/index.tsx'],
-    bundle: true,
-    minify: true,
-    format: 'esm',
-    target: 'es2022',
-    loader: { '.js': 'jsx', '.png': 'dataurl', '.svg': 'text' },
-    outfile: 'dist/index.js',
-    plugins: [CssModulesPlugin()],
-    ...config
-  })
-  .then(() => {
-    console.log('✅ Build finished')
-  })
-  .catch((err) => {
-    console.error(err)
-    process.exit(1)
-  })
+
+await build({
+  root: process.cwd(),
+  build: {
+    minify: "esbuild",
+    lib: {
+      entry: './src/index',
+      formats: ['es'],
+      fileName: "index"
+    },
+    target: "esnext",
+    outDir: "dist",
+    emptyOutDir: true
+  }
+}).then(() => {
+  console.log('✅ Build finished')
+}).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
