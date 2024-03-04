@@ -32,7 +32,8 @@
     "react": "*",
     "react-dom": "*",
     "react-fontawesome": "1.7.1",
-    "react-select": "5.7.2"
+    "react-select": "5.7.2",
+    "typescript": "*"
   },
   "devDependencies": {
     "@types/react": "*",
