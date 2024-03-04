@@ -28,6 +28,7 @@
 @layer base {
     :root {
         --input: #000000;
+        --input-autocomplete: #2f2f2f;
 
         --result-title: #000000;
         --result-title-selected: white;
@@ -67,6 +68,7 @@
 
     .dark {
         --input: white;
+        --input-autocomplete: #818181;
 
         --result-title: white;
         --result-title-selected: white;
@@ -100,7 +102,6 @@
         --destructive-foreground: 210 40% 98%;
 
         --border: 217.2 32.6% 17.5%;
-        --input: 217.2 32.6% 17.5%;
         --ring: 212.7 26.8% 83.9%;
     }
 }

@@ -26,10 +26,7 @@ const SearchBar = () => {
       placeholder='Search in Rokii...'
       ref={mainInput}
       value={term}
-      className={`
-        absolute z-50 w-full h-full bg-transparent border-none outline-none
-        text-[var(--main-font-color)] font-[var(--main-font)]
-      `}
+      className="absolute z-50 w-full h-full bg-transparent border-none outline-none text-input placeholder:text-input-autocomplete"
       onChange={(e) => updateTerm(e.target.value)}
     />
   )
