@@ -38,6 +38,9 @@
         --result-background-selected: rgba(18, 110, 219, 1);
         --result-background-hover: rgb(77, 144, 227);
 
+        --accent-background: var(--result-background-selected);
+        --accent-text: var(--result-title-selected);
+
         --background: white;
         --foreground: 222.2 84% 4.9%;
 
@@ -75,9 +78,12 @@
         --result-title-selected: white;
         --result-subtitle: #cccccc;
         --result-subtitle-selected: #cccccc;
-        --result-background: transparent;
+        --result-background: rgba(21, 22, 23, 0.999);
         --result-background-selected: #3d3b49;
         --result-background-hover: #34333d;
+
+        --accent-background: var(--result-background-selected);
+        --accent-text: var(--result-title-selected);
 
         --background: rgba(21, 22, 23, 0.999);
         --foreground: 210 40% 98%;

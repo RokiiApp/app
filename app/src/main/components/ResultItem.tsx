@@ -34,7 +34,7 @@ function ResultItem({ isSelected, result }: ResultProps) {
                     </span>}
             </div>
 
-            <div aria-label='extension-name'>
+            <div aria-label='extension-name' className='text-input'>
                 {extension}
             </div>
         </div>

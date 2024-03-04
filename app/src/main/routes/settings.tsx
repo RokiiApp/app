@@ -34,8 +34,8 @@ export { memoizedSettingsPage as Settings }
 const SettingsTopBar = ({ section }: { section: string }) => {
     return <header className='flex items-center gap-2 h-full'>
         <BackButton backLocation='/' />
-        <h1 className='text-xl font-bold'>Settings</h1>
-        <h2 className='text-md font-light'>/ {section}</h2>
+        <h1 className='text-input text-xl font-bold'>Settings</h1>
+        <h2 className='text-input text-md font-light'>/ {section}</h2>
     </header>
 }
 
@@ -50,7 +50,7 @@ const SettingsContainer = ({ sections, setSection, selectedSection }: SettingsCo
         <nav className="col-span-1">
             <ul className="list-none flex flex-col gap-2">
                 {sections.map((item) => (
-                    <li key={item} className="w-full px-2 py-1 bg-slate-700 rounded-md hover:bg-slate-400">
+                    <li key={item} className="w-full px-2 py-1 bg-accent-background rounded-md hover:bg-slate-400">
                         <button className="w-full text-left text-white" onClick={() => setSection(item)}>
                             {item}
                         </button>

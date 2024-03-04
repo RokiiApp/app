@@ -11,13 +11,13 @@ const BooleanInput: InputComponent<boolean> = ({ setting, onChange }) => {
             <div className="grid gap-1.5 leading-none">
                 <label
                     htmlFor={id}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-input text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                     {label}
                 </label>
                 {
                     description &&
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-input-autocomplete">
                         {description}
                     </p>
                 }
