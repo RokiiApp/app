@@ -36,6 +36,7 @@
         --result-subtitle-selected: #cccccc;
         --result-background: white;
         --result-background-selected: rgba(18, 110, 219, 1);
+        --result-background-hover: rgb(77, 144, 227);
 
         --background: white;
         --foreground: 222.2 84% 4.9%;
@@ -76,6 +77,7 @@
         --result-subtitle-selected: #cccccc;
         --result-background: transparent;
         --result-background-selected: #3d3b49;
+        --result-background-hover: #34333d;
 
         --background: rgba(21, 22, 23, 0.999);
         --foreground: 210 40% 98%;
