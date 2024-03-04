@@ -1,5 +1,12 @@
 # @rokii/build
 
+## [2.0.11](https://github.com/RokiiApp/app/compare/build-v2.0.10...build-v2.0.11) (2024-03-04)
+
+
+### Bug Fixes
+
+* migrate to vite ([81b6fac](https://github.com/RokiiApp/app/commit/81b6fac8d813bec2ad44c53a93e8521fde40932f)), closes [#24](https://github.com/RokiiApp/app/issues/24)
+
 ## [2.0.10](https://github.com/RokiiApp/app/compare/build-v2.0.9...build-v2.0.10) (2024-03-04)
 
 
