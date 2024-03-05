@@ -1,5 +1,12 @@
 # @rokii/build
 
+## [2.0.13](https://github.com/RokiiApp/app/compare/build-v2.0.12...build-v2.0.13) (2024-03-05)
+
+
+### Bug Fixes
+
+* build options ([953f687](https://github.com/RokiiApp/app/commit/953f687d26f32b19c0ac2ac23ee678b1564929d2))
+
 ## [2.0.12](https://github.com/RokiiApp/app/compare/build-v2.0.11...build-v2.0.12) (2024-03-05)
 
 
