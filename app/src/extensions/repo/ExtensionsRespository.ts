@@ -68,6 +68,9 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
   }
 
   private async onAddedExtensionDetected(event: ExtensionAddedEvent) {
+    // Wait 500ms to ensure the file is fully written
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
     console.log('[ExtensionsRepository] - New extension detected. Extension name: ', event.detail)
     const { name } = event.detail
 
