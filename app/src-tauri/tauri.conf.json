@@ -29,8 +29,7 @@
         "all": true,
         "scope": [
           "https://localhost/*",
-          "https://registry.npmjs.org/**/*",
-          "https://**/*"
+          "https://*"
         ]
       },
       "fs": {
