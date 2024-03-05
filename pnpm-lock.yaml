@@ -56,9 +56,9 @@ importers:
       js-untar:
         specifier: 2.0.0
         version: 2.0.0
-      just-debounce:
-        specifier: 1.1.0
-        version: 1.1.0
+      just-debounce-it:
+        specifier: 3.2.0
+        version: 3.2.0
       lucide-react:
         specifier: 0.341.0
         version: 0.341.0(react@18.2.0)
@@ -3527,8 +3527,8 @@ packages:
       graceful-fs: 4.2.11
     dev: true
 
-  /just-debounce@1.1.0:
-    resolution: {integrity: sha512-qpcRocdkUmf+UTNBYx5w6dexX5J31AKK1OmPwH630a83DdVVUIngk55RSAiIGpQyoH0dlr872VHfPjnQnK1qDQ==}
+  /just-debounce-it@3.2.0:
+    resolution: {integrity: sha512-WXzwLL0745uNuedrCsCs3rpmfD6DBaf7uuVwaq98/8dafURfgQaBsSpjiPp5+CW6Vjltwy9cOGI6qE71b3T8iQ==}
     dev: false
 
   /just-memoize@2.2.0:
