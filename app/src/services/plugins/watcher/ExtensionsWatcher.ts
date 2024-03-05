@@ -1,5 +1,5 @@
 import { RawEvent, watchImmediate } from 'tauri-plugin-fs-watch-api'
-import debounce from 'just-debounce'
+import debounce from 'just-debounce-it'
 import type { UnlistenFn } from '@tauri-apps/api/event'
 import { PLUGINS_PATH } from '@/common/constants/paths'
 import { TypedEventTarget } from 'typescript-event-target'
