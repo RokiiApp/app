@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/RokiiApp/app/compare/rokii-v1.4.0...rokii-v1.4.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* wait a bit before loading development extensions to avoid corrrupted file modules ([8dc619b](https://github.com/RokiiApp/app/commit/8dc619b42a7d1a9e28289891b2c4c959072d1da7))
+
 ## [1.4.0](https://github.com/RokiiApp/app/compare/rokii-v1.3.1...rokii-v1.4.0) (2024-03-04)
 
 
