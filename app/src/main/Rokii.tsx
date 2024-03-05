@@ -7,12 +7,14 @@ import { useGlobalSettings } from '@/main/hooks/useGlobalSettings'
 import { Home } from '@/main/routes/home'
 import { ExtensionApp } from '@/main/routes/app'
 import { Settings } from '@/main/routes/settings'
+import { useWindowListeners } from './hooks/useWindowListeners'
 
 /**
  * The Rokii app entry point
  */
 const Rokii = () => {
     useGlobalSettings()
+    useWindowListeners()
     useExtensionsRepository()
 
     return (

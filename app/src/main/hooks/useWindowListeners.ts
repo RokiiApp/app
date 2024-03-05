@@ -11,6 +11,7 @@ export const useWindowListeners = () => {
         const unlistenPromise = on(TauriEvent.WINDOW_BLUR, blurListener)
         const onKeyDown = onKeyDownListener(developerMode.value)
         window.addEventListener('keydown', onKeyDown)
+        window.addEventListener("contextmenu", (e) => e.preventDefault())
 
         return () => {
             unlistenPromise.then((unlisten) => unlisten())
