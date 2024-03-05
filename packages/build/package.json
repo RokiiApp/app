@@ -14,14 +14,15 @@
   "license": "MIT",
   "scripts": {
     "package:type-check": "tsc --noEmit",
-    "package:build": "tsc"
+    "package:build": "rimraf dist && tsc"
   },
   "dependencies": {
     "vite": "5.1.5"
   },
   "devDependencies": {
     "@types/node": "*",
-    "typescript": "*"
+    "typescript": "*",
+    "rimraf": "5.0.5"
   },
   "publishConfig": {
     "access": "public"
