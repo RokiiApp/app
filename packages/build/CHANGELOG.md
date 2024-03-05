@@ -1,5 +1,12 @@
 # @rokii/build
 
+## [2.0.12](https://github.com/RokiiApp/app/compare/build-v2.0.11...build-v2.0.12) (2024-03-05)
+
+
+### Bug Fixes
+
+* include compiled files indistribution ([32dc405](https://github.com/RokiiApp/app/commit/32dc40560349c75ac618694f6ca24f51985afeae))
+
 ## [2.0.11](https://github.com/RokiiApp/app/compare/build-v2.0.10...build-v2.0.11) (2024-03-04)
 
 
