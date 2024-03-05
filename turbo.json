@@ -9,10 +9,9 @@
                 "dist/**"
             ]
         },
-        "package:test": {},
         "package:type-check": {
             "dependsOn": [
-                "^package:build"
+                "package:build"
             ]
         },
         "app:type-check": {
