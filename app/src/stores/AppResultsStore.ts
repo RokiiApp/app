@@ -6,7 +6,7 @@ import { ResultCreator } from '@/entities/ResultCreator'
  * A store aislated from the main result store to handle the actions
  * from the app extensions
  */
-export const useAppResultsStore = create<ResultsStore>((set, get) => ({
+export const useAppResultsStore = create<ResultsStore>((set) => ({
   actionsMap: new Map(),
   actions: [],
 
@@ -16,48 +16,56 @@ export const useAppResultsStore = create<ResultsStore>((set, get) => ({
       return [newResult.id, newResult] as const
     })
 
-    const newMapActions = new Map([...get().actionsMap, ...actionResults])
-    const newActions = Array.from(newMapActions.values())
+    set(({ actionsMap: oldActionsMap }) => {
+      const actionsMap = new Map([...oldActionsMap, ...actionResults])
 
-    set(() => ({ actionsMap: newMapActions, actions: newActions }))
+      const actions = [...actionsMap.values()]
+      
+      return { actionsMap, actions }
+    })
   },
 
   updateAction: (id, newAction) => {
-    const actionsMap = get().actionsMap;
+    set(({ actionsMap: oldActionsMap }) => {
+      const actionsMap = new Map(oldActionsMap)
 
-    const oldAction = actionsMap.get(id)
-    if (!oldAction) return
+      const oldAction = actionsMap.get(id)
+      if (!oldAction) return {}
 
-    const updatedAction = oldAction.update(newAction)
+      const updatedAction = oldAction.update(newAction)
 
-    actionsMap.set(updatedAction.id, updatedAction)
+      actionsMap.set(updatedAction.id, updatedAction)
 
-    const newActions = Array.from(actionsMap.values())
+      const actions = [...actionsMap.values()]
 
-    set(() => ({ actionsMap, actions: newActions }))
+      return { actionsMap, actions }
+    })
   },
 
   removeAction: (id) => {
-    const actionsMap = get().actionsMap;
-    actionsMap.delete(id)
+    set(({ actionsMap: oldActionsMap }) => {
+      const actionsMap = new Map(oldActionsMap)
+      actionsMap.delete(id)
 
-    const newActions = Array.from(actionsMap.values())
-
-    set(() => ({ actionsMap, actions: newActions }))
+      const actions = [...actionsMap.values()]
+      return { actionsMap, actions }
+    })
   },
 
   removeActionsFromExtension: (extensionName: string) => {
-    const actionsMap = get().actionsMap;
+    set(({ actionsMap: oldActionsMap }) => {
+      const actionsMap = new Map(oldActionsMap)
 
-    for (const [id, action] of actionsMap) {
-      if (action.extension === extensionName) {
-        actionsMap.delete(id)
+      for (const [id, action] of actionsMap) {
+        if (action.extension === extensionName) {
+          actionsMap.delete(id)
+        }
       }
-    }
 
-    const newActions = Array.from(actionsMap.values())
+      const actions = [...actionsMap.values()]
 
-    set(() => ({ actionsMap, actions: newActions }))
+      return { actionsMap, actions }
+    })
   },
 
   removeAllActions: () => {
