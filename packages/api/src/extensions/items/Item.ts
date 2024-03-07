@@ -42,6 +42,7 @@ export class Item {
     this.keyword = action.keyword || []
     this.autocomplete = action.autocomplete || action.title
     this.icon = action.icon
+    this.group = action.group
   }
 }
 
