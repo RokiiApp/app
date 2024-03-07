@@ -35,7 +35,8 @@ export class ExtensionContextProvider {
       },
       hide: (id) => {
         const actionsStore = this.resultsStore.getState()
-        actionsStore.removeAction(id)
+        const fullId = `${this.extensionName}-${id}`
+        actionsStore.removeAction(fullId)
       },
       update: (id, action) => {
         const actionsStore = this.resultsStore.getState()
