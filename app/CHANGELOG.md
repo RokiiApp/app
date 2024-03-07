@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.5.0](https://github.com/RokiiApp/app/compare/rokii-v1.4.2...rokii-v1.5.0) (2024-03-07)
+
+
+### Features
+
+* Group results ([08a4552](https://github.com/RokiiApp/app/commit/08a4552a7dcde29c7715d1a34fbb2bfd16bc5a82)), closes [#36](https://github.com/RokiiApp/app/issues/36)
+
+
+### Bug Fixes
+
+* autocomplete error ([1356ffe](https://github.com/RokiiApp/app/commit/1356ffe047fcbb179f3c586a329de32645882fc7))
+* UI not being updated on settings changed ([5d02784](https://github.com/RokiiApp/app/commit/5d027846b42fea634bb4b8ed7948688f58aa3dd3)), closes [#37](https://github.com/RokiiApp/app/issues/37)
+* Use categories in extensions extension ([8e22fb9](https://github.com/RokiiApp/app/commit/8e22fb93de51344c43a16188e732874e96cb6cc0))
+* use correct id for hide api ([66d6b59](https://github.com/RokiiApp/app/commit/66d6b59ae13fb176b479adf4f7289e77a13f8bfd))
+* use extension icon if result does not provide ([63ebbb7](https://github.com/RokiiApp/app/commit/63ebbb74306e9f1707aabc71621d20dac97f0f4a))
+
 ## [1.4.2](https://github.com/RokiiApp/app/compare/rokii-v1.4.1...rokii-v1.4.2) (2024-03-05)
 
 
