@@ -60,7 +60,7 @@ const ResultsList = ({ items }: { items: Result[] }) => {
 
   if (results.length === 0) return null
 
-  requestAutocomplete(selectedResult.autocomplete)
+  requestAutocomplete(selectedResult?.autocomplete)
 
   return (
     <Virtuoso
