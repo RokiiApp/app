@@ -3,6 +3,7 @@ import { send } from '@/common/ipc'
 import { Item } from '@rokii/api'
 import { appWindow } from '@tauri-apps/api/window'
 import { Icon, ensureIcon } from "@/entities/Icon"
+import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 
 /**
  * A result corresponds to a row in the results list component.
@@ -27,21 +28,26 @@ export class Result {
     readonly id: `${string}-${string}`
     keywords: string[] | undefined
   
-    constructor(action: Item, extensionName: string) {  
+    constructor(action: Item, extensionName: string) {
+      this.extension = extensionName
+
+      const icon = action.icon || this.getExtensionIcon(extensionName)
       this.title = action.title
       this.subtitle = action.subtitle || ''
-      this.icon = ensureIcon(action.icon)
-      this.extension = extensionName
+      this.icon = ensureIcon(icon)
+      console.log("ext", extensionName)
       this.autocomplete = action.autocomplete || action.title
       this.id = `${extensionName}-${action.id}`
       this.keywords = action.keyword
     }
   
     update(newAction: Item) {
+      const icon = newAction.icon || this.getExtensionIcon(this.extension)
+    
       this.title = newAction.title
       this.subtitle = newAction.subtitle || ''
-      this.icon = newAction.icon || ''
-  
+      this.icon = ensureIcon(icon)
+
       return this
     }
   
@@ -50,4 +56,8 @@ export class Result {
       send(CHANNELS.ClearInput)
       await appWindow.hide()
     };
+
+    private getExtensionIcon(extensionName: string) {
+      return extensionsRepository.get(extensionName).icon
+    }
   }
