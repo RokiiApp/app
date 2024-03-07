@@ -28,6 +28,12 @@ export class Item {
   keyword: string[] = []
   autocomplete: string
   icon?: string
+  /**
+   * The group of the result. It's used to group the results in the results list
+   * component. This only applies to results displayed in an extension app window.
+   * If not provided, the result will be displayed on the top of the list.
+   */
+  group?: string
 
   constructor(action: ItemParams) {
     this.id = action.id || action.title
@@ -59,4 +65,10 @@ export type ItemParams = {
     * If the extension icon is not provided, the default icon will be used
     */
   icon?: string
+  /**
+    * The group of the result. It's used to group the results in the results list
+    * component. This only applies to results displayed in an extension app window.
+    * If not provided, the result will be displayed on the top of the list.
+    */
+  group?: string
 }
