@@ -1,10 +1,8 @@
-import { useMemo } from 'react'
 import { useExtensionSettings } from '@/stores/ExtensionSettingsStore'
 import { InputComponentFabric } from './input-components/InputComponentFabric'
 
 function ExtensionSettings({ extensionName }: { extensionName: string }) {
-  const getSettings = useExtensionSettings((s) => s.getAllFromExtension)
-  const extensionSetting = useMemo(() => getSettings(extensionName), [extensionName])
+  const extensionSetting = useExtensionSettings((s) => s.getAllFromExtension(extensionName))
   const add = useExtensionSettings((s) => s.addSetting)
 
   return (
