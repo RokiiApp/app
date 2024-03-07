@@ -1,8 +1,7 @@
 import type { Result } from '@/entities/result/Result'
 import { memo, useEffect } from 'react'
-import { Virtuoso } from 'react-virtuoso'
+import { GroupedVirtuoso } from 'react-virtuoso'
 
-import { RESULT_HEIGHT, VISIBLE_RESULTS } from '@/common/constants/ui'
 import { send } from '@/common/ipc'
 import { CHANNELS } from '@/common/constants/events'
 import { useAutocomplete } from '@/main/hooks/useAutocomplete'
@@ -10,8 +9,9 @@ import { useSelectedResult } from '@/main/hooks/useSelectedResult'
 import { useResultsAutoscroll } from '@/main/hooks/useResultsAutoscroll'
 import { useTermFilter } from '@/main/hooks/useTermFilter'
 import ResultItem from '../ResultItem'
+import { GroupByFunction } from '@/main/utils/groupBy'
 
-const ResultsList = ({ items }: { items: Result[] }) => {
+const ResultsList = ({ items, groupBy }: { items: Result[], groupBy: GroupByFunction }) => {
   // Filter items that don't match the term
   const results = useTermFilter(items)
 
@@ -20,6 +20,8 @@ const ResultsList = ({ items }: { items: Result[] }) => {
     selectedIndex,
     MovementHandlers
   } = useSelectedResult(results)
+
+  const { groupCounts, groups } = groupBy(results)
 
   const { listRef } = useResultsAutoscroll(selectedIndex)
 
@@ -63,13 +65,14 @@ const ResultsList = ({ items }: { items: Result[] }) => {
   requestAutocomplete(selectedResult?.autocomplete)
 
   return (
-    <Virtuoso
+    <GroupedVirtuoso
+      className='h-full'
+      groupCounts={groupCounts}
       tabIndex={-1}
       ref={listRef}
       overscan={5}
-      height={VISIBLE_RESULTS * RESULT_HEIGHT}
-      fixedItemHeight={RESULT_HEIGHT}
-      totalCount={results.length}
+
+      groupContent={(index) => <div className='bg-transparent px-1 backdrop-blur-xl border-none mb-0 font-bold pb-2 rounded-t'>{groups[index]}</div>}
       itemContent={(index) => {
         const result = results[index]
         return <ResultItem result={result} isSelected={selectedIndex === index} />

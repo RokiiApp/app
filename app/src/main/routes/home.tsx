@@ -1,11 +1,14 @@
 import { memo } from 'react'
 import { useGlobalResultsStore } from '@/stores/GlobalResultsStore'
+import { useInputStore } from '@/stores/InputStore'
+
 import { useRunExtensions } from '@/main/hooks/useRunPlugins'
 
-import { ResultsList } from '../components/ResultsList'
-import { InputBox } from '../components/InputBox'
-import { useInputStore } from '@/stores/InputStore'
-import { RokiiLayout } from '../components/RokiiLayout'
+import { ResultsList } from '@/main/components/ResultsList'
+import { InputBox } from '@/main/components/InputBox'
+import { RokiiLayout } from '@/main/components/RokiiLayout'
+
+import { groupByExtension } from '@/main/utils/groupBy'
 
 const Home = () => {
   const term = useInputStore((state) => state.term)
@@ -15,7 +18,7 @@ const Home = () => {
 
   return <RokiiLayout
     TopBar={<InputBox />}
-    ContentContainer={<ResultsList items={results} />}
+    ContentContainer={<ResultsList items={results} groupBy={groupByExtension} />}
   />
 }
 

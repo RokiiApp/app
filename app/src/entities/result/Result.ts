@@ -27,6 +27,11 @@ export class Result {
      */
     readonly id: `${string}-${string}`
     keywords: string[] | undefined
+    /**
+     * The group of the result. It's used to group the results in the results list
+     * component. This only applies to results displayed in an extension app window.
+     */
+    group: string | undefined
   
     constructor(action: Item, extensionName: string) {
       this.extension = extensionName
@@ -38,6 +43,7 @@ export class Result {
       this.autocomplete = action.autocomplete || action.title
       this.id = `${extensionName}-${action.id}`
       this.keywords = action.keyword
+      this.group = action.group
     }
   
     update(newAction: Item) {
@@ -46,6 +52,7 @@ export class Result {
       this.title = newAction.title
       this.subtitle = newAction.subtitle || ''
       this.icon = ensureIcon(icon)
+      this.group = newAction.group
 
       return this
     }
