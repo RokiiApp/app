@@ -11,7 +11,6 @@ export const useRunExtensions = (term: string) => {
   const removeActionsFromExtension = useGlobalResultsStore(s => s.removeActionsFromExtension)
   const updateExtensionSettings = useExtensionSettings(s => s.addSettings)
   const getExtensionSettings = useExtensionSettings(s => s.getAllFromExtension)
-  const removeSettings = useExtensionSettings(s => s.deleteAllFromExtension)
 
   const onExtensionAdded = ({ detail }: ExtensionLoadedEvent) => {
     const { name } = detail
@@ -43,7 +42,6 @@ export const useRunExtensions = (term: string) => {
   const onExtensionRemoved = ({ detail }: ExtensionRemovedEvent) => {
     const { name } = detail
 
-    removeSettings(name)
     removeActionsFromExtension(name)
   }
 
