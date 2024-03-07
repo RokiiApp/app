@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/RokiiApp/app/compare/rokii-v1.4.1...rokii-v1.4.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* enable/disable developer setting event listeners ([be9453e](https://github.com/RokiiApp/app/commit/be9453ed2bfb213a74c9d93764c2ccd3661315c3))
+
 ## [1.4.1](https://github.com/RokiiApp/app/compare/rokii-v1.4.0...rokii-v1.4.1) (2024-03-05)
 
 
