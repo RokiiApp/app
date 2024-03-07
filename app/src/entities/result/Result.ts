@@ -35,7 +35,6 @@ export class Result {
       this.title = action.title
       this.subtitle = action.subtitle || ''
       this.icon = ensureIcon(icon)
-      console.log("ext", extensionName)
       this.autocomplete = action.autocomplete || action.title
       this.id = `${extensionName}-${action.id}`
       this.keywords = action.keyword
