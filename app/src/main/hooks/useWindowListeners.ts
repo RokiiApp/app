@@ -9,12 +9,18 @@ export const useWindowListeners = () => {
 
     useEffect(() => {
         const unlistenPromise = on(TauriEvent.WINDOW_BLUR, blurListener)
+
+        return () => {
+            unlistenPromise.then((unlisten) => unlisten())
+        }
+    }, [])
+
+    useEffect(() => {
         const onKeyDown = onKeyDownListener(developerMode.value)
         window.addEventListener('keydown', onKeyDown)
         window.addEventListener("contextmenu", (e) => e.preventDefault())
 
         return () => {
-            unlistenPromise.then((unlisten) => unlisten())
             window.removeEventListener('keydown', onKeyDown)
         }
     }, [developerMode])
