@@ -1,4 +1,4 @@
-import { AppItem, ExtensionModule } from '@rokii/api'
+import { AppItem, ExtensionModule, Item } from '@rokii/api'
 import icon from '../icon.png'
 import { PluginInfo } from './types';
 import { initializeAsync } from './initializeAsync'
@@ -10,9 +10,14 @@ let plugins: PluginInfo[] = []
 const ExtensionsManagerApp: ExtensionModule["run"] = async ({ display }) => {
   const categorizeResult = categorizePlugins(plugins);
 
-  const orderedPlugins = categorizeResult.map(pluginToResult);
+  const results: Item[] = []
 
-  display(orderedPlugins)
+  for (let [category, plugins] of Object.entries(categorizeResult) ){
+    const resultsForCategory = plugins.map(plugin => pluginToResult(plugin, category))
+    results.push(...resultsForCategory)
+  }
+
+  display(results)
 }
 
 const extensionAppName = "Manager"

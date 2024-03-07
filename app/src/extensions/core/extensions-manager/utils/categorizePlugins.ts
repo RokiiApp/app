@@ -9,11 +9,5 @@ export const categorizePlugins = (plugins: PluginInfo[]) => {
         return '🔌 Other';
     });
 
-    const result: (PluginInfo | string)[] = [];
-
-    Object.entries(grouped).forEach(([category, plugins]) => {
-        result.push(category, ...plugins);
-    })
-
-    return result;
+    return grouped;
 };
