@@ -9,8 +9,7 @@ import { groupByCustomGroup } from '../utils/groupBy'
 const ExtensionApp = () => {
   const term = useInputStore((state) => state.term)
 
-  // TODO - Fix useRunApp hook to avoid returning null
-  const { results } = useRunApp(term) || { results: [] }
+  const { results } = useRunApp(term)
 
   return <RokiiLayout
     TopBar={<InputBox />}

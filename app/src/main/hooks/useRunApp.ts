@@ -15,7 +15,7 @@ export const useRunApp = (input: string) => {
 
   if (!extension) {
     navigate('/')
-    return null
+    return { results: [] }
   }
 
   const appRunner = useMemo(() => extension.getApp(app), [app])
