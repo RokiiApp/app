@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/RokiiApp/app/compare/api-v0.4.1...api-v0.5.0) (2024-03-07)
+
+
+### Features
+
+* API add support for grouping items ([7b086ab](https://github.com/RokiiApp/app/commit/7b086ab3d7184005526d728d4430375ccda26f26))
+
 ## [0.4.1](https://github.com/RokiiApp/app/compare/api-v0.4.0...api-v0.4.1) (2024-03-04)
 
 
