@@ -8,7 +8,9 @@ import { navigate } from 'wouter/use-hash-location'
 export const useRunApp = (input: string) => {
   const [results, removeAllResults] = useAppResultsStore((s) => [s.actions, s.removeAllActions])
 
-  const { extension: extensionName, app } = useParams<{ extension: string, app: string }>()
+  const { extension: extensionName, app: appWithQueryString } = useParams<{ extension: string, app: string }>()
+  const [app] = appWithQueryString.split("?")
+
   const extension = useMemo(() => extensionsRepository.get(extensionName), [extensionName])
 
   if (!extension) {
