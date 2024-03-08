@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/RokiiApp/app/compare/api-v0.5.0...api-v0.6.0) (2024-03-08)
+
+
+### Features
+
+* Add option to keep term on AppItems ([7784d16](https://github.com/RokiiApp/app/commit/7784d16000e3f87dbfd9787f9de50510703b9770))
+
 ## [0.5.0](https://github.com/RokiiApp/app/compare/api-v0.4.1...api-v0.5.0) (2024-03-07)
 
 

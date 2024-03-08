@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/RokiiApp/app/compare/rokii-v1.5.0...rokii-v1.6.0) (2024-03-08)
+
+
+### Features
+
+* add support for keepTerm API ([a39ce08](https://github.com/RokiiApp/app/commit/a39ce0827831ec853f41e3f5682360f8adc84068))
+
 ## [1.5.0](https://github.com/RokiiApp/app/compare/rokii-v1.4.2...rokii-v1.5.0) (2024-03-07)
 
 
