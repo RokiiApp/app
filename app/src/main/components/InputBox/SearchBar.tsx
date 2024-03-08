@@ -1,10 +1,11 @@
 import { memo, useEffect, useRef } from 'react'
+import { useHashLocation } from 'wouter/use-hash-location'
 
 import { useSearchBarEventsSubscription } from '@/main/hooks/useSearchBarEventsSubscription'
 import { useInputStore } from '@/stores/InputStore'
 import { CHANNELS } from '@/common/constants/events'
 import { useFocusSuscription } from '@/main/hooks/useFocusSuscription'
-import { useHashLocation } from 'wouter/use-hash-location'
+import { getParam } from '@/main/utils/getParam'
 
 const SearchBar = () => {
   const [location] = useHashLocation()
@@ -13,7 +14,10 @@ const SearchBar = () => {
 
   useEffect(() => {
     mainInput.current?.focus()
-    updateTerm('')
+    const keepTerm = getParam("keepterm")
+    if (keepTerm !== "true") {
+      updateTerm('')
+    }
   }, [location])
 
   useSearchBarEventsSubscription(mainInput)
