@@ -8,7 +8,7 @@ import { ResultsList } from '@/main/components/ResultsList'
 import { InputBox } from '@/main/components/InputBox'
 import { RokiiLayout } from '@/main/components/RokiiLayout'
 
-import { groupByExtension } from '@/main/utils/groupBy'
+import { ungrouped } from '@/main/utils/groupBy'
 
 const Home = () => {
   const term = useInputStore((state) => state.term)
@@ -18,7 +18,7 @@ const Home = () => {
 
   return <RokiiLayout
     TopBar={<InputBox />}
-    ContentContainer={<ResultsList items={results} groupBy={groupByExtension} />}
+    ContentContainer={<ResultsList items={results} groupBy={ungrouped} />}
   />
 }
 

@@ -7,6 +7,13 @@ export type GroupByFunction = (results: Result[]) => {
     groups: string[]
 }
 
+export const ungrouped: GroupByFunction = (results) => {
+    return {
+        groupCounts: [results.length],
+        groups: [UNGROUPED_CATEGORY]
+    }
+}
+
 export const groupByExtension: GroupByFunction = (results) => {
     const groupedResults = Object.groupBy(results, (result) => result.extension)
     const groupCounts = Object.values(groupedResults).map((results) => results?.length || 0)
