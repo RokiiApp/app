@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "package:type-check": "tsc --noEmit",
+    "generate-docs": "npx typedoc src/index.ts",
     "package:build": "rimraf dist && tsc"
   },
   "license": "MIT",
