@@ -1,3 +1,4 @@
+import type { ScriptItem, AppItem } from "."
 import { ItemTypes } from "."
 
 /**
@@ -34,6 +35,11 @@ export class Item {
    * If not provided, the result will be displayed on the top of the list.
    */
   group?: string
+  /**
+   * The order of the result. It's used to order the results in the results list
+   */
+  order?: number
+
 
   constructor(action: ItemParams) {
     this.id = action.id || action.title
@@ -43,6 +49,7 @@ export class Item {
     this.autocomplete = action.autocomplete || action.title
     this.icon = action.icon
     this.group = action.group
+    this.order = action.order
   }
 }
 
@@ -72,4 +79,9 @@ export type ItemParams = {
     * If not provided, the result will be displayed on the top of the list.
     */
   group?: string
+  /**
+    * The order of the result. It's used to order the results in the results list
+    */
+  order?: number
+
 }
