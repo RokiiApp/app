@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/RokiiApp/app/compare/api-v0.6.0...api-v0.7.0) (2024-03-09)
+
+
+### Features
+
+* Add order option to API ([0e7d3f1](https://github.com/RokiiApp/app/commit/0e7d3f126cf4fe6375b3d246ce21ca47ad6e693e))
+
 ## [0.6.0](https://github.com/RokiiApp/app/compare/api-v0.5.0...api-v0.6.0) (2024-03-08)
 
 
