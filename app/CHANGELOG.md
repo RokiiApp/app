@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.7.0](https://github.com/RokiiApp/app/compare/rokii-v1.6.0...rokii-v1.7.0) (2024-03-09)
+
+
+### Features
+
+* Add support for order option in API ([5114e04](https://github.com/RokiiApp/app/commit/5114e04ee502e4e8f6aa414a36fa6f9dba3088a6))
+
+
+### Bug Fixes
+
+* allow eval in context ([9a9a324](https://github.com/RokiiApp/app/commit/9a9a3246e04dffe667737905d1dc374580ffaf87))
+* Dont group main results for now ([f918185](https://github.com/RokiiApp/app/commit/f918185c7851ff26e11b250c218eeaed0fd436ae))
+* update deps ([1ed1a96](https://github.com/RokiiApp/app/commit/1ed1a96a54ce73a3dd4522c4546de92f5dbac035))
+
 ## [1.6.0](https://github.com/RokiiApp/app/compare/rokii-v1.5.0...rokii-v1.6.0) (2024-03-08)
 
 
