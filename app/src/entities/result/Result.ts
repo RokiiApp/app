@@ -32,25 +32,30 @@ export class Result {
      * component. This only applies to results displayed in an extension app window.
      */
     group: string | undefined
+    /**
+     * The order of the result. It's used to order the results in the results list
+     */
+    order: number
   
     constructor(action: Item, extensionName: string) {
       this.extension = extensionName
 
       const icon = action.icon || this.getExtensionIcon(extensionName)
       this.title = action.title
-      this.subtitle = action.subtitle || ''
+      this.subtitle = action.subtitle ?? ''
       this.icon = ensureIcon(icon)
       this.autocomplete = action.autocomplete || action.title
       this.id = `${extensionName}-${action.id}`
       this.keywords = action.keyword
       this.group = action.group
+      this.order = action.order ?? Infinity
     }
   
     update(newAction: Item) {
       const icon = newAction.icon || this.getExtensionIcon(this.extension)
     
       this.title = newAction.title
-      this.subtitle = newAction.subtitle || ''
+      this.subtitle = newAction.subtitle ?? ''
       this.icon = ensureIcon(icon)
       this.group = newAction.group
 
