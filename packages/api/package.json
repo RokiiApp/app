@@ -6,6 +6,7 @@
   "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "homepage": "https://api.rokii.app/",
   "repository": {
     "type": "git",
     "url": "https://github.com/rokiiapp/app.git",
