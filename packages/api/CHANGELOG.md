@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/RokiiApp/app/compare/api-v0.7.0...api-v0.7.1) (2024-03-10)
+
+
+### Bug Fixes
+
+* export all types ([aec6286](https://github.com/RokiiApp/app/commit/aec628695e94fff86083df101e141734d8951a8e))
+
 ## [0.7.0](https://github.com/RokiiApp/app/compare/api-v0.6.0...api-v0.7.0) (2024-03-09)
 
 
