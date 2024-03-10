@@ -23,7 +23,7 @@
       "react-dom": "18.2.0",
       "@types/react": "18.2.64",
       "@types/node": "20.11.25",
-      "typescript": "5.4.2",
+      "typescript": "5.3.3",
       "@tauri-apps/api": "1.5.3",
       "@tauri-apps/cli": "1.5.11"
     }
