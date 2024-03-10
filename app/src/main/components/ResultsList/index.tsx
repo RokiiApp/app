@@ -62,7 +62,9 @@ const ResultsList = ({ items, groupBy }: { items: Result[], groupBy: GroupByFunc
 
   if (results.length === 0) return null
 
-  requestAutocomplete(selectedResult?.autocomplete)
+  if (selectedResult) {
+    requestAutocomplete(selectedResult.autocomplete)
+  }
 
   return (
     <GroupedVirtuoso
@@ -75,6 +77,8 @@ const ResultsList = ({ items, groupBy }: { items: Result[], groupBy: GroupByFunc
       groupContent={(index) => <div className='bg-transparent px-1 backdrop-blur-xl border-none mb-0 font-bold pb-2 rounded-t'>{groups[index]}</div>}
       itemContent={(index) => {
         const result = results[index]
+        if (!result) return null
+
         return <ResultItem result={result} isSelected={selectedIndex === index} />
       }}
     />
