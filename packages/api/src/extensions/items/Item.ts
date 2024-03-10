@@ -59,8 +59,17 @@ export type ItemParams = {
     * Used to update or remove the action from the store
     */
   id?: string
+  /**
+   * The main text that will be displayed in the result
+   */
   title: string
+  /**
+   * The secondary text that will be displayed in the result
+   */
   subtitle?: string
+  /**
+   * Keywords used by Rokii to improve the search results
+   */
   keyword?: string[]
   /**
     * The text that will replace the current input when the user uses the tab key

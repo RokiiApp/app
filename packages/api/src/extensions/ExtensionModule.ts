@@ -1,6 +1,10 @@
 import type { Setting } from ".."
 import type { ExtensionContext } from ".."
 export interface ExtensionModule {
+    /**
+     * A base64 encoded string of the icon for the extension.
+     * 
+     */
     icon: string
     /**
      * The name of the extension.
@@ -22,16 +26,26 @@ export interface ExtensionModule {
      * A function that will be called when the extension is initialized.
      * It will be called synchronously, before the extension is executed.
      * 
-     * For long running tasks, use `initializeAsync` instead.
+     * For long running tasks, use {@link initializeAsync} instead.
      * 
      */
     initialize?: (settings: Record<string, any>) => void
+    /**
+     * 
+     * @param callback The function you can use to send data to the {@link onMessage} method.
+     * @param settings The user settings for the extension.
+     */
     initializeAsync?: (callback: (data: unknown) => void, settings: Record<string, any>) => Promise<void>
+
     /**
      * This method will be called when the initializeAsync method calls the callback.
-     * This is useful to retrieve data for the extension, and to perform long running tasks.
+     * This is useful to retrieve data for the extension after performing long running tasks.
+     * 
+     * @param data The data sent by the {@link initializeAsync} method.
+     * 
      */
     onMessage?: (data: unknown) => void
+
     /**
      * A list of apps that the extension provides.
      * 

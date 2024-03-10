@@ -1,8 +1,14 @@
 import type { Item } from "./items"
 
 /**
- * The context that is provided to the extension when it is executed.
- * This context provides the extension with the input term, and a function that can be called to display the results of the extension.
+ * Rokii provides the extensions with a context that contains relevant
+ * information about the current state of the application.
+ * 
+ * The context is provided every time the extension is executed.
+ * 
+ * Some of the information provided in the context includes:
+ * - The input term that the user has entered.
+ * - A function that can be called to display the results of the extension.
  * 
  */
 export interface ExtensionContext {
@@ -19,6 +25,11 @@ export interface ExtensionContext {
      * The input term that the user has entered.
      */
     term: string
+    /**
+     * A function that can be called to update the results of the extension.
+     * @param id A unique identifier for the item.
+     * @param item The item that will replace the current item.
+     */
     update: (id: string, item: Item) => void
     /**
      * Common actions that the extension can perform.
@@ -46,7 +57,7 @@ export interface ExtensionContext {
         replaceTerm: (term: string) => void
     },
     /**
-     * An object containing the settings for the extension.
+     * An object containing the user settings for the extension.
      */
     settings: Record<string, any>
 }
