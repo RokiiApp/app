@@ -44,7 +44,7 @@ class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
         const isRemoveEvent = 'remove' in type
         if (!isRemoveEvent) return
 
-        const extensionPath = paths[0]
+        const extensionPath = paths[0] as string
 
         const extensionName = getExtensionNameFromPath(extensionPath)
 
@@ -65,7 +65,7 @@ class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
         const isModifyEvent = 'modify' in type
         if (!isModifyEvent) return
 
-        const extensionPath = paths[0]
+        const extensionPath = paths[0] as string
 
         const extensionName = getExtensionNameFromPath(extensionPath)
 

@@ -69,6 +69,6 @@ export class Result {
     };
 
     private getExtensionIcon(extensionName: string) {
-      return extensionsRepository.get(extensionName).icon
+      return extensionsRepository.get(extensionName)?.icon
     }
   }

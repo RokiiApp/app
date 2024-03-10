@@ -17,6 +17,11 @@ export const useRunExtensions = (term: string) => {
 
     const extension = extensionsRepository.get(name)
 
+    if (!extension) {
+      console.error('[useRunExtensions] - InternalError: Extension was added but IS NOT in the repo', detail)
+      return
+    }
+
     const extensionContextProvider = new ExtensionContextProvider(extension.name, useGlobalResultsStore)
     const extensionContext = extensionContextProvider.get(term)
 

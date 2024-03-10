@@ -19,7 +19,7 @@ interface PreviewProps {
 export const Preview = ({ onComplete, plugin }: PreviewProps) => {
   const [runningAction, setRunningAction] = useState<NpmActions | null>(null)
   const [showDescription, setShowDescription] = useState(false)
-  const [showSettings, setShowSettings] = useState(false)
+  const [_showSettings, setShowSettings] = useState(false)
 
   const getNpmActions =
     (pluginName: string, runningActionName: NpmActions) => async () => {
@@ -95,7 +95,7 @@ export const Preview = ({ onComplete, plugin }: PreviewProps) => {
       </KeyboardNav>
 
       {showDescription && githubRepo && (
-        <Description repoName={githubRepo[1]} />
+        <Description repoName={githubRepo[1] as string} />
       )}
     </div>
   )

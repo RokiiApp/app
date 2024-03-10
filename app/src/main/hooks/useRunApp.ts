@@ -13,7 +13,7 @@ export const useRunApp = (input: string) => {
 
   const extension = useMemo(() => extensionsRepository.get(extensionName), [extensionName])
 
-  if (!extension) {
+  if (!extension || !app) {
     navigate('/')
     return { results: [] }
   }

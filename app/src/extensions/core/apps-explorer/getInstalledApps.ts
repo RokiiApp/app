@@ -12,8 +12,8 @@ export const getInstalledApps = async () => {
   const apps: Record<string, AppEntry> = {}
 
   for (let i = 0; i < lines.length; i += 2) {
-    const name = lines[i]
-    const id = lines[i + 1]
+    const name = lines[i] as string
+    const id = lines[i + 1] as string
 
     apps[name] = { name, id }
   }
