@@ -1,16 +1,11 @@
-import { ExtensionModule, Item } from '@rokii/api'
+import { App, Item } from '@rokii/api'
 
 import { categorizeExtensions } from './utils/categorizePlugins';
 import { pluginToResult } from './utils/pluginToResult';
 import { ExtensionInfo } from './types';
+import { getPlugins } from './utils/loadPlugins';
 
-let extensions: ExtensionInfo[] = []
-
-export const onMessage: ExtensionModule["onMessage"] = (message) => {
-    extensions = message as ExtensionInfo[]
-}
-
-export const ExtensionsManagerApp: ExtensionModule["run"] = async ({ display }) => {
+export const AppRun: App<ExtensionInfo[]>["run"] = async ({ display }, extensions) => {
     const categorizeResult = categorizeExtensions(extensions);
   
     const results: Item[] = []
@@ -21,4 +16,15 @@ export const ExtensionsManagerApp: ExtensionModule["run"] = async ({ display }) 
     }
   
     display(results)
-  }
+}
+
+export const onAppStart: App<ExtensionInfo[]>["onAppStart"] = async () => {
+    const extensions = await getPlugins()
+    return extensions
+}
+
+export const ExtensionManagerApp: App<ExtensionInfo[]> = {
+    id: "ExtensionsManager",
+    run: AppRun,
+    onAppStart
+}

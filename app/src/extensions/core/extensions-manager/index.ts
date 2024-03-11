@@ -1,20 +1,16 @@
 import { AppItem, ExtensionModule } from '@rokii/api'
 import icon from '../icon.png'
 import { initializeAsync } from './initializeAsync'
-import { ExtensionsManagerApp, onMessage } from './ExtensionsManagerApp';
+import { ExtensionManagerApp } from './ExtensionsManagerApp';
 
-const extensionAppName = "Manager"
-const managerLauncherAction = new AppItem({ title: 'Manage extensions', appName: extensionAppName, icon })
+const managerLauncherAction = new AppItem({ title: 'Manage extensions', appName: ExtensionManagerApp.id, icon })
 
 const ExtensionsManagerExtension: ExtensionModule = {
   name: 'Extensions',
   icon,
   initializeAsync,
   run: ({ display }) => display([managerLauncherAction]),
-  onMessage,
-  apps: {
-    [extensionAppName]: ExtensionsManagerApp
-  }
+  apps: [ ExtensionManagerApp ]
 }
 
 export default ExtensionsManagerExtension
