@@ -20,3 +20,7 @@
         alt="MIT License Icon"
         src="https://img.shields.io/npm/l/@rokii/api?color=blue&label=License&style=for-the-badge"
     />
+
+> [!WARNING]
+> This package is still in devleopment, breaking changes
+> may occur without major version bump.
