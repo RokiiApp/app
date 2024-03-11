@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.8.0](https://github.com/RokiiApp/app/compare/rokii-v1.7.1...rokii-v1.8.0) (2024-03-11)
+
+
+### Features
+
+* Add support for new Extensions App API ([a2c1589](https://github.com/RokiiApp/app/commit/a2c1589647f326e1f31059a53b46ea997ebde961))
+
+
+### Bug Fixes
+
+* disable npm plugins cache ([69a58a3](https://github.com/RokiiApp/app/commit/69a58a35eb0ca7d34c9d74cc33723c2b54ea804c))
+* extensions plugin ([f7d8ecf](https://github.com/RokiiApp/app/commit/f7d8ecf5a495699d88131a538c49494bf9a57c52))
+* migrate Extension Manager to the new Extensions API ([11d9b20](https://github.com/RokiiApp/app/commit/11d9b20eb596be62395e308f3f5634d0655c229d))
+
 ## [1.7.1](https://github.com/RokiiApp/app/compare/rokii-v1.7.0...rokii-v1.7.1) (2024-03-10)
 
 
