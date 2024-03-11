@@ -11,7 +11,7 @@ async function updateInstalledPlugins(plugins: ExtensionInfo[]) {
 
   const pluginsToUpdate = plugins.filter((p) => p.updateAvailable)
 
-  const updatePromises = pluginsToUpdate.map((p) => () => client.updatePackage(p.name))
+  const updatePromises = pluginsToUpdate.map((p) => client.updatePackage(p.name))
 
   await Promise.all(updatePromises)
 
@@ -26,7 +26,8 @@ async function updateInstalledPlugins(plugins: ExtensionInfo[]) {
 }
 
 export const initializeAsync: ExtensionModule['initializeAsync'] = async (send) => {
-  const plugins = await getPlugins()
-  updateInstalledPlugins(plugins)
-  send(plugins)
+  const initialPlugins = await getPlugins()
+  await updateInstalledPlugins(initialPlugins)
+  const updatedPlugins = await getPlugins()
+  send(updatedPlugins)
 }
