@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/RokiiApp/app/compare/rokii-v1.7.0...rokii-v1.7.1) (2024-03-10)
+
+
+### Bug Fixes
+
+* Autocomplete error when no selected result ([f8941c6](https://github.com/RokiiApp/app/commit/f8941c6a3ca4c90433aeb6fbca65bea1d319d6fe))
+
 ## [1.7.0](https://github.com/RokiiApp/app/compare/rokii-v1.6.0...rokii-v1.7.0) (2024-03-09)
 
 
