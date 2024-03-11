@@ -1,5 +1,5 @@
 import type { Setting } from ".."
-import type { ExtensionContext } from ".."
+import type { ExtensionContext, App } from ".."
 export interface ExtensionModule {
     /**
      * A base64 encoded string of the icon for the extension.
@@ -52,5 +52,5 @@ export interface ExtensionModule {
      * Apps are a way to group multiple extension results together.
      * They are shown in a separate page with a private results list.
      */
-    apps?: Record<string, (context: ExtensionContext) => Promise<void>>
+    apps?: App[]
 }
