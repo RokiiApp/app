@@ -5,5 +5,3 @@
  */
 export const PLUGINS_BLACKLIST = [
 ] as readonly string[]
-
-export const CACHE_PLUGINS_MAX_AGE = 5 * 60 * 1000 // 5 minutes

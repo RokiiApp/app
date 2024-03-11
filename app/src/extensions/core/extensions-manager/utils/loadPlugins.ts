@@ -1,31 +1,27 @@
 import type { PluginInfo } from '../types'
-import memoize from 'memoizee'
 import validVersion from 'semver/functions/valid'
 import compareVersions from 'semver/functions/gt'
 import { getNPMPlugins } from './dataFetching'
 import { getInstalledPlugins } from './getInstalledPlugins'
 import getDebuggingPlugins from './getDebuggingPlugins'
-import { CACHE_PLUGINS_MAX_AGE, PLUGINS_BLACKLIST } from '../constants'
-
-const getAvailableNPMPlugins = memoize(getNPMPlugins, { maxAge: CACHE_PLUGINS_MAX_AGE })
+import { PLUGINS_BLACKLIST } from '../constants'
 
 const parseVersion = (version: string) =>
   validVersion((version || '').replace(/^\^/, '')) || '0.0.0'
 
 export const getPlugins = async (): Promise<PluginInfo[]> => {
   const [available, installed, debuggingPlugins] = await Promise.all([
-    getAvailableNPMPlugins(),
+    getNPMPlugins(),
     getInstalledPlugins(),
     getDebuggingPlugins()
   ])
 
   const normalizedIntalledPlugins = installed.map((plugin) => {
-    const { name, version, settings } = plugin
+    const { name, version } = plugin
     return {
       name,
       version,
       installedVersion: parseVersion(version),
-      settings,
       isInstalled: true,
       isUpdateAvailable: false
     }
@@ -44,7 +40,7 @@ export const getPlugins = async (): Promise<PluginInfo[]> => {
     }
 
     const { installedVersion } = installedPlugin
-    const isUpdateAvailable = compareVersions(plugin.version, parseVersion(installedVersion))
+    const isUpdateAvailable = compareVersions(plugin.version, installedVersion)
 
     return {
       ...plugin,
