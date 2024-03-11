@@ -1,11 +1,11 @@
-import { PluginInfo } from "../types";
+import { ExtensionInfo } from "../types";
 
-export const categorizePlugins = (plugins: PluginInfo[]) => {
-    const grouped = Object.groupBy(plugins, (plugin: PluginInfo) => {
-        if (plugin.isDebugging) return '🐛 Debugging';
-        if (plugin.isUpdateAvailable) return '🆕 Updates';
-        if (plugin.isInstalled) return '💫 Installed';
-        if (plugin.name) return '🔎 Available';
+export const categorizeExtensions = (plugins: ExtensionInfo[]) => {
+    const grouped = Object.groupBy(plugins, (extension) => {
+        if (extension.isDebugging) return '🐛 Debugging';
+        if (extension.updateAvailable) return '🆕 Update available';
+        if (extension.isInstalled) return '💫 Installed';
+        if (extension.name) return '🔎 Available';
         return '🔌 Other';
     });
 

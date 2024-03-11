@@ -98,6 +98,10 @@ export class NpmClient {
     }
   }
 
+  /**
+   * Updates the local package to the latest NPM version
+   * @param name The full name of the package, including the scope
+   */
   async updatePackage (name: string) {
     // Plugin update is downloading `.tar` and unarchiving it to temp folder
     // Only if this part was succeeded, current version of plugin is uninstalled

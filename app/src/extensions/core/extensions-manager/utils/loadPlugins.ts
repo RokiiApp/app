@@ -1,74 +1,66 @@
-import type { PluginInfo } from '../types'
-import validVersion from 'semver/functions/valid'
+import type { ExtensionInfo } from '../types'
 import compareVersions from 'semver/functions/gt'
-import { getNPMPlugins } from './dataFetching'
+import { getNPMPlugins } from './getNpmPlugins'
 import { getInstalledPlugins } from './getInstalledPlugins'
 import getDebuggingPlugins from './getDebuggingPlugins'
 import { PLUGINS_BLACKLIST } from '../constants'
 
-const parseVersion = (version: string) =>
-  validVersion((version || '').replace(/^\^/, '')) || '0.0.0'
-
-export const getPlugins = async (): Promise<PluginInfo[]> => {
-  const [available, installed, debuggingPlugins] = await Promise.all([
+export const getPlugins = async (): Promise<ExtensionInfo[]> => {
+  const [available, installed, debuggingExtensionNames] = await Promise.all([
     getNPMPlugins(),
     getInstalledPlugins(),
     getDebuggingPlugins()
   ])
 
-  const normalizedIntalledPlugins = installed.map((plugin) => {
-    const { name, version } = plugin
-    return {
-      name,
-      version,
-      installedVersion: parseVersion(version),
-      isInstalled: true,
-      isUpdateAvailable: false
-    }
-  })
+  const pluginsList: ExtensionInfo[] = available.map((npmExtensionInfo) => {
+    const { name, description, version } = npmExtensionInfo
 
-  const pluginsList: PluginInfo[] = available.map((plugin) => {
-    const installedPlugin = normalizedIntalledPlugins.find(p => p.name === plugin.name)
+    const installedPlugin = installed.find(p => p.name === name)
 
-    if (installedPlugin == null) {
+    if (!installedPlugin) {
       return {
-        ...plugin,
+        name,
+        description,
+        lastVersion: version,
+        isDebugging: false,
         isInstalled: false,
-        isUpdateAvailable: false,
-        isDebugging: false
+        installedVersion: null,
+        updateAvailable: false,
       }
     }
 
-    const { installedVersion } = installedPlugin
-    const isUpdateAvailable = compareVersions(plugin.version, installedVersion)
+    const { version: installedVersion } = installedPlugin
+  
+    const updateAvailable = compareVersions(npmExtensionInfo.version, installedVersion)
 
     return {
-      ...plugin,
-      ...installedPlugin,
+      name,
+      description,
+      lastVersion: version,
+      isDebugging: false,
       isInstalled: true,
-      isUpdateAvailable
+      installedVersion,
+      updateAvailable
     }
   })
 
-  console.log('Debugging Plugins: ', debuggingPlugins)
+  console.log('Debugging Plugins: ', debuggingExtensionNames)
 
-  const listOfDebuggingPlugins = debuggingPlugins.map((name) => ({
+  const debuggingExtensions: ExtensionInfo[] = debuggingExtensionNames.map((name) => ({
     name,
     description: '',
-    version: 'dev',
+    lastVersion: 'dev',
+    installedVersion: 'dev',
     isDebugging: true,
-    isInstalled: true,
-    isUpdateAvailable: false
+    isInstalled: false,
+    updateAvailable: false
   }))
 
-  const pluginsListWithoutDebugging = pluginsList.filter(p =>
-    listOfDebuggingPlugins.find(d => d.name === p.name) === undefined
-  )
+  const pluginsListWithoutDebugging = pluginsList.filter(p => !debuggingExtensions.some(d => d.name === p.name))
 
-  const plugins = [
-    ...pluginsListWithoutDebugging,
-    ...listOfDebuggingPlugins
-  ].filter((plugin) => !PLUGINS_BLACKLIST.includes(plugin.name))
+  const allExtensions = [...pluginsListWithoutDebugging, ...debuggingExtensions]
 
-  return plugins
+  const extensions = allExtensions.filter((plugin) => !PLUGINS_BLACKLIST.includes(plugin.name))
+
+  return extensions
 }

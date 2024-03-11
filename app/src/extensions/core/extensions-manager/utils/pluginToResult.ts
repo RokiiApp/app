@@ -1,19 +1,19 @@
 import { client } from "@/services/plugins";
 import { Item, ScriptItem } from "@rokii/api";
 import * as format from '../utils/format';
-import { PluginInfo } from "../types";
+import { ExtensionInfo } from "../types";
 
-export const pluginToResult = (plugin: PluginInfo, category: string): Item => {
-    const title = `${format.name(plugin.name)}`;
-    const subtitle = format.version(plugin);
+export const pluginToResult = (extension: ExtensionInfo, category: string): Item => {
+    const title = format.name(extension.name);
+    const subtitle = format.version(extension);
 
     return new ScriptItem({
         title,
         subtitle,
         group: category,
-        id: plugin.name,
+        id: extension.name,
         run: () => {
-            client.installPackage(plugin.name)
+            client.installPackage(extension.name)
         }
     })
 };

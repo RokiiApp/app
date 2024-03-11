@@ -1,4 +1,4 @@
-import type { PluginInfo } from '../types'
+import type { ExtensionInfo } from '../types'
 
 function words (string: string) {
   const pattern = /[^\s]+/g
@@ -16,7 +16,7 @@ export const name = (text = '') => {
   return pluginWords.map(capitalize).join(' ')
 }
 
-export const version = (plugin: PluginInfo) =>
-  plugin.isUpdateAvailable
-    ? `${plugin.installedVersion ?? ''} → ${plugin.version}`
-    : plugin.version
+export const version = (plugin: ExtensionInfo) =>
+  plugin.updateAvailable
+    ? `${plugin.installedVersion ?? ''} → ${plugin.lastVersion}`
+    : plugin.lastVersion
