@@ -40,7 +40,7 @@ export class Extension implements ExtensionModule {
   }
 
   getApp(name: string) {
-    return this.apps?.[name]
+    return this.apps?.find(app => app.id === name)
   }
 
   init(savedSettings: StoredExtensionSettings = {}): StoredExtensionSettings {

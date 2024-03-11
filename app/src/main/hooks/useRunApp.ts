@@ -2,38 +2,46 @@ import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 import { ExtensionContextProvider } from '@/services/plugins/ContextProvider'
 import { useAppResultsStore } from '@/stores/AppResultsStore'
 import { useEffect, useMemo } from 'react'
-import { useParams } from 'wouter'
 import { navigate } from 'wouter/use-hash-location'
+import { useOnAppRun } from './useOnAppRun'
+import { useAppParamsInfo } from './useAppParamsInfo'
 
 export const useRunApp = (input: string) => {
   const [results, removeAllResults] = useAppResultsStore((s) => [s.actions, s.removeAllActions])
 
-  const { extension: extensionName, app: appWithQueryString } = useParams<{ extension: string, app: string }>()
-  const [app] = appWithQueryString.split("?")
+  const { extensionName, appId } = useAppParamsInfo()
 
   const extension = useMemo(() => extensionsRepository.get(extensionName), [extensionName])
 
-  if (!extension || !app) {
+  if (!extension || !appId) {
     navigate('/')
     return { results: [] }
   }
 
-  const appRunner = useMemo(() => extension.getApp(app), [app])
+  const extensionApp = useMemo(() => extension.getApp(appId), [appId])
+  
+  if (!extensionApp) {
+    navigate('/')
+    return { results: [] }
+  }
 
   const context = useMemo(() => {
     return new ExtensionContextProvider(extensionName, useAppResultsStore).get(input)
   }, [input])
 
+  const { pendingContext, appOwnContext } = useOnAppRun(extensionApp, context)
+
   useEffect(() => {
+    if (pendingContext) return
+
     removeAllResults()
-    if (appRunner) {
-      appRunner(context)
-    }
+
+    extensionApp.run(context, appOwnContext)
 
     return () => {
       removeAllResults()
     }
-  }, [input])
+  }, [input, pendingContext])
 
   return { results }
 }
