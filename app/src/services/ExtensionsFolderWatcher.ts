@@ -1,8 +1,7 @@
 import { RawEvent, watchImmediate } from 'tauri-plugin-fs-watch-api'
 import debounce from 'just-debounce-it'
-import type { UnlistenFn } from '@tauri-apps/api/event'
 import { PLUGINS_PATH } from '@/common/constants/paths'
-import { getExtensionNameFromPath } from '@/services/utils/getExtensionNameFromPath'
+import { getExtensionNameFromPath } from './utils/getExtensionNameFromPath'
 
 export interface ExtensionsFolderWatcherSubscritor {
     /**
@@ -16,6 +15,8 @@ export interface ExtensionsFolderWatcherSubscritor {
      */
     onExtensionRemoved: (extensionName: string) => void
 }
+
+type UnlistenFn = Awaited<ReturnType<typeof watchImmediate>>
 
 /**
  * A class that watches for changes in the extensions directory
