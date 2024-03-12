@@ -1,12 +1,10 @@
 import { NPM_API_BASE } from '@/common/constants/urls'
 import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs'
 import { join, sep } from '@tauri-apps/api/path'
-import { http } from '@tauri-apps/api'
-import { ResponseType } from '@tauri-apps/api/http'
-// @ts-ignore - no types available
-import untar from 'js-untar'
-import pako from 'pako'
+import { ungzip } from 'pako'
 import { PackageJson } from './PackageJson'
+import { downloadBinaryFile } from './downloadBinaryFile'
+import { untarArrayBuffer } from './untarArrayBuffer'
 
 /**
  * Lightweight npm client used to install/uninstall package, without resolving dependencies
@@ -31,17 +29,24 @@ export class NpmClient {
     console.log(`Extract ${tarURL} to ${destination}`)
 
     middleware?.()
-    const { data } = await http.fetch(tarURL, { method: 'GET', responseType: ResponseType.Binary })
+    const data = await downloadBinaryFile(tarURL)
 
-    function typedArrayToBuffer (array: Uint8Array): ArrayBuffer {
+    function typedArrayToBuffer(array: Uint8Array): ArrayBuffer {
       return array.buffer.slice(array.byteOffset, array.byteLength + array.byteOffset)
     }
 
-    const files = (await untar(typedArrayToBuffer(pako.ungzip(new Uint8Array(data as any))))).map((file: any) => ({ ...file, name: file.name.replace(/^package\//, '') }))
+    // Ensure the downloaded data is a Uint8Array
+    const binary = new Uint8Array(data)
+
+    const arrayBuffer = typedArrayToBuffer(ungzip(binary))
+
+    const untarredFiles = await untarArrayBuffer(arrayBuffer)
+
+    const renamedFiles = untarredFiles.map((file) => ({ ...file, name: file.name.replace(/^package\//, '') }))
 
     await createDir(`${destination}\\dist`, { recursive: true })
 
-    for (const file of files) {
+    for (const file of renamedFiles) {
       try {
         writeBinaryFile(await join(destination, file.name), file.buffer)
       } catch { }
@@ -106,7 +111,7 @@ export class NpmClient {
     // Plugin update is downloading `.tar` and unarchiving it to temp folder
     // Only if this part was succeeded, current version of plugin is uninstalled
     // and temp folder moved to real plugin location
-    const middleware = async () => await this.uninstallPackage(name)
+    const middleware = () => this.uninstallPackage(name)
     return await this.installPackage(name, { middleware })
   }
 
