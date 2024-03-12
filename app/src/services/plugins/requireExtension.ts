@@ -17,7 +17,7 @@ export const requireExtension = async (pluginName: string) => {
   const forceCacheBust = true
 
   try {
-    const module = await ExternalModuleImporter.importModule(pluginPath, forceCacheBust)
+    const module = await ExternalModuleImporter.import(pluginPath, forceCacheBust)
 
     const extension = new Extension(module.default)
 
