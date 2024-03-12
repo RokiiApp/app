@@ -1,9 +1,9 @@
-import { untarArrayBuffer, type TarFile } from "./untarArrayBuffer";
-import { downloadBinaryFile } from "./downloadBinaryFile";
+import { untarArrayBuffer } from "./utils/untarArrayBuffer";
+import { downloadBinaryFile } from "./utils/downloadBinaryFile";
 import { ungzip } from 'pako'
 
 const TarDownloader = {
-    async download (url: string): Promise<TarFile[]> {
+    async download(url: string) {
         const data = await downloadBinaryFile(url);
 
         // Ensure the downloaded data is a Uint8Array
