@@ -21,6 +21,7 @@ type UnlistenFn = Awaited<ReturnType<typeof watchImmediate>>
 /**
  * A class that watches for changes in the extensions directory
  * and emits events when an extension is added or removed
+ * It implements the **observer pattern**, so it allows other classes to subscribe to its events
  */
 class ExtensionsFolderWatcher {
     private unlistenFunction: UnlistenFn | null = null
