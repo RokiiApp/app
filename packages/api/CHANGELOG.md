@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.8.0](https://github.com/RokiiApp/app/compare/api-v0.7.1...api-v0.8.0) (2024-03-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Ad onAppStart method to execute code only one time before an app is launch
+
+### Features
+
+* Ad onAppStart method to execute code only one time before an app is launch ([a77c7c8](https://github.com/RokiiApp/app/commit/a77c7c8d6d915a304b6d8dfd9a460caf5fb946d5))
+
 ## [0.7.1](https://github.com/RokiiApp/app/compare/api-v0.7.0...api-v0.7.1) (2024-03-10)
 
 
