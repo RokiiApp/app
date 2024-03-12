@@ -1,7 +1,7 @@
 import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
 import { Item } from '@rokii/api'
-import { appWindow } from '@tauri-apps/api/window'
+import { WindowManager } from '@/services/WindowManager'
 import { Icon, ensureIcon } from "@/entities/Icon"
 import { extensionsRepository } from '@/extensions/repo/ExtensionsRespository'
 
@@ -65,7 +65,7 @@ export class Result {
     async onSelect(e: Event | React.SyntheticEvent) {
       if (e.defaultPrevented) return
       send(CHANNELS.ClearInput)
-      await appWindow.hide()
+      await WindowManager.hide()
     };
 
     private getExtensionIcon(extensionName: string) {

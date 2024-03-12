@@ -4,7 +4,7 @@ import { send } from '@/common/ipc'
 import { ZustandResultsStore } from '@/entities/ResultsStore'
 import { useExtensionSettings } from '@/stores/ExtensionSettingsStore'
 import { writeText } from '@tauri-apps/api/clipboard'
-import { appWindow } from '@tauri-apps/api/window'
+import { WindowManager } from '@/services/WindowManager'
 import { open } from '@tauri-apps/api/shell'
 
 export class ExtensionContextProvider {
@@ -53,8 +53,8 @@ export class ExtensionContextProvider {
         copyToClipboard: async (text) => {
           await writeText(text)
         },
-        hideWindow: async () => {
-          await appWindow.hide()
+        hideWindow: () => {
+          return WindowManager.hide()
         },
         replaceTerm: async (term) => {
           send(CHANNELS.ShowTerm, term)
