@@ -2,21 +2,53 @@ import { RawEvent, watchImmediate } from 'tauri-plugin-fs-watch-api'
 import debounce from 'just-debounce-it'
 import type { UnlistenFn } from '@tauri-apps/api/event'
 import { PLUGINS_PATH } from '@/common/constants/paths'
-import { TypedEventTarget } from 'typescript-event-target'
-import { ExtensionsWatcherEventTypes, ExtensionAddedEvent, ExtensionRemovedEvent } from './WatcherEvents'
-import { getExtensionNameFromPath } from './fs-utils'
+import { getExtensionNameFromPath } from '@/services/utils/getExtensionNameFromPath'
 
-export interface WatcherEvents {
-    [ExtensionsWatcherEventTypes.ADDED]: ExtensionAddedEvent
-    [ExtensionsWatcherEventTypes.REMOVED]: ExtensionRemovedEvent
+export interface ExtensionsFolderWatcherSubscritor {
+    /**
+     * The method that is called when an extension is added
+     * @param extensionName The name of the extension that was added
+     */
+    onExtensionAdded: (extensionName: string) => void,
+    /**
+     * The method that is called when an extension is removed
+     * @param extensionName 
+     */
+    onExtensionRemoved: (extensionName: string) => void
 }
 
 /**
  * A class that watches for changes in the extensions directory
  * and emits events when an extension is added or removed
  */
-class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
+class ExtensionsFolderWatcher {
     private unlistenFunction: UnlistenFn | null = null
+    private suscriptors: ExtensionsFolderWatcherSubscritor[] = []
+
+    /**
+     * This method subscribes a listener to the events that are emitted by this class
+     * @param subscriptor 
+     */
+    subscribe(subscriptor: ExtensionsFolderWatcherSubscritor) {
+        this.suscriptors.push(subscriptor)
+    }
+
+    /**
+     * This method unsubscribes a listener from the events that are emitted by this class
+     * @param subscriptor 
+     */
+    unsubscribe(subscriptor: ExtensionsFolderWatcherSubscritor) {
+        this.suscriptors = this.suscriptors.filter(s => s !== subscriptor)
+    }
+
+    private notifyExtensionAdded(extensionName: string) {
+        this.suscriptors.forEach(s => s.onExtensionAdded(extensionName))
+    }
+
+    private notifyExtensionRemoved(extensionName: string) {
+        this.suscriptors.forEach(s => s.onExtensionRemoved(extensionName))
+    }
+
     async watch() {
         if (this.unlistenFunction) return
         console.log('[ExtensionsWatcher] - Started')
@@ -53,7 +85,7 @@ class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
          */
         if (extensionName === "package.json") return
 
-        this.dispatchTypedEvent(ExtensionsWatcherEventTypes.REMOVED, new ExtensionRemovedEvent(extensionName))
+        this.notifyExtensionRemoved(extensionName)
     }
 
     private onModifyEvent(event: RawEvent) {
@@ -81,11 +113,11 @@ class ExtensionsWatcher extends TypedEventTarget<WatcherEvents> {
     }
 
     private notifyAddedExtension = debounce((name: string) => {
-        this.dispatchTypedEvent(ExtensionsWatcherEventTypes.ADDED, new ExtensionAddedEvent(name))
+        this.notifyExtensionAdded(name)
     }, 300)
 
 }
 
-const extensionsWatcher = new ExtensionsWatcher()
+const extensionsFolderWatcher = new ExtensionsFolderWatcher()
 
-export { extensionsWatcher }
+export { extensionsFolderWatcher }

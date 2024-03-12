@@ -1,16 +1,11 @@
 import { TypedEventTarget } from 'typescript-event-target'
 
 import { ensureRokiNeededFiles } from '@/services/plugins'
-import { extensionsWatcher } from '@/services/plugins/watcher/ExtensionsWatcher'
+import { ExtensionsFolderWatcherSubscritor, extensionsFolderWatcher } from '@/services/ExtensionsFolderWatcher'
 
 import { ExtensionsRepoEventTypes, ExtensionLoadedEvent, ExtensionRemovedEvent } from './Events'
 import { Extension } from '../Extension'
 import { getCoreExtensions, getExternalExtensions } from '@/services/plugins/getters'
-import {
-  ExtensionAddedEvent,
-  ExtensionRemovedEvent as FsExtensionRemovedEvent,
-  ExtensionsWatcherEventTypes
-} from '@/services/plugins/watcher/WatcherEvents'
 import { ExtensionModuleImporter } from '@/services/ExtensionModuleImporter'
 
 export interface RepositoryEvents {
@@ -23,7 +18,7 @@ export interface RepositoryEvents {
  * It also provides methods to add, remove and get extensions
  * Consumers can subscribe to the events that are dispatched by this class to be notified when an extension is added or removed
  */
-class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
+class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> implements ExtensionsFolderWatcherSubscritor {
   private initializedWatcher = false
   private extensions: Record<string, Extension> = {}
 
@@ -54,42 +49,38 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
 
   private initializeExtensionsWatcher() {
     if (this.initializedWatcher) return
-    extensionsWatcher.addEventListener(ExtensionsWatcherEventTypes.ADDED, this.onAddedExtensionDetected.bind(this))
-    extensionsWatcher.addEventListener(ExtensionsWatcherEventTypes.REMOVED, this.onRemovedExtensionDetected.bind(this))
-    extensionsWatcher.watch()
+    extensionsFolderWatcher.subscribe(this)
+    extensionsFolderWatcher.watch()
     this.initializedWatcher = true
   }
 
   private stopExtensionsWatcher() {
-    extensionsWatcher.removeEventListener(ExtensionsWatcherEventTypes.ADDED, this.onAddedExtensionDetected.bind(this))
-    extensionsWatcher.removeEventListener(ExtensionsWatcherEventTypes.REMOVED, this.onRemovedExtensionDetected.bind(this))
-    extensionsWatcher.stop()
+    extensionsFolderWatcher.unsubscribe(this)
+    extensionsFolderWatcher.stop()
     this.initializedWatcher = false
   }
 
-  private async onAddedExtensionDetected(event: ExtensionAddedEvent) {
+  async onExtensionAdded(extensionName: string) {
     // Wait 500ms to ensure the file is fully written
     await new Promise((resolve) => setTimeout(resolve, 500))
 
-    console.log('[ExtensionsRepository] - New extension detected. Extension name: ', event.detail)
-    const { name } = event.detail
+    console.log('[ExtensionsRepository] - New extension detected. Extension name: ', extensionName)
 
-    const extension = await ExtensionModuleImporter.get(name)
+    const extension = await ExtensionModuleImporter.get(extensionName)
     if (extension === null) {
-      console.log('[ExtensionsRepository] - Extension was invalid. Wont be added: ', event.detail)
+      console.log('[ExtensionsRepository] - Extension was invalid. Wont be added: ', extensionName)
       return
     }
 
-    console.log('[ExtensionsRepository] - Extension imported sucesfully: ', event.detail)
+    console.log('[ExtensionsRepository] - Extension imported sucesfully: ', extensionName)
 
     this.add(extension)
   }
 
-  private onRemovedExtensionDetected(event: FsExtensionRemovedEvent) {
-    console.log('[ExtensionsRepository] - Extension removed: ', event.detail)
-    const { name } = event.detail
+  onExtensionRemoved(extensionName: string) {
+    console.log('[ExtensionsRepository] - Extension removed: ', extensionName)
 
-    this.delete(name)
+    this.delete(extensionName)
   }
 
   private async initializePlugins() {
