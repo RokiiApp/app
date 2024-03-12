@@ -1,12 +1,12 @@
 import { getInstalledPluginNames } from '@/services/plugins/getExternalPlugins'
 import { ExtensionGetter } from '.'
-import { requireExtension } from '@/services/plugins/requireExtension'
+import { ExtensionModuleImporter } from '@/services/ExtensionModuleImporter'
 
 export const getExternalExtensions: ExtensionGetter = async () => {
   const extensionNames = await getInstalledPluginNames()
 
   const extensions = await Promise.allSettled(extensionNames.map(async (name) => {
-    const extension = await requireExtension(name)
+    const extension = await ExtensionModuleImporter.get(name)
     if (extension === null) {
       return Promise.reject(new Error(`Failed to load extension: ${name}`))
     }

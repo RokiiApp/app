@@ -11,7 +11,7 @@ import {
   ExtensionRemovedEvent as FsExtensionRemovedEvent,
   ExtensionsWatcherEventTypes
 } from '@/services/plugins/watcher/WatcherEvents'
-import { requireExtension } from '@/services/plugins/requireExtension'
+import { ExtensionModuleImporter } from '@/services/ExtensionModuleImporter'
 
 export interface RepositoryEvents {
   [ExtensionsRepoEventTypes.LOADED]: ExtensionLoadedEvent
@@ -74,7 +74,7 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> {
     console.log('[ExtensionsRepository] - New extension detected. Extension name: ', event.detail)
     const { name } = event.detail
 
-    const extension = await requireExtension(name)
+    const extension = await ExtensionModuleImporter.get(name)
     if (extension === null) {
       console.log('[ExtensionsRepository] - Extension was invalid. Wont be added: ', event.detail)
       return
