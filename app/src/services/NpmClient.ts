@@ -1,10 +1,8 @@
 import { NPM_API_BASE } from '@/common/constants/urls'
 import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs'
 import { join, sep } from '@tauri-apps/api/path'
-import { ungzip } from 'pako'
 import { PackageJson } from './PackageJson'
-import { downloadBinaryFile } from './downloadBinaryFile'
-import { untarArrayBuffer } from './untarArrayBuffer'
+import { TarDownloader } from './TarDownloader'
 
 /**
  * Lightweight npm client used to install/uninstall package, without resolving dependencies
@@ -29,18 +27,8 @@ export class NpmClient {
     console.log(`Extract ${tarURL} to ${destination}`)
 
     middleware?.()
-    const data = await downloadBinaryFile(tarURL)
 
-    function typedArrayToBuffer(array: Uint8Array): ArrayBuffer {
-      return array.buffer.slice(array.byteOffset, array.byteLength + array.byteOffset)
-    }
-
-    // Ensure the downloaded data is a Uint8Array
-    const binary = new Uint8Array(data)
-
-    const arrayBuffer = typedArrayToBuffer(ungzip(binary))
-
-    const untarredFiles = await untarArrayBuffer(arrayBuffer)
+    const untarredFiles = await TarDownloader.download(tarURL)
 
     const renamedFiles = untarredFiles.map((file) => ({ ...file, name: file.name.replace(/^package\//, '') }))
 
