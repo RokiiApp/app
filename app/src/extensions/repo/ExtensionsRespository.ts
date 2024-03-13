@@ -113,7 +113,7 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> implements
   private async loadExtension(extension: Extension) {
     this.extensions[extension.name] = extension
 
-    this.dispatchTypedEvent(ExtensionsRepoEventTypes.LOADED, new ExtensionLoadedEvent(extension.name))
+    this.dispatchTypedEvent(ExtensionsRepoEventTypes.LOADED, new ExtensionLoadedEvent(extension))
   }
 }
 

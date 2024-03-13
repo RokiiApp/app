@@ -13,14 +13,7 @@ export const useRunExtensions = (term: string) => {
   const getExtensionSettings = useExtensionSettings(s => s.getAllFromExtension)
 
   const onExtensionAdded = ({ detail }: ExtensionLoadedEvent) => {
-    const { name } = detail
-
-    const extension = extensionsRepository.get(name)
-
-    if (!extension) {
-      console.error('[useRunExtensions] - InternalError: Extension was added but IS NOT in the repo', detail)
-      return
-    }
+    const { extension } = detail
 
     const extensionContextProvider = new ExtensionContextProvider(extension.name, useGlobalResultsStore)
     const extensionContext = extensionContextProvider.get(term)
@@ -32,7 +25,7 @@ export const useRunExtensions = (term: string) => {
       updateExtensionSettings(extension.name, extensionSettings)
     } catch (error) {
       // Do not fail on plugin errors, just log them to console
-      console.log('Error initializing plugin', name, error)
+      console.log('Error initializing plugin', extension, error)
     }
 
     try {
@@ -40,7 +33,7 @@ export const useRunExtensions = (term: string) => {
       extension.run(extensionContext)
     } catch (error) {
       // Do not fail on plugin errors, just log them to console
-      console.log('Error running plugin', name, error)
+      console.log('Error running plugin', extension, error)
     }
   }
 
