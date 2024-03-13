@@ -1,7 +1,7 @@
 import { RawEvent, watchImmediate } from 'tauri-plugin-fs-watch-api'
 import debounce from 'just-debounce-it'
 import { PLUGINS_PATH } from '@/common/constants/paths'
-import { getExtensionNameFromPath } from './utils/getExtensionNameFromPath'
+import { getExtensionNameFromPath } from '@/utils/text/getExtensionNameFromPath'
 
 export interface ExtensionsFolderWatcherSubscritor {
     /**
