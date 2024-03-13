@@ -4,7 +4,7 @@ import { convertFileSrc } from '@tauri-apps/api/tauri'
  * This module is used to import external modules dynamically.
  */
 const ExternalModuleImporter = {
-  async import(modulePath: string, forceCacheBust = false) {
+  async import<T = any>(modulePath: string, forceCacheBust = false): Promise<T> {
     const normalizedPath = this.normalizePath(modulePath)
 
     if (forceCacheBust) {
