@@ -16,16 +16,18 @@ export interface ExtensionsFolderWatcherSubscritor {
     onExtensionRemoved: (extensionName: string) => void
 }
 
-type UnlistenFn = Awaited<ReturnType<typeof watchImmediate>>
-
 /**
  * A class that watches for changes in the extensions directory
  * and emits events when an extension is added or removed
  * It implements the **observer pattern**, so it allows other classes to subscribe to its events
  */
 class ExtensionsFolderWatcher {
-    private unlistenFunction: UnlistenFn | null = null
     private suscriptors: Set<ExtensionsFolderWatcherSubscritor> = new Set()
+
+    constructor() {
+        // We start watching the extensions folder
+        this.watch()
+    }
 
     /**
      * This method subscribes a listener to the events that are emitted by this class
@@ -51,22 +53,13 @@ class ExtensionsFolderWatcher {
         this.suscriptors.forEach(s => s.onExtensionRemoved(extensionName))
     }
 
-    async watch() {
-        if (this.unlistenFunction) return
+    private async watch() {
         console.log('[ExtensionsWatcher] - Started')
 
-        this.unlistenFunction = await watchImmediate(PLUGINS_PATH, (event) => {
+        await watchImmediate(PLUGINS_PATH, (event) => {
             this.onRemoveEvent(event)
             this.onModifyEvent(event)
         }, { recursive: true })
-
-    }
-
-    stop() {
-        console.log('[ExtensionsWatcher] - Stopped')
-        if (this.unlistenFunction) {
-            this.unlistenFunction()
-        }
     }
 
     private onRemoveEvent(event: RawEvent) {
@@ -122,4 +115,5 @@ class ExtensionsFolderWatcher {
 
 const extensionsFolderWatcher = new ExtensionsFolderWatcher()
 
+// This is a singleton, so we export the instance
 export { extensionsFolderWatcher }

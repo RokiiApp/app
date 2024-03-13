@@ -50,13 +50,11 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> implements
   private initializeExtensionsWatcher() {
     if (this.initializedWatcher) return
     extensionsFolderWatcher.subscribe(this)
-    extensionsFolderWatcher.watch()
     this.initializedWatcher = true
   }
 
   private stopExtensionsWatcher() {
     extensionsFolderWatcher.unsubscribe(this)
-    extensionsFolderWatcher.stop()
     this.initializedWatcher = false
   }
 
