@@ -7,7 +7,7 @@ export class PackageJson {
     this.path = path
   }
 
-  async overwrite (config: any) {
+  async overwrite(config: any) {
     const content = JSON.stringify(config, null, 2)
     await writeFile(this.path, content)
   }

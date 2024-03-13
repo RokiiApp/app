@@ -1,5 +1,5 @@
 import { untarArrayBuffer } from "@/utils/other/untarArrayBuffer";
-import { downloadBinaryFile } from "@/utils/requests/downloadBinaryFile";
+import { downloadBinaryFile } from "@/utils/requests";
 import { ungzip } from 'pako'
 
 const TarDownloader = {

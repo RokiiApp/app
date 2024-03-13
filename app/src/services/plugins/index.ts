@@ -1,18 +1,7 @@
 import { NpmClient } from '@/services/NpmClient'
 import { PLUGINS_PACKAGE_JSON_PATH, PLUGINS_PATH, ROKII_PATH } from '@/common/constants/paths'
-import { exists, createDir, writeFile } from '@tauri-apps/api/fs'
-
-const ensureFile = async (src: string, content = '') => {
-  if (!(await exists(src))) {
-    writeFile(src, content)
-  }
-}
-
-const ensureDir = async (path: string) => {
-  if (!(await exists(path))) {
-    createDir(path, { recursive: true })
-  }
-}
+import { exists } from '@tauri-apps/api/fs'
+import { ensureFile, ensureDir } from '@/utils/file-system'
 
 const EMPTY_PACKAGE_JSON = JSON.stringify(
   {

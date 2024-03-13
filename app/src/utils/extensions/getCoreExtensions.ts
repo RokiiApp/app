@@ -1,6 +1,7 @@
+import type { ExtensionGetter } from './types'
+
 import { coreExtensions } from '@/extensions/core'
 import { Extension } from '@/extensions/Extension'
-import { ExtensionGetter } from '.'
 
 export const getCoreExtensions: ExtensionGetter = async () => {
   const extensions: Extension[] = []

@@ -3,7 +3,7 @@ import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs'
 import { join, sep } from '@tauri-apps/api/path'
 import { PackageJson } from './PackageJson'
 import { TarDownloader } from './TarDownloader'
-import { deleteScope } from '@/utils/text/deleteScope'
+import { deleteScope } from '@/utils/text'
 
 /**
  * Lightweight npm client used to install/uninstall package, without resolving dependencies

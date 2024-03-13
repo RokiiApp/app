@@ -1,9 +1,10 @@
-import { getInstalledPluginNames } from '@/services/plugins/getExternalPlugins'
-import { ExtensionGetter } from '.'
+import type { ExtensionGetter } from './types'
+
 import { ExtensionModuleImporter } from '@/services/ExtensionModuleImporter'
+import { getExternalExtensionNames } from './getExternalExtensionNames'
 
 export const getExternalExtensions: ExtensionGetter = async () => {
-  const extensionNames = await getInstalledPluginNames()
+  const extensionNames = await getExternalExtensionNames()
 
   const extensions = await Promise.allSettled(extensionNames.map(async (name) => {
     const extension = await ExtensionModuleImporter.get(name)

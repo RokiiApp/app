@@ -5,7 +5,7 @@ import { ExtensionsFolderWatcherSubscritor, extensionsFolderWatcher } from '@/se
 
 import { ExtensionsRepoEventTypes, ExtensionLoadedEvent, ExtensionRemovedEvent } from './Events'
 import { Extension } from '../Extension'
-import { getCoreExtensions, getExternalExtensions } from '@/services/plugins/getters'
+import { getCoreExtensions, getExternalExtensions } from '@/utils/extensions'
 import { ExtensionModuleImporter } from '@/services/ExtensionModuleImporter'
 
 export interface RepositoryEvents {
