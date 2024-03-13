@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.2](https://github.com/RokiiApp/app/compare/rokii-v1.8.1...rokii-v1.8.2) (2024-03-13)
+
+
+### Bug Fixes
+
+* use a set to avoid duplicated subscriptors ([55ba461](https://github.com/RokiiApp/app/commit/55ba461c1fa8f3b22ed225a44f13d6194a71050d))
+
 ## [1.8.1](https://github.com/RokiiApp/app/compare/rokii-v1.8.0...rokii-v1.8.1) (2024-03-12)
 
 
