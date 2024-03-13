@@ -25,14 +25,14 @@ type UnlistenFn = Awaited<ReturnType<typeof watchImmediate>>
  */
 class ExtensionsFolderWatcher {
     private unlistenFunction: UnlistenFn | null = null
-    private suscriptors: ExtensionsFolderWatcherSubscritor[] = []
+    private suscriptors: Set<ExtensionsFolderWatcherSubscritor> = new Set()
 
     /**
      * This method subscribes a listener to the events that are emitted by this class
      * @param subscriptor 
      */
     subscribe(subscriptor: ExtensionsFolderWatcherSubscritor) {
-        this.suscriptors.push(subscriptor)
+        this.suscriptors.add(subscriptor)
     }
 
     /**
@@ -40,7 +40,7 @@ class ExtensionsFolderWatcher {
      * @param subscriptor 
      */
     unsubscribe(subscriptor: ExtensionsFolderWatcherSubscritor) {
-        this.suscriptors = this.suscriptors.filter(s => s !== subscriptor)
+        this.suscriptors.delete(subscriptor)
     }
 
     private notifyExtensionAdded(extensionName: string) {
