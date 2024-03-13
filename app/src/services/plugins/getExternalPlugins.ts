@@ -1,6 +1,6 @@
 import { PLUGINS_PACKAGE_JSON_PATH } from '@/common/constants/paths'
 import { PackageJson } from '@/services/PackageJson'
-import { deleteScope } from '../utils/deleteScope'
+import { deleteScope } from '@/utils/text/deleteScope'
 
 /**
  * @returns The names and versions of the plugins present in the package.json file in the plugins folder.
