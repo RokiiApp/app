@@ -3,6 +3,7 @@ import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs'
 import { join, sep } from '@tauri-apps/api/path'
 import { PackageJson } from './PackageJson'
 import { TarDownloader } from './TarDownloader'
+import { deleteScope } from './utils/deleteScope'
 
 /**
  * Lightweight npm client used to install/uninstall package, without resolving dependencies
@@ -61,7 +62,7 @@ export class NpmClient {
       middleware?: () => Promise<any>
     }
   ) {
-    const nameWithoutScope = name.replace(/^@.+?\//, '')
+    const nameWithoutScope = deleteScope(name)
     let versionToInstall
     const { version, middleware } = options ?? {}
 
@@ -110,7 +111,7 @@ export class NpmClient {
     console.group('[NpmClient] Uninstall package', name)
 
     try {
-      const nameWithoutScope = name.replace(/^@.+?\//, '')
+      const nameWithoutScope = deleteScope(name)
       const modulePath = await join(this.dirPath, nameWithoutScope)
 
       console.log('(1/2) Remove package directory ', modulePath)
