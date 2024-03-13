@@ -1,4 +1,4 @@
-import { untarArrayBuffer } from "./utils/untarArrayBuffer";
+import { untarArrayBuffer } from "@/utils/other/untarArrayBuffer";
 import { downloadBinaryFile } from "@/utils/requests/downloadBinaryFile";
 import { ungzip } from 'pako'
 
