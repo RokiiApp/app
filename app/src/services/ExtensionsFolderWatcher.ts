@@ -1,4 +1,4 @@
-import { RawEvent, watchImmediate } from 'tauri-plugin-fs-watch-api'
+import { WatchEvent, watchImmediate } from '@tauri-apps/plugin-fs'
 import debounce from 'just-debounce-it'
 import { PLUGINS_PATH } from '@/common/constants/paths'
 import { getExtensionNameFromPath } from '@/utils/text'
@@ -62,10 +62,10 @@ class ExtensionsFolderWatcher {
         }, { recursive: true })
     }
 
-    private onRemoveEvent(event: RawEvent) {
+    private onRemoveEvent(event: WatchEvent) {
         const { type, paths } = event
 
-        const isUnknownEvent = type === 'any ' || type === 'other'
+        const isUnknownEvent = type === 'any' || type === 'other'
         if (isUnknownEvent) return
 
         const isRemoveEvent = 'remove' in type
@@ -83,10 +83,10 @@ class ExtensionsFolderWatcher {
         this.notifyExtensionRemoved(extensionName)
     }
 
-    private onModifyEvent(event: RawEvent) {
+    private onModifyEvent(event: WatchEvent) {
         const { type, paths } = event
 
-        const isUnknownEvent = type === 'any ' || type === 'other'
+        const isUnknownEvent = type === 'any' || type === 'other'
         if (isUnknownEvent) return
 
         const isModifyEvent = 'modify' in type

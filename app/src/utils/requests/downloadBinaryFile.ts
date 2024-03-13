@@ -1,4 +1,4 @@
-import { FetchOptions, ResponseType, fetch } from "@tauri-apps/api/http"
+import { FetchOptions, ResponseType, fetch } from "@tauri-apps/plugin-http"
 
 const binaryFecthOptions: FetchOptions = {
     method: 'GET',

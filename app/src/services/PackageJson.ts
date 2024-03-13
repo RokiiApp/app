@@ -1,4 +1,4 @@
-import { writeFile, readTextFile } from '@tauri-apps/api/fs'
+import { writeFile, readTextFile } from '@tauri-apps/plugin-fs'
 
 export class PackageJson {
   private readonly path: string

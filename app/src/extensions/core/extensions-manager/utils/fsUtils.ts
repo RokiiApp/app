@@ -1,19 +1,12 @@
 import { PLUGINS_PATH } from '@/common/constants/paths'
-import { metadata } from 'tauri-plugin-fs-extra-api'
 import { join } from '@tauri-apps/api/path'
-import { FileEntry, readDir } from '@tauri-apps/api/fs'
+import { DirEntry, readDir } from '@tauri-apps/plugin-fs'
 
-export const isSymlink = async (path: string) => {
-  const fileInfo = await metadata(path)
-  return fileInfo.isSymlink
-}
-
-export const isScopeDir = async (file: FileEntry) => {
+export const isScopeDir = async (file: DirEntry) => {
   const fileNameMatchesScope = file.name?.match(/^@/)
   if (fileNameMatchesScope == null) return false
 
-  const fileInfo = await metadata(file.path)
-  return fileInfo.isDir
+  return file.isDirectory;
 }
 
 export const getSymlinkedPluginsInFolder = async (scope?: string) => {
@@ -22,10 +15,5 @@ export const getSymlinkedPluginsInFolder = async (scope?: string) => {
     ? await readDir(await join(PLUGINS_PATH, scope)).catch(() => [])
     : await readDir(PLUGINS_PATH).catch(() => [])
 
-  // filter bur with async
-  const resultPromises = files.map(async ({ path }) => await isSymlink(path))
-
-  const results = await Promise.all(resultPromises)
-
-  return files.filter((_, index) => results[index]).map(file => file.name).filter(Boolean) as string[]
+  return files.filter(file => file.isSymlink)
 }

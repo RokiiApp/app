@@ -35,12 +35,13 @@ fn main() {
         ])
         .system_tray(tray)
         .on_system_tray_event(system_tray_event_handler)
+        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_process::init())
+        .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             app.emit_all("single-instance", Payload { args: argv, cwd })
                 .unwrap();
         }))
-        .plugin(tauri_plugin_fs_watch::init())
-        .plugin(tauri_plugin_fs_extra::init())
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             Some(vec![""]),

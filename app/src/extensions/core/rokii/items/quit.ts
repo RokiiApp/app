@@ -1,5 +1,5 @@
 import { ScriptItem } from "@rokii/api";
-import { exit } from '@tauri-apps/api/process'
+import { exit } from '@tauri-apps/plugin-process'
 
 export const quit = new ScriptItem({
     title: 'Quit',

@@ -1,5 +1,5 @@
 import type { AppEntry } from './types'
-import { invoke } from '@tauri-apps/api/tauri'
+import { invoke } from '@tauri-apps/api/core'
 
 export const getInstalledApps = async () => {
   const rawInstalledApps = await invoke<string>('get_installed_apps')

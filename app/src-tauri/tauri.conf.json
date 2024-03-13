@@ -2,81 +2,42 @@
   "build": {
     "beforeDevCommand": "pnpm web:dev",
     "beforeBuildCommand": "pnpm web:build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": false
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420"
   },
-  "package": {
-    "productName": "Rokii",
-    "version": "../package.json"
-  },
-  "tauri": {
-    "systemTray": {
-      "iconPath": "icons/icon.png",
-      "iconAsTemplate": true
-    },
-    "updater": {
-      "active": true,
-      "endpoints": [
-        "https://github.com/RokiiApp/app/releases/latest/download/latest.json"
-      ],
-      "dialog": true,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEUwNTdCOERDOTRDRjZDRUEKUldUcWJNK1UzTGhYNEpKYWd1Z0R0aUM1dlYyUi83eFoxam1UbWtIR3NaWWZUekF2MkxnZ1l6WFIK"
-    },
-    "allowlist": {
-      "all": true,
-      "http": {
-        "all": true,
-        "scope": [
-          "https://localhost/*",
-          "https://*"
-        ]
-      },
-      "fs": {
-        "all": true,
-        "scope": [
-          "$APPCONFIG",
-          "$APPCONFIG/**/**"
-        ]
-      },
-      "path": {
-        "all": true
-      },
-      "globalShortcut": {
-        "all": true
-      },
-      "protocol": {
-        "asset": true,
-        "assetScope": [
-          "**"
-        ]
+  "bundle": {
+    "category": "Productivity",
+    "windows": {
+      "nsis": {
+        "installerIcon": "icons/icon.ico"
       }
     },
-    "bundle": {
-      "category": "Productivity",
-      "windows": {
-        "nsis": {
-          "installerIcon": "icons/icon.ico"
-        }
-      },
-      "active": true,
-      "targets": [
-        "nsis",
-        "updater"
-      ],
-      "publisher": "dubis.dev",
-      "identifier": "app.rokii.dev",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
+    "active": true,
+    "targets": [
+      "nsis",
+      "updater"
+    ],
+    "publisher": "dubis.dev",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "productName": "Rokii",
+  "version": "../package.json",
+  "identifier": "app.rokii.dev",
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEUwNTdCOERDOTRDRjZDRUEKUldUcWJNK1UzTGhYNEpKYWd1Z0R0aUM1dlYyUi83eFoxam1UbWtIR3NaWWZUekF2MkxnZ1l6WFIK",
+      "endpoints": [
+        "https://github.com/RokiiApp/app/releases/latest/download/latest.json"
       ]
-    },
-    "security": {
-      "csp": "script-src 'self' 'unsafe-eval' asset: https://asset.localhost; worker-src 'self' blob:"
-    },
+    }
+  },
+  "app": {
     "windows": [
       {
         "fullscreen": false,
@@ -90,6 +51,20 @@
         "skipTaskbar": true,
         "alwaysOnTop": true
       }
-    ]
+    ],
+    "trayIcon": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    },
+    "withGlobalTauri": false,
+    "security": {
+      "assetProtocol": {
+        "scope": [
+          "**"
+        ],
+        "enable": true
+      },
+      "csp": "script-src 'self' 'unsafe-eval' asset: https://asset.localhost; worker-src 'self' blob:; connect-src ipc: http://ipc.localhost"
+    }
   }
 }

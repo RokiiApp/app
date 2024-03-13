@@ -1,4 +1,4 @@
-import { readDir } from '@tauri-apps/api/fs'
+import { readDir } from '@tauri-apps/plugin-fs'
 import { getSymlinkedPluginsInFolder, isScopeDir } from './fsUtils'
 import { PLUGINS_PATH } from '@/common/constants/paths'
 

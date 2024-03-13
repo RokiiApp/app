@@ -1,5 +1,5 @@
 import { ScriptItem } from '@rokii/api'
-import { relaunch } from '@tauri-apps/api/process'
+import { relaunch } from '@tauri-apps/plugin-process'
 
 export const reload = new ScriptItem({
     title: 'Reload',

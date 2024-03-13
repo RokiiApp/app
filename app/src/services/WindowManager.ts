@@ -1,13 +1,15 @@
-import { appWindow } from "@tauri-apps/api/window"
+import { getCurrent } from "@tauri-apps/api/window"
 import { invoke } from '@tauri-apps/api'
 import { globalShortcut } from "@tauri-apps/api"
 import { send } from '@/common/ipc'
 import { CHANNELS } from '@/common/constants/events'
 import { useRokiiSettings } from '@/stores/rokii-settings'
 
+const currentWindow = getCurrent()
+
 const WindowManager = {
     hide() {
-        return appWindow.hide()
+        return currentWindow.hide()
     },
 
     async toggle() {
