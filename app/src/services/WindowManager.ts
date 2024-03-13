@@ -1,6 +1,6 @@
 import { getCurrent } from "@tauri-apps/api/window"
-import { invoke } from '@tauri-apps/api'
-import { globalShortcut } from "@tauri-apps/api"
+import { invoke } from '@tauri-apps/api/core'
+import * as globalShortcut from "@tauri-apps/plugin-global-shortcut"
 import { send } from '@/common/ipc'
 import { CHANNELS } from '@/common/constants/events'
 import { useRokiiSettings } from '@/stores/rokii-settings'

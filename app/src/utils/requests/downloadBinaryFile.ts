@@ -1,11 +1,4 @@
-import { FetchOptions, ResponseType, fetch } from "@tauri-apps/plugin-http"
-
-const binaryFecthOptions: FetchOptions = {
-    method: 'GET',
-    responseType: ResponseType.Binary
-}
-
-export const downloadBinaryFile = async (url: string): Promise<Iterable<number>> => {
-    const { data } = await fetch<Iterable<number>>(url, binaryFecthOptions)
-    return data
+export const downloadBinaryFile = async (url: string) => {
+    const res = await fetch(url)
+    return await res.arrayBuffer()
 }

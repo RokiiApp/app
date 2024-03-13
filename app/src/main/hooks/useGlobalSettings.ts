@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { changeTheme } from "../utils/changeTheme"
 import { AutoStart } from "@/services/AutoStart"
-import { globalShortcut, invoke } from "@tauri-apps/api"
+import { invoke } from "@tauri-apps/api/core"
+import * as globalShortcut from "@tauri-apps/plugin-global-shortcut"
 import { useRokiiSettings } from "@/stores/rokii-settings"
 import { WindowManager } from "@/services/WindowManager"
 

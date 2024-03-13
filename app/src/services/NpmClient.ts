@@ -1,5 +1,5 @@
 import { NPM_API_BASE } from '@/common/constants/urls'
-import { mkdir, remove, writeFile } from '@tauri-apps/plugin-fs'
+import { mkdir, remove, writeTextFile } from '@tauri-apps/plugin-fs'
 import { join, sep } from '@tauri-apps/api/path'
 import { PackageJson } from './PackageJson'
 import { TarDownloader } from './TarDownloader'
@@ -16,7 +16,7 @@ export class NpmClient {
     this.dirPath = dir
 
     // Initialize package.json
-    const packageJsonPath = [dir, 'package.json'].join(sep)
+    const packageJsonPath = [dir, 'package.json'].join(sep())
     this.packageJson = new PackageJson(packageJsonPath)
   }
 
@@ -37,7 +37,7 @@ export class NpmClient {
 
     for (const file of renamedFiles) {
       try {
-        writeFile(await join(destination, file.name), file.buffer)
+        writeTextFile(await join(destination, file.name), file.readAsString())
       } catch { }
     }
   }
