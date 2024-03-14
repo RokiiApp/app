@@ -1,5 +1,12 @@
 # @rokii/build
 
+## [2.0.14](https://github.com/RokiiApp/app/compare/build-v2.0.13...build-v2.0.14) (2024-03-14)
+
+
+### Bug Fixes
+
+* force release ([dad5884](https://github.com/RokiiApp/app/commit/dad5884f88c335bc2581893c2790f572b75b0a73))
+
 ## [2.0.13](https://github.com/RokiiApp/app/compare/build-v2.0.12...build-v2.0.13) (2024-03-05)
 
 

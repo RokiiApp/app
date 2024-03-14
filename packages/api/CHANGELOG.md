@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/RokiiApp/app/compare/api-v0.8.0...api-v0.8.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* force release ([dad5884](https://github.com/RokiiApp/app/commit/dad5884f88c335bc2581893c2790f572b75b0a73))
+
 ## [0.8.0](https://github.com/RokiiApp/app/compare/api-v0.7.1...api-v0.8.0) (2024-03-11)
 
 
