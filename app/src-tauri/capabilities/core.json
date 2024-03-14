@@ -51,6 +51,8 @@
     "autostart:allow-disable",
     "autostart:allow-enable",
     "autostart:allow-is-enabled",
+    "updater:default",
+    "dialog:allow-ask",
     {
       "identifier": "fs:scope",
       "allow": [

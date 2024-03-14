@@ -27,6 +27,7 @@ tauri-plugin-global-shortcut = { git = "https://github.com/tauri-apps/plugins-wo
 tauri-plugin-http = "2.0.0-beta"
 tauri-plugin-notification = "2.0.0-beta"
 systemicons = { git = "https://github.com/RokiiApp/systemicons", branch = "v1"}
+tauri-plugin-dialog = "2.0.0-beta.2"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
