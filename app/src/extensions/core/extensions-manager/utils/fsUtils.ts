@@ -15,5 +15,5 @@ export const getSymlinkedPluginsInFolder = async (scope?: string) => {
     ? await FileSystem.readDir(await join(PLUGINS_PATH, scope)).catch(() => [])
     : await FileSystem.readDir(PLUGINS_PATH).catch(() => [])
 
-  return files.filter(file => file.isSymlink)
+  return files.filter(file => file.isSymlink).map(file => file.name)
 }
