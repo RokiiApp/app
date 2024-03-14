@@ -25,7 +25,7 @@
   "homepage": "https://github.com/RokiiApp/developers#readme",
   "dependencies": {
     "just-memoize": "2.2.0",
-    "@tauri-apps/api": "*"
+    "@tauri-apps/plugin-shell": "2.0.0-beta.2"
   },
   "devDependencies": {
     "@types/node": "*",

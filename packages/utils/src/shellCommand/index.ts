@@ -1,7 +1,7 @@
-import { Command, SpawnOptions } from '@tauri-apps/api/shell'
+import { Command, SpawnOptions, TerminatedPayload } from '@tauri-apps/plugin-shell'
 
 interface ShellListeners {
-  onClose?: (code: number) => void
+  onClose?: (code: TerminatedPayload) => void
   onError?: (error: unknown) => void
   onStdout?: (data: string) => void
   onStderr?: (data: string) => void
@@ -13,7 +13,7 @@ interface CommandOptions {
 }
 
 export const shellCommand = async (cmd: string, options?: CommandOptions) => {
-  const command = new Command(cmd, [], options?.spawnOptions)
+  const command = Command.create(cmd, [], options?.spawnOptions)
 
   if ((options?.listeners) != null) {
     const { onClose, onError, onStderr, onStdout } = options.listeners

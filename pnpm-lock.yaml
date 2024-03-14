@@ -237,9 +237,9 @@ importers:
 
   packages/utils:
     dependencies:
-      '@tauri-apps/api':
-        specifier: 2.0.0-beta.5
-        version: 2.0.0-beta.5
+      '@tauri-apps/plugin-shell':
+        specifier: 2.0.0-beta.2
+        version: 2.0.0-beta.2
       just-memoize:
         specifier: 2.2.0
         version: 2.2.0
