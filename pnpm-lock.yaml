@@ -87,8 +87,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0
       lucide-react:
-        specifier: 0.356.0
-        version: 0.356.0(react@18.2.0)
+        specifier: 0.358.0
+        version: 0.358.0(react@18.2.0)
       pako:
         specifier: 2.1.0
         version: 2.1.0
@@ -3655,8 +3655,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lucide-react@0.356.0(react@18.2.0):
-    resolution: {integrity: sha512-MDInjLrmZToccH2UxEshntujBlFwtOofGB22FN/eg39FfGVYV1TT1eMIv2j4rdaTJBpYjUuX7fEo9pwYkNFgwA==}
+  /lucide-react@0.358.0(react@18.2.0):
+    resolution: {integrity: sha512-rBSptRjZTMBm24zsFhR6pK/NgbT18JegZGKcH4+1H3+UigMSRpeoWLtR/fAwMYwYnlJOZB+y8WpeHne9D6X6Kg==}
     peerDependencies:
       react: 18.2.0
     dependencies:
