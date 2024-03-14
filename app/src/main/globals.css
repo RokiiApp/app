@@ -14,13 +14,11 @@
         @apply bg-transparent;
         @apply overflow-hidden select-none;
         @apply h-screen;
-        font-family: var(--main-font);
+        font-family: system, sans-serif;
     }
 
     #root {
-        @apply bg-background;
-        border-radius: 10px;
-        height: 100%;
+        @apply bg-background h-full;
     }
 }
 
