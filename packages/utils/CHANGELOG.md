@@ -1,5 +1,13 @@
 # @rokii/utils
 
+## [2.0.10](https://github.com/RokiiApp/app/compare/utils-v2.0.9...utils-v2.0.10) (2024-03-14)
+
+
+### Bug Fixes
+
+* force release ([dad5884](https://github.com/RokiiApp/app/commit/dad5884f88c335bc2581893c2790f572b75b0a73))
+* ui shell plugin ([fa1ab86](https://github.com/RokiiApp/app/commit/fa1ab8635fce2f78d677ac73b9aaebb54470ece1))
+
 ## [2.0.9](https://github.com/RokiiApp/app/compare/utils-v2.0.8...utils-v2.0.9) (2024-03-04)
 
 

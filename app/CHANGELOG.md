@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.3](https://github.com/RokiiApp/app/compare/rokii-v1.8.2...rokii-v1.8.3) (2024-03-14)
+
+
+### Bug Fixes
+
+* force release ([dad5884](https://github.com/RokiiApp/app/commit/dad5884f88c335bc2581893c2790f572b75b0a73))
+* small memory leak ([5d0f28e](https://github.com/RokiiApp/app/commit/5d0f28ec04836ec0d4dc87082a6ea166b8f36eab))
+* types wit new api ([b94267f](https://github.com/RokiiApp/app/commit/b94267f3f7978446884bfae804566f8c2308004b))
+
 ## [1.8.2](https://github.com/RokiiApp/app/compare/rokii-v1.8.1...rokii-v1.8.2) (2024-03-13)
 
 
