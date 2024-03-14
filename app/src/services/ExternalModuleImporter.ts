@@ -1,4 +1,4 @@
-import { convertFileSrc } from '@tauri-apps/api/tauri'
+import { convertFileSrc } from '@tauri-apps/api/core'
 
 /**
  * This module is used to import external modules dynamically.

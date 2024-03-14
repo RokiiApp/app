@@ -1,12 +1,12 @@
-import { readDir } from '@tauri-apps/api/fs'
 import { getSymlinkedPluginsInFolder, isScopeDir } from './fsUtils'
 import { PLUGINS_PATH } from '@/common/constants/paths'
+import { FileSystem } from '@/services/FileSystem'
 
 const getNotScopedPluginNames = async () => await getSymlinkedPluginsInFolder()
 
 const getScopedPluginNames = async () => {
   // Get all scoped folders
-  const dirContent = await readDir(PLUGINS_PATH)
+  const dirContent = await FileSystem.readDir(PLUGINS_PATH)
   const scopeSubfolders = dirContent.filter(isScopeDir)
 
   const scopePluginsNamePromises = scopeSubfolders.map(async (scope) => {

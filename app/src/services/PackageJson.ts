@@ -1,4 +1,4 @@
-import { writeFile, readTextFile } from '@tauri-apps/api/fs'
+import { FileSystem } from '@/services/FileSystem'
 
 export class PackageJson {
   private readonly path: string
@@ -9,11 +9,11 @@ export class PackageJson {
 
   async overwrite(config: any) {
     const content = JSON.stringify(config, null, 2)
-    await writeFile(this.path, content)
+    await FileSystem.writeTextFile(this.path, content)
   }
 
   async read<T = Record<string, any>>() {
-    const content = await readTextFile(this.path)
+    const content = await FileSystem.readTextFile(this.path)
     return JSON.parse(content) as T
   }
 

@@ -3,19 +3,15 @@
 
 mod services;
 mod toggle_window_visibility;
-mod tray;
 
 use tauri_plugin_autostart::MacosLauncher;
 
-use crate::services::{get_file_icon, get_installed_apps, open_app_by_id};
+use crate::services::get_file_icon::get_file_icon;
+use crate::services::get_installed_apps::get_installed_apps;
+use crate::services::open_app_by_id::open_app_by_id;
 
-use get_file_icon::get_file_icon;
-use get_installed_apps::get_installed_apps;
-use open_app_by_id::open_app_by_id;
-
-use tauri::Manager;
+use tauri::{generate_handler, Manager};
 use toggle_window_visibility::toggle_window_visibility;
-use tray::{create_tray_menu, system_tray_event_handler};
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -24,27 +20,31 @@ struct Payload {
 }
 
 fn main() {
-    let tray = create_tray_menu();
-
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![
-            toggle_window_visibility::toggle_window_visibility,
-            get_file_icon,
-            get_installed_apps,
-            open_app_by_id
-        ])
-        .system_tray(tray)
-        .on_system_tray_event(system_tray_event_handler)
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
+        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_http::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_notification::init())
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_process::init())
+        .plugin(tauri_plugin_global_shortcut::Builder::default().build())
+        .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
-            app.emit_all("single-instance", Payload { args: argv, cwd })
+            app.emit_to("main", "single-instance", Payload { args: argv, cwd })
                 .unwrap();
         }))
-        .plugin(tauri_plugin_fs_watch::init())
-        .plugin(tauri_plugin_fs_extra::init())
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             Some(vec![""]),
         ))
+        .invoke_handler(generate_handler![
+            toggle_window_visibility,
+            get_installed_apps,
+            open_app_by_id,
+            get_file_icon
+        ])
         .run(tauri::generate_context!())
         .expect("error while building tauri application");
 }

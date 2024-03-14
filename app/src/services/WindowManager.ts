@@ -1,13 +1,15 @@
-import { appWindow } from "@tauri-apps/api/window"
-import { invoke } from '@tauri-apps/api'
-import { globalShortcut } from "@tauri-apps/api"
+import { getCurrent } from "@tauri-apps/api/window"
+import { invoke } from '@tauri-apps/api/core'
+import * as globalShortcut from "@tauri-apps/plugin-global-shortcut"
 import { send } from '@/common/ipc'
 import { CHANNELS } from '@/common/constants/events'
 import { useRokiiSettings } from '@/stores/rokii-settings'
 
+const currentWindow = getCurrent()
+
 const WindowManager = {
     hide() {
-        return appWindow.hide()
+        return currentWindow.hide()
     },
 
     async toggle() {
@@ -20,10 +22,17 @@ const WindowManager = {
         await invoke('toggle_window_visibility')
     },
 
-    async setToggleShortcut(prevHotkey: string, newHotkey: string) {
+    async setToggleShortcut(newHotkey: string) {
         try {
-            await globalShortcut.unregister(prevHotkey)
             await globalShortcut.register(newHotkey, WindowManager.toggle)
+        } catch (e) {
+            console.error(e)
+        }
+    },
+
+    async removeToggleShortcut(hotkey: string) {
+        try {
+            await globalShortcut.unregister(hotkey)
         } catch (e) {
             console.error(e)
         }

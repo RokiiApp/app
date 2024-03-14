@@ -1,5 +1,5 @@
 import { NPM_API_BASE } from '@/common/constants/urls'
-import { createDir, removeDir, writeBinaryFile } from '@tauri-apps/api/fs'
+import { FileSystem } from '@/services/FileSystem'
 import { join, sep } from '@tauri-apps/api/path'
 import { PackageJson } from './PackageJson'
 import { TarDownloader } from './TarDownloader'
@@ -16,7 +16,7 @@ export class NpmClient {
     this.dirPath = dir
 
     // Initialize package.json
-    const packageJsonPath = [dir, 'package.json'].join(sep)
+    const packageJsonPath = [dir, 'package.json'].join(sep())
     this.packageJson = new PackageJson(packageJsonPath)
   }
 
@@ -33,11 +33,11 @@ export class NpmClient {
 
     const renamedFiles = untarredFiles.map((file) => ({ ...file, name: file.name.replace(/^package\//, '') }))
 
-    await createDir(`${destination}\\dist`, { recursive: true })
+    await FileSystem.mkdir(`${destination}\\dist`, { recursive: true })
 
     for (const file of renamedFiles) {
       try {
-        writeBinaryFile(await join(destination, file.name), file.buffer)
+        FileSystem.writeBinaryFile(await join(destination, file.name), new Uint8Array(file.buffer))
       } catch { }
     }
   }
@@ -115,7 +115,7 @@ export class NpmClient {
       const modulePath = await join(this.dirPath, nameWithoutScope)
 
       console.log('(1/2) Remove package directory ', modulePath)
-      await removeDir(modulePath, { recursive: true })
+      await FileSystem.remove(modulePath, { recursive: true })
 
       console.log(`(2/2) Remove ${name} from package.json`)
       await this.packageJson.removeDependency(name)

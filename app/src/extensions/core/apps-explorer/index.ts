@@ -1,7 +1,7 @@
 import { InfoItem, ScriptItem, ExtensionModule } from '@rokii/api'
 import type { AppEntry } from './types'
 import icon from '../icon.png'
-import { invoke } from '@tauri-apps/api/tauri'
+import { invoke } from '@tauri-apps/api/core'
 import { getInstalledApps } from './getInstalledApps'
 
 const apps: Record<string, AppEntry> = {}

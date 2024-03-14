@@ -1,9 +1,9 @@
 import { ScriptItem } from "@rokii/api";
-import { exit } from '@tauri-apps/api/process'
+import { AppManager } from "@/services/AppManager";
 
 export const quit = new ScriptItem({
     title: 'Quit',
     subtitle: 'Quit from RoKii',
-    run: async () => await exit(),
+    run: () => AppManager.exit(),
     keyword: ['quit', 'exit']
 })

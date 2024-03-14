@@ -1,7 +1,7 @@
-import { exists, createDir } from '@tauri-apps/api/fs'
+import { FileSystem } from '@/services/FileSystem'
 
 export const ensureDir = async (path: string) => {
-  if (!(await exists(path))) {
-    createDir(path, { recursive: true })
+  if (!(await FileSystem.exists(path))) {
+    await FileSystem.mkdir(path, { recursive: true })
   }
 }

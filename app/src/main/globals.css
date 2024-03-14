@@ -13,15 +13,12 @@
     body {
         @apply bg-transparent;
         @apply overflow-hidden select-none;
-        @apply h-[99vh];
-        font-family: var(--main-font);
+        @apply h-screen;
+        font-family: system, sans-serif;
     }
 
     #root {
-        @apply bg-background;
-        border: 1.5px solid rgba(95, 94, 94, 0.522);
-        border-radius: 10px;
-        height: 100%;
+        @apply bg-background h-full;
     }
 }
 

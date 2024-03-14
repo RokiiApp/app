@@ -3,9 +3,9 @@ import { CHANNELS } from '@/common/constants/events'
 import { send } from '@/common/ipc'
 import { ZustandResultsStore } from '@/entities/ResultsStore'
 import { useExtensionSettings } from '@/stores/ExtensionSettingsStore'
-import { writeText } from '@tauri-apps/api/clipboard'
+import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { WindowManager } from '@/services/WindowManager'
-import { open } from '@tauri-apps/api/shell'
+import { open } from '@tauri-apps/plugin-shell'
 
 export class ExtensionContextProvider {
   extensionName: string

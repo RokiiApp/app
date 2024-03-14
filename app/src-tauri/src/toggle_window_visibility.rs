@@ -1,7 +1,7 @@
-use tauri::Window;
+use tauri::WebviewWindow;
 
 #[tauri::command]
-pub fn toggle_window_visibility(window: Window) {
+pub fn toggle_window_visibility(window: WebviewWindow) {
     if window.is_visible().unwrap() {
         window.hide().unwrap();
     } else {

@@ -6,10 +6,7 @@ const TarDownloader = {
     async download(url: string) {
         const data = await downloadBinaryFile(url);
 
-        // Ensure the downloaded data is a Uint8Array
-        const binary = new Uint8Array(data)
-
-        const arrayBuffer = this.typedArrayToBuffer(ungzip(binary))
+        const arrayBuffer = this.typedArrayToBuffer(ungzip(data))
 
         const untarredFiles = await untarArrayBuffer(arrayBuffer)
 
