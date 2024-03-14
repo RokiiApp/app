@@ -23,7 +23,7 @@ tauri-plugin-fs = "2.0.0-beta"
 tauri-plugin-process = "2.0.0-beta"
 tauri-plugin-clipboard-manager = "2.0.0-beta"
 tauri-plugin-shell = "2.0.0-beta"
-tauri-plugin-global-shortcut = "2.0.0-beta"
+tauri-plugin-global-shortcut = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2" }
 tauri-plugin-http = "2.0.0-beta"
 tauri-plugin-notification = "2.0.0-beta"
 systemicons = { git = "https://github.com/RokiiApp/systemicons", branch = "v1"}
@@ -34,4 +34,4 @@ systemicons = { git = "https://github.com/RokiiApp/systemicons", branch = "v1"}
 custom-protocol = ["tauri/custom-protocol"]
 
 [target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
-tauri-plugin-global-shortcut = "2.0.0-beta"
+tauri-plugin-global-shortcut = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2" }

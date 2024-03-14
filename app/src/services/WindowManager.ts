@@ -22,10 +22,17 @@ const WindowManager = {
         await invoke('toggle_window_visibility')
     },
 
-    async setToggleShortcut(prevHotkey: string, newHotkey: string) {
+    async setToggleShortcut(newHotkey: string) {
         try {
-            await globalShortcut.unregister(prevHotkey)
             await globalShortcut.register(newHotkey, WindowManager.toggle)
+        } catch (e) {
+            console.error(e)
+        }
+    },
+
+    async removeToggleShortcut(hotkey: string) {
+        try {
+            await globalShortcut.unregister(hotkey)
         } catch (e) {
             console.error(e)
         }
