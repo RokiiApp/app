@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.5](https://github.com/RokiiApp/app/compare/rokii-v1.8.4...rokii-v1.8.5) (2024-03-14)
+
+
+### Bug Fixes
+
+* broken dependencies ([7d7fdc5](https://github.com/RokiiApp/app/commit/7d7fdc5d4fbc3a5f54fc4f486865045ee0e47047))
+
 ## [1.8.4](https://github.com/RokiiApp/app/compare/rokii-v1.8.3...rokii-v1.8.4) (2024-03-14)
 
 
