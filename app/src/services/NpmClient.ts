@@ -1,5 +1,5 @@
 import { NPM_API_BASE } from '@/common/constants/urls'
-import { mkdir, remove, writeTextFile } from '@tauri-apps/plugin-fs'
+import { mkdir, remove, writeFile } from '@tauri-apps/plugin-fs'
 import { join, sep } from '@tauri-apps/api/path'
 import { PackageJson } from './PackageJson'
 import { TarDownloader } from './TarDownloader'
@@ -37,7 +37,7 @@ export class NpmClient {
 
     for (const file of renamedFiles) {
       try {
-        writeTextFile(await join(destination, file.name), file.readAsString())
+        writeFile(await join(destination, file.name), new Uint8Array(file.buffer))
       } catch { }
     }
   }

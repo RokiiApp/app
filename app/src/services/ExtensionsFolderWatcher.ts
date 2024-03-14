@@ -54,12 +54,12 @@ class ExtensionsFolderWatcher {
     }
 
     private async watch() {
-        console.log('[ExtensionsWatcher] - Started')
-
         await watchImmediate(PLUGINS_PATH, (event) => {
             this.onRemoveEvent(event)
             this.onModifyEvent(event)
         }, { recursive: true })
+
+        console.log('[ExtensionsWatcher] - Started')
     }
 
     private onRemoveEvent(event: WatchEvent) {
