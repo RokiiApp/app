@@ -1,6 +1,7 @@
 import { NPM_API_BASE } from '@/common/constants/urls'
 import { FileSystem } from '@/services/FileSystem'
 import { join, sep } from '@tauri-apps/api/path'
+import { fetch } from '@tauri-apps/plugin-http'
 import { PackageJson } from './PackageJson'
 import { TarDownloader } from './TarDownloader'
 import { deleteScope } from '@/utils/text'

@@ -17,7 +17,7 @@
           "url": "http://localhost:1420"
         },
         {
-          "url": "https://*"
+          "url": "https://**"
         }
       ]
     },

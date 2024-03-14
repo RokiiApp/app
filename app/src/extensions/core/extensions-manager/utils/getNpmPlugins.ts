@@ -1,4 +1,5 @@
 import type { Extension, NPMResponse } from '../types'
+import { fetch } from "@tauri-apps/plugin-http"
 
 const sortByPopularity = (a: Extension, b: Extension) => b.score.detail.popularity - a.score.detail.popularity
 

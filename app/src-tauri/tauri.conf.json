@@ -60,6 +60,7 @@
         ],
         "enable": true
       },
+      "devCsp": "script-src 'self' 'unsafe-eval' asset: https://asset.localhost; worker-src 'self' blob:; connect-src ipc: http://ipc.localhost",
       "csp": "script-src 'self' 'unsafe-eval' asset: https://asset.localhost; worker-src 'self' blob:; connect-src ipc: http://ipc.localhost"
     }
   }

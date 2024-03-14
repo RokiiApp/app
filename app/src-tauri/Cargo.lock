@@ -4477,9 +4477,9 @@ dependencies = [
 
 [[package]]
 name = "system-deps"
-version = "6.2.0"
+version = "6.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a2d580ff6a20c55dfb86be5f9c238f67835d0e81cbdea8bf5680e0897320331"
+checksum = "e8e9199467bcbc77c6a13cc6e32a6af21721ab8c96aa0261856c4fda5a4433f0"
 dependencies = [
  "cfg-expr",
  "heck",
@@ -4699,8 +4699,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-autostart"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a11d976fdee482eddf3bc846284fe46c2fea94b202fc6bf846e5db411346b11d"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "auto-launch",
  "log",
@@ -4714,8 +4713,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-clipboard-manager"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b8cf4b7fde295126b30b8279aa2addedda7689027a6a7fc4cdf9bea43a86ad84"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "arboard",
  "log",
@@ -4729,8 +4727,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-dialog"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14c7894fb904ed003fd15915b263655672be4e4581298f7fa8916016e50010ed"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "glib 0.16.9",
  "log",
@@ -4747,8 +4744,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-fs"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d5d71f69535111078131380bcf2a4c2f190ef4d045a33d787a606e7d4fc6a786"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "anyhow",
  "glob",
@@ -4782,8 +4778,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-http"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8ed4a2d9de58cafba4dbafff9330ed56b57176b9e6a153268113ffc66b5f70e7"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "data-url",
  "http",
@@ -4803,8 +4798,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-notification"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "16c69417d3e60449a6b88fd8af94854a39cab6b5096e50bdbc433d5271d9b465"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "log",
  "mac-notification-sys",
@@ -4824,8 +4818,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-process"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a0e3a9a8fcce829133941bbd2f164114cf7feb012a6c06a8c4b7e531a8dcd01d"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "tauri",
  "tauri-plugin",
@@ -4834,8 +4827,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-shell"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "19e5c2d4187bc552d1be72081588c34187eb29e4c375cdfe99872f8d57b6aead"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "encoding_rs",
  "log",
@@ -4854,8 +4846,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-single-instance"
 version = "2.0.0-beta.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "71935cac98dffdaf038126e1198c40a2a3433466c6866f662c92ec6602f31b23"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "log",
  "serde",
@@ -4869,8 +4860,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-updater"
 version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6cb1f95a0fa908434f19241137255ad84bc9433b4b5ce6727f26f6b22a74622e"
+source = "git+https://github.com/tauri-apps/plugins-workspace?branch=v2#1d7dc86ec3da382e0b2f23cbd052c6ce77173848"
 dependencies = [
  "base64 0.21.7",
  "dirs-next",
@@ -4891,6 +4881,7 @@ dependencies = [
  "time",
  "tokio",
  "url",
+ "windows-sys 0.52.0",
  "zip",
 ]
 
