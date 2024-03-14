@@ -38,13 +38,16 @@ export const useSearchBarEventsSubscription = (mainInput: React.RefObject<HTMLIn
     // NOTE: when page refreshed (location.reload) componentWillUnmount is not called
     window.addEventListener('beforeunload', cleanup)
 
-    on(TauriEvent.WINDOW_FOCUS, handleShowEvent)
-    on(CHANNELS.ClearInput, () => updateTerm(''))
-    on(CHANNELS.ShowTerm, ({ payload }) => updateTerm(payload))
+    const promiseUnlistenFocus = on(TauriEvent.WINDOW_FOCUS, handleShowEvent)
+    const promiseUblistenClear = on(CHANNELS.ClearInput, () => updateTerm(''))
+    const promiseUnlistenShowterm =  on(CHANNELS.ShowTerm, ({ payload }) => updateTerm(payload))
 
     // function to be called when unmounted
     return () => {
       cleanup()
+      promiseUnlistenFocus.then(unlisten => unlisten())
+      promiseUblistenClear.then(unlisten => unlisten())
+      promiseUnlistenShowterm.then(unlisten => unlisten())
     }
   }, [mainInput])
 }
