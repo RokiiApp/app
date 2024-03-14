@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "migrated",
-  "description": "permissions that were migrated from v1",
+  "identifier": "core",
+  "description": "Core permissions for Rokii app",
   "local": true,
   "windows": [
     "main"
