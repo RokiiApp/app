@@ -1,7 +1,7 @@
-import { exists, writeTextFile } from '@tauri-apps/plugin-fs'
+import { FileSystem } from '@/services/FileSystem'
 
 export const ensureFile = async (src: string, content = '') => {
-    if (!(await exists(src))) {
-      await writeTextFile(src, content)
+    if (!(await FileSystem.exists(src))) {
+      await FileSystem.writeTextFile(src, content)
     }
-  }
+}

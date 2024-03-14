@@ -1,4 +1,4 @@
-import { WatchEvent, watchImmediate } from '@tauri-apps/plugin-fs'
+import { FileSystem, WatchEvent } from '@/services/FileSystem'
 import debounce from 'just-debounce-it'
 import { PLUGINS_PATH } from '@/common/constants/paths'
 import { getExtensionNameFromPath } from '@/utils/text'
@@ -54,7 +54,7 @@ class ExtensionsFolderWatcher {
     }
 
     private async watch() {
-        await watchImmediate(PLUGINS_PATH, (event) => {
+        await FileSystem.watchImmediate(PLUGINS_PATH, (event) => {
             this.onRemoveEvent(event)
             this.onModifyEvent(event)
         }, { recursive: true })
