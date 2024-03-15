@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.7](https://github.com/RokiiApp/app/compare/rokii-v1.8.6...rokii-v1.8.7) (2024-03-15)
+
+
+### Bug Fixes
+
+* update deps ([beca4d1](https://github.com/RokiiApp/app/commit/beca4d18a0f5f3f3bba4d95c38c225cd74bd4f11))
+
 ## [1.8.6](https://github.com/RokiiApp/app/compare/rokii-v1.8.5...rokii-v1.8.6) (2024-03-14)
 
 
