@@ -63,9 +63,9 @@ jobs:
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
  
-      - uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: "./app/src-tauri -> target"
+      # - uses: Swatinem/rust-cache@v2
+      #   with:
+      #     workspaces: "./app/src-tauri -> target"
 
       - name: Install app dependencies
         run: pnpm i
