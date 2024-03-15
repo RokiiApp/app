@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.8](https://github.com/RokiiApp/app/compare/rokii-v1.8.7...rokii-v1.8.8) (2024-03-15)
+
+
+### Bug Fixes
+
+* allow restart an exit capabilities ([5c113f2](https://github.com/RokiiApp/app/commit/5c113f25870b8211b9213794c8b3f96b40294606))
+* asset protocol ([5817cb0](https://github.com/RokiiApp/app/commit/5817cb027e0f488e7dc46672fbc9d0ba48136507))
+* remove test script ([1822cfa](https://github.com/RokiiApp/app/commit/1822cfaa6d5f99e3bff417d45feccac6316c02d1))
+
 ## [1.8.7](https://github.com/RokiiApp/app/compare/rokii-v1.8.6...rokii-v1.8.7) (2024-03-15)
 
 
