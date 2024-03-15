@@ -53,6 +53,8 @@
     "autostart:allow-is-enabled",
     "updater:default",
     "dialog:allow-ask",
+    "process:allow-exit",
+    "process:allow-restart",
     {
       "identifier": "fs:scope",
       "allow": [
