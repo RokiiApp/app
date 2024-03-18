@@ -1,24 +1,24 @@
 import { enable, isEnabled, disable } from '@tauri-apps/plugin-autostart'
 
-export class AutoStart {
-  static async isEnabled () {
+const AutoStart = {
+  async isEnabled () {
     return await isEnabled()
-  }
+  },
 
-  static async set (to: boolean) {
+  async set (to: boolean) {
     to
       ? await AutoStart.enable()
       : await AutoStart.disable()
-  }
+  },
 
-  private static async enable () {
+  async enable () {
     if (await isEnabled()) {
       return
     }
     await enable()
-  }
+  },
 
-  private static async disable () {
+  async disable () {
     const enabled = await isEnabled()
     if (!enabled) {
       return
@@ -26,3 +26,7 @@ export class AutoStart {
     await disable()
   }
 }
+
+Object.freeze(AutoStart)
+
+export { AutoStart }
