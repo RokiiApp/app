@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.10](https://github.com/RokiiApp/app/compare/rokii-v1.8.9...rokii-v1.8.10) (2024-03-18)
+
+
+### Bug Fixes
+
+* allow clipboard-manager feature ([ae0a16c](https://github.com/RokiiApp/app/commit/ae0a16cc7cf164923884104154f1bc5fdd659c34))
+* Performance issues with the scroll when a lot of results are present ([dfcd2ac](https://github.com/RokiiApp/app/commit/dfcd2ac5db66e9059c7738ad296e0830ebec3c35))
+
 ## [1.8.9](https://github.com/RokiiApp/app/compare/rokii-v1.8.8...rokii-v1.8.9) (2024-03-15)
 
 
