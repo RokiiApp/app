@@ -2,23 +2,17 @@ import type { FocusableChannel } from '@/common/constants/events'
 import { on } from '@/common/ipc'
 import { useEffect } from 'react'
 
-export const useFocusSuscription = <T extends React.RefObject<any>>(focusableElementRef: T, channel: FocusableChannel, customFocusHandler?: (element: T) => void) => {
-  const onFocusInputRequest = () => {
-    if (customFocusHandler != null) {
-      customFocusHandler(focusableElementRef)
-    } else {
-      focusableElementRef.current?.focus()
-    }
-  }
+export const useFocusSuscription = <T extends React.RefObject<any>>(focusableElementRef: T, channel: FocusableChannel) => {
 
   useEffect(() => {
     if (!focusableElementRef) return
 
-    const unlistenPromise = on(channel, onFocusInputRequest)
+    const { current } = focusableElementRef
+    const unlistenPromise = on(channel, current.focus())
 
     // function to be called when unmounted
     return () => {
       unlistenPromise.then(unlisten => unlisten())
     }
-  }, [focusableElementRef, channel, customFocusHandler])
+  }, [focusableElementRef, channel])
 }
