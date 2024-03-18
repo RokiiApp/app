@@ -1,6 +1,6 @@
 import type { Result } from '@/entities/result/Result'
 import { memo, useEffect } from 'react'
-import { GroupedVirtuoso } from 'react-virtuoso'
+import { GroupedVirtuoso, Virtuoso } from 'react-virtuoso'
 
 import { send } from '@/common/ipc'
 import { CHANNELS } from '@/common/constants/events'
@@ -23,7 +23,7 @@ const ResultsList = ({ items, groupBy }: { items: Result[], groupBy: GroupByFunc
 
   const { groupCounts, groups } = groupBy(results)
 
-  const { listRef } = useResultsAutoscroll(selectedIndex)
+  const { listRef } = useResultsAutoscroll(selectedIndex, results.length)
 
   const { requestAutocomplete } = useAutocomplete()
 
@@ -66,15 +66,40 @@ const ResultsList = ({ items, groupBy }: { items: Result[], groupBy: GroupByFunc
     requestAutocomplete(selectedResult.autocomplete)
   }
 
+  if (groupCounts.length === 0) {
+    return <Virtuoso
+      ref={listRef}
+      fixedItemHeight={48} // We specify h-12 in ResultItem
+      className='h-full'
+      overscan={5}
+      tabIndex={-1}
+
+      totalCount={results.length}
+      itemContent={(index) => {
+        const result = results[index]
+        if (!result) return null
+
+        return <ResultItem result={result} isSelected={selectedIndex === index} />
+      }}
+    />
+
+  }
+
   return (
     <GroupedVirtuoso
       className='h-full'
       groupCounts={groupCounts}
+      // We cant use h-full here because it will break the group headers
+      // fixedItemHeight={48}
       tabIndex={-1}
       ref={listRef}
       overscan={5}
 
-      groupContent={(index) => <div className='bg-transparent px-1 backdrop-blur-xl border-none mb-0 font-bold pb-2 rounded-t'>{groups[index]}</div>}
+      groupContent={(index) => {
+        if (groups[index] === '') return null
+        return <div className='bg-transparent px-1 backdrop-blur-xl border-none mb-0 font-bold pb-2 rounded-t'>{groups[index]}</div>
+      }}
+
       itemContent={(index) => {
         const result = results[index]
         if (!result) return null

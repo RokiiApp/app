@@ -7,11 +7,8 @@ export type GroupByFunction = (results: Result[]) => {
     groups: string[]
 }
 
-export const ungrouped: GroupByFunction = (results) => {
-    return {
-        groupCounts: [results.length],
-        groups: [UNGROUPED_CATEGORY]
-    }
+export const ungrouped: GroupByFunction = () => {
+    return { groupCounts: [], groups: [] }
 }
 
 export const groupByExtension: GroupByFunction = (results) => {
@@ -32,6 +29,9 @@ export const groupByCustomGroup: GroupByFunction = (results) => {
     return { groupCounts, groups }
 }
 
+/**
+ * Makes the ungrouped category appear first
+ */
 const groupOrderer = (a: string, b: string) => {
     if (a === UNGROUPED_CATEGORY) return -1
     if (b === UNGROUPED_CATEGORY) return 1
