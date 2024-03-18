@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.9](https://github.com/RokiiApp/app/compare/rokii-v1.8.8...rokii-v1.8.9) (2024-03-15)
+
+
+### Bug Fixes
+
+* use pinned deps ([8b06563](https://github.com/RokiiApp/app/commit/8b06563610d02376f31bff48bebe59a16789d5bd))
+
 ## [1.8.8](https://github.com/RokiiApp/app/compare/rokii-v1.8.7...rokii-v1.8.8) (2024-03-15)
 
 
