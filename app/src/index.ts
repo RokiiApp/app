@@ -1,12 +1,5 @@
-// Here we manage the App Lifecycle
+import { RokiiApp } from "./RokiiApp"
 
-const runRokii = async () => {
-    // Inititalize the frontend
-    import("@/main")
+RokiiApp.getInstance().run();
 
-    // Initialize autoupdater
-    import("@/services/AutoUpdater").then(m => m.AutoUpdater.tryUpdate())
-}
-
-runRokii();
 

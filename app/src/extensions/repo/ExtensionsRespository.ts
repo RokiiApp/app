@@ -19,7 +19,6 @@ export interface RepositoryEvents {
  * Consumers can subscribe to the events that are dispatched by this class to be notified when an extension is added or removed
  */
 class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> implements ExtensionsFolderWatcherSubscritor {
-  private initializedWatcher = false
   private extensions: Record<string, Extension> = {}
 
   // PUBLIC METHODS
@@ -46,16 +45,12 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> implements
   }
 
   // PRIVATE METHODS
-
   private initializeExtensionsWatcher() {
-    if (this.initializedWatcher) return
     extensionsFolderWatcher.subscribe(this)
-    this.initializedWatcher = true
   }
 
   private stopExtensionsWatcher() {
     extensionsFolderWatcher.unsubscribe(this)
-    this.initializedWatcher = false
   }
 
   async onExtensionAdded(extensionName: string) {
@@ -119,4 +114,5 @@ class ExtensionsRepository extends TypedEventTarget<RepositoryEvents> implements
 
 const extensionsRepository = new ExtensionsRepository()
 
+// We use a singleton pattern to ensure that there is only one instance of the repository
 export { extensionsRepository }

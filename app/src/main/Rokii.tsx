@@ -2,7 +2,6 @@ import { memo } from 'react'
 import { Router, Route } from 'wouter'
 import { useHashLocation } from 'wouter/use-hash-location'
 
-import { useExtensionsRepository } from '@/main/hooks/useExtensionsRepository'
 import { useGlobalSettings } from '@/main/hooks/useGlobalSettings'
 import { Home } from '@/main/routes/home'
 import { ExtensionApp } from '@/main/routes/app'
@@ -15,7 +14,6 @@ import { useWindowListeners } from './hooks/useWindowListeners'
 const Rokii = () => {
     useGlobalSettings()
     useWindowListeners()
-    useExtensionsRepository()
 
     return (
         <div className='h-full w-full flex flex-col'>
