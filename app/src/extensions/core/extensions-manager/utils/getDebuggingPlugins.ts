@@ -2,7 +2,7 @@ import { getSymlinkedPluginsInFolder, isScopeDir } from './fsUtils'
 import { PLUGINS_PATH } from '@/common/constants/paths'
 import { FileSystem } from '@/services/FileSystem'
 
-const getNotScopedPluginNames = async () => await getSymlinkedPluginsInFolder()
+const getNotScopedPluginNames = () => getSymlinkedPluginsInFolder()
 
 const getScopedPluginNames = async () => {
   // Get all scoped folders

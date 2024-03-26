@@ -2,9 +2,9 @@ import { PLUGINS_PATH } from '@/common/constants/paths'
 import { join } from '@tauri-apps/api/path'
 import { FileSystem, type DirEntry } from '@/services/FileSystem'
 
-export const isScopeDir = async (file: DirEntry) => {
-  const fileNameMatchesScope = file.name?.match(/^@/)
-  if (fileNameMatchesScope == null) return false
+export const isScopeDir = (file: DirEntry) => {
+  const fileNameMatchesScope = file.name.match(/^@/)
+  if (fileNameMatchesScope === null) return false
 
   return file.isDirectory;
 }
