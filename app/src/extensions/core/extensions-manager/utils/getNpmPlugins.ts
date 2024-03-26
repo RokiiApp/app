@@ -22,7 +22,7 @@ export const getNPMPlugins = async () => {
 
     return sortedExtensions.map((p) => ({
       name: p.package.name,
-      version: p.package.version,
+      lastVersion: p.package.version,
       description: p.package.description,
       homepage: p.package.links.homepage,
       repo: p.package.links.repository

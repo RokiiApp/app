@@ -12,37 +12,49 @@ export const getPlugins = async (): Promise<ExtensionInfo[]> => {
     getDebuggingPlugins()
   ])
 
-  const pluginsList: ExtensionInfo[] = available.map((npmExtensionInfo) => {
-    const { name, description, version } = npmExtensionInfo
+  const objInfo: Record<string, ExtensionInfo> = {}
 
-    const installedPlugin = installed.find(p => p.name === name)
-
-    if (!installedPlugin) {
-      return {
-        name,
-        description,
-        lastVersion: version,
-        isDebugging: false,
-        isInstalled: false,
-        installedVersion: null,
-        updateAvailable: false,
-      }
-    }
-
-    const { version: installedVersion } = installedPlugin
-  
-    const updateAvailable = compareVersions(npmExtensionInfo.version, installedVersion)
-
-    return {
+  // To ensure offline support, we first add the installed info
+  for (let { name, installedVersion } of installed) {
+    objInfo[name] = {
       name,
-      description,
-      lastVersion: version,
+      description: "",
+      lastVersion: installedVersion,
       isDebugging: false,
       isInstalled: true,
       installedVersion,
-      updateAvailable
+      updateAvailable: false
     }
-  })
+  }
+
+
+  for (let { name, description, lastVersion } of available) {
+    // If there is an installed version, we overwritte the current info
+    const extensionInstalledInfo = objInfo[name]
+    if (extensionInstalledInfo) {
+      objInfo[name] = {
+        ...extensionInstalledInfo,
+        description,
+        lastVersion,
+        updateAvailable: compareVersions(lastVersion, extensionInstalledInfo.installedVersion!)
+      }
+
+    }
+    // If there is not installed version, we just use the remote info
+    else {
+      objInfo[name] = {
+        name,
+        description,
+        isInstalled: false,
+        installedVersion: null,
+        lastVersion,
+        isDebugging: false,
+        updateAvailable: false
+      }
+    }
+  }
+
+  const pluginsList = Object.values(objInfo)
 
   console.log('Debugging Plugins: ', debuggingExtensionNames)
 

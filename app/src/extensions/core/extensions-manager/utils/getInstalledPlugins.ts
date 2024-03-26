@@ -8,10 +8,10 @@ export const getInstalledPlugins = async () => {
 
   const installedEntries = Object.entries(installedExtensions)
 
-  const result = installedEntries.map(([pluginName, installedVersion]) => {
+  const result = installedEntries.map(([extensionName, version]) => {
     return {
-      name: pluginName,
-      version: installedVersion
+      name: extensionName,
+      installedVersion: version
     }
   })
 
