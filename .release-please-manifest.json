@@ -1,5 +1,5 @@
 {
-    "app": "1.8.10",
+    "app": "1.8.11",
     "packages/ui": "2.0.14",
     "packages/api": "0.8.1",
     "packages/build": "2.0.14",
