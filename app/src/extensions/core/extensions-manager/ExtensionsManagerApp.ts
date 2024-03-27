@@ -18,13 +18,8 @@ export const AppRun: App<ExtensionInfo[]>["run"] = async ({ display }, extension
     display(results)
 }
 
-export const onAppStart: App<ExtensionInfo[]>["onAppStart"] = async () => {
-    const extensions = await getPlugins()
-    return extensions
-}
-
 export const ExtensionManagerApp: App<ExtensionInfo[]> = {
     id: "ExtensionsManager",
     run: AppRun,
-    onAppStart
+    onAppStart: getPlugins
 }
