@@ -55,7 +55,7 @@
     "dialog:allow-ask",
     "process:allow-exit",
     "process:allow-restart",
-    "clipboard-manager:allow-write",
+    "clipboard-manager:allow-write-text",
     {
       "identifier": "fs:scope",
       "allow": [
