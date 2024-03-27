@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.11](https://github.com/RokiiApp/app/compare/rokii-v1.8.10...rokii-v1.8.11) (2024-03-27)
+
+
+### Bug Fixes
+
+* add offline support for extensions ([aa5efaf](https://github.com/RokiiApp/app/commit/aa5efaf04b4c640765080df8e21771c89866acae))
+* not getting correctly debugging plugins ([f843164](https://github.com/RokiiApp/app/commit/f8431647b3c220fc9cc781fca729947bdbc246f6))
+* update deps ([a1f84c6](https://github.com/RokiiApp/app/commit/a1f84c62d5cd8c2092766dd68e383c0ec6f76e0d))
+
 ## [1.8.10](https://github.com/RokiiApp/app/compare/rokii-v1.8.9...rokii-v1.8.10) (2024-03-18)
 
 
