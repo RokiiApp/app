@@ -15,17 +15,17 @@
   "dependencies": {},
   "devDependencies": {
     "@changesets/cli": "2.27.1",
-    "turbo": "1.13.0"
+    "turbo": "1.13.2"
   },
   "pnpm": {
     "overrides": {
       "react": "18.2.0",
       "react-dom": "18.2.0",
-      "@types/react": "18.2.72",
-      "@types/node": "20.11.30",
+      "@types/react": "18.2.74",
+      "@types/node": "20.12.4",
       "typescript": "5.4.3",
-      "@tauri-apps/api": "2.0.0-beta.6",
-      "@tauri-apps/cli": "2.0.0-beta.11",
+      "@tauri-apps/api": "2.0.0-beta.7",
+      "@tauri-apps/cli": "2.0.0-beta.12",
       "@tauri-apps/plugin-fs": "2.0.0-beta.2",
       "@tauri-apps/plugin-updater": "2.0.0-beta.2",
       "@tauri-apps/plugin-dialog": "2.0.0-beta.2",
