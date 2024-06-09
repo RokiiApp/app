@@ -9,6 +9,7 @@ use tauri_plugin_autostart::MacosLauncher;
 use crate::services::get_file_icon::get_file_icon;
 use crate::services::get_installed_apps::get_installed_apps;
 use crate::services::open_app_by_id::open_app_by_id;
+use crate::services::open_devtools::open_devtools;
 
 use tauri::{generate_handler, Manager};
 use toggle_window_visibility::toggle_window_visibility;
@@ -43,7 +44,8 @@ fn main() {
             toggle_window_visibility,
             get_installed_apps,
             open_app_by_id,
-            get_file_icon
+            get_file_icon,
+            open_devtools
         ])
         .run(tauri::generate_context!())
         .expect("error while building tauri application");
