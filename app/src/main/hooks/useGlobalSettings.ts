@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { changeTheme } from "../utils/changeTheme"
 import { AutoStart } from "@/services/AutoStart"
-import { invoke } from "@tauri-apps/api/core"
 import { useRokiiSettings } from "@/stores/rokii-settings"
 import { WindowManager } from "@/services/WindowManager"
+import { TrayMenu } from "@/services/TrayMenu"
 
 export const useGlobalSettings = () => {
     const settings = useRokiiSettings(s => s.getAllSettings())
@@ -24,7 +24,15 @@ export const useGlobalSettings = () => {
     }, [theme])
 
     useEffect(() => {
-        invoke('set-tray-dev', { to: developerMode })
+        const menuType = developerMode.value ? "development" : "standard"
+
+        const rokiiTray = TrayMenu.create(menuType)
+
+        return () => {
+            rokiiTray.then(async trayMenu => {
+                trayMenu.delete()
+            })
+        }
     }, [developerMode])
 
     useEffect(() => {

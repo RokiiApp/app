@@ -11,7 +11,7 @@ use crate::services::get_installed_apps::get_installed_apps;
 use crate::services::open_app_by_id::open_app_by_id;
 use crate::services::open_devtools::open_devtools;
 
-use tauri::{generate_handler, Manager};
+use tauri::{generate_handler, Emitter, Manager};
 use toggle_window_visibility::toggle_window_visibility;
 
 #[derive(Clone, serde::Serialize)]

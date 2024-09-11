@@ -14,8 +14,7 @@
     },
     "active": true,
     "targets": [
-      "nsis",
-      "updater"
+      "nsis"
     ],
     "publisher": "dubis.dev",
     "icon": [
