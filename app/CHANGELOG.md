@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.12](https://github.com/RokiiApp/app/compare/rokii-v1.8.11...rokii-v1.8.12) (2024-09-11)
+
+
+### Bug Fixes
+
+* Toggle not working, update to tauri v2 rc ([ece6150](https://github.com/RokiiApp/app/commit/ece615001f783a7f71ffe50314ff6e169918728b))
+* Update deps ([4d213b4](https://github.com/RokiiApp/app/commit/4d213b4c4a64382aba43d452285d41e07c69300d))
+* Update deps ([75390b6](https://github.com/RokiiApp/app/commit/75390b60e9e6a2a7b89571210deb98a9cca3dc79))
+
 ## [1.8.11](https://github.com/RokiiApp/app/compare/rokii-v1.8.10...rokii-v1.8.11) (2024-03-27)
 
 
