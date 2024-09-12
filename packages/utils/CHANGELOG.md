@@ -1,5 +1,12 @@
 # @rokii/utils
 
+## [2.0.11](https://github.com/RokiiApp/app/compare/utils-v2.0.10...utils-v2.0.11) (2024-09-12)
+
+
+### Bug Fixes
+
+* Force release ([e815c8b](https://github.com/RokiiApp/app/commit/e815c8bf6d7b72d6e4791d4760b3d70eb6cadbed))
+
 ## [2.0.10](https://github.com/RokiiApp/app/compare/utils-v2.0.9...utils-v2.0.10) (2024-03-14)
 
 
