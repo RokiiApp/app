@@ -19,7 +19,7 @@ jobs:
       is_release: ${{ steps.release.outputs.releases_created }}
 
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
 
       - name: ensure rokii is latest release
@@ -58,7 +58,7 @@ jobs:
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
-          version: 8
+          version: 9
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
