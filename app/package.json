@@ -62,9 +62,6 @@
   "engines": {
     "node": ">=20"
   },
-  "os": [
-    "win32"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rokiiapp/app.git",
