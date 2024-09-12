@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.14](https://github.com/RokiiApp/app/compare/rokii-v1.8.13...rokii-v1.8.14) (2024-09-12)
+
+
+### Bug Fixes
+
+* about page not being shown ([11bee7d](https://github.com/RokiiApp/app/commit/11bee7d02af3049e065b79bc025efba340469ee4))
+* Generate updater artifacts ([98a825c](https://github.com/RokiiApp/app/commit/98a825c713b4465241a859c41121b116d27b7723))
+* Shortcut not being unregistered ([9e9049c](https://github.com/RokiiApp/app/commit/9e9049cf8d35a979e5022b47929d0e8870947371))
+
 ## [1.8.13](https://github.com/RokiiApp/app/compare/rokii-v1.8.12...rokii-v1.8.13) (2024-09-12)
 
 
