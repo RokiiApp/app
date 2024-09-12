@@ -16,6 +16,7 @@
     "targets": [
       "nsis"
     ],
+    "createUpdaterArtifacts": true,
     "publisher": "dubis.dev",
     "icon": [
       "icons/32x32.png",
