@@ -1,6 +1,6 @@
 {
   "name": "@rokii/build",
-  "version": "2.0.14",
+  "version": "2.0.15",
   "description": "Build utilities for Rokii plugins and packages",
   "author": "David Jiménez <dubisdev@gmail.com> (https://dubis.dev)",
   "repository": "RokiiApp/developers",
