@@ -11,12 +11,9 @@ export const useGlobalSettings = () => {
     const { developerMode, hotkey, openAtLogin, theme } = settings
 
     useEffect(() => {
-        WindowManager.setToggleShortcut(hotkey.value)
-
-        return () => {
-            // Unregister all shortcuts to avoid conflicts
-            WindowManager.removeToggleShortcut(hotkey.value)
-        }
+        WindowManager.removeAllShortcuts().then(
+            () => WindowManager.setToggleShortcut(hotkey.value)
+        )
     }, [hotkey])
 
     useEffect(() => {
@@ -29,9 +26,7 @@ export const useGlobalSettings = () => {
         const rokiiTray = TrayMenu.create(menuType)
 
         return () => {
-            rokiiTray.then(async trayMenu => {
-                trayMenu.delete()
-            })
+            rokiiTray.then(trayMenu => trayMenu.delete())
         }
     }, [developerMode])
 
