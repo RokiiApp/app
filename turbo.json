@@ -1,28 +1,28 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "pipeline": {
-        "package:build": {
-            "dependsOn": [
-                "^package:build"
-            ],
-            "outputs": [
-                "dist/**"
-            ]
-        },
-        "package:type-check": {
-            "dependsOn": [
-                "package:build"
-            ]
-        },
-        "app:type-check": {
-            "dependsOn": [
-                "package:type-check"
-            ]
-        },
-        "app:build": {
-            "dependsOn": [
-                "app:type-check"
-            ]
-        }
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "package:build": {
+      "dependsOn": [
+        "^package:build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "package:type-check": {
+      "dependsOn": [
+        "package:build"
+      ]
+    },
+    "app:type-check": {
+      "dependsOn": [
+        "package:type-check"
+      ]
+    },
+    "app:build": {
+      "dependsOn": [
+        "app:type-check"
+      ]
     }
+  }
 }

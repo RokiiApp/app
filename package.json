@@ -12,10 +12,9 @@
     "type-check": "turbo app:type-check",
     "build": "turbo app:build"
   },
-  "dependencies": {},
   "devDependencies": {
     "@changesets/cli": "2.27.8",
-    "turbo": "1.13.4"
+    "turbo": "2.1.1"
   },
   "pnpm": {
     "overrides": {
@@ -36,5 +35,6 @@
       "@tauri-apps/plugin-global-shortcut": "latest",
       "@tauri-apps/plugin-http": "latest"
     }
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }
