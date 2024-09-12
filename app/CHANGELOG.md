@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.13](https://github.com/RokiiApp/app/compare/rokii-v1.8.12...rokii-v1.8.13) (2024-09-12)
+
+
+### Bug Fixes
+
+* Force release ([e815c8b](https://github.com/RokiiApp/app/commit/e815c8bf6d7b72d6e4791d4760b3d70eb6cadbed))
+
 ## [1.8.12](https://github.com/RokiiApp/app/compare/rokii-v1.8.11...rokii-v1.8.12) (2024-09-11)
 
 
